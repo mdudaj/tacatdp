@@ -1,0 +1,127 @@
+# Phase 3 Canvas YAML screen blueprint.
+# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+Screens:
+  Screen_section_4:
+    Properties:
+      LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
+    Children:
+      - Screen_section_4_Shell:
+          Control: CanvasComponent
+          ComponentName: ScreenShell
+          Properties:
+            TitleText: '="SECTION 4: GENDER & FARMER GROUP SOCIAL INCLUSION"'
+            ProgressText: '="Section 4"'
+            ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
+      - Row_001_Control_farmer_group_member:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Is farmer a member of a Farmer Group?"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_farmer_group_member."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_002_Control_farmer_group_type:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Farmer Group Type"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_farmer_group_type."'
+            RowVisible: '=Formula.visibility_farmer_group_type'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_003_Control_male_members:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Male Group Members"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_male_members."'
+            RowVisible: '=Formula.visibility_male_members'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_004_Control_female_members:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Female Group Members"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_female_members."'
+            RowVisible: '=Formula.visibility_female_members'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_005_Control_total_members:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="total members"'
+            Required: '=false'
+            HelperText: '=""'
+            ErrorText: '=""'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_006_Control_youth_members:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Youth (18-35) Group Members"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_youth_members."'
+            RowVisible: '=Formula.visibility_youth_members'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_007_Control_youth_pct:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="youth pct"'
+            Required: '=false'
+            HelperText: '=""'
+            ErrorText: '=""'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_008_Control_total_display:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Total Group Members: ${total_members}"'
+            Required: '=false'
+            HelperText: '=""'
+            ErrorText: '=""'
+            RowVisible: '=Formula.visibility_total_display'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_009_Control_youth_display:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Youth Members (%): ${youth_pct}%"'
+            Required: '=false'
+            HelperText: '=""'
+            ErrorText: '=""'
+            RowVisible: '=Formula.visibility_youth_display'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Screen_section_4_ValidationSummary:
+          Control: CanvasComponent
+          ComponentName: ValidationSummary
+          Properties:
+            Items: '=colValidationSummary'
+            Visible: '=CountRows(colValidationSummary) > 0'
+      - Screen_section_4_CommandBar:
+          Control: CanvasComponent
+          ComponentName: CommandBar
+          Properties:
+            BackFormula: '="Navigate(Screen_section_3, ScreenTransition.Fade)"'
+            NextFormula: '="Navigate(Screen_section_5, ScreenTransition.Fade)"'
+            SaveDraftFormula: '="// TODO: Patch placeholder collection for draft save"'
+            SubmitFormula: '="Clear(colValidationSummary); If(true && !(!IsBlank(Control_farmer_group_member.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Is farmer a member of a Farmer Group?"", Message: ""Is farmer a member of a Farmer Group? is required."", Control: ""Control_farmer_group_member""})); If(Formula.visibility_farmer_group_type && !(!IsBlank(Control_farmer_group_type.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Farmer Group Type"", Message: ""Farmer Group Type is required."", Control: ""Control_farmer_group_type""})); If(Formula.visibility_male_members && !(Self.Value >= 0), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Male Group Members"", Message: ""Male Group Members is invalid."", Control: ""Control_male_members""})); If(Formula.visibility_male_members && !(!IsBlank(Control_male_members.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Male Group Members"", Message: ""Male Group Members is required."", Control: ""Control_male_members""})); If(Formula.visibility_female_members && !(Self.Value >= 0), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Female Group Members"", Message: ""Female Group Members is invalid."", Control: ""Control_female_members""})); If(Formula.visibility_female_members && !(!IsBlank(Control_female_members.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Female Group Members"", Message: ""Female Group Members is required."", Control: ""Control_female_members""})); If(Formula.visibility_youth_members && !(Self.Value >= 1 && Self.Value <= Control_total_members.Text), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Youth (18-35) Group Members"", Message: ""Youth (18-35) Group Members is invalid."", Control: ""Control_youth_members""})); If(Formula.visibility_youth_members && !(!IsBlank(Control_youth_members.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Youth (18-35) Group Members"", Message: ""Youth (18-35) Group Members is required."", Control: ""Control_youth_members""}));"'

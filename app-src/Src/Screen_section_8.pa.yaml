@@ -1,0 +1,204 @@
+# Phase 3 Canvas YAML screen blueprint.
+# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+Screens:
+  Screen_section_8:
+    Properties:
+      LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
+    Children:
+      - Screen_section_8_Shell:
+          Control: CanvasComponent
+          ComponentName: ScreenShell
+          Properties:
+            TitleText: '="SECTION 8: ENVIRONMENTAL & SOCIAL SAFEGUARDS & CLIMATE RISK ASESSMENT"'
+            ProgressText: '="Section 27"'
+            ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
+      - Row_001_Control_row_335:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Environmental & Social Risk Screening"'
+            Required: '=false'
+            HelperText: '=""'
+            ErrorText: '=""'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_002_Control_exclusion_screen_passed:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Exclusion Screen Passed?"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_exclusion_screen_passed."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_003_Control_es_risk_category:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="E&S Risk Category"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_es_risk_category."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_004_Control_disclosure_published:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Disclosure Published?"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_disclosure_published."'
+            RowVisible: '=Formula.visibility_disclosure_published'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_005_Control_disclosure_date:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Disclosure Date"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_disclosure_date."'
+            RowVisible: '=Formula.visibility_disclosure_date'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_006_Control_grm_complaint:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="GRM Complaint?"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_grm_complaint."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_007_Control_ess_grievance:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Is there an ESS related grievance/complaint related to project/farm?"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_ess_grievance."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_008_Control_grievance_name:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Briefly name the Complaint/Grievance"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_grievance_name."'
+            RowVisible: '=Formula.visibility_grievance_name'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_009_Control_grievance_stage:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="What stage of GRM for above Compliant/Grivance?"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_grievance_stage."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_010_Control_grievance_name_other:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Other stage of GRM for above Compliant/Grivance?"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_grievance_name_other."'
+            RowVisible: '=Formula.visibility_grievance_name_other'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_011_Control_climate_hazards:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Climate hazards  affected  farm/business in the past 3–5 years"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_climate_hazards."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_012_Control_other_climate_hazards:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Please specify the ""other"" Climate_hazards."'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_other_climate_hazards."'
+            RowVisible: '=Formula.visibility_other_climate_hazards'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_013_Control_frequently:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="How frequently do these climate events occur"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_frequently."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_014_Control_collateral:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Assets used as collateral for your farming/business loan?"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_collateral."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_015_Control_other_collateral:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Please specify the ""other"" "'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_other_collateral."'
+            RowVisible: '=Formula.visibility_other_collateral'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_016_Control_exposure_level:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="How exposed is your collateral to climate risks?"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_exposure_level."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Screen_section_8_ValidationSummary:
+          Control: CanvasComponent
+          ComponentName: ValidationSummary
+          Properties:
+            Items: '=colValidationSummary'
+            Visible: '=CountRows(colValidationSummary) > 0'
+      - Screen_section_8_CommandBar:
+          Control: CanvasComponent
+          ComponentName: CommandBar
+          Properties:
+            BackFormula: '="Navigate(Screen_summary, ScreenTransition.Fade)"'
+            NextFormula: '="Navigate(Screen_section_9, ScreenTransition.Fade)"'
+            SaveDraftFormula: '="// TODO: Patch placeholder collection for draft save"'
+            SubmitFormula: '="Clear(colValidationSummary); If(true && !(!IsBlank(Control_exclusion_screen_passed.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Exclusion Screen Passed?"", Message: ""Exclusion Screen Passed? is required."", Control: ""Control_exclusion_screen_passed""})); If(true && !(!IsBlank(Control_es_risk_category.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""E&S Risk Category"", Message: ""E&S Risk Category is required."", Control: ""Control_es_risk_category""})); If(Formula.visibility_disclosure_published && !(!IsBlank(Control_disclosure_published.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Disclosure Published?"", Message: ""Disclosure Published? is required."", Control: ""Control_disclosure_published""})); If(Formula.visibility_disclosure_date && !(!IsBlank(Control_disclosure_date.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Disclosure Date"", Message: ""Disclosure Date is required."", Control: ""Control_disclosure_date""})); If(true && !(!IsBlank(Control_grm_complaint.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""GRM Complaint?"", Message: ""GRM Complaint? is required."", Control: ""Control_grm_complaint""})); If(true && !(!IsBlank(Control_ess_grievance.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Is there an ESS related grievance/complaint related to project/farm?"", Message: ""Is there an ESS related grievance/complaint related to project/farm? is required."", Control: ""Control_ess_grievance""})); If(Formula.visibility_grievance_name && !(!IsBlank(Control_grievance_name.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Briefly name the Complaint/Grievance"", Message: ""Briefly name the Complaint/Grievance is required."", Control: ""Control_grievance_name""})); If(true && !(!IsBlank(Control_grievance_stage.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""What stage of GRM for above Compliant/Grivance?"", Message: ""What stage of GRM for above Compliant/Grivance? is required."", Control: ""Control_grievance_stage""})); If(Formula.visibility_grievance_name_other && !(!IsBlank(Control_grievance_name_other.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Other stage of GRM for above Compliant/Grivance?"", Message: ""Other stage of GRM for above Compliant/Grivance? is required."", Control: ""Control_grievance_name_other""})); If(true && !(!IsBlank(Control_climate_hazards.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Climate hazards  affected  farm/business in the past 3–5 years"", Message: ""Climate hazards  affected  farm/business in the past 3–5 years is required."", Control: ""Control_climate_hazards""})); If(Formula.visibility_other_climate_hazards && !(!IsBlank(Control_other_climate_hazards.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Please specify the \""other\"" Climate_hazards."", Message: ""Please specify the \""other\"" Climate_hazards. is required."", Control: ""Control_other_climate_hazards""})); If(true && !(!IsBlank(Control_frequently.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""How frequently do these climate events occur"", Message: ""How frequently do these climate events occur is required."", Control: ""Control_frequently""})); If(true && !(!IsBlank(Control_collateral.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Assets used as collateral for your farming/business loan?"", Message: ""Assets used as collateral for your farming/business loan? is required."", Control: ""Control_collateral""})); If(Formula.visibility_other_collateral && !(!IsBlank(Control_other_collateral.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Please specify the \""other\"" "", Message: ""Please specify the \""other\""  is required."", Control: ""Control_other_collateral""})); If(true && !(!IsBlank(Control_exposure_level.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""How exposed is your collateral to climate risks?"", Message: ""How exposed is your collateral to climate risks? is required."", Control: ""Control_exposure_level""}));"'
