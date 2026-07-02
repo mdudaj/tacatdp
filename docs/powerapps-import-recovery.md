@@ -46,3 +46,9 @@ This creates a `.msapp` from the `.msapr` reference archive while setting `LoadF
 3. Save, export/download, and unpack from Studio or Git Integration.
 4. Commit the Studio-normalized source, not handwritten generated source.
 5. Only then treat promoted screens/components as importable source.
+
+## Current Phase 3 import-candidate fallback
+
+If the component-based candidate opens with `ErrOpeningDocument_UnknownError`, the next candidate should avoid custom components entirely. Use only native controls already present in the baseline `.msapr` templates, such as `Label@2.5.1` and `Classic/TextInput@2.3.2`, then repack without `--disable-load-from-yaml`.
+
+This does not require updating `app-src/TACATDP Impact Tracking.msapr` when the baseline imports successfully. The `.msapr` remains the original app reference archive; the risk is Studio's YAML loader rejecting generated source. Updating `.msapr` is only useful after Studio or Git Integration has opened, normalized, saved, and re-exported the changed app.

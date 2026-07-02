@@ -1,160 +1,486 @@
-# Phase 3 Canvas YAML screen blueprint.
-# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+# Phase 3 native Canvas source candidate.
+# Generated from artifacts/powerapps/phase3-scaffolds without custom components.
 Screens:
   Screen_water_efficiency:
     Properties:
       LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
-      - Screen_water_efficiency_Shell:
-          Control: CanvasComponent
-          ComponentName: ScreenShell
+      - Screen_water_efficiency_Title:
+          Control: Label@2.5.1
           Properties:
-            TitleText: '="SECTION 11: WATER EFFICIENCY QUANTIFICATION"'
-            ProgressText: '="Section 30"'
-            ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
-      - Row_001_Control_row_389:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Bold'
+            Height: '=40'
+            Size: '=18'
+            Text: '="SECTION 11: WATER EFFICIENCY QUANTIFICATION"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=24'
+      - Screen_water_efficiency_Progress:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="SECTION 11: WATER EFFICIENCY QUANTIFICATION"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_002_Control_crop:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Section 30"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=68'
+      - Screen_water_efficiency_Row_001_Control_row_389_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Crop Type"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_crop."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_003_Control_area:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="SECTION 11: WATER EFFICIENCY QUANTIFICATION"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=112'
+      - Screen_water_efficiency_Row_001_Control_row_389_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Irrigated Area (Ha)"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_area."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_004_Control_water_tech:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=144'
+      - Screen_water_efficiency_Row_001_Control_row_389_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Newly Adopted Sustainable Irrigation Technology"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_water_tech."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_005_Control_other_water_tech:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=192'
+      - Screen_water_efficiency_Row_002_Control_crop_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Other Newly Adopted Sustainable Irrigation Technology"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_other_water_tech."'
-            RowVisible: '=Formula.visibility_other_water_tech'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_006_Control_irr_base:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Crop Type *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=232'
+      - Screen_water_efficiency_Row_002_Control_crop_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Baseline Unsustainable Irrigation Practice to Be Replaced"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_irr_base."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_007_Control_other_irr_base:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=264'
+      - Screen_water_efficiency_Row_002_Control_crop_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Other Baseline Unsustainable Irrigation Practice to Be Replaced"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_other_irr_base."'
-            RowVisible: '=Formula.visibility_other_irr_base'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_008_Control_water_base:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_crop."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=312'
+      - Screen_water_efficiency_Row_003_Control_area_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Water Baseline (m³/year)"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_water_base."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_009_Control_water_after:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Irrigated Area (Ha) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=352'
+      - Screen_water_efficiency_Row_003_Control_area_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Water After (m³/year)"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_water_after."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_010_Control_water_saved:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=384'
+      - Screen_water_efficiency_Row_003_Control_area_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="water saved"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_011_Control_water_eff:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_area."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=432'
+      - Screen_water_efficiency_Row_004_Control_water_te_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="water eff"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_012_Control_water_summary:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Newly Adopted Sustainable Irrigation Technology *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=472'
+      - Screen_water_efficiency_Row_004_Control_water_te_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Water Saved (m³): ${water_saved}\nWater Efficiency (%): ${water_eff}"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Screen_water_efficiency_ValidationSummary:
-          Control: CanvasComponent
-          ComponentName: ValidationSummary
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=504'
+      - Screen_water_efficiency_Row_004_Control_water_te_Help:
+          Control: Label@2.5.1
           Properties:
-            Items: '=colValidationSummary'
-            Visible: '=CountRows(colValidationSummary) > 0'
-      - Screen_water_efficiency_CommandBar:
-          Control: CanvasComponent
-          ComponentName: CommandBar
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_water_tech."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=552'
+      - Screen_water_efficiency_Row_005_Control_other_wa_Label:
+          Control: Label@2.5.1
           Properties:
-            BackFormula: '="Navigate(Screen_section_10, ScreenTransition.Fade)"'
-            NextFormula: '="Navigate(Screen_yield_income, ScreenTransition.Fade)"'
-            SaveDraftFormula: '="// TODO: Patch placeholder collection for draft save"'
-            SubmitFormula: '="Clear(colValidationSummary); If(true && !(!IsBlank(Control_crop.Selected)), Collect(colValidationSummary, {Screen: ""Screen_water_efficiency"", Field: ""Crop Type"", Message: ""Crop Type is required."", Control: ""Control_crop""})); If(true && !(!IsBlank(Control_area.Text)), Collect(colValidationSummary, {Screen: ""Screen_water_efficiency"", Field: ""Irrigated Area (Ha)"", Message: ""Irrigated Area (Ha) is required."", Control: ""Control_area""})); If(true && !(!IsBlank(Control_water_tech.Selected)), Collect(colValidationSummary, {Screen: ""Screen_water_efficiency"", Field: ""Newly Adopted Sustainable Irrigation Technology"", Message: ""Newly Adopted Sustainable Irrigation Technology is required."", Control: ""Control_water_tech""})); If(Formula.visibility_other_water_tech && !(!IsBlank(Control_other_water_tech.Text)), Collect(colValidationSummary, {Screen: ""Screen_water_efficiency"", Field: ""Other Newly Adopted Sustainable Irrigation Technology"", Message: ""Other Newly Adopted Sustainable Irrigation Technology is required."", Control: ""Control_other_water_tech""})); If(true && !(!IsBlank(Control_irr_base.Selected)), Collect(colValidationSummary, {Screen: ""Screen_water_efficiency"", Field: ""Baseline Unsustainable Irrigation Practice to Be Replaced"", Message: ""Baseline Unsustainable Irrigation Practice to Be Replaced is required."", Control: ""Control_irr_base""})); If(Formula.visibility_other_irr_base && !(!IsBlank(Control_other_irr_base.Text)), Collect(colValidationSummary, {Screen: ""Screen_water_efficiency"", Field: ""Other Baseline Unsustainable Irrigation Practice to Be Replaced"", Message: ""Other Baseline Unsustainable Irrigation Practice to Be Replaced is required."", Control: ""Control_other_irr_base""})); If(true && !(!IsBlank(Control_water_base.Text)), Collect(colValidationSummary, {Screen: ""Screen_water_efficiency"", Field: ""Water Baseline (m³/year)"", Message: ""Water Baseline (m³/year) is required."", Control: ""Control_water_base""})); If(true && !(!IsBlank(Control_water_after.Text)), Collect(colValidationSummary, {Screen: ""Screen_water_efficiency"", Field: ""Water After (m³/year)"", Message: ""Water After (m³/year) is required."", Control: ""Control_water_after""}));"'
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Other Newly Adopted Sustainable Irrigation Technology *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=592'
+      - Screen_water_efficiency_Row_005_Control_other_wa_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=624'
+      - Screen_water_efficiency_Row_005_Control_other_wa_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_other_water_tech."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=672'
+      - Screen_water_efficiency_Row_006_Control_irr_base_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Baseline Unsustainable Irrigation Practice to Be Replaced *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=712'
+      - Screen_water_efficiency_Row_006_Control_irr_base_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=744'
+      - Screen_water_efficiency_Row_006_Control_irr_base_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_irr_base."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=792'
+      - Screen_water_efficiency_Row_007_Control_other_ir_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Other Baseline Unsustainable Irrigation Practice to Be Replaced *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=832'
+      - Screen_water_efficiency_Row_007_Control_other_ir_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=864'
+      - Screen_water_efficiency_Row_007_Control_other_ir_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_other_irr_base."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=912'
+      - Screen_water_efficiency_Row_008_Control_water_ba_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Water Baseline (m³/year) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=952'
+      - Screen_water_efficiency_Row_008_Control_water_ba_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=984'
+      - Screen_water_efficiency_Row_008_Control_water_ba_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_water_base."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1032'
+      - Screen_water_efficiency_Row_009_Control_water_af_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Water After (m³/year) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1072'
+      - Screen_water_efficiency_Row_009_Control_water_af_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1104'
+      - Screen_water_efficiency_Row_009_Control_water_af_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_water_after."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1152'
+      - Screen_water_efficiency_Row_010_Control_water_sa_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="water saved"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1192'
+      - Screen_water_efficiency_Row_010_Control_water_sa_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1224'
+      - Screen_water_efficiency_Row_010_Control_water_sa_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1272'
+      - Screen_water_efficiency_Row_011_Control_water_ef_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="water eff"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1312'
+      - Screen_water_efficiency_Row_011_Control_water_ef_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1344'
+      - Screen_water_efficiency_Row_011_Control_water_ef_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1392'
+      - Screen_water_efficiency_Row_012_Control_water_su_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Water Saved (m³): ${water_saved}\nWater Efficiency (%): ${water_eff}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1432'
+      - Screen_water_efficiency_Row_012_Control_water_su_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1464'
+      - Screen_water_efficiency_Row_012_Control_water_su_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1512'
+      - Screen_water_efficiency_CommandHint:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 120, 212, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Semibold'
+            Height: '=32'
+            Size: '=12'
+            Text: '="Back | Save Draft | Next - wire navigation after Studio opens this source"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1560'

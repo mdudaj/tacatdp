@@ -1,127 +1,375 @@
-# Phase 3 Canvas YAML screen blueprint.
-# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+# Phase 3 native Canvas source candidate.
+# Generated from artifacts/powerapps/phase3-scaffolds without custom components.
 Screens:
   Screen_section_4:
     Properties:
       LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
-      - Screen_section_4_Shell:
-          Control: CanvasComponent
-          ComponentName: ScreenShell
+      - Screen_section_4_Title:
+          Control: Label@2.5.1
           Properties:
-            TitleText: '="SECTION 4: GENDER & FARMER GROUP SOCIAL INCLUSION"'
-            ProgressText: '="Section 4"'
-            ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
-      - Row_001_Control_farmer_group_member:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Bold'
+            Height: '=40'
+            Size: '=18'
+            Text: '="SECTION 4: GENDER & FARMER GROUP SOCIAL INCLUSION"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=24'
+      - Screen_section_4_Progress:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Is farmer a member of a Farmer Group?"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_farmer_group_member."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_002_Control_farmer_group_type:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Section 4"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=68'
+      - Screen_section_4_Row_001_Control_farmer_group_me_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Farmer Group Type"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_farmer_group_type."'
-            RowVisible: '=Formula.visibility_farmer_group_type'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_003_Control_male_members:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Is farmer a member of a Farmer Group? *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=112'
+      - Screen_section_4_Row_001_Control_farmer_group_me_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Male Group Members"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_male_members."'
-            RowVisible: '=Formula.visibility_male_members'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_004_Control_female_members:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=144'
+      - Screen_section_4_Row_001_Control_farmer_group_me_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Female Group Members"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_female_members."'
-            RowVisible: '=Formula.visibility_female_members'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_005_Control_total_members:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_farmer_group_member."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=192'
+      - Screen_section_4_Row_002_Control_farmer_group_ty_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="total members"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_006_Control_youth_members:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Farmer Group Type *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=232'
+      - Screen_section_4_Row_002_Control_farmer_group_ty_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Youth (18-35) Group Members"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_youth_members."'
-            RowVisible: '=Formula.visibility_youth_members'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_007_Control_youth_pct:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=264'
+      - Screen_section_4_Row_002_Control_farmer_group_ty_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="youth pct"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_008_Control_total_display:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_farmer_group_type."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=312'
+      - Screen_section_4_Row_003_Control_male_members_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Total Group Members: ${total_members}"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=Formula.visibility_total_display'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_009_Control_youth_display:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Male Group Members *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=352'
+      - Screen_section_4_Row_003_Control_male_members_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Youth Members (%): ${youth_pct}%"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=Formula.visibility_youth_display'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Screen_section_4_ValidationSummary:
-          Control: CanvasComponent
-          ComponentName: ValidationSummary
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=384'
+      - Screen_section_4_Row_003_Control_male_members_Help:
+          Control: Label@2.5.1
           Properties:
-            Items: '=colValidationSummary'
-            Visible: '=CountRows(colValidationSummary) > 0'
-      - Screen_section_4_CommandBar:
-          Control: CanvasComponent
-          ComponentName: CommandBar
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_male_members."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=432'
+      - Screen_section_4_Row_004_Control_female_members_Label:
+          Control: Label@2.5.1
           Properties:
-            BackFormula: '="Navigate(Screen_section_3, ScreenTransition.Fade)"'
-            NextFormula: '="Navigate(Screen_section_5, ScreenTransition.Fade)"'
-            SaveDraftFormula: '="// TODO: Patch placeholder collection for draft save"'
-            SubmitFormula: '="Clear(colValidationSummary); If(true && !(!IsBlank(Control_farmer_group_member.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Is farmer a member of a Farmer Group?"", Message: ""Is farmer a member of a Farmer Group? is required."", Control: ""Control_farmer_group_member""})); If(Formula.visibility_farmer_group_type && !(!IsBlank(Control_farmer_group_type.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Farmer Group Type"", Message: ""Farmer Group Type is required."", Control: ""Control_farmer_group_type""})); If(Formula.visibility_male_members && !(Self.Value >= 0), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Male Group Members"", Message: ""Male Group Members is invalid."", Control: ""Control_male_members""})); If(Formula.visibility_male_members && !(!IsBlank(Control_male_members.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Male Group Members"", Message: ""Male Group Members is required."", Control: ""Control_male_members""})); If(Formula.visibility_female_members && !(Self.Value >= 0), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Female Group Members"", Message: ""Female Group Members is invalid."", Control: ""Control_female_members""})); If(Formula.visibility_female_members && !(!IsBlank(Control_female_members.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Female Group Members"", Message: ""Female Group Members is required."", Control: ""Control_female_members""})); If(Formula.visibility_youth_members && !(Self.Value >= 1 && Self.Value <= Control_total_members.Text), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Youth (18-35) Group Members"", Message: ""Youth (18-35) Group Members is invalid."", Control: ""Control_youth_members""})); If(Formula.visibility_youth_members && !(!IsBlank(Control_youth_members.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_4"", Field: ""Youth (18-35) Group Members"", Message: ""Youth (18-35) Group Members is required."", Control: ""Control_youth_members""}));"'
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Female Group Members *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=472'
+      - Screen_section_4_Row_004_Control_female_members_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=504'
+      - Screen_section_4_Row_004_Control_female_members_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_female_members."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=552'
+      - Screen_section_4_Row_005_Control_total_members_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="total members"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=592'
+      - Screen_section_4_Row_005_Control_total_members_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=624'
+      - Screen_section_4_Row_005_Control_total_members_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=672'
+      - Screen_section_4_Row_006_Control_youth_members_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Youth (18-35) Group Members *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=712'
+      - Screen_section_4_Row_006_Control_youth_members_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=744'
+      - Screen_section_4_Row_006_Control_youth_members_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_youth_members."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=792'
+      - Screen_section_4_Row_007_Control_youth_pct_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="youth pct"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=832'
+      - Screen_section_4_Row_007_Control_youth_pct_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=864'
+      - Screen_section_4_Row_007_Control_youth_pct_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=912'
+      - Screen_section_4_Row_008_Control_total_display_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Total Group Members: ${total_members}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=952'
+      - Screen_section_4_Row_008_Control_total_display_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=984'
+      - Screen_section_4_Row_008_Control_total_display_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1032'
+      - Screen_section_4_Row_009_Control_youth_display_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Youth Members (%): ${youth_pct}%"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1072'
+      - Screen_section_4_Row_009_Control_youth_display_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1104'
+      - Screen_section_4_Row_009_Control_youth_display_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1152'
+      - Screen_section_4_CommandHint:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 120, 212, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Semibold'
+            Height: '=32'
+            Size: '=12'
+            Text: '="Back | Save Draft | Next - wire navigation after Studio opens this source"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1200'
