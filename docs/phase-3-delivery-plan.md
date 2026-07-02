@@ -4,7 +4,7 @@
 
 Deliver Phase 3 as architecture and implementation preparation before editing the canvas app source heavily. The goal is to avoid turning the exported YAML into an unmaintainable hand-edited form.
 
-Use `docs/phase-3-maker-runbook.md` as the ordered Power Apps Studio execution guide and manual QA gate for the active scaffold pack under `artifacts/powerapps/phase3-scaffolds/` and the promoted Canvas screen artifacts under `app-src/Src/` and component artifacts under `app-src/Src/Component/`.
+Use `docs/phase-3-maker-runbook.md` as the ordered Power Apps Studio execution guide and manual QA gate for the scaffold pack under `artifacts/powerapps/phase3-scaffolds/`. Keep `app-src/Src/` as Studio-exported live source; do not manually promote generated scaffold YAML into it.
 
 ## Milestones
 

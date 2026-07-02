@@ -7,43 +7,5 @@
 # For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
 # ************************************************************************************************
 EditorState:
-  ComponentDefinitionsOrder:
-    - ScreenShell
-    - FieldRow
-    - ValidationSummary
-    - CommandBar
   ScreensOrder:
     - Screen1
-    - Screen_main
-    - Screen_section_2
-    - Screen_section_3
-    - Screen_section_4
-    - Screen_section_5
-    - Screen_section_6
-    - Screen_section_7
-    - Screen_farm_preparation
-    - Screen_farm_operations
-    - Screen_input_supply
-    - Screen_weeding
-    - Screen_pest
-    - Screen_harvesting
-    - Screen_postharvest
-    - Screen_storage
-    - Screen_transport
-    - Screen_processing
-    - Screen_aquaculture
-    - Screen_landing
-    - Screen_aquaponics
-    - Screen_marketing
-    - Screen_consumption
-    - Screen_training
-    - Screen_aracsa
-    - Screen_other
-    - Screen_summary
-    - Screen_section_8
-    - Screen_section_9
-    - Screen_section_10
-    - Screen_water_efficiency
-    - Screen_yield_income
-    - Screen_sec13
-    - Screen_production_cost_repeat_Detail
