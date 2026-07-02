@@ -6,14 +6,14 @@ Screens:
       LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
       - Screen_production_cost_repeat_Detail_Shell:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: ScreenShell
           Properties:
             TitleText: '="Add production cost item"'
             ProgressText: '="Section 33"'
             ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
       - Row_001_Control_stage:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Agri-crop value chain stage"'
@@ -24,7 +24,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_production_cost_repeat"'
             ItemsPlaceholder: '=""'
       - Row_002_Control_cost_item:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Production cost item"'
@@ -35,7 +35,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_production_cost_repeat"'
             ItemsPlaceholder: '=""'
       - Row_003_Control_unit:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Unit of measure"'
@@ -46,7 +46,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_production_cost_repeat"'
             ItemsPlaceholder: '=""'
       - Row_004_Control_quantity:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Quantity"'
@@ -57,7 +57,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_production_cost_repeat"'
             ItemsPlaceholder: '=""'
       - Row_005_Control_unit_cost:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Unit cost (TZS)"'
@@ -68,7 +68,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_production_cost_repeat"'
             ItemsPlaceholder: '=""'
       - Row_006_Control_subtotal:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Cost subtotal (TZS)"'
@@ -79,13 +79,13 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_production_cost_repeat"'
             ItemsPlaceholder: '=""'
       - Screen_production_cost_repeat_Detail_ValidationSummary:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: ValidationSummary
           Properties:
             Items: '=colValidationSummary'
             Visible: '=CountRows(colValidationSummary) > 0'
       - Screen_production_cost_repeat_Detail_CommandBar:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: CommandBar
           Properties:
             BackFormula: '="Navigate(Screen_sec13, ScreenTransition.Fade)"'
