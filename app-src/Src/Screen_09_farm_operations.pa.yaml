@@ -1,0 +1,412 @@
+# Phase 3 native Canvas source candidate.
+# Generated from artifacts/powerapps/phase3-scaffolds without custom components.
+Screens:
+  Screen_09_farm_operations:
+    Properties:
+      LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
+    Children:
+      - Screen_09_farm_operations_Title:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Bold'
+            Height: '=40'
+            Size: '=18'
+            Text: '="Farm Operations Stage Beneficiaries"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=24'
+      - Screen_09_farm_operations_Progress:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="09 Farm Operations"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=68'
+      - Screen_09_farm_operations_Row_001_Row_001_Control_farm_ope_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Direct Male Beneficiaries *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=112'
+      - Screen_09_farm_operations_Row_001_Row_001_Control_farm_ope_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=144'
+      - Screen_09_farm_operations_Row_001_Row_001_Control_farm_ope_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_farm_operations_dm."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=192'
+      - Screen_09_farm_operations_Row_002_Row_002_Control_farm_ope_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Direct Female Beneficiaries *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=232'
+      - Screen_09_farm_operations_Row_002_Row_002_Control_farm_ope_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=264'
+      - Screen_09_farm_operations_Row_002_Row_002_Control_farm_ope_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_farm_operations_df."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=312'
+      - Screen_09_farm_operations_Row_003_Row_003_Control_farm_ope_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="farm operations dt"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=352'
+      - Screen_09_farm_operations_Row_003_Row_003_Control_farm_ope_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=384'
+      - Screen_09_farm_operations_Row_003_Row_003_Control_farm_ope_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=432'
+      - Screen_09_farm_operations_Row_004_Row_004_Control_farm_ope_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Total Direct Male +Female Beneficiaries ${farm_operations_dt}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=472'
+      - Screen_09_farm_operations_Row_004_Row_004_Control_farm_ope_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=504'
+      - Screen_09_farm_operations_Row_004_Row_004_Control_farm_ope_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=552'
+      - Screen_09_farm_operations_Row_005_Row_005_Control_farm_ope_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Direct Youth (18-35) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=592'
+      - Screen_09_farm_operations_Row_005_Row_005_Control_farm_ope_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=624'
+      - Screen_09_farm_operations_Row_005_Row_005_Control_farm_ope_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_farm_operations_dy."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=672'
+      - Screen_09_farm_operations_Row_006_Row_006_Control_farm_ope_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Indirect Male Beneficiaries *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=712'
+      - Screen_09_farm_operations_Row_006_Row_006_Control_farm_ope_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=744'
+      - Screen_09_farm_operations_Row_006_Row_006_Control_farm_ope_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_farm_operations_im."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=792'
+      - Screen_09_farm_operations_Row_007_Row_007_Control_farm_ope_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Indirect Female Beneficiaries *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=832'
+      - Screen_09_farm_operations_Row_007_Row_007_Control_farm_ope_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=864'
+      - Screen_09_farm_operations_Row_007_Row_007_Control_farm_ope_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_farm_operations_if."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=912'
+      - Screen_09_farm_operations_Row_008_Row_008_Control_farm_ope_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="farm operations it"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=952'
+      - Screen_09_farm_operations_Row_008_Row_008_Control_farm_ope_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=984'
+      - Screen_09_farm_operations_Row_008_Row_008_Control_farm_ope_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1032'
+      - Screen_09_farm_operations_Row_009_Row_009_Control_farm_ope_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Total Indirect Male +Female Beneficiaries ${farm_operations_it}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1072'
+      - Screen_09_farm_operations_Row_009_Row_009_Control_farm_ope_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1104'
+      - Screen_09_farm_operations_Row_009_Row_009_Control_farm_ope_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1152'
+      - Screen_09_farm_operations_Row_010_Row_010_Control_farm_ope_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Indirect Youth (18-35) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1192'
+      - Screen_09_farm_operations_Row_010_Row_010_Control_farm_ope_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1224'
+      - Screen_09_farm_operations_Row_010_Row_010_Control_farm_ope_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_farm_operations_iy."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1272'
+      - Screen_09_farm_operations_CommandHint:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 120, 212, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Semibold'
+            Height: '=32'
+            Size: '=12'
+            Text: '="Back | Save Draft | Next - wire navigation after Studio opens this source"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1320'

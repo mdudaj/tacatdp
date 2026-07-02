@@ -1,205 +1,215 @@
 {
   "screenCount": 33,
-  "fieldRowCount": 400,
+  "fieldRowCount": 393,
   "requiredFieldRowCount": 226,
+  "hiddenOdkMetadataFields": [
+    "deviceid",
+    "devicephonenum",
+    "endtime",
+    "simid",
+    "starttime",
+    "subscriberid",
+    "username"
+  ],
+  "screenNamingConvention": "Screen_<two-digit-order>_<semantic_name>.pa.yaml",
   "screens": [
     {
-      "name": "Screen_aquaculture",
-      "title": "Aquaculture Production Stage Beneficiaries",
-      "rows": 10,
-      "requiredRows": 6
-    },
-    {
-      "name": "Screen_aquaponics",
-      "title": "Aquaponics Systems Stage Beneficiaries",
-      "rows": 10,
-      "requiredRows": 6
-    },
-    {
-      "name": "Screen_aracsa",
-      "title": "Farmer Group Collective Engagement in ARA/CSA",
-      "rows": 10,
-      "requiredRows": 6
-    },
-    {
-      "name": "Screen_consumption",
-      "title": "Consumption / User Stage Beneficiaries",
-      "rows": 9,
-      "requiredRows": 6
-    },
-    {
-      "name": "Screen_farm_operations",
-      "title": "Farm Operations Stage Beneficiaries",
-      "rows": 10,
-      "requiredRows": 6
-    },
-    {
-      "name": "Screen_farm_preparation",
-      "title": "Farm Preparation Stage Beneficiaries",
-      "rows": 10,
-      "requiredRows": 6
-    },
-    {
-      "name": "Screen_harvesting",
-      "title": "Harvesting Stage Beneficiaries",
-      "rows": 10,
-      "requiredRows": 6
-    },
-    {
-      "name": "Screen_input_supply",
-      "title": "Input Supply Stage Beneficiaries",
-      "rows": 10,
-      "requiredRows": 6
-    },
-    {
-      "name": "Screen_landing",
-      "title": "Fisheries Landing Stage Beneficiaries",
-      "rows": 10,
-      "requiredRows": 6
-    },
-    {
-      "name": "Screen_main",
-      "title": "QR Code Scan Direct",
-      "rows": 28,
+      "name": "Screen_01_demographics",
+      "title": "Demographics",
+      "rows": 21,
       "requiredRows": 14
     },
     {
-      "name": "Screen_marketing",
-      "title": "Marketing / Trading Stage Beneficiaries",
-      "rows": 10,
-      "requiredRows": 6
-    },
-    {
-      "name": "Screen_other",
-      "title": "Other Value Chain Activity Stage Beneficiaries",
-      "rows": 10,
-      "requiredRows": 6
-    },
-    {
-      "name": "Screen_pest",
-      "title": "Pre-Harvest / Pest Control Stage Beneficiaries",
-      "rows": 10,
-      "requiredRows": 6
-    },
-    {
-      "name": "Screen_postharvest",
-      "title": "Post-Harvest Handling Stage Beneficiaries",
-      "rows": 10,
-      "requiredRows": 6
-    },
-    {
-      "name": "Screen_processing",
-      "title": "Value Addition / Processing Stage Beneficiaries",
-      "rows": 10,
-      "requiredRows": 6
-    },
-    {
-      "name": "Screen_production_cost_repeat_Detail",
-      "title": "Add production cost item",
-      "rows": 6,
-      "requiredRows": 5
-    },
-    {
-      "name": "Screen_sec13",
-      "title": "SECTION 13: Detailed Agri-Crop Production Cost and Income Quantification",
-      "rows": 41,
-      "requiredRows": 20
-    },
-    {
-      "name": "Screen_section_10",
-      "title": "SECTION 10: GHG QUANTIFICATION",
-      "rows": 25,
-      "requiredRows": 12
-    },
-    {
-      "name": "Screen_section_2",
+      "name": "Screen_02_agricultural_production",
       "title": "SECTION 2: Agricultural Production, Yield Performance, Climate Risk and Deployed ARA Technology / Practice",
       "rows": 8,
       "requiredRows": 8
     },
     {
-      "name": "Screen_section_3",
+      "name": "Screen_03_resource_efficiency",
       "title": "SECTION 3: RESOUIRCE EFFICIENCY IN IRRIGATION, WATER & ENERGY",
       "rows": 14,
       "requiredRows": 12
     },
     {
-      "name": "Screen_section_4",
+      "name": "Screen_04_social_inclusion",
       "title": "SECTION 4: GENDER & FARMER GROUP SOCIAL INCLUSION",
       "rows": 9,
       "requiredRows": 5
     },
     {
-      "name": "Screen_section_5",
+      "name": "Screen_05_household_quantification",
       "title": "SECTION:5 HouseHold Number Quantification",
       "rows": 7,
       "requiredRows": 4
     },
     {
-      "name": "Screen_section_6",
+      "name": "Screen_06_training_gap",
       "title": "SECTION: 6 ARA\u2011CSA TRAINING & Gender Action Plan",
       "rows": 10,
       "requiredRows": 7
     },
     {
-      "name": "Screen_section_7",
+      "name": "Screen_07_beneficiaries_overview",
       "title": "SECTION 7: BENEFICIARIES QUANTIFICATION ",
       "rows": 2,
       "requiredRows": 1
     },
     {
-      "name": "Screen_section_8",
-      "title": "SECTION 8: ENVIRONMENTAL & SOCIAL SAFEGUARDS & CLIMATE RISK ASESSMENT",
-      "rows": 16,
-      "requiredRows": 15
-    },
-    {
-      "name": "Screen_section_9",
-      "title": "SECTION 9: INSURANCE & GUARANTEE LINKAGE",
-      "rows": 7,
-      "requiredRows": 4
-    },
-    {
-      "name": "Screen_storage",
-      "title": "Storage / Warehousing Stage Beneficiaries",
+      "name": "Screen_08_farm_preparation",
+      "title": "Farm Preparation Stage Beneficiaries",
       "rows": 10,
       "requiredRows": 6
     },
     {
-      "name": "Screen_summary",
-      "title": "Summary Dashboard",
-      "rows": 24,
-      "requiredRows": 0
-    },
-    {
-      "name": "Screen_training",
-      "title": "Trainers & Trainees Stage Beneficiaries",
+      "name": "Screen_09_farm_operations",
+      "title": "Farm Operations Stage Beneficiaries",
       "rows": 10,
       "requiredRows": 6
     },
     {
-      "name": "Screen_transport",
-      "title": "Crop Transport Stage Beneficiaries",
+      "name": "Screen_10_input_supply",
+      "title": "Input Supply Stage Beneficiaries",
       "rows": 10,
       "requiredRows": 6
     },
     {
-      "name": "Screen_water_efficiency",
-      "title": "SECTION 11: WATER EFFICIENCY QUANTIFICATION",
-      "rows": 12,
-      "requiredRows": 8
-    },
-    {
-      "name": "Screen_weeding",
+      "name": "Screen_11_weeding",
       "title": "Weeding / Field Management Stage Beneficiaries",
       "rows": 10,
       "requiredRows": 6
     },
     {
-      "name": "Screen_yield_income",
+      "name": "Screen_12_pest_control",
+      "title": "Pre-Harvest / Pest Control Stage Beneficiaries",
+      "rows": 10,
+      "requiredRows": 6
+    },
+    {
+      "name": "Screen_13_harvesting",
+      "title": "Harvesting Stage Beneficiaries",
+      "rows": 10,
+      "requiredRows": 6
+    },
+    {
+      "name": "Screen_14_postharvest",
+      "title": "Post-Harvest Handling Stage Beneficiaries",
+      "rows": 10,
+      "requiredRows": 6
+    },
+    {
+      "name": "Screen_15_storage",
+      "title": "Storage / Warehousing Stage Beneficiaries",
+      "rows": 10,
+      "requiredRows": 6
+    },
+    {
+      "name": "Screen_16_transport",
+      "title": "Crop Transport Stage Beneficiaries",
+      "rows": 10,
+      "requiredRows": 6
+    },
+    {
+      "name": "Screen_17_processing",
+      "title": "Value Addition / Processing Stage Beneficiaries",
+      "rows": 10,
+      "requiredRows": 6
+    },
+    {
+      "name": "Screen_18_aquaculture",
+      "title": "Aquaculture Production Stage Beneficiaries",
+      "rows": 10,
+      "requiredRows": 6
+    },
+    {
+      "name": "Screen_19_fisheries_landing",
+      "title": "Fisheries Landing Stage Beneficiaries",
+      "rows": 10,
+      "requiredRows": 6
+    },
+    {
+      "name": "Screen_20_aquaponics",
+      "title": "Aquaponics Systems Stage Beneficiaries",
+      "rows": 10,
+      "requiredRows": 6
+    },
+    {
+      "name": "Screen_21_marketing",
+      "title": "Marketing / Trading Stage Beneficiaries",
+      "rows": 10,
+      "requiredRows": 6
+    },
+    {
+      "name": "Screen_22_consumption",
+      "title": "Consumption / User Stage Beneficiaries",
+      "rows": 9,
+      "requiredRows": 6
+    },
+    {
+      "name": "Screen_23_trainers_trainees",
+      "title": "Trainers & Trainees Stage Beneficiaries",
+      "rows": 10,
+      "requiredRows": 6
+    },
+    {
+      "name": "Screen_24_collective_engagement",
+      "title": "Farmer Group Collective Engagement in ARA/CSA",
+      "rows": 10,
+      "requiredRows": 6
+    },
+    {
+      "name": "Screen_25_other_value_chain",
+      "title": "Other Value Chain Activity Stage Beneficiaries",
+      "rows": 10,
+      "requiredRows": 6
+    },
+    {
+      "name": "Screen_26_beneficiary_summary",
+      "title": "Summary Dashboard",
+      "rows": 24,
+      "requiredRows": 0
+    },
+    {
+      "name": "Screen_27_safeguards_climate",
+      "title": "SECTION 8: ENVIRONMENTAL & SOCIAL SAFEGUARDS & CLIMATE RISK ASESSMENT",
+      "rows": 16,
+      "requiredRows": 15
+    },
+    {
+      "name": "Screen_28_insurance_guarantee",
+      "title": "SECTION 9: INSURANCE & GUARANTEE LINKAGE",
+      "rows": 7,
+      "requiredRows": 4
+    },
+    {
+      "name": "Screen_29_ghg_quantification",
+      "title": "SECTION 10: GHG QUANTIFICATION",
+      "rows": 25,
+      "requiredRows": 12
+    },
+    {
+      "name": "Screen_30_water_efficiency",
+      "title": "SECTION 11: WATER EFFICIENCY QUANTIFICATION",
+      "rows": 12,
+      "requiredRows": 8
+    },
+    {
+      "name": "Screen_31_yield_income",
       "title": "SECTION 12: YIELD & INCOME IMPACT QUANTIFICATION",
       "rows": 12,
       "requiredRows": 3
+    },
+    {
+      "name": "Screen_32_production_cost_income",
+      "title": "SECTION 13: Detailed Agri-Crop Production Cost and Income Quantification",
+      "rows": 41,
+      "requiredRows": 20
+    },
+    {
+      "name": "Screen_33_production_cost_detail",
+      "title": "Add production cost item",
+      "rows": 6,
+      "requiredRows": 5
     }
   ]
 }
