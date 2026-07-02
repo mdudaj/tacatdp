@@ -29,6 +29,8 @@ MAPPING_CSV = SCHEMAS / "xlsform-to-list-mapping.csv"
 SUMMARY_MD = SCHEMAS / "schema-summary.md"
 CREATE_SCRIPT = SCRIPTS / "create-microsoft-lists.ps1"
 IMPORT_REFERENCE_SCRIPT = SCRIPTS / "import-reference-data.ps1"
+CREATE_CMD = SCRIPTS / "create-microsoft-lists.cmd"
+IMPORT_REFERENCE_CMD = SCRIPTS / "import-reference-data.cmd"
 
 LOCATION_LISTS = {"region", "district", "ward", "village"}
 REFERENCE_SELECT_LISTS = {"branch", "crop_name", "cost_item", "unit_measure", *LOCATION_LISTS}
@@ -398,9 +400,28 @@ def generate_pnp_script() -> None:
 
 $ErrorActionPreference = "Stop"
 
-if (-not (Get-Module -ListAvailable -Name PnP.PowerShell)) {
-    throw "PnP.PowerShell is required. Install it with: Install-Module PnP.PowerShell -Scope CurrentUser"
+function Ensure-PnPPowerShell {
+    if ($PSVersionTable.PSEdition -eq "Desktop") {
+        throw "PnP.PowerShell requires PowerShell 7+. Run this script with pwsh, or use create-microsoft-lists.cmd."
+    }
+
+    try {
+        Import-Module PnP.PowerShell -ErrorAction Stop
+        return
+    } catch {
+        Write-Host "PnP.PowerShell is not available in this PowerShell profile. Installing for CurrentUser..."
+    }
+
+    $gallery = Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue
+    if ($gallery -and $gallery.InstallationPolicy -ne "Trusted") {
+        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+    }
+
+    Install-Module PnP.PowerShell -Scope CurrentUser -Force -AllowClobber
+    Import-Module PnP.PowerShell -ErrorAction Stop
 }
+
+Ensure-PnPPowerShell
 
 $resolvedSchemaPath = Resolve-Path $SchemaPath
 $schema = Get-Content $resolvedSchemaPath -Raw | ConvertFrom-Json
@@ -448,9 +469,28 @@ foreach ($list in $schema.lists) {
 
 $ErrorActionPreference = "Stop"
 
-if (-not (Get-Module -ListAvailable -Name PnP.PowerShell)) {
-    throw "PnP.PowerShell is required. Install it with: Install-Module PnP.PowerShell -Scope CurrentUser"
+function Ensure-PnPPowerShell {
+    if ($PSVersionTable.PSEdition -eq "Desktop") {
+        throw "PnP.PowerShell requires PowerShell 7+. Run this script with pwsh, or use import-reference-data.cmd."
+    }
+
+    try {
+        Import-Module PnP.PowerShell -ErrorAction Stop
+        return
+    } catch {
+        Write-Host "PnP.PowerShell is not available in this PowerShell profile. Installing for CurrentUser..."
+    }
+
+    $gallery = Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue
+    if ($gallery -and $gallery.InstallationPolicy -ne "Trusted") {
+        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+    }
+
+    Install-Module PnP.PowerShell -Scope CurrentUser -Force -AllowClobber
+    Import-Module PnP.PowerShell -ErrorAction Stop
 }
+
+Ensure-PnPPowerShell
 
 $resolvedReferencePath = Resolve-Path $ReferenceDataPath
 Connect-PnPOnline -Url $SiteUrl -Interactive
@@ -475,6 +515,30 @@ Get-ChildItem -Path $resolvedReferencePath -Filter "*.csv" | ForEach-Object {
         Add-PnPListItem -List $listTitle -Values $values | Out-Null
     }
 }
+''',
+        encoding="utf-8",
+    )
+    CREATE_CMD.write_text(
+        r'''@echo off
+where pwsh >nul 2>nul
+if errorlevel 1 (
+  echo PowerShell 7+ ^(pwsh^) is required for PnP.PowerShell.
+  echo Install it from https://aka.ms/powershell-release?tag=stable then rerun this command.
+  exit /b 1
+)
+pwsh -NoProfile -ExecutionPolicy Bypass -File "%~dp0create-microsoft-lists.ps1" %*
+''',
+        encoding="utf-8",
+    )
+    IMPORT_REFERENCE_CMD.write_text(
+        r'''@echo off
+where pwsh >nul 2>nul
+if errorlevel 1 (
+  echo PowerShell 7+ ^(pwsh^) is required for PnP.PowerShell.
+  echo Install it from https://aka.ms/powershell-release?tag=stable then rerun this command.
+  exit /b 1
+)
+pwsh -NoProfile -ExecutionPolicy Bypass -File "%~dp0import-reference-data.ps1" %*
 ''',
         encoding="utf-8",
     )
@@ -673,6 +737,8 @@ def main() -> None:
                 f"- `{REFERENCE_DATA.relative_to(ROOT)}/`",
                 f"- `{CREATE_SCRIPT.relative_to(ROOT)}`",
                 f"- `{IMPORT_REFERENCE_SCRIPT.relative_to(ROOT)}`",
+                f"- `{CREATE_CMD.relative_to(ROOT)}`",
+                f"- `{IMPORT_REFERENCE_CMD.relative_to(ROOT)}`",
                 "",
                 "The PnP PowerShell scripts create lists with typed columns and import reference data. CSV templates are provided for submission-data import after list creation.",
             ]
@@ -688,6 +754,8 @@ def main() -> None:
     print(f"Wrote {REFERENCE_DATA.relative_to(ROOT)}/*.csv")
     print(f"Wrote {CREATE_SCRIPT.relative_to(ROOT)}")
     print(f"Wrote {IMPORT_REFERENCE_SCRIPT.relative_to(ROOT)}")
+    print(f"Wrote {CREATE_CMD.relative_to(ROOT)}")
+    print(f"Wrote {IMPORT_REFERENCE_CMD.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

@@ -17,6 +17,8 @@ It creates:
 - `schemas/reference-data/*.csv` - reference data CSVs generated from the XLSForm `choices` sheet.
 - `scripts/create-microsoft-lists.ps1` - PnP PowerShell script to create lists and typed columns.
 - `scripts/import-reference-data.ps1` - PnP PowerShell script to import generated reference data.
+- `scripts/create-microsoft-lists.cmd` - Windows launcher that runs the PowerShell script with execution policy bypass for this process.
+- `scripts/import-reference-data.cmd` - Windows launcher that imports reference data with execution policy bypass for this process.
 
 ## Schema shape
 
@@ -31,11 +33,25 @@ The generated schema uses the agreed hybrid design:
 
 ## Import steps
 
-Install PnP PowerShell if needed:
+Use PowerShell 7+ (`pwsh`) on Windows. PnP.PowerShell is installed automatically in `CurrentUser` scope if it is missing from the current PowerShell profile.
+
+Recommended Windows command prompt flow:
+
+```bat
+cd scripts
+create-microsoft-lists.cmd -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>"
+import-reference-data.cmd -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>"
+```
+
+If you prefer calling PowerShell directly:
 
 ```powershell
-Install-Module PnP.PowerShell -Scope CurrentUser
+cd scripts
+pwsh -NoProfile -ExecutionPolicy Bypass -File .\create-microsoft-lists.ps1 -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>"
+pwsh -NoProfile -ExecutionPolicy Bypass -File .\import-reference-data.ps1 -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>"
 ```
+
+The `-ExecutionPolicy Bypass` flag applies only to that process, so it does not require changing the machine policy.
 
 Create lists and typed fields:
 
@@ -52,6 +68,20 @@ cd scripts
 ```
 
 The reference import includes 66,297 village rows, so it can take time. Run it after confirming the target SharePoint site and list names.
+
+## Windows troubleshooting
+
+If script execution is disabled, use the `.cmd` launchers or the direct `pwsh -NoProfile -ExecutionPolicy Bypass -File ...` commands above. Avoid relying on `Set-ExecutionPolicy -Scope Process` in a previous terminal because it only affects that running PowerShell process.
+
+If PnP.PowerShell is reported as unavailable on the next run, confirm you are using PowerShell 7+ consistently:
+
+```powershell
+$PSVersionTable.PSEdition
+$PSVersionTable.PSVersion
+Get-Module -ListAvailable PnP.PowerShell
+```
+
+If `$PSVersionTable.PSEdition` is `Desktop`, you are in Windows PowerShell 5.1; open PowerShell 7 (`pwsh`) or use the `.cmd` launcher. The scripts install PnP.PowerShell with `Install-Module PnP.PowerShell -Scope CurrentUser -Force -AllowClobber` when the module is missing.
 
 ## Review before running
 

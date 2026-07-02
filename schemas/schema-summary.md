@@ -13,5 +13,7 @@
 - `schemas/reference-data/`
 - `scripts/create-microsoft-lists.ps1`
 - `scripts/import-reference-data.ps1`
+- `scripts/create-microsoft-lists.cmd`
+- `scripts/import-reference-data.cmd`
 
 The PnP PowerShell scripts create lists with typed columns and import reference data. CSV templates are provided for submission-data import after list creation.
