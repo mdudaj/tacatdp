@@ -11,7 +11,7 @@ Use these artifacts together:
 | Artifact | Purpose |
 | --- | --- |
 | `app-src/Src/` | Current unpacked Power Apps source exported from Studio. Treat this as the live app source. |
-| `app-src/Src/ScreenShell.pa.yaml`, `FieldRow.pa.yaml`, `ValidationSummary.pa.yaml`, `CommandBar.pa.yaml` | Promoted component artifacts used by the active Canvas source. |
+| `app-src/Src/Component/ScreenShell.pa.yaml`, `FieldRow.pa.yaml`, `ValidationSummary.pa.yaml`, `CommandBar.pa.yaml` | Promoted component artifacts used by the active Canvas source. |
 | `app-src/Src/Screen_*.pa.yaml` | Promoted screen artifacts used by the active Canvas source. |
 | `artifacts/powerapps/phase3-scaffolds/phase3-canvas-yaml-pack.json` | Inventory of generated component and screen blueprints. |
 | `artifacts/powerapps/phase3-scaffolds/components/*.pa.yaml` | Component blueprints for the Phase 3 shell, field rows, command bar, and validation summary. |
@@ -44,7 +44,7 @@ It contains:
 | Screen blueprints | 33 | `artifacts/powerapps/phase3-scaffolds/screens/` |
 | Pack manifest | 1 | `artifacts/powerapps/phase3-scaffolds/phase3-canvas-yaml-pack.json` |
 
-The active source also contains promoted copies under `app-src/Src/`: 4 component files and 33 screen files. Keep the scaffold pack and promoted source synchronized until Power Apps Studio has normalized and re-exported the app.
+The active source also contains promoted copies under `app-src/Src/Component/` for components and `app-src/Src/` for screens. Keep the scaffold pack and promoted source synchronized until Power Apps Studio has normalized and re-exported the app.
 
 ## Maker execution order
 
@@ -233,7 +233,7 @@ Before replacing placeholders later:
 
 Phase 3 maker execution is ready when:
 
-1. Components exist in `app-src/Src/` with matching names.
+1. Components exist in `app-src/Src/Component/` with matching names and are listed in `_EditorState.pa.yaml`.
 2. Screen skeletons exist in `app-src/Src/` and are listed in `_EditorState.pa.yaml` in scaffold order.
 3. Placeholder data state is visible and isolated.
 4. The changed Canvas source can be exported/unpacked, reviewed, repacked, and imported without losing scaffolded screens or components.
