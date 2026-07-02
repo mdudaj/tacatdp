@@ -13,9 +13,9 @@ Use these artifacts together:
 | `app-src/Src/` | Current unpacked Power Apps source exported from Studio. Treat this as the live app source. |
 | `app-src/Src/ScreenShell.pa.yaml`, `FieldRow.pa.yaml`, `ValidationSummary.pa.yaml`, `CommandBar.pa.yaml` | Promoted component artifacts used by the active Canvas source. |
 | `app-src/Src/Screen_*.pa.yaml` | Promoted screen artifacts used by the active Canvas source. |
-| `app-src/phase3-scaffolds/phase3-canvas-yaml-pack.json` | Inventory of generated component and screen blueprints. |
-| `app-src/phase3-scaffolds/components/*.pa.yaml` | Component blueprints for the Phase 3 shell, field rows, command bar, and validation summary. |
-| `app-src/phase3-scaffolds/screens/*.pa.yaml` | Screen blueprints for section-level implementation. |
+| `artifacts/powerapps/phase3-scaffolds/phase3-canvas-yaml-pack.json` | Inventory of generated component and screen blueprints. |
+| `artifacts/powerapps/phase3-scaffolds/components/*.pa.yaml` | Component blueprints for the Phase 3 shell, field rows, command bar, and validation summary. |
+| `artifacts/powerapps/phase3-scaffolds/screens/*.pa.yaml` | Screen blueprints for section-level implementation. |
 | `docs/design-system.md` | UX/layout contract for one-field-per-row screens, spacing, validation, navigation, and accessibility. |
 | `docs/phase-3-requirements.md` | Phase 3 functional and non-functional requirements. |
 | `schemas/xlsform-to-list-mapping.csv` | Source of truth for field-to-list mapping. |
@@ -23,7 +23,7 @@ Use these artifacts together:
 
 ## Non-negotiable gates
 
-1. `app-src/phase3-scaffolds/` is the source scaffold pack for building repack/import-ready Canvas artifacts. Do not overwrite `app-src/Src/` directly from these files without validating the result through Power Apps Studio and the pack/unpack flow.
+1. `artifacts/powerapps/phase3-scaffolds/` is the source scaffold pack for building repack/import-ready Canvas artifacts. Do not overwrite `app-src/Src/` directly from these files without validating the result through Power Apps Studio and the pack/unpack flow.
 2. Placeholder data sources are temporary. Keep them named and documented as placeholders until real Microsoft Lists are available.
 3. Do not publish, share, or connect production SharePoint/Microsoft Lists from this phase without explicit approval.
 4. Every data-entry field must use one field per row by default, with a visible label above the input and helper/error text below it.
@@ -34,15 +34,15 @@ Use these artifacts together:
 
 The active scaffold pack is:
 
-`app-src/phase3-scaffolds/`
+`artifacts/powerapps/phase3-scaffolds/`
 
 It contains:
 
 | Type | Count | Location |
 | --- | ---: | --- |
-| Component blueprints | 4 | `app-src/phase3-scaffolds/components/` |
-| Screen blueprints | 33 | `app-src/phase3-scaffolds/screens/` |
-| Pack manifest | 1 | `app-src/phase3-scaffolds/phase3-canvas-yaml-pack.json` |
+| Component blueprints | 4 | `artifacts/powerapps/phase3-scaffolds/components/` |
+| Screen blueprints | 33 | `artifacts/powerapps/phase3-scaffolds/screens/` |
+| Pack manifest | 1 | `artifacts/powerapps/phase3-scaffolds/phase3-canvas-yaml-pack.json` |
 
 The active source also contains promoted copies under `app-src/Src/`: 4 component files and 33 screen files. Keep the scaffold pack and promoted source synchronized until Power Apps Studio has normalized and re-exported the app.
 
@@ -227,7 +227,7 @@ Before replacing placeholders later:
 - [ ] App Checker has no unresolved accessibility findings affecting data entry.
 - [ ] Delegation warnings are documented and not caused by large reference lists.
 - [ ] Studio save succeeds after changes.
-- [ ] Export/unpack source can be reviewed without losing `app-src/phase3-scaffolds/`.
+- [ ] Export/unpack source can be reviewed without losing `artifacts/powerapps/phase3-scaffolds/`.
 
 ## Completion criteria for this slice
 
