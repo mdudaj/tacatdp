@@ -11,6 +11,8 @@ Use these artifacts together:
 | Artifact | Purpose |
 | --- | --- |
 | `app-src/Src/` | Current unpacked Power Apps source exported from Studio. Treat this as the live app source. |
+| `app-src/Src/ScreenShell.pa.yaml`, `FieldRow.pa.yaml`, `ValidationSummary.pa.yaml`, `CommandBar.pa.yaml` | Promoted component artifacts used by the active Canvas source. |
+| `app-src/Src/Screen_*.pa.yaml` | Promoted screen artifacts used by the active Canvas source. |
 | `app-src/phase3-scaffolds/phase3-canvas-yaml-pack.json` | Inventory of generated component and screen blueprints. |
 | `app-src/phase3-scaffolds/components/*.pa.yaml` | Component blueprints for the Phase 3 shell, field rows, command bar, and validation summary. |
 | `app-src/phase3-scaffolds/screens/*.pa.yaml` | Screen blueprints for section-level implementation. |
@@ -41,6 +43,8 @@ It contains:
 | Component blueprints | 4 | `app-src/phase3-scaffolds/components/` |
 | Screen blueprints | 33 | `app-src/phase3-scaffolds/screens/` |
 | Pack manifest | 1 | `app-src/phase3-scaffolds/phase3-canvas-yaml-pack.json` |
+
+The active source also contains promoted copies under `app-src/Src/`: 4 component files and 33 screen files. Keep the scaffold pack and promoted source synchronized until Power Apps Studio has normalized and re-exported the app.
 
 ## Maker execution order
 
@@ -73,6 +77,8 @@ Minimum placeholder startup behavior:
 2. Clear and seed one sample submission record with a temporary `SubmissionKey`.
 3. Seed small region/district/ward/village samples only; do not model full village volume in local collections.
 4. Add a visible banner or label stating `Placeholder data only - replace before publish`.
+
+The current source seeds placeholder collections in `app-src/Src/App.pa.yaml` so the promoted source has a concrete placeholder seam before live Microsoft Lists are ready.
 
 ### 3. Build reusable components first
 
@@ -227,8 +233,8 @@ Before replacing placeholders later:
 
 Phase 3 maker execution is ready when:
 
-1. Components are created or explicitly queued with matching names.
-2. Screen skeletons are created or explicitly queued in scaffold order.
+1. Components exist in `app-src/Src/` with matching names.
+2. Screen skeletons exist in `app-src/Src/` and are listed in `_EditorState.pa.yaml` in scaffold order.
 3. Placeholder data state is visible and isolated.
 4. The changed Canvas source can be exported/unpacked, reviewed, repacked, and imported without losing scaffolded screens or components.
 5. Manual QA checklist items are completed or documented as blocked by Windows/Power Apps readiness.
