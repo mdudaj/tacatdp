@@ -1,0 +1,356 @@
+# Phase 3 Canvas YAML screen blueprint.
+# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+Screens:
+  Screen_main:
+    Properties:
+      LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+    Children:
+      - Screen_main_Shell:
+          Control: Component
+          ComponentName: ScreenShell
+          Properties:
+            TitleText: ="QR Code Scan Direct"
+            ProgressText: ="Section 1"
+            ShowValidationSummary: =CountRows(colValidationSummary) > 0
+      - Row_001_Control_starttime:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="starttime"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_002_Control_endtime:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="endtime"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_003_Control_deviceid:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="deviceid"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_004_Control_subscriberid:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="subscriberid"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_005_Control_simid:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="simid"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_006_Control_devicephonenum:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="devicephonenum"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_007_Control_username:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="username"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_008_Control_customer_id:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Customer ID"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_009_Control_customer_name:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Customer Name"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_010_Control_gender:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Gender"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_gender."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_011_Control_age:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Farmer Age"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_012_Control_age_group:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="age group"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_013_Control_age_group_display:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Age Group: ${age_group}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_014_Control_education_level:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Education Level"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_education_level."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_015_Control_zone:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Zone"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_zone."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: ="placeholder_zone"
+      - Row_016_Control_crdb_branch:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="CRDB Branch"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_crdb_branch."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: ="placeholder_branch"
+      - Row_017_Control_region:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Region"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_region."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: ="placeholder_region"
+      - Row_018_Control_district:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="District"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_district."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: ="placeholder_district"
+      - Row_019_Control_ward:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Ward"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_ward."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: ="placeholder_ward"
+      - Row_020_Control_village:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Village"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_village."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: ="placeholder_village"
+      - Row_021_Control_georeference:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="***Enumerator: Measure this outside of the house, in front of the main door to the house. You can adjust the location by manually moving the pin on the map."
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_022_Control_farmer_phone:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Farmer Phone"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_farmer_phone."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_023_Control_loan_amount_tzs:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Loan Amount (TZS)"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_loan_amount_tzs."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_024_Control_farmer_segment:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="farmer segment"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_025_Control_farmer_segment_note:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Farmer Segment ${farmer_segment}"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_farmer_segment_note."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_026_Control_own_farmland:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Farmer/House Hold Own Farmland?"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_own_farmland."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_027_Control_land_size_acres:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Land Size (Acres)"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_land_size_acres."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_028_Control_quantify_cost:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Would you like to quantify production cost and income?"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_quantify_cost."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Screen_main_ValidationSummary:
+          Control: Component
+          ComponentName: ValidationSummary
+          Properties:
+            Items: =colValidationSummary
+            Visible: =CountRows(colValidationSummary) > 0
+      - Screen_main_CommandBar:
+          Control: Component
+          ComponentName: CommandBar
+          Properties:
+            BackFormula: =""
+            NextFormula: ="Navigate(Screen_section_2, ScreenTransition.Fade)"
+            SaveDraftFormula: ="// TODO: Patch placeholder collection for draft save"
+            SubmitFormula: ="Clear(colValidationSummary);
+If(true && !(!IsBlank(Control_gender.Selected)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Gender"", Message: ""Gender is required."", Control: ""Control_gender""}));
+If(true && !(!IsBlank(Control_education_level.Selected)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Education Level"", Message: ""Education Level is required."", Control: ""Control_education_level""}));
+If(true && !(!IsBlank(Control_zone.Selected)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Zone"", Message: ""Zone is required."", Control: ""Control_zone""}));
+If(true && !(!IsBlank(Control_crdb_branch.Selected)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""CRDB Branch"", Message: ""CRDB Branch is required."", Control: ""Control_crdb_branch""}));
+If(true && !(Filter(ChoicesSource, zone=Control_zone.Selected.Value)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""CRDB Branch"", Message: ""CRDB Branch is invalid."", Control: ""Control_crdb_branch""}));
+If(true && !(!IsBlank(Control_region.Selected)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Region"", Message: ""Region is required."", Control: ""Control_region""}));
+If(true && !(!IsBlank(Control_district.Selected)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""District"", Message: ""District is required."", Control: ""Control_district""}));
+If(true && !(Filter(ChoicesSource, region=Control_region.Selected.Value)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""District"", Message: ""District is invalid."", Control: ""Control_district""}));
+If(true && !(!IsBlank(Control_ward.Selected)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Ward"", Message: ""Ward is required."", Control: ""Control_ward""}));
+If(true && !(Filter(ChoicesSource, region=Control_region.Selected.Value && district=Control_district.Selected.Value)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Ward"", Message: ""Ward is invalid."", Control: ""Control_ward""}));
+If(true && !(!IsBlank(Control_village.Selected)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Village"", Message: ""Village is required."", Control: ""Control_village""}));
+If(true && !(Filter(ChoicesSource, region=Control_region.Selected.Value && district=Control_district.Selected.Value && ward=Control_ward.Selected.Value)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Village"", Message: ""Village is invalid."", Control: ""Control_village""}));
+If(true && !((IsMatch(Text(Self.Value), \""0\d{9}\"") && Len(Text(Self.Value))=10) || Self.Value=-444 || Self.Value=-888), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Farmer Phone"", Message: ""Insert a 10-digit number including the zero in the beginning!"", Control: ""Control_farmer_phone""}));
+If(true && !(!IsBlank(Control_farmer_phone.Text)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Farmer Phone"", Message: ""Farmer Phone is required."", Control: ""Control_farmer_phone""}));
+If(true && !(Self.Value >= 200000), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Loan Amount (TZS)"", Message: ""Kiasi cha mkopo lazima kiwe TZS 200,000 au zaidi."", Control: ""Control_loan_amount_tzs""}));
+If(true && !(!IsBlank(Control_loan_amount_tzs.Text)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Loan Amount (TZS)"", Message: ""Loan Amount (TZS) is required."", Control: ""Control_loan_amount_tzs""}));
+If(true && !(!IsBlank(Control_farmer_segment_note.Text)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Farmer Segment ${farmer_segment}"", Message: ""Farmer Segment ${farmer_segment} is required."", Control: ""Control_farmer_segment_note""}));
+If(true && !(!IsBlank(Control_own_farmland.Selected)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Farmer/House Hold Own Farmland?"", Message: ""Farmer/House Hold Own Farmland? is required."", Control: ""Control_own_farmland""}));
+If(true && !(!IsBlank(Control_land_size_acres.Text)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Land Size (Acres)"", Message: ""Land Size (Acres) is required."", Control: ""Control_land_size_acres""}));
+If(true && !(!IsBlank(Control_quantify_cost.Selected)), Collect(colValidationSummary, {Screen: ""Screen_main"", Field: ""Would you like to quantify production cost and income?"", Message: ""Would you like to quantify production cost and income? is required."", Control: ""Control_quantify_cost""}));"

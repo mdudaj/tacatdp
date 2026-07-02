@@ -1,0 +1,499 @@
+# Phase 3 Canvas YAML screen blueprint.
+# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+Screens:
+  Screen_sec13:
+    Properties:
+      LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+    Children:
+      - Screen_sec13_Shell:
+          Control: Component
+          ComponentName: ScreenShell
+          Properties:
+            TitleText: ="SECTION 13: Detailed Agri-Crop Production Cost and Income Quantification"
+            ProgressText: ="Section 32"
+            ShowValidationSummary: =CountRows(colValidationSummary) > 0
+      - Row_001_Control_row_419:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="SECTION 13: Detailed Agri-Crop Production Cost and Income Quantification"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_002_Control_reporting_period:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Reporting period"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_reporting_period."
+            RowVisible: =Formula.visibility_reporting_period
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_003_Control_farm_size:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Cultivated area (Acres)"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_farm_size."
+            RowVisible: =Formula.visibility_farm_size
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_004_Control_production_before:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Production before TACATDP (kg)"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_production_before."
+            RowVisible: =Formula.visibility_production_before
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_005_Control_production_after:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Production after TACATDP (kg)"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_production_after."
+            RowVisible: =Formula.visibility_production_after
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_006_Control_yield_before:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Yield before TACATDP"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_007_Control_yield_change_pct:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Yield improvement (%)"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_008_Control_stage:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Agri-crop value chain stage"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_stage."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_production_cost_repeat"
+            ItemsPlaceholder: =""
+      - Row_009_Control_cost_item:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Production cost item"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_cost_item."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_production_cost_repeat"
+            ItemsPlaceholder: =""
+      - Row_010_Control_unit:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Unit of measure"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_unit."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_production_cost_repeat"
+            ItemsPlaceholder: =""
+      - Row_011_Control_quantity:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Quantity"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_quantity."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_production_cost_repeat"
+            ItemsPlaceholder: =""
+      - Row_012_Control_unit_cost:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Unit cost (TZS)"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_unit_cost."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_production_cost_repeat"
+            ItemsPlaceholder: =""
+      - Row_013_Control_subtotal:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Cost subtotal (TZS)"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_production_cost_repeat"
+            ItemsPlaceholder: =""
+      - Row_014_Control_total_cost:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Total production cost"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_015_Control_qty_sold:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Quantity sold"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_qty_sold."
+            RowVisible: =Formula.visibility_qty_sold
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_016_Control_selling_price:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Selling price (TZS per unit)"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_selling_price."
+            RowVisible: =Formula.visibility_selling_price
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_017_Control_gross_revenue:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Gross revenue"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_018_Control_household_consumption:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Quantity consumed at home"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_household_consumption."
+            RowVisible: =Formula.visibility_household_consumption
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_019_Control_baseline_loss:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Post-harvest loss before TACATDP"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_baseline_loss."
+            RowVisible: =Formula.visibility_baseline_loss
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_020_Control_current_loss:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Post-harvest loss after TACATDP"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_current_loss."
+            RowVisible: =Formula.visibility_current_loss
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_021_Control_loss_reduction:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Loss reduction"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_022_Control_loss_reduction_pct:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Loss reduction (%)"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_023_Control_net_income:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Net farming income"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_024_Control_profit_margin:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Profit margin (%)"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_025_Control_cost_efficiency:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Cost per unit produced"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_026_Control_interventions:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="TACATDP intervention(s) received"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_interventions."
+            RowVisible: =Formula.visibility_interventions
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_027_Control_intervention_other:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Specify other intervention"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_intervention_other."
+            RowVisible: =Formula.visibility_intervention_other
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_028_Control_adaptation_result:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Expected impact"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_adaptation_result."
+            RowVisible: =Formula.visibility_adaptation_result
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_029_Control_adaptation_result_other:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Specify other intervention"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_adaptation_result_other."
+            RowVisible: =Formula.visibility_adaptation_result_other
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_030_Control_verification:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Source of verification"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_verification."
+            RowVisible: =Formula.visibility_verification
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_031_Control_verification_other:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Specify other source of verification"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_verification_other."
+            RowVisible: =Formula.visibility_verification_other
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_032_Control_summary_title:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="TACATDP Production Summary"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_033_Control_s1:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Total Production Cost: TZS ${total_cost}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_034_Control_s2:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Yield Before: ${yield_before} kg/acre"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_035_Control_s3:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Yield After: ${yield_after} kg/acre"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_036_Control_s4:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Yield Improvement: ${yield_change_pct}%"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_037_Control_s5:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Gross Revenue: TZS ${gross_revenue}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_038_Control_s6:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Net Farming Income: TZS ${net_income}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_039_Control_s7:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Profit Margin: ${profit_margin}%"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_040_Control_s8:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Post-harvest Loss Reduction: ${loss_reduction_pct}%"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_041_Control_s9:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Production Cost per kg: TZS ${cost_efficiency}/kg"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Screen_sec13_ValidationSummary:
+          Control: Component
+          ComponentName: ValidationSummary
+          Properties:
+            Items: =colValidationSummary
+            Visible: =CountRows(colValidationSummary) > 0
+      - Screen_sec13_CommandBar:
+          Control: Component
+          ComponentName: CommandBar
+          Properties:
+            BackFormula: ="Navigate(Screen_yield_income, ScreenTransition.Fade)"
+            NextFormula: ="Navigate(Screen_production_cost_repeat_Detail, ScreenTransition.Fade)"
+            SaveDraftFormula: ="// TODO: Patch placeholder collection for draft save"
+            SubmitFormula: ="Clear(colValidationSummary);
+If(Formula.visibility_reporting_period && !(!IsBlank(Control_reporting_period.Selected)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Reporting period"", Message: ""Reporting period is required."", Control: ""Control_reporting_period""}));
+If(Formula.visibility_farm_size && !(!IsBlank(Control_farm_size.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Cultivated area (Acres)"", Message: ""Cultivated area (Acres) is required."", Control: ""Control_farm_size""}));
+If(Formula.visibility_production_before && !(!IsBlank(Control_production_before.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Production before TACATDP (kg)"", Message: ""Production before TACATDP (kg) is required."", Control: ""Control_production_before""}));
+If(Formula.visibility_production_after && !(!IsBlank(Control_production_after.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Production after TACATDP (kg)"", Message: ""Production after TACATDP (kg) is required."", Control: ""Control_production_after""}));
+If(true && !(!IsBlank(Control_stage.Selected)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Agri-crop value chain stage"", Message: ""Agri-crop value chain stage is required."", Control: ""Control_stage""}));
+If(true && !(!IsBlank(Control_cost_item.Selected)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Production cost item"", Message: ""Production cost item is required."", Control: ""Control_cost_item""}));
+If(true && !(!IsBlank(Control_unit.Selected)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Unit of measure"", Message: ""Unit of measure is required."", Control: ""Control_unit""}));
+If(true && !(!IsBlank(Control_quantity.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Quantity"", Message: ""Quantity is required."", Control: ""Control_quantity""}));
+If(true && !(!IsBlank(Control_unit_cost.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Unit cost (TZS)"", Message: ""Unit cost (TZS) is required."", Control: ""Control_unit_cost""}));
+If(Formula.visibility_qty_sold && !(!IsBlank(Control_qty_sold.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Quantity sold"", Message: ""Quantity sold is required."", Control: ""Control_qty_sold""}));
+If(Formula.visibility_selling_price && !(!IsBlank(Control_selling_price.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Selling price (TZS per unit)"", Message: ""Selling price (TZS per unit) is required."", Control: ""Control_selling_price""}));
+If(Formula.visibility_household_consumption && !(!IsBlank(Control_household_consumption.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Quantity consumed at home"", Message: ""Quantity consumed at home is required."", Control: ""Control_household_consumption""}));
+If(Formula.visibility_baseline_loss && !(!IsBlank(Control_baseline_loss.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Post-harvest loss before TACATDP"", Message: ""Post-harvest loss before TACATDP is required."", Control: ""Control_baseline_loss""}));
+If(Formula.visibility_current_loss && !(!IsBlank(Control_current_loss.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Post-harvest loss after TACATDP"", Message: ""Post-harvest loss after TACATDP is required."", Control: ""Control_current_loss""}));
+If(Formula.visibility_interventions && !(!IsBlank(Control_interventions.Selected)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""TACATDP intervention(s) received"", Message: ""TACATDP intervention(s) received is required."", Control: ""Control_interventions""}));
+If(Formula.visibility_intervention_other && !(!IsBlank(Control_intervention_other.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Specify other intervention"", Message: ""Specify other intervention is required."", Control: ""Control_intervention_other""}));
+If(Formula.visibility_adaptation_result && !(!IsBlank(Control_adaptation_result.Selected)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Expected impact"", Message: ""Expected impact is required."", Control: ""Control_adaptation_result""}));
+If(Formula.visibility_adaptation_result_other && !(!IsBlank(Control_adaptation_result_other.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Specify other intervention"", Message: ""Specify other intervention is required."", Control: ""Control_adaptation_result_other""}));
+If(Formula.visibility_verification && !(!IsBlank(Control_verification.Selected)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Source of verification"", Message: ""Source of verification is required."", Control: ""Control_verification""}));
+If(Formula.visibility_verification_other && !(!IsBlank(Control_verification_other.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Specify other source of verification"", Message: ""Specify other source of verification is required."", Control: ""Control_verification_other""}));"
