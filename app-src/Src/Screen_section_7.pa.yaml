@@ -1,0 +1,50 @@
+# Phase 3 Canvas YAML screen blueprint.
+# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+Screens:
+  Screen_section_7:
+    Properties:
+      LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
+    Children:
+      - Screen_section_7_Shell:
+          Control: CanvasComponent
+          ComponentName: ScreenShell
+          Properties:
+            TitleText: '="SECTION 7: BENEFICIARIES QUANTIFICATION "'
+            ProgressText: '="Section 7"'
+            ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
+      - Row_001_Control_row_89:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="SECTION 7: BENEFICIARIES QUANTIFICATION (Direct and Indirect Beneficiary Quantification by Value Chain Stage, Disaggregated by Gender and Youth)"'
+            Required: '=false'
+            HelperText: '=""'
+            ErrorText: '=""'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_002_Control_vc_stages:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="What are Value Chain Stages activities involved in this project?"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_vc_stages."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Screen_section_7_ValidationSummary:
+          Control: CanvasComponent
+          ComponentName: ValidationSummary
+          Properties:
+            Items: '=colValidationSummary'
+            Visible: '=CountRows(colValidationSummary) > 0'
+      - Screen_section_7_CommandBar:
+          Control: CanvasComponent
+          ComponentName: CommandBar
+          Properties:
+            BackFormula: '="Navigate(Screen_section_6, ScreenTransition.Fade)"'
+            NextFormula: '="Navigate(Screen_farm_preparation, ScreenTransition.Fade)"'
+            SaveDraftFormula: '="// TODO: Patch placeholder collection for draft save"'
+            SubmitFormula: '="Clear(colValidationSummary); If(true && !(!IsBlank(Control_vc_stages.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_7"", Field: ""What are Value Chain Stages activities involved in this project?"", Message: ""What are Value Chain Stages activities involved in this project? is required."", Control: ""Control_vc_stages""}));"'

@@ -1,40 +1,28 @@
 # Phase 3 Canvas YAML component blueprint.
 # Use as a maker reference; validate in Power Apps Studio before import or publish.
 ComponentDefinitions:
-  FieldRow:
+  CommandBar:
     DefinitionType: CanvasComponent
-    Description: "One field per row with visible label, input, helper text, and error text."
+    Description: "Consistent Back, Next, Save Draft, and Submit actions."
     CustomProperties:
-      LabelText:
+      BackFormula:
         PropertyKind: Input
-        DisplayName: "LabelText"
+        DisplayName: "BackFormula"
         DataType: Text
-      Required:
+      NextFormula:
         PropertyKind: Input
-        DisplayName: "Required"
-        DataType: Boolean
-      HelperText:
-        PropertyKind: Input
-        DisplayName: "HelperText"
+        DisplayName: "NextFormula"
         DataType: Text
-      ErrorText:
+      SaveDraftFormula:
         PropertyKind: Input
-        DisplayName: "ErrorText"
+        DisplayName: "SaveDraftFormula"
         DataType: Text
-      RowVisible:
+      SubmitFormula:
         PropertyKind: Input
-        DisplayName: "RowVisible"
-        DataType: Boolean
-      DataPlaceholder:
-        PropertyKind: Input
-        DisplayName: "DataPlaceholder"
-        DataType: Text
-      ItemsPlaceholder:
-        PropertyKind: Input
-        DisplayName: "ItemsPlaceholder"
+        DisplayName: "SubmitFormula"
         DataType: Text
     Children:
-      - FieldRowRootContainer:
+      - CommandBarRootContainer:
           Control: GroupContainer@1.5.0
           Variant: AutoLayout
           Properties:

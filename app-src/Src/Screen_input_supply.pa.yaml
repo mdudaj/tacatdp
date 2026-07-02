@@ -1,0 +1,138 @@
+# Phase 3 Canvas YAML screen blueprint.
+# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+Screens:
+  Screen_input_supply:
+    Properties:
+      LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
+    Children:
+      - Screen_input_supply_Shell:
+          Control: CanvasComponent
+          ComponentName: ScreenShell
+          Properties:
+            TitleText: '="Input Supply Stage Beneficiaries"'
+            ProgressText: '="Section 10"'
+            ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
+      - Row_001_Control_input_supply_dm:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Direct Male Beneficiaries"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_input_supply_dm."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_002_Control_input_supply_df:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Direct Female Beneficiaries"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_input_supply_df."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_003_Control_input_supply_dt:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="input supply dt"'
+            Required: '=false'
+            HelperText: '=""'
+            ErrorText: '=""'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_004_Control_input_supply_dt_note:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Total Direct Male +Female Beneficiaries ${input_supply_dt}"'
+            Required: '=false'
+            HelperText: '=""'
+            ErrorText: '=""'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_005_Control_input_supply_dy:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Direct Youth (18-35)"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_input_supply_dy."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_006_Control_input_supply_im:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Indirect Male Beneficiaries"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_input_supply_im."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_007_Control_input_supply_if:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Indirect Female Beneficiaries"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_input_supply_if."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_008_Control_input_supply_it:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="input supply it"'
+            Required: '=false'
+            HelperText: '=""'
+            ErrorText: '=""'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_009_Control_farm_input_supply_it_note:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Total Indirect Male +Female Beneficiaries ${input_supply_it}"'
+            Required: '=false'
+            HelperText: '=""'
+            ErrorText: '=""'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Row_010_Control_input_supply_iy:
+          Control: CanvasComponent
+          ComponentName: FieldRow
+          Properties:
+            LabelText: '="Indirect Youth (18-35)"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_input_supply_iy."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
+      - Screen_input_supply_ValidationSummary:
+          Control: CanvasComponent
+          ComponentName: ValidationSummary
+          Properties:
+            Items: '=colValidationSummary'
+            Visible: '=CountRows(colValidationSummary) > 0'
+      - Screen_input_supply_CommandBar:
+          Control: CanvasComponent
+          ComponentName: CommandBar
+          Properties:
+            BackFormula: '="Navigate(Screen_farm_operations, ScreenTransition.Fade)"'
+            NextFormula: '="Navigate(Screen_weeding, ScreenTransition.Fade)"'
+            SaveDraftFormula: '="// TODO: Patch placeholder collection for draft save"'
+            SubmitFormula: '="Clear(colValidationSummary); If(true && !(!IsBlank(Control_input_supply_dm.Text)), Collect(colValidationSummary, {Screen: ""Screen_input_supply"", Field: ""Direct Male Beneficiaries"", Message: ""Direct Male Beneficiaries is required."", Control: ""Control_input_supply_dm""})); If(true && !(!IsBlank(Control_input_supply_df.Text)), Collect(colValidationSummary, {Screen: ""Screen_input_supply"", Field: ""Direct Female Beneficiaries"", Message: ""Direct Female Beneficiaries is required."", Control: ""Control_input_supply_df""})); If(true && !(!IsBlank(Control_input_supply_dy.Text)), Collect(colValidationSummary, {Screen: ""Screen_input_supply"", Field: ""Direct Youth (18-35)"", Message: ""Direct Youth (18-35) is required."", Control: ""Control_input_supply_dy""})); If(true && !(!IsBlank(Control_input_supply_im.Text)), Collect(colValidationSummary, {Screen: ""Screen_input_supply"", Field: ""Indirect Male Beneficiaries"", Message: ""Indirect Male Beneficiaries is required."", Control: ""Control_input_supply_im""})); If(true && !(!IsBlank(Control_input_supply_if.Text)), Collect(colValidationSummary, {Screen: ""Screen_input_supply"", Field: ""Indirect Female Beneficiaries"", Message: ""Indirect Female Beneficiaries is required."", Control: ""Control_input_supply_if""})); If(true && !(!IsBlank(Control_input_supply_iy.Text)), Collect(colValidationSummary, {Screen: ""Screen_input_supply"", Field: ""Indirect Youth (18-35)"", Message: ""Indirect Youth (18-35) is required."", Control: ""Control_input_supply_iy""}));"'

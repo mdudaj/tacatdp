@@ -54,6 +54,8 @@ The active import source remains the Studio-exported baseline under `app-src/Src
 4. Confirm `app-src/Src/Screen1.pa.yaml` still represents the current one-screen starter form.
 5. Use the generated scaffold files as the build source for the Canvas artifact, then validate the resulting app source through Studio and the pack/unpack flow before treating it as import-ready.
 
+If using the checked-in `app-src/TACATDP Impact Tracking.msapr`, pack it into a `.msapp` first. Do not treat the `.msapr` reference archive itself as the primary import target, and use the recovery pack option that disables YAML loading until the baseline opens cleanly.
+
 ### 2. Create placeholder app state
 
 Create temporary placeholder collections in `App.OnStart` or named formulas where Studio supports them:

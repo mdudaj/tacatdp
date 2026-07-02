@@ -12,3 +12,5 @@ Recommended organization:
 | `qa/` | Manual QA evidence, App Checker exports, Monitor notes, and pack/import validation results. |
 
 Keep `app-src/Src/` as the active Studio-exported Canvas source. Keep `artifacts/` for generated packs, review references, and validation outputs that should not be mixed into the live Canvas source tree.
+
+The checked-in `.msapr` under `app-src/` is a Power Platform pack reference archive. Build a `.msapp` from it before Studio import; keep generated scaffold YAML in `artifacts/` unless Studio, Git Integration, or a verified pack/import round-trip normalizes it into live source.
