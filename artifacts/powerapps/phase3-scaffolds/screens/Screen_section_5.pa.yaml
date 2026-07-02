@@ -6,14 +6,14 @@ Screens:
       LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
       - Screen_section_5_Shell:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: ScreenShell
           Properties:
             TitleText: '="SECTION:5 HouseHold Number Quantification"'
             ProgressText: '="Section 5"'
             ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
       - Row_001_Control_row_68:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="HouseHold Number Quantification"'
@@ -24,7 +24,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_002_Control_hh_male:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Number of MALE household members"'
@@ -35,7 +35,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_003_Control_hh_female:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Number of FEMALE household members"'
@@ -46,7 +46,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_004_Control_hh_total:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="hh total"'
@@ -57,7 +57,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_005_Control_hh_total_note:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Total household members (M+F): ${hh_total}"'
@@ -68,7 +68,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_006_Control_hh_head_gender:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Head of Household Gender"'
@@ -79,7 +79,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_007_Control_women_decision:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Are women direct decision-makers in ARA investment use?"'
@@ -90,13 +90,13 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Screen_section_5_ValidationSummary:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: ValidationSummary
           Properties:
             Items: '=colValidationSummary'
             Visible: '=CountRows(colValidationSummary) > 0'
       - Screen_section_5_CommandBar:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: CommandBar
           Properties:
             BackFormula: '="Navigate(Screen_section_4, ScreenTransition.Fade)"'

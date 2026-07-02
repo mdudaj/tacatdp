@@ -6,14 +6,14 @@ Screens:
       LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
       - Screen_section_8_Shell:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: ScreenShell
           Properties:
             TitleText: '="SECTION 8: ENVIRONMENTAL & SOCIAL SAFEGUARDS & CLIMATE RISK ASESSMENT"'
             ProgressText: '="Section 27"'
             ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
       - Row_001_Control_row_335:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Environmental & Social Risk Screening"'
@@ -24,7 +24,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_002_Control_exclusion_screen_passed:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Exclusion Screen Passed?"'
@@ -35,7 +35,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_003_Control_es_risk_category:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="E&S Risk Category"'
@@ -46,7 +46,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_004_Control_disclosure_published:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Disclosure Published?"'
@@ -57,7 +57,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_005_Control_disclosure_date:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Disclosure Date"'
@@ -68,7 +68,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_006_Control_grm_complaint:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="GRM Complaint?"'
@@ -79,7 +79,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_007_Control_ess_grievance:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Is there an ESS related grievance/complaint related to project/farm?"'
@@ -90,7 +90,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_008_Control_grievance_name:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Briefly name the Complaint/Grievance"'
@@ -101,7 +101,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_009_Control_grievance_stage:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="What stage of GRM for above Compliant/Grivance?"'
@@ -112,7 +112,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_010_Control_grievance_name_other:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Other stage of GRM for above Compliant/Grivance?"'
@@ -123,7 +123,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_011_Control_climate_hazards:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Climate hazards  affected  farm/business in the past 3–5 years"'
@@ -134,7 +134,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_012_Control_other_climate_hazards:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Please specify the ""other"" Climate_hazards."'
@@ -145,7 +145,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_013_Control_frequently:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="How frequently do these climate events occur"'
@@ -156,7 +156,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_014_Control_collateral:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Assets used as collateral for your farming/business loan?"'
@@ -167,7 +167,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_015_Control_other_collateral:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Please specify the ""other"" "'
@@ -178,7 +178,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_016_Control_exposure_level:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="How exposed is your collateral to climate risks?"'
@@ -189,13 +189,13 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Screen_section_8_ValidationSummary:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: ValidationSummary
           Properties:
             Items: '=colValidationSummary'
             Visible: '=CountRows(colValidationSummary) > 0'
       - Screen_section_8_CommandBar:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: CommandBar
           Properties:
             BackFormula: '="Navigate(Screen_summary, ScreenTransition.Fade)"'

@@ -6,14 +6,14 @@ Screens:
       LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
       - Screen_transport_Shell:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: ScreenShell
           Properties:
             TitleText: '="Crop Transport Stage Beneficiaries"'
             ProgressText: '="Section 16"'
             ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
       - Row_001_Control_transport_dm:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Direct Male Beneficiaries"'
@@ -24,7 +24,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_002_Control_transport_df:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Direct Female Beneficiaries"'
@@ -35,7 +35,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_003_Control_transport_dt:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="transport dt"'
@@ -46,7 +46,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_004_Control_transport_dt_note:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Total Direct Male +Female Beneficiaries ${transport_dt}"'
@@ -57,7 +57,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_005_Control_transport_dy:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Direct Youth (18-35)"'
@@ -68,7 +68,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_006_Control_transport_im:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Indirect Male Beneficiaries"'
@@ -79,7 +79,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_007_Control_transport_if:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Indirect Female Beneficiaries"'
@@ -90,7 +90,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_008_Control_transport_it:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="transport it"'
@@ -101,7 +101,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_009_Control_transport_it_note:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Total Indirect Male +Female Beneficiaries ${transport_it}"'
@@ -112,7 +112,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_010_Control_transport_iy:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Indirect Youth (18-35)"'
@@ -123,13 +123,13 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Screen_transport_ValidationSummary:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: ValidationSummary
           Properties:
             Items: '=colValidationSummary'
             Visible: '=CountRows(colValidationSummary) > 0'
       - Screen_transport_CommandBar:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: CommandBar
           Properties:
             BackFormula: '="Navigate(Screen_storage, ScreenTransition.Fade)"'

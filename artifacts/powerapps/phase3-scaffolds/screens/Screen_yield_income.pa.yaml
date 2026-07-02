@@ -6,14 +6,14 @@ Screens:
       LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
       - Screen_yield_income_Shell:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: ScreenShell
           Properties:
             TitleText: '="SECTION 12: YIELD & INCOME IMPACT QUANTIFICATION"'
             ProgressText: '="Section 31"'
             ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
       - Row_001_Control_row_403:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="SECTION 12: YIELD & INCOME IMPACT QUANTIFICATION"'
@@ -24,7 +24,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_002_Control_yield_base:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Baseline Yield (kg)"'
@@ -35,7 +35,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_003_Control_price_base:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Price Before (TZS/kg)"'
@@ -46,7 +46,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_004_Control_income_base:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="income base"'
@@ -57,7 +57,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_005_Control_note_income_base:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Income Before (TZS): ${income_base}"'
@@ -68,7 +68,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_006_Control_price_after:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Price After (TZS/kg)"'
@@ -79,7 +79,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_007_Control_income_after:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="income after"'
@@ -90,7 +90,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_008_Control_note_income_after:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Income After (TZS): ${income_after}"'
@@ -101,7 +101,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_009_Control_yield_change:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="yield change"'
@@ -112,7 +112,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_010_Control_note_yield_change:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Yield Change (%): ${yield_change}"'
@@ -123,7 +123,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_011_Control_income_change:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="income change"'
@@ -134,7 +134,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_012_Control_note_income_change:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Income Change (%): ${income_change}"'
@@ -145,13 +145,13 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Screen_yield_income_ValidationSummary:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: ValidationSummary
           Properties:
             Items: '=colValidationSummary'
             Visible: '=CountRows(colValidationSummary) > 0'
       - Screen_yield_income_CommandBar:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: CommandBar
           Properties:
             BackFormula: '="Navigate(Screen_water_efficiency, ScreenTransition.Fade)"'

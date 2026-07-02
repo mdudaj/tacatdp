@@ -6,14 +6,14 @@ Screens:
       LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
       - Screen_section_10_Shell:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: ScreenShell
           Properties:
             TitleText: '="SECTION 10: GHG QUANTIFICATION"'
             ProgressText: '="Section 29"'
             ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
       - Row_001_Control_ghg_quantification:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="SECTION 10: GHG QUANTIFICATION"'
@@ -24,7 +24,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_002_Control_baseline_tech:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Baseline Technology"'
@@ -35,7 +35,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_003_Control_other_baseline_tech:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Other Baseline Technology"'
@@ -46,7 +46,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_004_Control_new_tech:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="New Financed Technology"'
@@ -57,7 +57,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_005_Control_other_new_tech:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Other New Financed Technology"'
@@ -68,7 +68,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_006_Control_energy_base:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Energy Source Baseline"'
@@ -79,7 +79,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_007_Control_other_energy_base:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Other Energy Source Baseline"'
@@ -90,7 +90,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_008_Control_energy_after:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Energy Source After"'
@@ -101,7 +101,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_009_Control_other_energy_after:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Other Energy Source After"'
@@ -112,7 +112,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_010_Control_base_hours:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Baseline Hours/year"'
@@ -123,7 +123,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_011_Control_diesel_rate:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Diesel Rate (L/hr)"'
@@ -134,7 +134,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_012_Control_diesel_base:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="diesel base"'
@@ -145,7 +145,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_013_Control_row_374:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Diesel/year= ${diesel_base}"'
@@ -156,7 +156,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_014_Control_ef:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="ef"'
@@ -167,7 +167,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_015_Control_ghg_base:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="ghg base"'
@@ -178,7 +178,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_016_Control_row_377:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Baseline GHG= ${ghg_base}"'
@@ -189,7 +189,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_017_Control_diesel_proj:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Project Diesel Use (L/year)"'
@@ -200,7 +200,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_018_Control_ghg_proj:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="ghg proj"'
@@ -211,7 +211,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_019_Control_row_380:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Project GHG= ${ghg_proj}"'
@@ -222,7 +222,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_020_Control_ghg_saved_t:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="ghg saved t"'
@@ -233,7 +233,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_021_Control_lifespan:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Lifespan"'
@@ -244,7 +244,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_022_Control_ghg_lifetime:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="ghg lifetime"'
@@ -255,7 +255,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_023_Control_row_384:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="Lifetime GHG = ${ghg_lifetime}"'
@@ -266,7 +266,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_024_Control_mitigation_tag:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="mitigation tag"'
@@ -277,7 +277,7 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Row_025_Control_result:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: FieldRow
           Properties:
             LabelText: '="GHG Avoided: ${ghg_saved_t} tCO2eq"'
@@ -288,13 +288,13 @@ Screens:
             DataPlaceholder: '="placeholder_tacatdp_submissions"'
             ItemsPlaceholder: '=""'
       - Screen_section_10_ValidationSummary:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: ValidationSummary
           Properties:
             Items: '=colValidationSummary'
             Visible: '=CountRows(colValidationSummary) > 0'
       - Screen_section_10_CommandBar:
-          Control: Component
+          Control: CanvasComponent
           ComponentName: CommandBar
           Properties:
             BackFormula: '="Navigate(Screen_section_9, ScreenTransition.Fade)"'
