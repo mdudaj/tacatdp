@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This runbook turns the Phase 3 placeholder scaffolds into an ordered Power Apps Studio workflow. It is for maker-assisted implementation only: do not publish the app and do not connect production SharePoint/Microsoft Lists until the controlled Windows/Power Apps environment is ready.
+This runbook turns the Phase 3 placeholder scaffolds into an ordered Power Apps Studio workflow. The deliverable is repack/import-ready Canvas app artifacts that can be validated in Power Apps Studio, exported, unpacked, reviewed, repacked, and imported again. Do not publish the app and do not connect production SharePoint/Microsoft Lists until the controlled Windows/Power Apps environment is ready.
 
 ## Inputs
 
@@ -21,7 +21,7 @@ Use these artifacts together:
 
 ## Non-negotiable gates
 
-1. `app-src/phase3-scaffolds/` is a reference scaffold folder. Do not overwrite `app-src/Src/` directly from these files.
+1. `app-src/phase3-scaffolds/` is the source scaffold pack for building repack/import-ready Canvas artifacts. Do not overwrite `app-src/Src/` directly from these files without validating the result through Power Apps Studio and the pack/unpack flow.
 2. Placeholder data sources are temporary. Keep them named and documented as placeholders until real Microsoft Lists are available.
 3. Do not publish, share, or connect production SharePoint/Microsoft Lists from this phase without explicit approval.
 4. Every data-entry field must use one field per row by default, with a visible label above the input and helper/error text below it.
@@ -50,7 +50,7 @@ It contains:
 2. Confirm the app opens without source repair prompts.
 3. Save a Studio version checkpoint before adding Phase 3 screens.
 4. Confirm `app-src/Src/Screen1.pa.yaml` still represents the current one-screen starter form.
-5. Keep the generated scaffold files open as reference only; copy structure/formulas deliberately through Studio or controlled source edits after Studio validation.
+5. Use the generated scaffold files as the build source for the Canvas artifact, then validate the resulting app source through Studio and the pack/unpack flow before treating it as import-ready.
 
 ### 2. Create placeholder app state
 
@@ -230,5 +230,6 @@ Phase 3 maker execution is ready when:
 1. Components are created or explicitly queued with matching names.
 2. Screen skeletons are created or explicitly queued in scaffold order.
 3. Placeholder data state is visible and isolated.
-4. Manual QA checklist items are completed or documented as blocked by Windows/Power Apps readiness.
-5. The app remains unpublished until placeholder sources are replaced and approved.
+4. The changed Canvas source can be exported/unpacked, reviewed, repacked, and imported without losing scaffolded screens or components.
+5. Manual QA checklist items are completed or documented as blocked by Windows/Power Apps readiness.
+6. The app remains unpublished until placeholder sources are replaced and approved.
