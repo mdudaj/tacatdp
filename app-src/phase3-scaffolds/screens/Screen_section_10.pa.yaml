@@ -1,0 +1,315 @@
+# Phase 3 Canvas YAML screen blueprint.
+# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+Screens:
+  Screen_section_10:
+    Properties:
+      LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+    Children:
+      - Screen_section_10_Shell:
+          Control: Component
+          ComponentName: ScreenShell
+          Properties:
+            TitleText: ="SECTION 10: GHG QUANTIFICATION"
+            ProgressText: ="Section 29"
+            ShowValidationSummary: =CountRows(colValidationSummary) > 0
+      - Row_001_Control_ghg_quantification:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="SECTION 10: GHG QUANTIFICATION"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_002_Control_baseline_tech:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Baseline Technology"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_baseline_tech."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_003_Control_other_baseline_tech:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Other Baseline Technology"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_other_baseline_tech."
+            RowVisible: =Formula.visibility_other_baseline_tech
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_004_Control_new_tech:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="New Financed Technology"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_new_tech."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_005_Control_other_new_tech:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Other New Financed Technology"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_other_new_tech."
+            RowVisible: =Formula.visibility_other_new_tech
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_006_Control_energy_base:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Energy Source Baseline"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_energy_base."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_007_Control_other_energy_base:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Other Energy Source Baseline"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_other_energy_base."
+            RowVisible: =Formula.visibility_other_energy_base
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_008_Control_energy_after:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Energy Source After"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_energy_after."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_009_Control_other_energy_after:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Other Energy Source After"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_other_energy_after."
+            RowVisible: =Formula.visibility_other_energy_after
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_010_Control_base_hours:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Baseline Hours/year"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_base_hours."
+            RowVisible: =Formula.visibility_base_hours
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_011_Control_diesel_rate:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Diesel Rate (L/hr)"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_diesel_rate."
+            RowVisible: =Formula.visibility_diesel_rate
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_012_Control_diesel_base:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="diesel base"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_013_Control_row_374:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Diesel/year= ${diesel_base}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_014_Control_ef:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="ef"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_015_Control_ghg_base:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="ghg base"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_016_Control_row_377:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Baseline GHG= ${ghg_base}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_017_Control_diesel_proj:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Project Diesel Use (L/year)"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_diesel_proj."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_018_Control_ghg_proj:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="ghg proj"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_019_Control_row_380:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Project GHG= ${ghg_proj}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_020_Control_ghg_saved_t:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="ghg saved t"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_021_Control_lifespan:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Lifespan"
+            Required: =true
+            HelperText: =""
+            ErrorText: ="Connect to validation state for Control_lifespan."
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_022_Control_ghg_lifetime:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="ghg lifetime"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_023_Control_row_384:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="Lifetime GHG = ${ghg_lifetime}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_024_Control_mitigation_tag:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="mitigation tag"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_025_Control_result:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="GHG Avoided: ${ghg_saved_t} tCO2eq"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Screen_section_10_ValidationSummary:
+          Control: Component
+          ComponentName: ValidationSummary
+          Properties:
+            Items: =colValidationSummary
+            Visible: =CountRows(colValidationSummary) > 0
+      - Screen_section_10_CommandBar:
+          Control: Component
+          ComponentName: CommandBar
+          Properties:
+            BackFormula: ="Navigate(Screen_section_9, ScreenTransition.Fade)"
+            NextFormula: ="Navigate(Screen_water_efficiency, ScreenTransition.Fade)"
+            SaveDraftFormula: ="// TODO: Patch placeholder collection for draft save"
+            SubmitFormula: ="Clear(colValidationSummary);
+If(true && !(!IsBlank(Control_baseline_tech.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Baseline Technology"", Message: ""Baseline Technology is required."", Control: ""Control_baseline_tech""}));
+If(Formula.visibility_other_baseline_tech && !(!IsBlank(Control_other_baseline_tech.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Other Baseline Technology"", Message: ""Other Baseline Technology is required."", Control: ""Control_other_baseline_tech""}));
+If(true && !(!IsBlank(Control_new_tech.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""New Financed Technology"", Message: ""New Financed Technology is required."", Control: ""Control_new_tech""}));
+If(Formula.visibility_other_new_tech && !(!IsBlank(Control_other_new_tech.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Other New Financed Technology"", Message: ""Other New Financed Technology is required."", Control: ""Control_other_new_tech""}));
+If(true && !(!IsBlank(Control_energy_base.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Energy Source Baseline"", Message: ""Energy Source Baseline is required."", Control: ""Control_energy_base""}));
+If(Formula.visibility_other_energy_base && !(!IsBlank(Control_other_energy_base.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Other Energy Source Baseline"", Message: ""Other Energy Source Baseline is required."", Control: ""Control_other_energy_base""}));
+If(true && !(!IsBlank(Control_energy_after.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Energy Source After"", Message: ""Energy Source After is required."", Control: ""Control_energy_after""}));
+If(Formula.visibility_other_energy_after && !(!IsBlank(Control_other_energy_after.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Other Energy Source After"", Message: ""Other Energy Source After is required."", Control: ""Control_other_energy_after""}));
+If(Formula.visibility_base_hours && !(!IsBlank(Control_base_hours.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Baseline Hours/year"", Message: ""Baseline Hours/year is required."", Control: ""Control_base_hours""}));
+If(Formula.visibility_diesel_rate && !(!IsBlank(Control_diesel_rate.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Diesel Rate (L/hr)"", Message: ""Diesel Rate (L/hr) is required."", Control: ""Control_diesel_rate""}));
+If(true && !(!IsBlank(Control_diesel_proj.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Project Diesel Use (L/year)"", Message: ""Project Diesel Use (L/year) is required."", Control: ""Control_diesel_proj""}));
+If(true && !(!IsBlank(Control_lifespan.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Lifespan"", Message: ""Lifespan is required."", Control: ""Control_lifespan""}));"

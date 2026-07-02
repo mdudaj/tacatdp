@@ -1,0 +1,292 @@
+# Phase 3 Canvas YAML screen blueprint.
+# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+Screens:
+  Screen_summary:
+    Properties:
+      LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+    Children:
+      - Screen_summary_Shell:
+          Control: Component
+          ComponentName: ScreenShell
+          Properties:
+            TitleText: ="Summary Dashboard"
+            ProgressText: ="Section 26"
+            ShowValidationSummary: =CountRows(colValidationSummary) > 0
+      - Row_001_Control_sum_direct_male:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum direct male"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_002_Control_sum_direct_male_note:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum_direct_male: ${sum_direct_male}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_003_Control_sum_direct_female:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum direct female"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_004_Control_sum_direct_female_note:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum_direct_female: ${sum_direct_female}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_005_Control_sum_direct_total:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum direct total"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_006_Control_sum_direct_total_note:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum_direct_total: ${sum_direct_total}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_007_Control_sum_direct_youth:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum direct youth"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_008_Control_sum_direct_youth_note:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum_direct_youth: ${sum_direct_youth}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_009_Control_sum_indirect_male:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum indirect male"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_010_Control_sum_indirect_male_note:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum_indirect_male: ${sum_indirect_male}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_011_Control_sum_indirect_female:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum indirect female"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_012_Control_sum_indirect_female_note:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum_indirect_female: ${sum_indirect_female}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_013_Control_sum_indirect_total:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum indirect total"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_014_Control_sum_indirect_total_note:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum_indirect_total: ${sum_indirect_total}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_015_Control_sum_indirect_youth:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum indirect youth"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_016_Control_sum_indirect_youth_note:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="sum_indirect_youth: ${sum_indirect_youth}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_017_Control_overall_male:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="overall male"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_018_Control_overall_male_note:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="overall_male: ${overall_male}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_019_Control_overall_female:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="overall female"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_020_Control_overall_female_note:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="overall_female: ${overall_female}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_021_Control_grand_total:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="grand total"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_022_Control_grand_total_note:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="grand_total: ${grand_total}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_023_Control_overall_youth:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="overall youth"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Row_024_Control_overall_youth_note:
+          Control: Component
+          ComponentName: FieldRow
+          Properties:
+            LabelText: ="overall_youth: ${overall_youth}"
+            Required: =false
+            HelperText: =""
+            ErrorText: =""
+            RowVisible: =true
+            DataPlaceholder: ="placeholder_tacatdp_submissions"
+            ItemsPlaceholder: =""
+      - Screen_summary_ValidationSummary:
+          Control: Component
+          ComponentName: ValidationSummary
+          Properties:
+            Items: =colValidationSummary
+            Visible: =CountRows(colValidationSummary) > 0
+      - Screen_summary_CommandBar:
+          Control: Component
+          ComponentName: CommandBar
+          Properties:
+            BackFormula: ="Navigate(Screen_other, ScreenTransition.Fade)"
+            NextFormula: ="Navigate(Screen_section_8, ScreenTransition.Fade)"
+            SaveDraftFormula: ="// TODO: Patch placeholder collection for draft save"
+            SubmitFormula: ="Clear(colValidationSummary);"

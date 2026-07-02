@@ -74,16 +74,22 @@ Recommended direction for this workbook:
 
 ## Phase 3: App architecture
 
+Status: planned; skills research, design research, design-system contract, app architecture requirements, Milestone 1 placeholder plan, and delivery plan are documented.
+
 1. Replace the one-screen generated form with a guided multi-section structure based on XLSForm groups.
+   - Planned in `docs/phase-3-delivery-plan.md`.
 2. Define reusable formulas or variables for:
    - section completion
    - field visibility
    - field validation
    - submit eligibility
    - save error handling
+   - Planned in `docs/phase-3-delivery-plan.md`.
 3. Decide whether to use `SubmitForm` for generated form cards, `Patch` for a custom form, or a hybrid.
-4. Use `SubmitForm` where generated form behavior is sufficient.
-5. Use explicit `Patch` only where custom multi-screen behavior requires it, with manual validation before saving.
+   - Recommended: custom guided screens with explicit `Patch` orchestration against parent, section, child, and reference-backed lists.
+4. Use explicit validation before section navigation and save.
+5. Use Power Apps modern controls/Fluent UI where feasible and Material Design principles for form clarity, validation, progress, navigation, touch targets, and accessibility.
+6. For Milestone 1, build placeholders with local sample collections while waiting for the controlled Windows environment to allow Microsoft Lists creation.
 
 ## Phase 4: Implement field controls and logic
 
