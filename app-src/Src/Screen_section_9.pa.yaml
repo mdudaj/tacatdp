@@ -1,105 +1,301 @@
-# Phase 3 Canvas YAML screen blueprint.
-# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+# Phase 3 native Canvas source candidate.
+# Generated from artifacts/powerapps/phase3-scaffolds without custom components.
 Screens:
   Screen_section_9:
     Properties:
       LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
-      - Screen_section_9_Shell:
-          Control: CanvasComponent
-          ComponentName: ScreenShell
+      - Screen_section_9_Title:
+          Control: Label@2.5.1
           Properties:
-            TitleText: '="SECTION 9: INSURANCE & GUARANTEE LINKAGE"'
-            ProgressText: '="Section 28"'
-            ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
-      - Row_001_Control_row_353:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Bold'
+            Height: '=40'
+            Size: '=18'
+            Text: '="SECTION 9: INSURANCE & GUARANTEE LINKAGE"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=24'
+      - Screen_section_9_Progress:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="SECTION 9: INSURANCE & GUARANTEE LINKAGE"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_002_Control_accessed_insurance:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Section 28"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=68'
+      - Screen_section_9_Row_001_Control_row_353_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Accessed TACATDP Insurance"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_accessed_insurance."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_003_Control_insurance_year:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="SECTION 9: INSURANCE & GUARANTEE LINKAGE"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=112'
+      - Screen_section_9_Row_001_Control_row_353_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Insurance Year"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_insurance_year."'
-            RowVisible: '=Formula.visibility_insurance_year'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_004_Control_insurance_type:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=144'
+      - Screen_section_9_Row_001_Control_row_353_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Insurance Type"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_insurance_type."'
-            RowVisible: '=Formula.visibility_insurance_type'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_005_Control_qualified_guarantee:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=192'
+      - Screen_section_9_Row_002_Control_accessed_insura_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="qualified guarantee"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_006_Control_guarantee_status:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Accessed TACATDP Insurance *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=232'
+      - Screen_section_9_Row_002_Control_accessed_insura_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Qualified for Guarantee: ${qualified_guarantee}"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_007_Control_guarantee_coverage:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=264'
+      - Screen_section_9_Row_002_Control_accessed_insura_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Guarantee Coverage %"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_guarantee_coverage."'
-            RowVisible: '=Formula.visibility_guarantee_coverage'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Screen_section_9_ValidationSummary:
-          Control: CanvasComponent
-          ComponentName: ValidationSummary
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_accessed_insurance."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=312'
+      - Screen_section_9_Row_003_Control_insurance_year_Label:
+          Control: Label@2.5.1
           Properties:
-            Items: '=colValidationSummary'
-            Visible: '=CountRows(colValidationSummary) > 0'
-      - Screen_section_9_CommandBar:
-          Control: CanvasComponent
-          ComponentName: CommandBar
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Insurance Year *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=352'
+      - Screen_section_9_Row_003_Control_insurance_year_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            BackFormula: '="Navigate(Screen_section_8, ScreenTransition.Fade)"'
-            NextFormula: '="Navigate(Screen_section_10, ScreenTransition.Fade)"'
-            SaveDraftFormula: '="// TODO: Patch placeholder collection for draft save"'
-            SubmitFormula: '="Clear(colValidationSummary); If(true && !(!IsBlank(Control_accessed_insurance.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_9"", Field: ""Accessed TACATDP Insurance"", Message: ""Accessed TACATDP Insurance is required."", Control: ""Control_accessed_insurance""})); If(Formula.visibility_insurance_year && !(!IsBlank(Control_insurance_year.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_9"", Field: ""Insurance Year"", Message: ""Insurance Year is required."", Control: ""Control_insurance_year""})); If(Formula.visibility_insurance_type && !(!IsBlank(Control_insurance_type.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_9"", Field: ""Insurance Type"", Message: ""Insurance Type is required."", Control: ""Control_insurance_type""})); If(Formula.visibility_guarantee_coverage && !(!IsBlank(Control_guarantee_coverage.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_9"", Field: ""Guarantee Coverage %"", Message: ""Guarantee Coverage % is required."", Control: ""Control_guarantee_coverage""}));"'
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=384'
+      - Screen_section_9_Row_003_Control_insurance_year_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_insurance_year."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=432'
+      - Screen_section_9_Row_004_Control_insurance_type_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Insurance Type *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=472'
+      - Screen_section_9_Row_004_Control_insurance_type_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=504'
+      - Screen_section_9_Row_004_Control_insurance_type_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_insurance_type."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=552'
+      - Screen_section_9_Row_005_Control_qualified_guara_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="qualified guarantee"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=592'
+      - Screen_section_9_Row_005_Control_qualified_guara_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=624'
+      - Screen_section_9_Row_005_Control_qualified_guara_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=672'
+      - Screen_section_9_Row_006_Control_guarantee_statu_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Qualified for Guarantee: ${qualified_guarantee}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=712'
+      - Screen_section_9_Row_006_Control_guarantee_statu_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=744'
+      - Screen_section_9_Row_006_Control_guarantee_statu_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=792'
+      - Screen_section_9_Row_007_Control_guarantee_cover_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Guarantee Coverage % *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=832'
+      - Screen_section_9_Row_007_Control_guarantee_cover_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=864'
+      - Screen_section_9_Row_007_Control_guarantee_cover_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_guarantee_coverage."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=912'
+      - Screen_section_9_CommandHint:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 120, 212, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Semibold'
+            Height: '=32'
+            Size: '=12'
+            Text: '="Back | Save Draft | Next - wire navigation after Studio opens this source"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=960'

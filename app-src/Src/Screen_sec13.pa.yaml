@@ -1,479 +1,1559 @@
-# Phase 3 Canvas YAML screen blueprint.
-# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+# Phase 3 native Canvas source candidate.
+# Generated from artifacts/powerapps/phase3-scaffolds without custom components.
 Screens:
   Screen_sec13:
     Properties:
       LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
-      - Screen_sec13_Shell:
-          Control: CanvasComponent
-          ComponentName: ScreenShell
+      - Screen_sec13_Title:
+          Control: Label@2.5.1
           Properties:
-            TitleText: '="SECTION 13: Detailed Agri-Crop Production Cost and Income Quantification"'
-            ProgressText: '="Section 32"'
-            ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
-      - Row_001_Control_row_419:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Bold'
+            Height: '=40'
+            Size: '=18'
+            Text: '="SECTION 13: Detailed Agri-Crop Production Cost and Income Quantification"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=24'
+      - Screen_sec13_Progress:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="SECTION 13: Detailed Agri-Crop Production Cost and Income Quantification"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_002_Control_reporting_period:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Section 32"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=68'
+      - Screen_sec13_Row_001_Control_row_419_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Reporting period"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_reporting_period."'
-            RowVisible: '=Formula.visibility_reporting_period'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_003_Control_farm_size:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="SECTION 13: Detailed Agri-Crop Production Cost and Income Quantification"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=112'
+      - Screen_sec13_Row_001_Control_row_419_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Cultivated area (Acres)"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_farm_size."'
-            RowVisible: '=Formula.visibility_farm_size'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_004_Control_production_before:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=144'
+      - Screen_sec13_Row_001_Control_row_419_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Production before TACATDP (kg)"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_production_before."'
-            RowVisible: '=Formula.visibility_production_before'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_005_Control_production_after:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=192'
+      - Screen_sec13_Row_002_Control_reporting_period_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Production after TACATDP (kg)"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_production_after."'
-            RowVisible: '=Formula.visibility_production_after'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_006_Control_yield_before:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Reporting period *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=232'
+      - Screen_sec13_Row_002_Control_reporting_period_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Yield before TACATDP"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_007_Control_yield_change_pct:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=264'
+      - Screen_sec13_Row_002_Control_reporting_period_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Yield improvement (%)"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_008_Control_stage:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_reporting_period."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=312'
+      - Screen_sec13_Row_003_Control_farm_size_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Agri-crop value chain stage"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_stage."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_production_cost_repeat"'
-            ItemsPlaceholder: '=""'
-      - Row_009_Control_cost_item:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Cultivated area (Acres) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=352'
+      - Screen_sec13_Row_003_Control_farm_size_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Production cost item"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_cost_item."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_production_cost_repeat"'
-            ItemsPlaceholder: '=""'
-      - Row_010_Control_unit:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=384'
+      - Screen_sec13_Row_003_Control_farm_size_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Unit of measure"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_unit."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_production_cost_repeat"'
-            ItemsPlaceholder: '=""'
-      - Row_011_Control_quantity:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_farm_size."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=432'
+      - Screen_sec13_Row_004_Control_production_before_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Quantity"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_quantity."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_production_cost_repeat"'
-            ItemsPlaceholder: '=""'
-      - Row_012_Control_unit_cost:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Production before TACATDP (kg) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=472'
+      - Screen_sec13_Row_004_Control_production_before_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Unit cost (TZS)"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_unit_cost."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_production_cost_repeat"'
-            ItemsPlaceholder: '=""'
-      - Row_013_Control_subtotal:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=504'
+      - Screen_sec13_Row_004_Control_production_before_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Cost subtotal (TZS)"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_production_cost_repeat"'
-            ItemsPlaceholder: '=""'
-      - Row_014_Control_total_cost:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_production_before."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=552'
+      - Screen_sec13_Row_005_Control_production_after_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Total production cost"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_015_Control_qty_sold:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Production after TACATDP (kg) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=592'
+      - Screen_sec13_Row_005_Control_production_after_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Quantity sold"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_qty_sold."'
-            RowVisible: '=Formula.visibility_qty_sold'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_016_Control_selling_price:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=624'
+      - Screen_sec13_Row_005_Control_production_after_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Selling price (TZS per unit)"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_selling_price."'
-            RowVisible: '=Formula.visibility_selling_price'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_017_Control_gross_revenue:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_production_after."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=672'
+      - Screen_sec13_Row_006_Control_yield_before_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Gross revenue"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_018_Control_household_consumption:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Yield before TACATDP"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=712'
+      - Screen_sec13_Row_006_Control_yield_before_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Quantity consumed at home"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_household_consumption."'
-            RowVisible: '=Formula.visibility_household_consumption'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_019_Control_baseline_loss:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=744'
+      - Screen_sec13_Row_006_Control_yield_before_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Post-harvest loss before TACATDP"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_baseline_loss."'
-            RowVisible: '=Formula.visibility_baseline_loss'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_020_Control_current_loss:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=792'
+      - Screen_sec13_Row_007_Control_yield_change_pct_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Post-harvest loss after TACATDP"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_current_loss."'
-            RowVisible: '=Formula.visibility_current_loss'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_021_Control_loss_reduction:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Yield improvement (%)"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=832'
+      - Screen_sec13_Row_007_Control_yield_change_pct_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Loss reduction"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_022_Control_loss_reduction_pct:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=864'
+      - Screen_sec13_Row_007_Control_yield_change_pct_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Loss reduction (%)"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_023_Control_net_income:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=912'
+      - Screen_sec13_Row_008_Control_stage_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Net farming income"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_024_Control_profit_margin:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Agri-crop value chain stage *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=952'
+      - Screen_sec13_Row_008_Control_stage_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Profit margin (%)"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_025_Control_cost_efficiency:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=984'
+      - Screen_sec13_Row_008_Control_stage_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Cost per unit produced"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_026_Control_interventions:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_stage."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1032'
+      - Screen_sec13_Row_009_Control_cost_item_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="TACATDP intervention(s) received"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_interventions."'
-            RowVisible: '=Formula.visibility_interventions'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_027_Control_intervention_other:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Production cost item *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1072'
+      - Screen_sec13_Row_009_Control_cost_item_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Specify other intervention"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_intervention_other."'
-            RowVisible: '=Formula.visibility_intervention_other'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_028_Control_adaptation_result:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1104'
+      - Screen_sec13_Row_009_Control_cost_item_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Expected impact"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_adaptation_result."'
-            RowVisible: '=Formula.visibility_adaptation_result'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_029_Control_adaptation_result_other:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_cost_item."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1152'
+      - Screen_sec13_Row_010_Control_unit_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Specify other intervention"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_adaptation_result_other."'
-            RowVisible: '=Formula.visibility_adaptation_result_other'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_030_Control_verification:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Unit of measure *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1192'
+      - Screen_sec13_Row_010_Control_unit_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Source of verification"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_verification."'
-            RowVisible: '=Formula.visibility_verification'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_031_Control_verification_other:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1224'
+      - Screen_sec13_Row_010_Control_unit_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Specify other source of verification"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_verification_other."'
-            RowVisible: '=Formula.visibility_verification_other'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_032_Control_summary_title:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_unit."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1272'
+      - Screen_sec13_Row_011_Control_quantity_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="TACATDP Production Summary"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_033_Control_s1:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Quantity *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1312'
+      - Screen_sec13_Row_011_Control_quantity_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Total Production Cost: TZS ${total_cost}"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_034_Control_s2:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1344'
+      - Screen_sec13_Row_011_Control_quantity_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Yield Before: ${yield_before} kg/acre"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_035_Control_s3:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_quantity."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1392'
+      - Screen_sec13_Row_012_Control_unit_cost_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Yield After: ${yield_after} kg/acre"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_036_Control_s4:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Unit cost (TZS) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1432'
+      - Screen_sec13_Row_012_Control_unit_cost_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Yield Improvement: ${yield_change_pct}%"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_037_Control_s5:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1464'
+      - Screen_sec13_Row_012_Control_unit_cost_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Gross Revenue: TZS ${gross_revenue}"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_038_Control_s6:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_unit_cost."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1512'
+      - Screen_sec13_Row_013_Control_subtotal_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Net Farming Income: TZS ${net_income}"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_039_Control_s7:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Cost subtotal (TZS)"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1552'
+      - Screen_sec13_Row_013_Control_subtotal_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Profit Margin: ${profit_margin}%"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_040_Control_s8:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1584'
+      - Screen_sec13_Row_013_Control_subtotal_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Post-harvest Loss Reduction: ${loss_reduction_pct}%"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_041_Control_s9:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1632'
+      - Screen_sec13_Row_014_Control_total_cost_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Production Cost per kg: TZS ${cost_efficiency}/kg"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Screen_sec13_ValidationSummary:
-          Control: CanvasComponent
-          ComponentName: ValidationSummary
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Total production cost"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1672'
+      - Screen_sec13_Row_014_Control_total_cost_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            Items: '=colValidationSummary'
-            Visible: '=CountRows(colValidationSummary) > 0'
-      - Screen_sec13_CommandBar:
-          Control: CanvasComponent
-          ComponentName: CommandBar
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1704'
+      - Screen_sec13_Row_014_Control_total_cost_Help:
+          Control: Label@2.5.1
           Properties:
-            BackFormula: '="Navigate(Screen_yield_income, ScreenTransition.Fade)"'
-            NextFormula: '="Navigate(Screen_production_cost_repeat_Detail, ScreenTransition.Fade)"'
-            SaveDraftFormula: '="// TODO: Patch placeholder collection for draft save"'
-            SubmitFormula: '="Clear(colValidationSummary); If(Formula.visibility_reporting_period && !(!IsBlank(Control_reporting_period.Selected)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Reporting period"", Message: ""Reporting period is required."", Control: ""Control_reporting_period""})); If(Formula.visibility_farm_size && !(!IsBlank(Control_farm_size.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Cultivated area (Acres)"", Message: ""Cultivated area (Acres) is required."", Control: ""Control_farm_size""})); If(Formula.visibility_production_before && !(!IsBlank(Control_production_before.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Production before TACATDP (kg)"", Message: ""Production before TACATDP (kg) is required."", Control: ""Control_production_before""})); If(Formula.visibility_production_after && !(!IsBlank(Control_production_after.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Production after TACATDP (kg)"", Message: ""Production after TACATDP (kg) is required."", Control: ""Control_production_after""})); If(true && !(!IsBlank(Control_stage.Selected)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Agri-crop value chain stage"", Message: ""Agri-crop value chain stage is required."", Control: ""Control_stage""})); If(true && !(!IsBlank(Control_cost_item.Selected)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Production cost item"", Message: ""Production cost item is required."", Control: ""Control_cost_item""})); If(true && !(!IsBlank(Control_unit.Selected)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Unit of measure"", Message: ""Unit of measure is required."", Control: ""Control_unit""})); If(true && !(!IsBlank(Control_quantity.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Quantity"", Message: ""Quantity is required."", Control: ""Control_quantity""})); If(true && !(!IsBlank(Control_unit_cost.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Unit cost (TZS)"", Message: ""Unit cost (TZS) is required."", Control: ""Control_unit_cost""})); If(Formula.visibility_qty_sold && !(!IsBlank(Control_qty_sold.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Quantity sold"", Message: ""Quantity sold is required."", Control: ""Control_qty_sold""})); If(Formula.visibility_selling_price && !(!IsBlank(Control_selling_price.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Selling price (TZS per unit)"", Message: ""Selling price (TZS per unit) is required."", Control: ""Control_selling_price""})); If(Formula.visibility_household_consumption && !(!IsBlank(Control_household_consumption.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Quantity consumed at home"", Message: ""Quantity consumed at home is required."", Control: ""Control_household_consumption""})); If(Formula.visibility_baseline_loss && !(!IsBlank(Control_baseline_loss.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Post-harvest loss before TACATDP"", Message: ""Post-harvest loss before TACATDP is required."", Control: ""Control_baseline_loss""})); If(Formula.visibility_current_loss && !(!IsBlank(Control_current_loss.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Post-harvest loss after TACATDP"", Message: ""Post-harvest loss after TACATDP is required."", Control: ""Control_current_loss""})); If(Formula.visibility_interventions && !(!IsBlank(Control_interventions.Selected)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""TACATDP intervention(s) received"", Message: ""TACATDP intervention(s) received is required."", Control: ""Control_interventions""})); If(Formula.visibility_intervention_other && !(!IsBlank(Control_intervention_other.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Specify other intervention"", Message: ""Specify other intervention is required."", Control: ""Control_intervention_other""})); If(Formula.visibility_adaptation_result && !(!IsBlank(Control_adaptation_result.Selected)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Expected impact"", Message: ""Expected impact is required."", Control: ""Control_adaptation_result""})); If(Formula.visibility_adaptation_result_other && !(!IsBlank(Control_adaptation_result_other.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Specify other intervention"", Message: ""Specify other intervention is required."", Control: ""Control_adaptation_result_other""})); If(Formula.visibility_verification && !(!IsBlank(Control_verification.Selected)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Source of verification"", Message: ""Source of verification is required."", Control: ""Control_verification""})); If(Formula.visibility_verification_other && !(!IsBlank(Control_verification_other.Text)), Collect(colValidationSummary, {Screen: ""Screen_sec13"", Field: ""Specify other source of verification"", Message: ""Specify other source of verification is required."", Control: ""Control_verification_other""}));"'
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1752'
+      - Screen_sec13_Row_015_Control_qty_sold_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Quantity sold *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1792'
+      - Screen_sec13_Row_015_Control_qty_sold_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1824'
+      - Screen_sec13_Row_015_Control_qty_sold_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_qty_sold."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1872'
+      - Screen_sec13_Row_016_Control_selling_price_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Selling price (TZS per unit) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1912'
+      - Screen_sec13_Row_016_Control_selling_price_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1944'
+      - Screen_sec13_Row_016_Control_selling_price_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_selling_price."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1992'
+      - Screen_sec13_Row_017_Control_gross_revenue_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Gross revenue"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2032'
+      - Screen_sec13_Row_017_Control_gross_revenue_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2064'
+      - Screen_sec13_Row_017_Control_gross_revenue_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2112'
+      - Screen_sec13_Row_018_Control_household_consumpti_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Quantity consumed at home *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2152'
+      - Screen_sec13_Row_018_Control_household_consumpti_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2184'
+      - Screen_sec13_Row_018_Control_household_consumpti_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_household_consumption."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2232'
+      - Screen_sec13_Row_019_Control_baseline_loss_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Post-harvest loss before TACATDP *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2272'
+      - Screen_sec13_Row_019_Control_baseline_loss_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2304'
+      - Screen_sec13_Row_019_Control_baseline_loss_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_baseline_loss."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2352'
+      - Screen_sec13_Row_020_Control_current_loss_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Post-harvest loss after TACATDP *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2392'
+      - Screen_sec13_Row_020_Control_current_loss_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2424'
+      - Screen_sec13_Row_020_Control_current_loss_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_current_loss."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2472'
+      - Screen_sec13_Row_021_Control_loss_reduction_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Loss reduction"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2512'
+      - Screen_sec13_Row_021_Control_loss_reduction_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2544'
+      - Screen_sec13_Row_021_Control_loss_reduction_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2592'
+      - Screen_sec13_Row_022_Control_loss_reduction_pct_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Loss reduction (%)"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2632'
+      - Screen_sec13_Row_022_Control_loss_reduction_pct_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2664'
+      - Screen_sec13_Row_022_Control_loss_reduction_pct_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2712'
+      - Screen_sec13_Row_023_Control_net_income_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Net farming income"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2752'
+      - Screen_sec13_Row_023_Control_net_income_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2784'
+      - Screen_sec13_Row_023_Control_net_income_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2832'
+      - Screen_sec13_Row_024_Control_profit_margin_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Profit margin (%)"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2872'
+      - Screen_sec13_Row_024_Control_profit_margin_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2904'
+      - Screen_sec13_Row_024_Control_profit_margin_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2952'
+      - Screen_sec13_Row_025_Control_cost_efficiency_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Cost per unit produced"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2992'
+      - Screen_sec13_Row_025_Control_cost_efficiency_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3024'
+      - Screen_sec13_Row_025_Control_cost_efficiency_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3072'
+      - Screen_sec13_Row_026_Control_interventions_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="TACATDP intervention(s) received *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3112'
+      - Screen_sec13_Row_026_Control_interventions_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3144'
+      - Screen_sec13_Row_026_Control_interventions_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_interventions."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3192'
+      - Screen_sec13_Row_027_Control_intervention_other_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Specify other intervention *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3232'
+      - Screen_sec13_Row_027_Control_intervention_other_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3264'
+      - Screen_sec13_Row_027_Control_intervention_other_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_intervention_other."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3312'
+      - Screen_sec13_Row_028_Control_adaptation_result_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Expected impact *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3352'
+      - Screen_sec13_Row_028_Control_adaptation_result_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3384'
+      - Screen_sec13_Row_028_Control_adaptation_result_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_adaptation_result."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3432'
+      - Screen_sec13_Row_029_Control_adaptation_result_o_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Specify other intervention *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3472'
+      - Screen_sec13_Row_029_Control_adaptation_result_o_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3504'
+      - Screen_sec13_Row_029_Control_adaptation_result_o_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_adaptation_result_other."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3552'
+      - Screen_sec13_Row_030_Control_verification_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Source of verification *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3592'
+      - Screen_sec13_Row_030_Control_verification_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3624'
+      - Screen_sec13_Row_030_Control_verification_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_verification."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3672'
+      - Screen_sec13_Row_031_Control_verification_other_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Specify other source of verification *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3712'
+      - Screen_sec13_Row_031_Control_verification_other_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3744'
+      - Screen_sec13_Row_031_Control_verification_other_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_verification_other."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3792'
+      - Screen_sec13_Row_032_Control_summary_title_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="TACATDP Production Summary"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3832'
+      - Screen_sec13_Row_032_Control_summary_title_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3864'
+      - Screen_sec13_Row_032_Control_summary_title_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3912'
+      - Screen_sec13_Row_033_Control_s1_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Total Production Cost: TZS ${total_cost}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3952'
+      - Screen_sec13_Row_033_Control_s1_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3984'
+      - Screen_sec13_Row_033_Control_s1_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4032'
+      - Screen_sec13_Row_034_Control_s2_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Yield Before: ${yield_before} kg/acre"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4072'
+      - Screen_sec13_Row_034_Control_s2_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4104'
+      - Screen_sec13_Row_034_Control_s2_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4152'
+      - Screen_sec13_Row_035_Control_s3_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Yield After: ${yield_after} kg/acre"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4192'
+      - Screen_sec13_Row_035_Control_s3_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4224'
+      - Screen_sec13_Row_035_Control_s3_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4272'
+      - Screen_sec13_Row_036_Control_s4_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Yield Improvement: ${yield_change_pct}%"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4312'
+      - Screen_sec13_Row_036_Control_s4_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4344'
+      - Screen_sec13_Row_036_Control_s4_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4392'
+      - Screen_sec13_Row_037_Control_s5_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Gross Revenue: TZS ${gross_revenue}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4432'
+      - Screen_sec13_Row_037_Control_s5_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4464'
+      - Screen_sec13_Row_037_Control_s5_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4512'
+      - Screen_sec13_Row_038_Control_s6_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Net Farming Income: TZS ${net_income}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4552'
+      - Screen_sec13_Row_038_Control_s6_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4584'
+      - Screen_sec13_Row_038_Control_s6_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4632'
+      - Screen_sec13_Row_039_Control_s7_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Profit Margin: ${profit_margin}%"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4672'
+      - Screen_sec13_Row_039_Control_s7_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4704'
+      - Screen_sec13_Row_039_Control_s7_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4752'
+      - Screen_sec13_Row_040_Control_s8_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Post-harvest Loss Reduction: ${loss_reduction_pct}%"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4792'
+      - Screen_sec13_Row_040_Control_s8_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4824'
+      - Screen_sec13_Row_040_Control_s8_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4872'
+      - Screen_sec13_Row_041_Control_s9_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Production Cost per kg: TZS ${cost_efficiency}/kg"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4912'
+      - Screen_sec13_Row_041_Control_s9_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4944'
+      - Screen_sec13_Row_041_Control_s9_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=4992'
+      - Screen_sec13_CommandHint:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 120, 212, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Semibold'
+            Height: '=32'
+            Size: '=12'
+            Text: '="Back | Save Draft | Next - wire navigation after Studio opens this source"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=5040'

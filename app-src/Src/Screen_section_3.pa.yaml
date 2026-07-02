@@ -1,182 +1,560 @@
-# Phase 3 Canvas YAML screen blueprint.
-# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+# Phase 3 native Canvas source candidate.
+# Generated from artifacts/powerapps/phase3-scaffolds without custom components.
 Screens:
   Screen_section_3:
     Properties:
       LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
-      - Screen_section_3_Shell:
-          Control: CanvasComponent
-          ComponentName: ScreenShell
+      - Screen_section_3_Title:
+          Control: Label@2.5.1
           Properties:
-            TitleText: '="SECTION 3: RESOUIRCE EFFICIENCY IN IRRIGATION, WATER & ENERGY"'
-            ProgressText: '="Section 3"'
-            ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
-      - Row_001_Control_row_41:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Bold'
+            Height: '=40'
+            Size: '=18'
+            Text: '="SECTION 3: RESOUIRCE EFFICIENCY IN IRRIGATION, WATER & ENERGY"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=24'
+      - Screen_section_3_Progress:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="SECTION 3: RESOUIRCE EFFICIENCY IN IRRIGATION, WATER & ENERGY"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_002_Control_uses_irrigation:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Section 3"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=68'
+      - Screen_section_3_Row_001_Control_row_41_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Uses Irrigation?"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_uses_irrigation."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_003_Control_irrigation_type:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="SECTION 3: RESOUIRCE EFFICIENCY IN IRRIGATION, WATER & ENERGY"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=112'
+      - Screen_section_3_Row_001_Control_row_41_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Irrigation Type"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_irrigation_type."'
-            RowVisible: '=Formula.visibility_irrigation_type'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_004_Control_other_irrigation_type:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=144'
+      - Screen_section_3_Row_001_Control_row_41_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Please specify the ""other"" Irrigation Type."'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_other_irrigation_type."'
-            RowVisible: '=Formula.visibility_other_irrigation_type'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_005_Control_water_source:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=192'
+      - Screen_section_3_Row_002_Control_uses_irrigation_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Water Source"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_water_source."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_006_Control_other_water_source:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Uses Irrigation? *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=232'
+      - Screen_section_3_Row_002_Control_uses_irrigation_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Please specify the ""other"" Water_Source."'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_other_water_source."'
-            RowVisible: '=Formula.visibility_other_water_source'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_007_Control_energy_source:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=264'
+      - Screen_section_3_Row_002_Control_uses_irrigation_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Current Energy Source Used in Production / Processing"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_energy_source."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_008_Control_other_energy_source:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_uses_irrigation."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=312'
+      - Screen_section_3_Row_003_Control_irrigation_type_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Please specify the ""other"" Energy_Source."'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_other_energy_source."'
-            RowVisible: '=Formula.visibility_other_energy_source'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_009_Control_adopted_energy:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Irrigation Type *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=352'
+      - Screen_section_3_Row_003_Control_irrigation_type_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Adopted Energy Source Diployed (After) ARA Adoption"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_adopted_energy."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_010_Control_other_adopted_energy:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=384'
+      - Screen_section_3_Row_003_Control_irrigation_type_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Please specify the ""other"" Adopted_Energy."'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_other_adopted_energy."'
-            RowVisible: '=Formula.visibility_other_adopted_energy'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_011_Control_baseline_yield:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_irrigation_type."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=432'
+      - Screen_section_3_Row_004_Control_other_irrigatio_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Baseline Yield (kg/acre)"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_baseline_yield."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_012_Control_yield_after:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Please specify the ""other"" Irrigation Type. *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=472'
+      - Screen_section_3_Row_004_Control_other_irrigatio_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Yield After TACATDP ARA Diployment (kg/acre)"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_yield_after."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_013_Control_yield_increase_pct:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=504'
+      - Screen_section_3_Row_004_Control_other_irrigatio_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Yield Increase %"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_yield_increase_pct."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_014_Control_yield_increase_display:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_other_irrigation_type."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=552'
+      - Screen_section_3_Row_005_Control_water_source_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Yield Increase (%): ${yield_increase_pct}"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Screen_section_3_ValidationSummary:
-          Control: CanvasComponent
-          ComponentName: ValidationSummary
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Water Source *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=592'
+      - Screen_section_3_Row_005_Control_water_source_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            Items: '=colValidationSummary'
-            Visible: '=CountRows(colValidationSummary) > 0'
-      - Screen_section_3_CommandBar:
-          Control: CanvasComponent
-          ComponentName: CommandBar
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=624'
+      - Screen_section_3_Row_005_Control_water_source_Help:
+          Control: Label@2.5.1
           Properties:
-            BackFormula: '="Navigate(Screen_section_2, ScreenTransition.Fade)"'
-            NextFormula: '="Navigate(Screen_section_4, ScreenTransition.Fade)"'
-            SaveDraftFormula: '="// TODO: Patch placeholder collection for draft save"'
-            SubmitFormula: '="Clear(colValidationSummary); If(true && !(!IsBlank(Control_uses_irrigation.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_3"", Field: ""Uses Irrigation?"", Message: ""Uses Irrigation? is required."", Control: ""Control_uses_irrigation""})); If(Formula.visibility_irrigation_type && !(!IsBlank(Control_irrigation_type.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_3"", Field: ""Irrigation Type"", Message: ""Irrigation Type is required."", Control: ""Control_irrigation_type""})); If(Formula.visibility_other_irrigation_type && !(!IsBlank(Control_other_irrigation_type.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_3"", Field: ""Please specify the \""other\"" Irrigation Type."", Message: ""Please specify the \""other\"" Irrigation Type. is required."", Control: ""Control_other_irrigation_type""})); If(true && !(!IsBlank(Control_water_source.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_3"", Field: ""Water Source"", Message: ""Water Source is required."", Control: ""Control_water_source""})); If(Formula.visibility_other_water_source && !(!IsBlank(Control_other_water_source.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_3"", Field: ""Please specify the \""other\"" Water_Source."", Message: ""Please specify the \""other\"" Water_Source. is required."", Control: ""Control_other_water_source""})); If(true && !(!IsBlank(Control_energy_source.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_3"", Field: ""Current Energy Source Used in Production / Processing"", Message: ""Current Energy Source Used in Production / Processing is required."", Control: ""Control_energy_source""})); If(Formula.visibility_other_energy_source && !(!IsBlank(Control_other_energy_source.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_3"", Field: ""Please specify the \""other\"" Energy_Source."", Message: ""Please specify the \""other\"" Energy_Source. is required."", Control: ""Control_other_energy_source""})); If(true && !(!IsBlank(Control_adopted_energy.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_3"", Field: ""Adopted Energy Source Diployed (After) ARA Adoption"", Message: ""Adopted Energy Source Diployed (After) ARA Adoption is required."", Control: ""Control_adopted_energy""})); If(Formula.visibility_other_adopted_energy && !(!IsBlank(Control_other_adopted_energy.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_3"", Field: ""Please specify the \""other\"" Adopted_Energy."", Message: ""Please specify the \""other\"" Adopted_Energy. is required."", Control: ""Control_other_adopted_energy""})); If(true && !(Self.Value >= 0), Collect(colValidationSummary, {Screen: ""Screen_section_3"", Field: ""Baseline Yield (kg/acre)"", Message: ""Baseline Yield (kg/acre) is invalid."", Control: ""Control_baseline_yield""})); If(true && !(!IsBlank(Control_baseline_yield.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_3"", Field: ""Baseline Yield (kg/acre)"", Message: ""Baseline Yield (kg/acre) is required."", Control: ""Control_baseline_yield""})); If(true && !(Self.Value >= Value(Control_baseline_yield.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_3"", Field: ""Yield After TACATDP ARA Diployment (kg/acre)"", Message: ""Yield After TACATDP ARA Diployment (kg/acre) is invalid."", Control: ""Control_yield_after""})); If(true && !(!IsBlank(Control_yield_after.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_3"", Field: ""Yield After TACATDP ARA Diployment (kg/acre)"", Message: ""Yield After TACATDP ARA Diployment (kg/acre) is required."", Control: ""Control_yield_after""})); If(true && !(!IsBlank(Control_yield_increase_pct.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_3"", Field: ""Yield Increase %"", Message: ""Yield Increase % is required."", Control: ""Control_yield_increase_pct""}));"'
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_water_source."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=672'
+      - Screen_section_3_Row_006_Control_other_water_sou_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Please specify the ""other"" Water_Source. *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=712'
+      - Screen_section_3_Row_006_Control_other_water_sou_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=744'
+      - Screen_section_3_Row_006_Control_other_water_sou_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_other_water_source."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=792'
+      - Screen_section_3_Row_007_Control_energy_source_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Current Energy Source Used in Production / Processing *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=832'
+      - Screen_section_3_Row_007_Control_energy_source_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=864'
+      - Screen_section_3_Row_007_Control_energy_source_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_energy_source."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=912'
+      - Screen_section_3_Row_008_Control_other_energy_so_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Please specify the ""other"" Energy_Source. *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=952'
+      - Screen_section_3_Row_008_Control_other_energy_so_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=984'
+      - Screen_section_3_Row_008_Control_other_energy_so_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_other_energy_source."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1032'
+      - Screen_section_3_Row_009_Control_adopted_energy_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Adopted Energy Source Diployed (After) ARA Adoption *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1072'
+      - Screen_section_3_Row_009_Control_adopted_energy_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1104'
+      - Screen_section_3_Row_009_Control_adopted_energy_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_adopted_energy."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1152'
+      - Screen_section_3_Row_010_Control_other_adopted_e_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Please specify the ""other"" Adopted_Energy. *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1192'
+      - Screen_section_3_Row_010_Control_other_adopted_e_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1224'
+      - Screen_section_3_Row_010_Control_other_adopted_e_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_other_adopted_energy."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1272'
+      - Screen_section_3_Row_011_Control_baseline_yield_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Baseline Yield (kg/acre) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1312'
+      - Screen_section_3_Row_011_Control_baseline_yield_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1344'
+      - Screen_section_3_Row_011_Control_baseline_yield_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_baseline_yield."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1392'
+      - Screen_section_3_Row_012_Control_yield_after_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Yield After TACATDP ARA Diployment (kg/acre) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1432'
+      - Screen_section_3_Row_012_Control_yield_after_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1464'
+      - Screen_section_3_Row_012_Control_yield_after_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_yield_after."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1512'
+      - Screen_section_3_Row_013_Control_yield_increase__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Yield Increase % *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1552'
+      - Screen_section_3_Row_013_Control_yield_increase__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1584'
+      - Screen_section_3_Row_013_Control_yield_increase__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_yield_increase_pct."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1632'
+      - Screen_section_3_Row_014_Control_yield_increase__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Yield Increase (%): ${yield_increase_pct}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1672'
+      - Screen_section_3_Row_014_Control_yield_increase__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1704'
+      - Screen_section_3_Row_014_Control_yield_increase__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1752'
+      - Screen_section_3_CommandHint:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 120, 212, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Semibold'
+            Height: '=32'
+            Size: '=12'
+            Text: '="Back | Save Draft | Next - wire navigation after Studio opens this source"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1800'

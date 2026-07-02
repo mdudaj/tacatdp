@@ -1,127 +1,375 @@
-# Phase 3 Canvas YAML screen blueprint.
-# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+# Phase 3 native Canvas source candidate.
+# Generated from artifacts/powerapps/phase3-scaffolds without custom components.
 Screens:
   Screen_consumption:
     Properties:
       LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
-      - Screen_consumption_Shell:
-          Control: CanvasComponent
-          ComponentName: ScreenShell
+      - Screen_consumption_Title:
+          Control: Label@2.5.1
           Properties:
-            TitleText: '="Consumption / User Stage Beneficiaries"'
-            ProgressText: '="Section 22"'
-            ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
-      - Row_001_Control_consumption_dm:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Bold'
+            Height: '=40'
+            Size: '=18'
+            Text: '="Consumption / User Stage Beneficiaries"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=24'
+      - Screen_consumption_Progress:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Direct Male Beneficiaries"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_consumption_dm."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_002_Control_consumption_df:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Section 22"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=68'
+      - Screen_consumption_Row_001_Control_consumption_d_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Direct Female Beneficiaries"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_consumption_df."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_003_Control_consumption_dt:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Direct Male Beneficiaries *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=112'
+      - Screen_consumption_Row_001_Control_consumption_d_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="consumption dt"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_004_Control_consumption_dy:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=144'
+      - Screen_consumption_Row_001_Control_consumption_d_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Direct Youth (18-35)"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_consumption_dy."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_005_Control_consumption_im:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_consumption_dm."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=192'
+      - Screen_consumption_Row_002_Control_consumption_d_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Indirect Male Beneficiaries"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_consumption_im."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_006_Control_consumption_if:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Direct Female Beneficiaries *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=232'
+      - Screen_consumption_Row_002_Control_consumption_d_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Indirect Female Beneficiaries"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_consumption_if."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_007_Control_consumption_it:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=264'
+      - Screen_consumption_Row_002_Control_consumption_d_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="consumption it"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_008_Control_consumption_it_note:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_consumption_df."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=312'
+      - Screen_consumption_Row_003_Control_consumption_d_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Total Indirect Male +Female Beneficiaries ${consumption_it}"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_009_Control_consumption_iy:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="consumption dt"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=352'
+      - Screen_consumption_Row_003_Control_consumption_d_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Indirect Youth (18-35)"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_consumption_iy."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Screen_consumption_ValidationSummary:
-          Control: CanvasComponent
-          ComponentName: ValidationSummary
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=384'
+      - Screen_consumption_Row_003_Control_consumption_d_Help:
+          Control: Label@2.5.1
           Properties:
-            Items: '=colValidationSummary'
-            Visible: '=CountRows(colValidationSummary) > 0'
-      - Screen_consumption_CommandBar:
-          Control: CanvasComponent
-          ComponentName: CommandBar
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=432'
+      - Screen_consumption_Row_004_Control_consumption_d_Label:
+          Control: Label@2.5.1
           Properties:
-            BackFormula: '="Navigate(Screen_marketing, ScreenTransition.Fade)"'
-            NextFormula: '="Navigate(Screen_training, ScreenTransition.Fade)"'
-            SaveDraftFormula: '="// TODO: Patch placeholder collection for draft save"'
-            SubmitFormula: '="Clear(colValidationSummary); If(true && !(!IsBlank(Control_consumption_dm.Text)), Collect(colValidationSummary, {Screen: ""Screen_consumption"", Field: ""Direct Male Beneficiaries"", Message: ""Direct Male Beneficiaries is required."", Control: ""Control_consumption_dm""})); If(true && !(!IsBlank(Control_consumption_df.Text)), Collect(colValidationSummary, {Screen: ""Screen_consumption"", Field: ""Direct Female Beneficiaries"", Message: ""Direct Female Beneficiaries is required."", Control: ""Control_consumption_df""})); If(true && !(!IsBlank(Control_consumption_dy.Text)), Collect(colValidationSummary, {Screen: ""Screen_consumption"", Field: ""Direct Youth (18-35)"", Message: ""Direct Youth (18-35) is required."", Control: ""Control_consumption_dy""})); If(true && !(!IsBlank(Control_consumption_im.Text)), Collect(colValidationSummary, {Screen: ""Screen_consumption"", Field: ""Indirect Male Beneficiaries"", Message: ""Indirect Male Beneficiaries is required."", Control: ""Control_consumption_im""})); If(true && !(!IsBlank(Control_consumption_if.Text)), Collect(colValidationSummary, {Screen: ""Screen_consumption"", Field: ""Indirect Female Beneficiaries"", Message: ""Indirect Female Beneficiaries is required."", Control: ""Control_consumption_if""})); If(true && !(!IsBlank(Control_consumption_iy.Text)), Collect(colValidationSummary, {Screen: ""Screen_consumption"", Field: ""Indirect Youth (18-35)"", Message: ""Indirect Youth (18-35) is required."", Control: ""Control_consumption_iy""}));"'
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Direct Youth (18-35) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=472'
+      - Screen_consumption_Row_004_Control_consumption_d_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=504'
+      - Screen_consumption_Row_004_Control_consumption_d_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_consumption_dy."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=552'
+      - Screen_consumption_Row_005_Control_consumption_i_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Indirect Male Beneficiaries *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=592'
+      - Screen_consumption_Row_005_Control_consumption_i_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=624'
+      - Screen_consumption_Row_005_Control_consumption_i_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_consumption_im."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=672'
+      - Screen_consumption_Row_006_Control_consumption_i_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Indirect Female Beneficiaries *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=712'
+      - Screen_consumption_Row_006_Control_consumption_i_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=744'
+      - Screen_consumption_Row_006_Control_consumption_i_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_consumption_if."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=792'
+      - Screen_consumption_Row_007_Control_consumption_i_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="consumption it"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=832'
+      - Screen_consumption_Row_007_Control_consumption_i_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=864'
+      - Screen_consumption_Row_007_Control_consumption_i_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=912'
+      - Screen_consumption_Row_008_Control_consumption_i_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Total Indirect Male +Female Beneficiaries ${consumption_it}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=952'
+      - Screen_consumption_Row_008_Control_consumption_i_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=984'
+      - Screen_consumption_Row_008_Control_consumption_i_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1032'
+      - Screen_consumption_Row_009_Control_consumption_i_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Indirect Youth (18-35) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1072'
+      - Screen_consumption_Row_009_Control_consumption_i_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1104'
+      - Screen_consumption_Row_009_Control_consumption_i_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_consumption_iy."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1152'
+      - Screen_consumption_CommandHint:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 120, 212, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Semibold'
+            Height: '=32'
+            Size: '=12'
+            Text: '="Back | Save Draft | Next - wire navigation after Studio opens this source"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1200'

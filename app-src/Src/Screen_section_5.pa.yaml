@@ -1,105 +1,301 @@
-# Phase 3 Canvas YAML screen blueprint.
-# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+# Phase 3 native Canvas source candidate.
+# Generated from artifacts/powerapps/phase3-scaffolds without custom components.
 Screens:
   Screen_section_5:
     Properties:
       LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
-      - Screen_section_5_Shell:
-          Control: CanvasComponent
-          ComponentName: ScreenShell
+      - Screen_section_5_Title:
+          Control: Label@2.5.1
           Properties:
-            TitleText: '="SECTION:5 HouseHold Number Quantification"'
-            ProgressText: '="Section 5"'
-            ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
-      - Row_001_Control_row_68:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Bold'
+            Height: '=40'
+            Size: '=18'
+            Text: '="SECTION:5 HouseHold Number Quantification"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=24'
+      - Screen_section_5_Progress:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="HouseHold Number Quantification"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_002_Control_hh_male:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Section 5"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=68'
+      - Screen_section_5_Row_001_Control_row_68_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Number of MALE household members"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_hh_male."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_003_Control_hh_female:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="HouseHold Number Quantification"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=112'
+      - Screen_section_5_Row_001_Control_row_68_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Number of FEMALE household members"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_hh_female."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_004_Control_hh_total:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=144'
+      - Screen_section_5_Row_001_Control_row_68_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="hh total"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_005_Control_hh_total_note:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=192'
+      - Screen_section_5_Row_002_Control_hh_male_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Total household members (M+F): ${hh_total}"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_006_Control_hh_head_gender:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Number of MALE household members *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=232'
+      - Screen_section_5_Row_002_Control_hh_male_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Head of Household Gender"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_hh_head_gender."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_007_Control_women_decision:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=264'
+      - Screen_section_5_Row_002_Control_hh_male_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Are women direct decision-makers in ARA investment use?"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_women_decision."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Screen_section_5_ValidationSummary:
-          Control: CanvasComponent
-          ComponentName: ValidationSummary
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_hh_male."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=312'
+      - Screen_section_5_Row_003_Control_hh_female_Label:
+          Control: Label@2.5.1
           Properties:
-            Items: '=colValidationSummary'
-            Visible: '=CountRows(colValidationSummary) > 0'
-      - Screen_section_5_CommandBar:
-          Control: CanvasComponent
-          ComponentName: CommandBar
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Number of FEMALE household members *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=352'
+      - Screen_section_5_Row_003_Control_hh_female_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            BackFormula: '="Navigate(Screen_section_4, ScreenTransition.Fade)"'
-            NextFormula: '="Navigate(Screen_section_6, ScreenTransition.Fade)"'
-            SaveDraftFormula: '="// TODO: Patch placeholder collection for draft save"'
-            SubmitFormula: '="Clear(colValidationSummary); If(true && !(Self.Value >= 0), Collect(colValidationSummary, {Screen: ""Screen_section_5"", Field: ""Number of MALE household members"", Message: ""Number of MALE household members is invalid."", Control: ""Control_hh_male""})); If(true && !(!IsBlank(Control_hh_male.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_5"", Field: ""Number of MALE household members"", Message: ""Number of MALE household members is required."", Control: ""Control_hh_male""})); If(true && !(Self.Value >= 0), Collect(colValidationSummary, {Screen: ""Screen_section_5"", Field: ""Number of FEMALE household members"", Message: ""Number of FEMALE household members is invalid."", Control: ""Control_hh_female""})); If(true && !(!IsBlank(Control_hh_female.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_5"", Field: ""Number of FEMALE household members"", Message: ""Number of FEMALE household members is required."", Control: ""Control_hh_female""})); If(true && !(!IsBlank(Control_hh_head_gender.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_5"", Field: ""Head of Household Gender"", Message: ""Head of Household Gender is required."", Control: ""Control_hh_head_gender""})); If(true && !(!IsBlank(Control_women_decision.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_5"", Field: ""Are women direct decision-makers in ARA investment use?"", Message: ""Are women direct decision-makers in ARA investment use? is required."", Control: ""Control_women_decision""}));"'
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=384'
+      - Screen_section_5_Row_003_Control_hh_female_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_hh_female."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=432'
+      - Screen_section_5_Row_004_Control_hh_total_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="hh total"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=472'
+      - Screen_section_5_Row_004_Control_hh_total_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=504'
+      - Screen_section_5_Row_004_Control_hh_total_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=552'
+      - Screen_section_5_Row_005_Control_hh_total_note_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Total household members (M+F): ${hh_total}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=592'
+      - Screen_section_5_Row_005_Control_hh_total_note_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=624'
+      - Screen_section_5_Row_005_Control_hh_total_note_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=672'
+      - Screen_section_5_Row_006_Control_hh_head_gender_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Head of Household Gender *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=712'
+      - Screen_section_5_Row_006_Control_hh_head_gender_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=744'
+      - Screen_section_5_Row_006_Control_hh_head_gender_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_hh_head_gender."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=792'
+      - Screen_section_5_Row_007_Control_women_decision_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Are women direct decision-makers in ARA investment use? *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=832'
+      - Screen_section_5_Row_007_Control_women_decision_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=864'
+      - Screen_section_5_Row_007_Control_women_decision_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_women_decision."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=912'
+      - Screen_section_5_CommandHint:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 120, 212, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Semibold'
+            Height: '=32'
+            Size: '=12'
+            Text: '="Back | Save Draft | Next - wire navigation after Studio opens this source"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=960'

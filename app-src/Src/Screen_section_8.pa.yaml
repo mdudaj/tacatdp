@@ -1,204 +1,634 @@
-# Phase 3 Canvas YAML screen blueprint.
-# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+# Phase 3 native Canvas source candidate.
+# Generated from artifacts/powerapps/phase3-scaffolds without custom components.
 Screens:
   Screen_section_8:
     Properties:
       LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
-      - Screen_section_8_Shell:
-          Control: CanvasComponent
-          ComponentName: ScreenShell
+      - Screen_section_8_Title:
+          Control: Label@2.5.1
           Properties:
-            TitleText: '="SECTION 8: ENVIRONMENTAL & SOCIAL SAFEGUARDS & CLIMATE RISK ASESSMENT"'
-            ProgressText: '="Section 27"'
-            ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
-      - Row_001_Control_row_335:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Bold'
+            Height: '=40'
+            Size: '=18'
+            Text: '="SECTION 8: ENVIRONMENTAL & SOCIAL SAFEGUARDS & CLIMATE RISK ASESSMENT"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=24'
+      - Screen_section_8_Progress:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Environmental & Social Risk Screening"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_002_Control_exclusion_screen_passed:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Section 27"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=68'
+      - Screen_section_8_Row_001_Control_row_335_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Exclusion Screen Passed?"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_exclusion_screen_passed."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_003_Control_es_risk_category:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Environmental & Social Risk Screening"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=112'
+      - Screen_section_8_Row_001_Control_row_335_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="E&S Risk Category"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_es_risk_category."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_004_Control_disclosure_published:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=144'
+      - Screen_section_8_Row_001_Control_row_335_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Disclosure Published?"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_disclosure_published."'
-            RowVisible: '=Formula.visibility_disclosure_published'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_005_Control_disclosure_date:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=192'
+      - Screen_section_8_Row_002_Control_exclusion_scree_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Disclosure Date"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_disclosure_date."'
-            RowVisible: '=Formula.visibility_disclosure_date'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_006_Control_grm_complaint:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Exclusion Screen Passed? *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=232'
+      - Screen_section_8_Row_002_Control_exclusion_scree_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="GRM Complaint?"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_grm_complaint."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_007_Control_ess_grievance:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=264'
+      - Screen_section_8_Row_002_Control_exclusion_scree_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Is there an ESS related grievance/complaint related to project/farm?"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_ess_grievance."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_008_Control_grievance_name:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_exclusion_screen_passed."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=312'
+      - Screen_section_8_Row_003_Control_es_risk_categor_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Briefly name the Complaint/Grievance"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_grievance_name."'
-            RowVisible: '=Formula.visibility_grievance_name'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_009_Control_grievance_stage:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="E&S Risk Category *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=352'
+      - Screen_section_8_Row_003_Control_es_risk_categor_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="What stage of GRM for above Compliant/Grivance?"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_grievance_stage."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_010_Control_grievance_name_other:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=384'
+      - Screen_section_8_Row_003_Control_es_risk_categor_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Other stage of GRM for above Compliant/Grivance?"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_grievance_name_other."'
-            RowVisible: '=Formula.visibility_grievance_name_other'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_011_Control_climate_hazards:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_es_risk_category."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=432'
+      - Screen_section_8_Row_004_Control_disclosure_publ_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Climate hazards  affected  farm/business in the past 3–5 years"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_climate_hazards."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_012_Control_other_climate_hazards:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Disclosure Published? *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=472'
+      - Screen_section_8_Row_004_Control_disclosure_publ_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Please specify the ""other"" Climate_hazards."'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_other_climate_hazards."'
-            RowVisible: '=Formula.visibility_other_climate_hazards'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_013_Control_frequently:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=504'
+      - Screen_section_8_Row_004_Control_disclosure_publ_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="How frequently do these climate events occur"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_frequently."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_014_Control_collateral:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_disclosure_published."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=552'
+      - Screen_section_8_Row_005_Control_disclosure_date_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Assets used as collateral for your farming/business loan?"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_collateral."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_015_Control_other_collateral:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Disclosure Date *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=592'
+      - Screen_section_8_Row_005_Control_disclosure_date_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Please specify the ""other"" "'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_other_collateral."'
-            RowVisible: '=Formula.visibility_other_collateral'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_016_Control_exposure_level:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=624'
+      - Screen_section_8_Row_005_Control_disclosure_date_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="How exposed is your collateral to climate risks?"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_exposure_level."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Screen_section_8_ValidationSummary:
-          Control: CanvasComponent
-          ComponentName: ValidationSummary
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_disclosure_date."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=672'
+      - Screen_section_8_Row_006_Control_grm_complaint_Label:
+          Control: Label@2.5.1
           Properties:
-            Items: '=colValidationSummary'
-            Visible: '=CountRows(colValidationSummary) > 0'
-      - Screen_section_8_CommandBar:
-          Control: CanvasComponent
-          ComponentName: CommandBar
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="GRM Complaint? *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=712'
+      - Screen_section_8_Row_006_Control_grm_complaint_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            BackFormula: '="Navigate(Screen_summary, ScreenTransition.Fade)"'
-            NextFormula: '="Navigate(Screen_section_9, ScreenTransition.Fade)"'
-            SaveDraftFormula: '="// TODO: Patch placeholder collection for draft save"'
-            SubmitFormula: '="Clear(colValidationSummary); If(true && !(!IsBlank(Control_exclusion_screen_passed.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Exclusion Screen Passed?"", Message: ""Exclusion Screen Passed? is required."", Control: ""Control_exclusion_screen_passed""})); If(true && !(!IsBlank(Control_es_risk_category.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""E&S Risk Category"", Message: ""E&S Risk Category is required."", Control: ""Control_es_risk_category""})); If(Formula.visibility_disclosure_published && !(!IsBlank(Control_disclosure_published.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Disclosure Published?"", Message: ""Disclosure Published? is required."", Control: ""Control_disclosure_published""})); If(Formula.visibility_disclosure_date && !(!IsBlank(Control_disclosure_date.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Disclosure Date"", Message: ""Disclosure Date is required."", Control: ""Control_disclosure_date""})); If(true && !(!IsBlank(Control_grm_complaint.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""GRM Complaint?"", Message: ""GRM Complaint? is required."", Control: ""Control_grm_complaint""})); If(true && !(!IsBlank(Control_ess_grievance.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Is there an ESS related grievance/complaint related to project/farm?"", Message: ""Is there an ESS related grievance/complaint related to project/farm? is required."", Control: ""Control_ess_grievance""})); If(Formula.visibility_grievance_name && !(!IsBlank(Control_grievance_name.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Briefly name the Complaint/Grievance"", Message: ""Briefly name the Complaint/Grievance is required."", Control: ""Control_grievance_name""})); If(true && !(!IsBlank(Control_grievance_stage.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""What stage of GRM for above Compliant/Grivance?"", Message: ""What stage of GRM for above Compliant/Grivance? is required."", Control: ""Control_grievance_stage""})); If(Formula.visibility_grievance_name_other && !(!IsBlank(Control_grievance_name_other.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Other stage of GRM for above Compliant/Grivance?"", Message: ""Other stage of GRM for above Compliant/Grivance? is required."", Control: ""Control_grievance_name_other""})); If(true && !(!IsBlank(Control_climate_hazards.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Climate hazards  affected  farm/business in the past 3–5 years"", Message: ""Climate hazards  affected  farm/business in the past 3–5 years is required."", Control: ""Control_climate_hazards""})); If(Formula.visibility_other_climate_hazards && !(!IsBlank(Control_other_climate_hazards.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Please specify the \""other\"" Climate_hazards."", Message: ""Please specify the \""other\"" Climate_hazards. is required."", Control: ""Control_other_climate_hazards""})); If(true && !(!IsBlank(Control_frequently.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""How frequently do these climate events occur"", Message: ""How frequently do these climate events occur is required."", Control: ""Control_frequently""})); If(true && !(!IsBlank(Control_collateral.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Assets used as collateral for your farming/business loan?"", Message: ""Assets used as collateral for your farming/business loan? is required."", Control: ""Control_collateral""})); If(Formula.visibility_other_collateral && !(!IsBlank(Control_other_collateral.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""Please specify the \""other\"" "", Message: ""Please specify the \""other\""  is required."", Control: ""Control_other_collateral""})); If(true && !(!IsBlank(Control_exposure_level.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_8"", Field: ""How exposed is your collateral to climate risks?"", Message: ""How exposed is your collateral to climate risks? is required."", Control: ""Control_exposure_level""}));"'
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=744'
+      - Screen_section_8_Row_006_Control_grm_complaint_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_grm_complaint."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=792'
+      - Screen_section_8_Row_007_Control_ess_grievance_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Is there an ESS related grievance/complaint related to project/farm? *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=832'
+      - Screen_section_8_Row_007_Control_ess_grievance_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=864'
+      - Screen_section_8_Row_007_Control_ess_grievance_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_ess_grievance."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=912'
+      - Screen_section_8_Row_008_Control_grievance_name_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Briefly name the Complaint/Grievance *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=952'
+      - Screen_section_8_Row_008_Control_grievance_name_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=984'
+      - Screen_section_8_Row_008_Control_grievance_name_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_grievance_name."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1032'
+      - Screen_section_8_Row_009_Control_grievance_stage_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="What stage of GRM for above Compliant/Grivance? *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1072'
+      - Screen_section_8_Row_009_Control_grievance_stage_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1104'
+      - Screen_section_8_Row_009_Control_grievance_stage_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_grievance_stage."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1152'
+      - Screen_section_8_Row_010_Control_grievance_name__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Other stage of GRM for above Compliant/Grivance? *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1192'
+      - Screen_section_8_Row_010_Control_grievance_name__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1224'
+      - Screen_section_8_Row_010_Control_grievance_name__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_grievance_name_other."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1272'
+      - Screen_section_8_Row_011_Control_climate_hazards_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Climate hazards  affected  farm/business in the past 3–5 years *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1312'
+      - Screen_section_8_Row_011_Control_climate_hazards_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1344'
+      - Screen_section_8_Row_011_Control_climate_hazards_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_climate_hazards."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1392'
+      - Screen_section_8_Row_012_Control_other_climate_h_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Please specify the ""other"" Climate_hazards. *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1432'
+      - Screen_section_8_Row_012_Control_other_climate_h_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1464'
+      - Screen_section_8_Row_012_Control_other_climate_h_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_other_climate_hazards."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1512'
+      - Screen_section_8_Row_013_Control_frequently_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="How frequently do these climate events occur *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1552'
+      - Screen_section_8_Row_013_Control_frequently_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1584'
+      - Screen_section_8_Row_013_Control_frequently_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_frequently."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1632'
+      - Screen_section_8_Row_014_Control_collateral_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Assets used as collateral for your farming/business loan? *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1672'
+      - Screen_section_8_Row_014_Control_collateral_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1704'
+      - Screen_section_8_Row_014_Control_collateral_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_collateral."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1752'
+      - Screen_section_8_Row_015_Control_other_collatera_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Please specify the ""other""  *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1792'
+      - Screen_section_8_Row_015_Control_other_collatera_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1824'
+      - Screen_section_8_Row_015_Control_other_collatera_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_other_collateral."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1872'
+      - Screen_section_8_Row_016_Control_exposure_level_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="How exposed is your collateral to climate risks? *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1912'
+      - Screen_section_8_Row_016_Control_exposure_level_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1944'
+      - Screen_section_8_Row_016_Control_exposure_level_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_exposure_level."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1992'
+      - Screen_section_8_CommandHint:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 120, 212, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Semibold'
+            Height: '=32'
+            Size: '=12'
+            Text: '="Back | Save Draft | Next - wire navigation after Studio opens this source"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2040'

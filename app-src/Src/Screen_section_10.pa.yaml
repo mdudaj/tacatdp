@@ -1,303 +1,967 @@
-# Phase 3 Canvas YAML screen blueprint.
-# Placeholder-bound scaffold; replace placeholders with real SharePoint/Microsoft Lists data sources before publish.
+# Phase 3 native Canvas source candidate.
+# Generated from artifacts/powerapps/phase3-scaffolds without custom components.
 Screens:
   Screen_section_10:
     Properties:
       LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
-      - Screen_section_10_Shell:
-          Control: CanvasComponent
-          ComponentName: ScreenShell
+      - Screen_section_10_Title:
+          Control: Label@2.5.1
           Properties:
-            TitleText: '="SECTION 10: GHG QUANTIFICATION"'
-            ProgressText: '="Section 29"'
-            ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
-      - Row_001_Control_ghg_quantification:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Bold'
+            Height: '=40'
+            Size: '=18'
+            Text: '="SECTION 10: GHG QUANTIFICATION"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=24'
+      - Screen_section_10_Progress:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="SECTION 10: GHG QUANTIFICATION"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_002_Control_baseline_tech:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Section 29"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=68'
+      - Screen_section_10_Row_001_Control_ghg_quantifica_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Baseline Technology"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_baseline_tech."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_003_Control_other_baseline_tech:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="SECTION 10: GHG QUANTIFICATION"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=112'
+      - Screen_section_10_Row_001_Control_ghg_quantifica_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Other Baseline Technology"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_other_baseline_tech."'
-            RowVisible: '=Formula.visibility_other_baseline_tech'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_004_Control_new_tech:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=144'
+      - Screen_section_10_Row_001_Control_ghg_quantifica_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="New Financed Technology"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_new_tech."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_005_Control_other_new_tech:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=192'
+      - Screen_section_10_Row_002_Control_baseline_tech_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Other New Financed Technology"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_other_new_tech."'
-            RowVisible: '=Formula.visibility_other_new_tech'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_006_Control_energy_base:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Baseline Technology *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=232'
+      - Screen_section_10_Row_002_Control_baseline_tech_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Energy Source Baseline"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_energy_base."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_007_Control_other_energy_base:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=264'
+      - Screen_section_10_Row_002_Control_baseline_tech_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Other Energy Source Baseline"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_other_energy_base."'
-            RowVisible: '=Formula.visibility_other_energy_base'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_008_Control_energy_after:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_baseline_tech."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=312'
+      - Screen_section_10_Row_003_Control_other_baseline_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Energy Source After"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_energy_after."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_009_Control_other_energy_after:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Other Baseline Technology *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=352'
+      - Screen_section_10_Row_003_Control_other_baseline_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Other Energy Source After"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_other_energy_after."'
-            RowVisible: '=Formula.visibility_other_energy_after'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_010_Control_base_hours:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=384'
+      - Screen_section_10_Row_003_Control_other_baseline_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Baseline Hours/year"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_base_hours."'
-            RowVisible: '=Formula.visibility_base_hours'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_011_Control_diesel_rate:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_other_baseline_tech."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=432'
+      - Screen_section_10_Row_004_Control_new_tech_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Diesel Rate (L/hr)"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_diesel_rate."'
-            RowVisible: '=Formula.visibility_diesel_rate'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_012_Control_diesel_base:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="New Financed Technology *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=472'
+      - Screen_section_10_Row_004_Control_new_tech_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="diesel base"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_013_Control_row_374:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=504'
+      - Screen_section_10_Row_004_Control_new_tech_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Diesel/year= ${diesel_base}"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_014_Control_ef:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_new_tech."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=552'
+      - Screen_section_10_Row_005_Control_other_new_tech_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="ef"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_015_Control_ghg_base:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Other New Financed Technology *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=592'
+      - Screen_section_10_Row_005_Control_other_new_tech_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="ghg base"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_016_Control_row_377:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=624'
+      - Screen_section_10_Row_005_Control_other_new_tech_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Baseline GHG= ${ghg_base}"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_017_Control_diesel_proj:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_other_new_tech."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=672'
+      - Screen_section_10_Row_006_Control_energy_base_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Project Diesel Use (L/year)"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_diesel_proj."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_018_Control_ghg_proj:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Energy Source Baseline *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=712'
+      - Screen_section_10_Row_006_Control_energy_base_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="ghg proj"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_019_Control_row_380:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=744'
+      - Screen_section_10_Row_006_Control_energy_base_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Project GHG= ${ghg_proj}"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_020_Control_ghg_saved_t:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_energy_base."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=792'
+      - Screen_section_10_Row_007_Control_other_energy_b_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="ghg saved t"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_021_Control_lifespan:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Other Energy Source Baseline *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=832'
+      - Screen_section_10_Row_007_Control_other_energy_b_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="Lifespan"'
-            Required: '=true'
-            HelperText: '=""'
-            ErrorText: '="Connect to validation state for Control_lifespan."'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_022_Control_ghg_lifetime:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=864'
+      - Screen_section_10_Row_007_Control_other_energy_b_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="ghg lifetime"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_023_Control_row_384:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_other_energy_base."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=912'
+      - Screen_section_10_Row_008_Control_energy_after_Label:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="Lifetime GHG = ${ghg_lifetime}"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_024_Control_mitigation_tag:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Energy Source After *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=952'
+      - Screen_section_10_Row_008_Control_energy_after_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            LabelText: '="mitigation tag"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Row_025_Control_result:
-          Control: CanvasComponent
-          ComponentName: FieldRow
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=984'
+      - Screen_section_10_Row_008_Control_energy_after_Help:
+          Control: Label@2.5.1
           Properties:
-            LabelText: '="GHG Avoided: ${ghg_saved_t} tCO2eq"'
-            Required: '=false'
-            HelperText: '=""'
-            ErrorText: '=""'
-            RowVisible: '=true'
-            DataPlaceholder: '="placeholder_tacatdp_submissions"'
-            ItemsPlaceholder: '=""'
-      - Screen_section_10_ValidationSummary:
-          Control: CanvasComponent
-          ComponentName: ValidationSummary
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_energy_after."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1032'
+      - Screen_section_10_Row_009_Control_other_energy_a_Label:
+          Control: Label@2.5.1
           Properties:
-            Items: '=colValidationSummary'
-            Visible: '=CountRows(colValidationSummary) > 0'
-      - Screen_section_10_CommandBar:
-          Control: CanvasComponent
-          ComponentName: CommandBar
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Other Energy Source After *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1072'
+      - Screen_section_10_Row_009_Control_other_energy_a_Input:
+          Control: Classic/TextInput@2.3.2
           Properties:
-            BackFormula: '="Navigate(Screen_section_9, ScreenTransition.Fade)"'
-            NextFormula: '="Navigate(Screen_water_efficiency, ScreenTransition.Fade)"'
-            SaveDraftFormula: '="// TODO: Patch placeholder collection for draft save"'
-            SubmitFormula: '="Clear(colValidationSummary); If(true && !(!IsBlank(Control_baseline_tech.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Baseline Technology"", Message: ""Baseline Technology is required."", Control: ""Control_baseline_tech""})); If(Formula.visibility_other_baseline_tech && !(!IsBlank(Control_other_baseline_tech.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Other Baseline Technology"", Message: ""Other Baseline Technology is required."", Control: ""Control_other_baseline_tech""})); If(true && !(!IsBlank(Control_new_tech.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""New Financed Technology"", Message: ""New Financed Technology is required."", Control: ""Control_new_tech""})); If(Formula.visibility_other_new_tech && !(!IsBlank(Control_other_new_tech.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Other New Financed Technology"", Message: ""Other New Financed Technology is required."", Control: ""Control_other_new_tech""})); If(true && !(!IsBlank(Control_energy_base.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Energy Source Baseline"", Message: ""Energy Source Baseline is required."", Control: ""Control_energy_base""})); If(Formula.visibility_other_energy_base && !(!IsBlank(Control_other_energy_base.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Other Energy Source Baseline"", Message: ""Other Energy Source Baseline is required."", Control: ""Control_other_energy_base""})); If(true && !(!IsBlank(Control_energy_after.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Energy Source After"", Message: ""Energy Source After is required."", Control: ""Control_energy_after""})); If(Formula.visibility_other_energy_after && !(!IsBlank(Control_other_energy_after.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Other Energy Source After"", Message: ""Other Energy Source After is required."", Control: ""Control_other_energy_after""})); If(Formula.visibility_base_hours && !(!IsBlank(Control_base_hours.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Baseline Hours/year"", Message: ""Baseline Hours/year is required."", Control: ""Control_base_hours""})); If(Formula.visibility_diesel_rate && !(!IsBlank(Control_diesel_rate.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Diesel Rate (L/hr)"", Message: ""Diesel Rate (L/hr) is required."", Control: ""Control_diesel_rate""})); If(true && !(!IsBlank(Control_diesel_proj.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Project Diesel Use (L/year)"", Message: ""Project Diesel Use (L/year) is required."", Control: ""Control_diesel_proj""})); If(true && !(!IsBlank(Control_lifespan.Text)), Collect(colValidationSummary, {Screen: ""Screen_section_10"", Field: ""Lifespan"", Message: ""Lifespan is required."", Control: ""Control_lifespan""}));"'
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1104'
+      - Screen_section_10_Row_009_Control_other_energy_a_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_other_energy_after."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1152'
+      - Screen_section_10_Row_010_Control_base_hours_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Baseline Hours/year *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1192'
+      - Screen_section_10_Row_010_Control_base_hours_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1224'
+      - Screen_section_10_Row_010_Control_base_hours_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_base_hours."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1272'
+      - Screen_section_10_Row_011_Control_diesel_rate_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Diesel Rate (L/hr) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1312'
+      - Screen_section_10_Row_011_Control_diesel_rate_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1344'
+      - Screen_section_10_Row_011_Control_diesel_rate_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_diesel_rate."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1392'
+      - Screen_section_10_Row_012_Control_diesel_base_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="diesel base"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1432'
+      - Screen_section_10_Row_012_Control_diesel_base_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1464'
+      - Screen_section_10_Row_012_Control_diesel_base_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1512'
+      - Screen_section_10_Row_013_Control_row_374_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Diesel/year= ${diesel_base}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1552'
+      - Screen_section_10_Row_013_Control_row_374_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1584'
+      - Screen_section_10_Row_013_Control_row_374_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1632'
+      - Screen_section_10_Row_014_Control_ef_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="ef"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1672'
+      - Screen_section_10_Row_014_Control_ef_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1704'
+      - Screen_section_10_Row_014_Control_ef_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1752'
+      - Screen_section_10_Row_015_Control_ghg_base_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="ghg base"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1792'
+      - Screen_section_10_Row_015_Control_ghg_base_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1824'
+      - Screen_section_10_Row_015_Control_ghg_base_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1872'
+      - Screen_section_10_Row_016_Control_row_377_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Baseline GHG= ${ghg_base}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1912'
+      - Screen_section_10_Row_016_Control_row_377_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1944'
+      - Screen_section_10_Row_016_Control_row_377_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1992'
+      - Screen_section_10_Row_017_Control_diesel_proj_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Project Diesel Use (L/year) *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2032'
+      - Screen_section_10_Row_017_Control_diesel_proj_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2064'
+      - Screen_section_10_Row_017_Control_diesel_proj_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_diesel_proj."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2112'
+      - Screen_section_10_Row_018_Control_ghg_proj_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="ghg proj"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2152'
+      - Screen_section_10_Row_018_Control_ghg_proj_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2184'
+      - Screen_section_10_Row_018_Control_ghg_proj_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2232'
+      - Screen_section_10_Row_019_Control_row_380_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Project GHG= ${ghg_proj}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2272'
+      - Screen_section_10_Row_019_Control_row_380_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2304'
+      - Screen_section_10_Row_019_Control_row_380_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2352'
+      - Screen_section_10_Row_020_Control_ghg_saved_t_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="ghg saved t"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2392'
+      - Screen_section_10_Row_020_Control_ghg_saved_t_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2424'
+      - Screen_section_10_Row_020_Control_ghg_saved_t_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2472'
+      - Screen_section_10_Row_021_Control_lifespan_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Lifespan *"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2512'
+      - Screen_section_10_Row_021_Control_lifespan_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2544'
+      - Screen_section_10_Row_021_Control_lifespan_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(168, 0, 0, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Connect to validation state for Control_lifespan."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2592'
+      - Screen_section_10_Row_022_Control_ghg_lifetime_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="ghg lifetime"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2632'
+      - Screen_section_10_Row_022_Control_ghg_lifetime_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2664'
+      - Screen_section_10_Row_022_Control_ghg_lifetime_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2712'
+      - Screen_section_10_Row_023_Control_row_384_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="Lifetime GHG = ${ghg_lifetime}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2752'
+      - Screen_section_10_Row_023_Control_row_384_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2784'
+      - Screen_section_10_Row_023_Control_row_384_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2832'
+      - Screen_section_10_Row_024_Control_mitigation_tag_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="mitigation tag"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2872'
+      - Screen_section_10_Row_024_Control_mitigation_tag_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2904'
+      - Screen_section_10_Row_024_Control_mitigation_tag_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2952'
+      - Screen_section_10_Row_025_Control_result_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="GHG Avoided: ${ghg_saved_t} tCO2eq"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2992'
+      - Screen_section_10_Row_025_Control_result_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3024'
+      - Screen_section_10_Row_025_Control_result_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3072'
+      - Screen_section_10_CommandHint:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 120, 212, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Semibold'
+            Height: '=32'
+            Size: '=12'
+            Text: '="Back | Save Draft | Next - wire navigation after Studio opens this source"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3120'
