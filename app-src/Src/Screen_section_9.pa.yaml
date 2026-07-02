@@ -3,107 +3,103 @@
 Screens:
   Screen_section_9:
     Properties:
-      LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+      LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
     Children:
       - Screen_section_9_Shell:
           Control: Component
           ComponentName: ScreenShell
           Properties:
-            TitleText: ="SECTION 9: INSURANCE & GUARANTEE LINKAGE"
-            ProgressText: ="Section 28"
-            ShowValidationSummary: =CountRows(colValidationSummary) > 0
+            TitleText: '="SECTION 9: INSURANCE & GUARANTEE LINKAGE"'
+            ProgressText: '="Section 28"'
+            ShowValidationSummary: '=CountRows(colValidationSummary) > 0'
       - Row_001_Control_row_353:
           Control: Component
           ComponentName: FieldRow
           Properties:
-            LabelText: ="SECTION 9: INSURANCE & GUARANTEE LINKAGE"
-            Required: =false
-            HelperText: =""
-            ErrorText: =""
-            RowVisible: =true
-            DataPlaceholder: ="placeholder_tacatdp_submissions"
-            ItemsPlaceholder: =""
+            LabelText: '="SECTION 9: INSURANCE & GUARANTEE LINKAGE"'
+            Required: '=false'
+            HelperText: '=""'
+            ErrorText: '=""'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
       - Row_002_Control_accessed_insurance:
           Control: Component
           ComponentName: FieldRow
           Properties:
-            LabelText: ="Accessed TACATDP Insurance"
-            Required: =true
-            HelperText: =""
-            ErrorText: ="Connect to validation state for Control_accessed_insurance."
-            RowVisible: =true
-            DataPlaceholder: ="placeholder_tacatdp_submissions"
-            ItemsPlaceholder: =""
+            LabelText: '="Accessed TACATDP Insurance"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_accessed_insurance."'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
       - Row_003_Control_insurance_year:
           Control: Component
           ComponentName: FieldRow
           Properties:
-            LabelText: ="Insurance Year"
-            Required: =true
-            HelperText: =""
-            ErrorText: ="Connect to validation state for Control_insurance_year."
-            RowVisible: =Formula.visibility_insurance_year
-            DataPlaceholder: ="placeholder_tacatdp_submissions"
-            ItemsPlaceholder: =""
+            LabelText: '="Insurance Year"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_insurance_year."'
+            RowVisible: '=Formula.visibility_insurance_year'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
       - Row_004_Control_insurance_type:
           Control: Component
           ComponentName: FieldRow
           Properties:
-            LabelText: ="Insurance Type"
-            Required: =true
-            HelperText: =""
-            ErrorText: ="Connect to validation state for Control_insurance_type."
-            RowVisible: =Formula.visibility_insurance_type
-            DataPlaceholder: ="placeholder_tacatdp_submissions"
-            ItemsPlaceholder: =""
+            LabelText: '="Insurance Type"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_insurance_type."'
+            RowVisible: '=Formula.visibility_insurance_type'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
       - Row_005_Control_qualified_guarantee:
           Control: Component
           ComponentName: FieldRow
           Properties:
-            LabelText: ="qualified guarantee"
-            Required: =false
-            HelperText: =""
-            ErrorText: =""
-            RowVisible: =true
-            DataPlaceholder: ="placeholder_tacatdp_submissions"
-            ItemsPlaceholder: =""
+            LabelText: '="qualified guarantee"'
+            Required: '=false'
+            HelperText: '=""'
+            ErrorText: '=""'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
       - Row_006_Control_guarantee_status:
           Control: Component
           ComponentName: FieldRow
           Properties:
-            LabelText: ="Qualified for Guarantee: ${qualified_guarantee}"
-            Required: =false
-            HelperText: =""
-            ErrorText: =""
-            RowVisible: =true
-            DataPlaceholder: ="placeholder_tacatdp_submissions"
-            ItemsPlaceholder: =""
+            LabelText: '="Qualified for Guarantee: ${qualified_guarantee}"'
+            Required: '=false'
+            HelperText: '=""'
+            ErrorText: '=""'
+            RowVisible: '=true'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
       - Row_007_Control_guarantee_coverage:
           Control: Component
           ComponentName: FieldRow
           Properties:
-            LabelText: ="Guarantee Coverage %"
-            Required: =true
-            HelperText: =""
-            ErrorText: ="Connect to validation state for Control_guarantee_coverage."
-            RowVisible: =Formula.visibility_guarantee_coverage
-            DataPlaceholder: ="placeholder_tacatdp_submissions"
-            ItemsPlaceholder: =""
+            LabelText: '="Guarantee Coverage %"'
+            Required: '=true'
+            HelperText: '=""'
+            ErrorText: '="Connect to validation state for Control_guarantee_coverage."'
+            RowVisible: '=Formula.visibility_guarantee_coverage'
+            DataPlaceholder: '="placeholder_tacatdp_submissions"'
+            ItemsPlaceholder: '=""'
       - Screen_section_9_ValidationSummary:
           Control: Component
           ComponentName: ValidationSummary
           Properties:
-            Items: =colValidationSummary
-            Visible: =CountRows(colValidationSummary) > 0
+            Items: '=colValidationSummary'
+            Visible: '=CountRows(colValidationSummary) > 0'
       - Screen_section_9_CommandBar:
           Control: Component
           ComponentName: CommandBar
           Properties:
-            BackFormula: ="Navigate(Screen_section_8, ScreenTransition.Fade)"
-            NextFormula: ="Navigate(Screen_section_10, ScreenTransition.Fade)"
-            SaveDraftFormula: ="// TODO: Patch placeholder collection for draft save"
-            SubmitFormula: ="Clear(colValidationSummary);
-If(true && !(!IsBlank(Control_accessed_insurance.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_9"", Field: ""Accessed TACATDP Insurance"", Message: ""Accessed TACATDP Insurance is required."", Control: ""Control_accessed_insurance""}));
-If(Formula.visibility_insurance_year && !(!IsBlank(Control_insurance_year.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_9"", Field: ""Insurance Year"", Message: ""Insurance Year is required."", Control: ""Control_insurance_year""}));
-If(Formula.visibility_insurance_type && !(!IsBlank(Control_insurance_type.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_9"", Field: ""Insurance Type"", Message: ""Insurance Type is required."", Control: ""Control_insurance_type""}));
-If(Formula.visibility_guarantee_coverage && !(!IsBlank(Control_guarantee_coverage.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_9"", Field: ""Guarantee Coverage %"", Message: ""Guarantee Coverage % is required."", Control: ""Control_guarantee_coverage""}));"
+            BackFormula: '="Navigate(Screen_section_8, ScreenTransition.Fade)"'
+            NextFormula: '="Navigate(Screen_section_10, ScreenTransition.Fade)"'
+            SaveDraftFormula: '="// TODO: Patch placeholder collection for draft save"'
+            SubmitFormula: '="Clear(colValidationSummary); If(true && !(!IsBlank(Control_accessed_insurance.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_9"", Field: ""Accessed TACATDP Insurance"", Message: ""Accessed TACATDP Insurance is required."", Control: ""Control_accessed_insurance""})); If(Formula.visibility_insurance_year && !(!IsBlank(Control_insurance_year.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_9"", Field: ""Insurance Year"", Message: ""Insurance Year is required."", Control: ""Control_insurance_year""})); If(Formula.visibility_insurance_type && !(!IsBlank(Control_insurance_type.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_9"", Field: ""Insurance Type"", Message: ""Insurance Type is required."", Control: ""Control_insurance_type""})); If(Formula.visibility_guarantee_coverage && !(!IsBlank(Control_guarantee_coverage.Selected)), Collect(colValidationSummary, {Screen: ""Screen_section_9"", Field: ""Guarantee Coverage %"", Message: ""Guarantee Coverage % is required."", Control: ""Control_guarantee_coverage""}));"'
