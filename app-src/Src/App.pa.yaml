@@ -8,5 +8,4 @@
 # ************************************************************************************************
 App:
   Properties:
-    OnStart: '=Clear(colValidationSummary); ClearCollect(placeholder_tacatdp_submissions, {SubmissionKey:"sample-submission", SubmissionStatus:"Draft"}); ClearCollect(placeholder_tacatdp_production_cost_repeat, {SubmissionKey:"sample-submission", Stage:"Sample stage", Amount:0}); ClearCollect(placeholder_zone, {Title:"Sample Zone"}); ClearCollect(placeholder_branch, {Title:"Sample Branch", Zone:"Sample Zone"}); ClearCollect(placeholder_region, {Title:"Sample Region"}); ClearCollect(placeholder_district, {Title:"Sample District", Region:"Sample Region"}); ClearCollect(placeholder_ward, {Title:"Sample Ward", District:"Sample District"}); ClearCollect(placeholder_village, {Title:"Sample Village", Ward:"Sample Ward"})'
-    Theme: '=PowerAppsTheme'
+    Theme: =PowerAppsTheme
