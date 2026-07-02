@@ -1,0 +1,240 @@
+ChoiceValue,LabelEn,LabelSw,ZoneValue,SortOrder
+1,1.1 Dodoma,1.1 Dodoma,1,1
+2,1.2 UDOM,1.2 UDOM,1,2
+3,1.3 Chamwino Dodoma,1.3 Chamwino Dodoma,1,3
+4,1.4 LAPF Dodoma,1.4 LAPF Dodoma,1,4
+5,1.5 Chamwino IKULU,1.5 Chamwino IKULU,1,5
+6,1.6 Kambarage Premier Center,1.6 Kambarage Premier Center,1,6
+7,1.7 Morogoro,1.7 Morogoro,1,7
+8,1.8 Mandela,1.8 Mandela,1,8
+9,1.9 Kilombero,1.9 Kilombero,1,9
+10,1.10 Ifakara,1.10 Ifakara,1,10
+11,1.11 Iringa,1.11 Iringa,1,11
+12,1.12 Mafinga,1.12 Mafinga,1,12
+13,1.13 Singida,1.13 Singida,1,13
+14,1.14 Mzumbe,1.14 Mzumbe,1,14
+15,1.15 Gairo,1.15 Gairo,1,15
+16,1.16 Mazimbu,1.16 Mazimbu,1,16
+17,1.17 Mkwawa,1.17 Mkwawa,1,17
+18,1.18 Chief Kingalu,1.18 Chief Kingalu,1,18
+19,1.19 Bunge,1.19 Bunge,1,19
+20,1.20 Mpwapwa,1.20 Mpwapwa,1,20
+21,1.21 SUA,1.21 SUA,1,21
+22,1.22 Turiani,1.22 Turiani,1,22
+23,1.23 Kilosa,1.23 Kilosa,1,23
+24,1.24 Majengo,1.24 Majengo,1,24
+25,1.25 Msamvu,1.25 Msamvu,1,25
+26,1.26 Kondoa,1.26 Kondoa,1,26
+27,1.27 Ulanga,1.27 Ulanga,1,27
+28,1.28 Ilula,1.28 Ilula,1,28
+29,1.29 Kibaigwa,1.29 Kibaigwa,1,29
+30,1.30 Manyoni,1.30 Manyoni,1,30
+31,1.31 Singida NHC,1.31 Singida NHC,1,31
+32,1.32 Mikumi,1.32 Mikumi,1,32
+33,2.1 Bagamoyo,2.1 Bagamoyo,2,33
+34,2.2 Kibaha,2.2 Kibaha,2,34
+35,2.3 Mkuranga,2.3 Mkuranga,2,35
+36,2.4 Mlandizi,2.4 Mlandizi,2,36
+37,2.5 Bunju,2.5 Bunju,2,37
+38,2.6 Buza,2.6 Buza,2,38
+39,2.7 Goba,2.7 Goba,2,39
+40,2.8 Msasani,2.8 Msasani,2,40
+41,2.9 Mwananyamala,2.9 Mwananyamala,2,41
+42,2.10 Mbezi Beach,2.10 Mbezi Beach,2,42
+43,2.11 Mbagala,2.11 Mbagala,2,43
+44,2.12 Mikocheni,2.12 Mikocheni,2,44
+45,2.13 Tegeta,2.13 Tegeta,2,45
+46,2.14 Kijitonyama,2.14 Kijitonyama,2,46
+47,2.15 Oysterbay,2.15 Oysterbay,2,47
+48,2.16 Temeke,2.16 Temeke,2,48
+49,2.17 Kisarawe,2.17 Kisarawe,2,49
+50,2.18 Mafia,2.18 Mafia,2,50
+51,2.19 Ikwiriri,2.19 Ikwiriri,2,51
+52,2.20 Zanzibar,2.20 Zanzibar,2,52
+53,2.21 Pemba,2.21 Pemba,2,53
+54,2.22 Mwenge,2.22 Mwenge,2,54
+55,2.23 Magomeni,2.23 Magomeni,2,55
+56,2.24 Mtoni Kijichi,2.24 Mtoni Kijichi,2,56
+57,2.25 JN Hydropower,2.25 JN Hydropower,2,57
+58,2.26 Kinondoni Municipal,2.26 Kinondoni Municipal,2,58
+59,2.27 Chalinze,2.27 Chalinze,2,59
+60,2.28 Wete,2.28 Wete,2,60
+61,2.29 Temeke Taifa,2.29 Temeke Taifa,2,61
+62,2.30 Tandika,2.30 Tandika,2,62
+63,2.31 Mbande,2.31 Mbande,2,63
+64,2.32 Kawe,2.32 Kawe,2,64
+65,2.33 Michenzani Mall,2.33 Michenzani Mall,2,65
+66,3.1 Kibada,3.1 Kibada,3,66
+67,3.2 Ardhi University,3.2 Ardhi University,3,67
+68,3.3 Azam ICD,3.3 Azam ICD,3,68
+69,3.4 Azikiwe,3.4 Azikiwe,3,69
+70,3.5 Banana,3.5 Banana,3,70
+71,3.6 Chanika,3.6 Chanika,3,71
+72,3.7 Tower,3.7 Tower,3,72
+73,3.8 Vijana,3.8 Vijana,3,73
+74,3.9 Lumumba,3.9 Lumumba,3,74
+75,3.10 Palm Beach Premier Branch,3.10 Palm Beach Premier Branch,3,75
+76,3.11 TPA/Waterfront),3.11 TPA/Waterfront),3,76
+77,3.12 Mlimani City,3.12 Mlimani City,3,77
+78,3.13 UDSM,3.13 UDSM,3,78
+79,3.14 Tabata,3.14 Tabata,3,79
+80,3.15 Pugu Road,3.15 Pugu Road,3,80
+81,3.16 TAZARA,3.16 TAZARA,3,81
+82,3.17 Ubungo,3.17 Ubungo,3,82
+83,3.18 Kariakoo Narung'ombe,3.18 Kariakoo Narung'ombe,3,83
+84,3.19 Holland House,3.19 Holland House,3,84
+85,3.20 Kimara,3.20 Kimara,3,85
+86,3.21 Kinyerezi,3.21 Kinyerezi,3,86
+87,3.22 Gongo la Mboto,3.22 Gongo la Mboto,3,87
+88,3.23 Kariakoo Uhuru,3.23 Kariakoo Uhuru,3,88
+89,3.24 Ilala Municipal,3.24 Ilala Municipal,3,89
+90,3.25 Mbezi Luis,3.25 Mbezi Luis,3,90
+91,3.26 TRA- Samora,3.26 TRA- Samora,3,91
+92,4.1 Ludewa,4.1 Ludewa,4,92
+93,4.2 Mbeya,4.2 Mbeya,4,93
+94,4.3 Kyela,4.3 Kyela,4,94
+95,4.4 Mbarali,4.4 Mbarali,4,95
+96,4.5 Mbozi,4.5 Mbozi,4,96
+97,4.6 Mwanjelwa,4.6 Mwanjelwa,4,97
+98,4.7 Tunduma,4.7 Tunduma,4,98
+99,4.8 Sumbawanga,4.8 Sumbawanga,4,99
+100,4.9 Mpanda,4.9 Mpanda,4,100
+101,4.10 Njombe,4.10 Njombe,4,101
+102,4.11 Makambako,4.11 Makambako,4,102
+103,4.12 Mbalizi,4.12 Mbalizi,4,103
+104,4.13 Mt Livingstone,4.13 Mt Livingstone,4,104
+105,4.14 Majimoto,4.14 Majimoto,4,105
+106,4.15 Uyole,4.15 Uyole,4,106
+107,4.16 Mlowo,4.16 Mlowo,4,107
+108,4.17 Chunya,4.17 Chunya,4,108
+109,4.18 Rungwe,4.18 Rungwe,4,109
+110,4.19 Nkasi,4.19 Nkasi,4,110
+111,4.20 Songwe,4.20 Songwe,4,111
+112,4.21 Mtwango,4.21 Mtwango,4,112
+113,4.22 Wanging'ombe,4.22 Wanging'ombe,4,113
+114,4.23 Ikonda,4.23 Ikonda,4,114
+115,4.24 TRA- Tunduma,4.24 TRA- Tunduma,4,115
+116,5.1 Bunda,5.1 Bunda,5,116
+117,5.2 Mwanza,5.2 Mwanza,5,117
+118,5.3 Nyerere,5.3 Nyerere,5,118
+119,5.4 Nyanza,5.4 Nyanza,5,119
+120,5.5 Sirari,5.5 Sirari,5,120
+121,5.6 Shirati,5.6 Shirati,5,121
+122,5.7 SAUT,5.7 SAUT,5,122
+123,5.8 Bukoba,5.8 Bukoba,5,123
+124,5.9 Mugango,5.9 Mugango,5,124
+125,5.10 Karagwe,5.10 Karagwe,5,125
+126,5.11 Muleba,5.11 Muleba,5,126
+127,5.12 Tarime,5.12 Tarime,5,127
+128,5.13 Musoma,5.13 Musoma,5,128
+129,5.14 Bariadi,5.14 Bariadi,5,129
+130,5.15 Buzuruga,5.15 Buzuruga,5,130
+131,5.16 Misungwi,5.16 Misungwi,5,131
+132,5.17 Rock City,5.17 Rock City,5,132
+133,5.18 Rorya,5.18 Rorya,5,133
+134,5.19 Nyamongo,5.19 Nyamongo,5,134
+135,5.20 Nansio,5.20 Nansio,5,135
+136,5.21 Ngara,5.21 Ngara,5,136
+137,5.22 Mwaloni,5.22 Mwaloni,5,137
+138,5.23 Bugando,5.23 Bugando,5,138
+139,5.24 Meatu,5.24 Meatu,5,139
+140,5.25 Magu,5.25 Magu,5,140
+141,5.26 Ilemela,5.26 Ilemela,5,141
+142,5.27 Mkuyuni,5.27 Mkuyuni,5,142
+143,5.28 Kwimba,5.28 Kwimba,5,143
+144,5.29 Buhongwa,5.29 Buhongwa,5,144
+145,5.30 Igoma,5.30 Igoma,5,145
+146,5.31 Kagera Sugar,5.31 Kagera Sugar,5,146
+147,5.32 Nshamba,5.32 Nshamba,5,147
+148,5.33 Serengeti,5.33 Serengeti,5,148
+149,5.34 Rwamishenye,5.34 Rwamishenye,5,149
+150,5.35 Biharamulo,5.35 Biharamulo,5,150
+151,5.36 Rulenge,5.36 Rulenge,5,151
+152,5.37 Kyerwa,5.37 Kyerwa,5,152
+153,5.38 Mwanza Refinery,5.38 Mwanza Refinery,5,153
+154,5.39 Mutukula,5.39 Mutukula,5,154
+155,5.40 Maswa,5.40 Maswa,5,155
+156,5.41 Sengerema,5.41 Sengerema,5,156
+157,6.1 Arusha,6.1 Arusha,6,157
+158,6.2 Kwa Mromboo,6.2 Kwa Mromboo,6,158
+159,6.3 Mapato,6.3 Mapato,6,159
+160,6.4 Meru,6.4 Meru,6,160
+161,6.5 Dongobesh,6.5 Dongobesh,6,161
+162,6.6 Monduli,6.6 Monduli,6,162
+163,6.7 Mto wa Mbu,6.7 Mto wa Mbu,6,163
+164,6.8 Ngaramtoni,6.8 Ngaramtoni,6,164
+165,6.9 Njiro,6.9 Njiro,6,165
+166,6.10 Sakina,6.10 Sakina,6,166
+167,6.11 Soko Kuu,6.11 Soko Kuu,6,167
+168,6.12 Tengeru,6.12 Tengeru,6,168
+169,6.13 Mererani Mineral Market,6.13 Mererani Mineral Market,6,169
+170,6.14 Lushoto,6.14 Lushoto,6,170
+171,6.15 Cultural Heritage,6.15 Cultural Heritage,6,171
+172,6.16 TFA,6.16 TFA,6,172
+173,6.17 Usa River,6.17 Usa River,6,173
+174,6.18 Moshi,6.18 Moshi,6,174
+175,6.19 Hai,6.19 Hai,6,175
+176,6.20 Marangu,6.20 Marangu,6,176
+177,6.21 Babati,6.21 Babati,6,177
+178,6.22 Tanga,6.22 Tanga,6,178
+179,6.23 Korogwe,6.23 Korogwe,6,179
+180,6.24 Handeni,6.24 Handeni,6,180
+181,6.25 Muheza,6.25 Muheza,6,181
+182,6.26 Mbuyuni,6.26 Mbuyuni,6,182
+183,6.27 Siha,6.27 Siha,6,183
+184,6.28 Hydom,6.28 Hydom,6,184
+185,6.29 Karatu,6.29 Karatu,6,185
+186,6.30 Mererani,6.30 Mererani,6,186
+187,6.31 Katesh,6.31 Katesh,6,187
+188,6.32 Tarakea,6.32 Tarakea,6,188
+189,6.33 Kiteto,6.33 Kiteto,6,189
+190,6.34 Mbulu,6.34 Mbulu,6,190
+191,6.35 Mwanga,6.35 Mwanga,6,191
+192,6.36 Rombo Mkuu,6.36 Rombo Mkuu,6,192
+193,6.37 Kilindi,6.37 Kilindi,6,193
+194,6.38 Same,6.38 Same,6,194
+195,6.39 Ngamiani,6.39 Ngamiani,6,195
+196,6.40 KCMC,6.40 KCMC,6,196
+197,6.41 TPC - MOSHI,6.41 TPC - MOSHI,6,197
+198,7.1 Mtwara,7.1 Mtwara,7,198
+199,7.2 Lindi,7.2 Lindi,7,199
+200,7.3 Masasi,7.3 Masasi,7,200
+201,7.4 Nanyamba,7.4 Nanyamba,7,201
+202,7.5 Newala,7.5 Newala,7,202
+203,7.6 Nanyumbu,7.6 Nanyumbu,7,203
+204,7.7 Mbinga,7.7 Mbinga,7,204
+205,7.8 Songea,7.8 Songea,7,205
+206,7.9 Ruangwa,7.9 Ruangwa,7,206
+207,7.10 Kilwa Kivinje,7.10 Kilwa Kivinje,7,207
+208,7.11 Liwale,7.11 Liwale,7,208
+209,7.12 Tandahimba,7.12 Tandahimba,7,209
+210,7.13 Nyasa,7.13 Nyasa,7,210
+211,7.14 Namtumbo,7.14 Namtumbo,7,211
+212,7.15 Tunduru,7.15 Tunduru,7,212
+213,7.16 Nachingwea,7.16 Nachingwea,7,213
+214,8.1 Tabora,8.1 Tabora,8,214
+215,8.2 Urambo,8.2 Urambo,8,215
+216,8.3 Kaliua,8.3 Kaliua,8,216
+217,8.4 Kigoma,8.4 Kigoma,8,217
+218,8.5 Kasulu,8.5 Kasulu,8,218
+219,8.6 Shinyanga,8.6 Shinyanga,8,219
+220,8.7 Kahama,8.7 Kahama,8,220
+221,8.8 Geita,8.8 Geita,8,221
+222,8.9 Chato,8.9 Chato,8,222
+223,8.10 Katoro,8.10 Katoro,8,223
+224,8.11 Maganzo,8.11 Maganzo,8,224
+225,8.12 Mbogwe,8.12 Mbogwe,8,225
+226,8.13 Nzega,8.13 Nzega,8,226
+227,8.14 Buhigwe,8.14 Buhigwe,8,227
+228,8.15 Kibondo,8.15 Kibondo,8,228
+229,8.16 Nyang'hwale,8.16 Nyang'hwale,8,229
+230,8.17 Runzewe,8.17 Runzewe,8,230
+231,8.18 Igunga,8.18 Igunga,8,231
+232,8.19 Kakola,8.19 Kakola,8,232
+233,8.20 Tinde,8.20 Tinde,8,233
+234,8.21 Bukombe,8.21 Bukombe,8,234
+235,8.22 Kahama Social,8.22 Kahama Social,8,235
+236,8.23 Nguruka,8.23 Nguruka,8,236
+237,8.24 Sikonge,8.24 Sikonge,8,237
+238,8.25 Kakonko,8.25 Kakonko,8,238
+239,"8.26 Geita Gold Market""","8.26 Geita Gold Market""",8,239

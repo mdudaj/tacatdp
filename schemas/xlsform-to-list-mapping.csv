@@ -1,0 +1,293 @@
+survey_row,xlsform_name,xlsform_type,base_type,label_en,choice_list,target_list,target_columns,required_in_app,required_in_sharepoint,relevance,constraint,choice_filter,storage_strategy
+9,Customer_ID,integer,integer,Customer ID,,TACATDP_Profile,Customer_ID,no,no,,,,scalar input field
+10,Customer_Name,text,text,Customer Name,,TACATDP_Profile,Customer_Name,no,no,,,,scalar input field
+11,Gender,select_one Gender,select_one,Gender,Gender,TACATDP_Profile,GenderValue;GenderLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+12,age,integer,integer,Farmer Age,,TACATDP_Profile,age,no,no,,,,scalar input field
+15,Education_Level,select_one Education_Level,select_one,Education Level,Education_Level,TACATDP_Profile,Education_LevelValue;Education_LevelLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+16,zone,select_one Zone,select_one,Zone,Zone,TACATDP_Profile,zoneValue;zoneLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+17,CRDB_Branch,select_one branch,select_one,CRDB Branch,branch,TACATDP_Profile,CRDB_BranchValue;CRDB_BranchLabel,yes,no,,,zone=${zone},select_one stored as text value/label from reference data for delegation and export fidelity
+18,region,select_one region,select_one,Region,region,TACATDP_Profile,regionValue;regionLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+19,district,select_one district,select_one,District,district,TACATDP_Profile,districtValue;districtLabel,yes,no,,,region=${region},select_one stored as text value/label from reference data for delegation and export fidelity
+20,ward,select_one ward,select_one,Ward,ward,TACATDP_Profile,wardValue;wardLabel,yes,no,,,region=${region} and district=${district},select_one stored as text value/label from reference data for delegation and export fidelity
+21,village,select_one village,select_one,Village,village,TACATDP_Profile,villageValue;villageLabel,yes,no,,,region=${region} and district=${district} and ward=${ward},select_one stored as text value/label from reference data for delegation and export fidelity
+22,Georeference,geopoint,geopoint,"***Enumerator: Measure this outside of the house, in front of the main door to the house. You can adjust the location by manually moving the pin on the map.",,TACATDP_Profile,GeoreferenceRaw;GeoreferenceLatitude;GeoreferenceLongitude;GeoreferenceAccuracy,no,no,,,,Geopoint split into raw/latitude/longitude/accuracy
+23,Farmer_Phone,text,text,Farmer Phone,,TACATDP_Profile,Farmer_Phone,yes,no,,"(regex(.,'0\d{9}') and string-length(.)=10) or .=-444 or .=-888",,scalar input field
+24,loan_amount_tzs,integer,integer,Loan Amount (TZS),,TACATDP_Profile,loan_amount_tzs,yes,no,,. >= 200000,,scalar input field
+27,own_farmland,select_one Yes_No,select_one,Farmer/House Hold Own Farmland?,Yes_No,TACATDP_Profile,own_farmlandValue;own_farmlandLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+28,land_size_acres,integer,integer,Land Size (Acres),,TACATDP_Profile,land_size_acres,yes,no,,,,scalar input field
+31,crop_name,select_multiple crop_name,select_multiple,Crop Name,crop_name,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,,,,select_multiple child rows
+32,crop_category,select_multiple crop_category,select_multiple,Crop Category,crop_category,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,,,,select_multiple child rows
+33,crop_adaptation,select_multiple crop_adaptation,select_multiple,Crop Adaptation and Resilience Rationale,crop_adaptation,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,,,"selected(${crop_name}, crop_name)",select_multiple child rows
+34,technology,select_multiple technology,select_multiple,TACATDP ARA Technology Diployed,technology,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,,,,select_multiple child rows
+35,climate_risk,select_multiple climate_risk,select_multiple,Available Key Climate Risks/hazards,climate_risk,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,,,"selected(${technology}, technology)",select_multiple child rows
+36,adaptation,select_multiple adaptation,select_multiple,Adaptation Rationale,adaptation,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,,,"selected(${technology}, technology)",select_multiple child rows
+37,additional,select_multiple additional,select_multiple,Additionality (Mitigation Co- benefit),additional,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,,,"selected(${technology}, technology)",select_multiple child rows
+38,SDGs,select_multiple SDGs,select_multiple,Applicable SDG Alignment,SDGs,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,,,"selected(${technology}, technology)",select_multiple child rows
+42,Uses_Irrigation,select_one Yes_No,select_one,Uses Irrigation?,Yes_No,TACATDP_ResourceEfficiency,Uses_IrrigationValue;Uses_IrrigationLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+43,Irrigation_Type,select_multiple Irrigation_Type,select_multiple,Irrigation Type,Irrigation_Type,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,${Uses_Irrigation}='1',,,select_multiple child rows
+44,other_Irrigation_Type,text,text,"Please specify the ""other"" Irrigation Type.",,TACATDP_ResourceEfficiency,other_Irrigation_Type,yes,no,"selected(${Irrigation_Type}, '96')",,,scalar input field
+45,Water_Source,select_multiple Water_Source,select_multiple,Water Source,Water_Source,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,,,,select_multiple child rows
+46,other_Water_Source,text,text,"Please specify the ""other"" Water_Source.",,TACATDP_ResourceEfficiency,other_Water_Source,yes,no,"selected(${Water_Source}, '96')",,,scalar input field
+47,Energy_Source,select_multiple Energy_Source,select_multiple,Current Energy Source Used in Production / Processing,Energy_Source,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,,,,select_multiple child rows
+48,other_Energy_Source,text,text,"Please specify the ""other"" Energy_Source.",,TACATDP_ResourceEfficiency,other_Energy_Source,yes,no,"selected(${Energy_Source}, '96')",,,scalar input field
+49,Adopted_Energy,select_multiple Adopted_Energy,select_multiple,Adopted Energy Source Diployed (After) ARA Adoption,Adopted_Energy,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,,,,select_multiple child rows
+50,other_Adopted_Energy,text,text,"Please specify the ""other"" Adopted_Energy.",,TACATDP_ResourceEfficiency,other_Adopted_Energy,yes,no,"selected(${Adopted_Energy}, '96')",,,scalar input field
+51,baseline_yield,integer,integer,Baseline Yield (kg/acre),,TACATDP_ResourceEfficiency,baseline_yield,yes,no,,. >= 0,,scalar input field
+52,yield_after,integer,integer,Yield After TACATDP ARA Diployment (kg/acre),,TACATDP_ResourceEfficiency,yield_after,yes,no,,. >= ${baseline_yield},,scalar input field
+57,farmer_group_member,select_one Yes_No,select_one,Is farmer a member of a Farmer Group?,Yes_No,TACATDP_SocialInclusion,farmer_group_memberValue;farmer_group_memberLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+58,farmer_group_type,select_one group_type,select_one,Farmer Group Type,group_type,TACATDP_SocialInclusion,farmer_group_typeValue;farmer_group_typeLabel,yes,no,${farmer_group_member}='1',,,select_one stored as text value/label from reference data for delegation and export fidelity
+59,male_members,integer,integer,Male Group Members,,TACATDP_SocialInclusion,male_members,yes,no,${farmer_group_member}='1',. >= 0,,scalar input field
+60,female_members,integer,integer,Female Group Members,,TACATDP_SocialInclusion,female_members,yes,no,${farmer_group_member}='1',. >= 0,,scalar input field
+62,youth_members,integer,integer,Youth (18-35) Group Members,,TACATDP_SocialInclusion,youth_members,yes,no,${farmer_group_member}='1',. >= 1 and . <= ${total_members},,scalar input field
+69,hh_male,integer,integer,Number of MALE household members,,TACATDP_SocialInclusion,hh_male,yes,no,,. >= 0,,scalar input field
+70,hh_female,integer,integer,Number of FEMALE household members,,TACATDP_SocialInclusion,hh_female,yes,no,,. >= 0,,scalar input field
+73,hh_head_gender,select_one Gender,select_one,Head of Household Gender,Gender,TACATDP_SocialInclusion,hh_head_genderValue;hh_head_genderLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+74,women_decision,select_one Yes_No,select_one,Are women direct decision-makers in ARA investment use?,Yes_No,TACATDP_SocialInclusion,women_decisionValue;women_decisionLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+78,ara_training,select_one Yes_No,select_one,Did individual or farmer group receive ARA training?,Yes_No,TACATDP_SocialInclusion,ara_trainingValue;ara_trainingLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+79,training_type,select_multiple training_type,select_multiple,Type of Training Received,training_type,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,${ara_training}='1',,,select_multiple child rows
+80,target_group,select_multiple target_group,select_multiple,Target Groups Covered,target_group,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,${ara_training}='1',count-selected(.) >= 1,,select_multiple child rows
+81,male_trained,integer,integer,Number of MALE farmers trained,,TACATDP_SocialInclusion,male_trained,yes,no,${ara_training}='1',. >= 0,,scalar input field
+82,female_trained,integer,integer,Number of FEMALE farmers trained,,TACATDP_SocialInclusion,female_trained,yes,no,${ara_training}='1',. >= 0,,scalar input field
+85,gender_content,select_one Yes_No,select_one,Was gender-responsive content included?,Yes_No,TACATDP_SocialInclusion,gender_contentValue;gender_contentLabel,yes,no,${ara_training}='1',,,select_one stored as text value/label from reference data for delegation and export fidelity
+86,gender_focus,select_one gender_focus,select_one,Brief gender focus description,gender_focus,TACATDP_SocialInclusion,gender_focusValue;gender_focusLabel,yes,no,${ara_training}='1',,,select_one stored as text value/label from reference data for delegation and export fidelity
+90,vc_stages,select_multiple vc_stages,select_multiple,What are Value Chain Stages activities involved in this project?,vc_stages,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,,,,select_multiple child rows
+92,farm_preparation_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,farm_preparation_dm,yes,no,,,,scalar input field
+93,farm_preparation_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,farm_preparation_df,yes,no,,,,scalar input field
+96,farm_preparation_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,farm_preparation_dy,yes,no,,,,scalar input field
+97,farm_preparation_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,farm_preparation_im,yes,no,,,,scalar input field
+98,farm_preparation_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,farm_preparation_if,yes,no,,,,scalar input field
+101,farm_preparation_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,farm_preparation_iy,yes,no,,,,scalar input field
+104,farm_operations_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,farm_operations_dm,yes,no,,,,scalar input field
+105,farm_operations_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,farm_operations_df,yes,no,,,,scalar input field
+108,farm_operations_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,farm_operations_dy,yes,no,,,,scalar input field
+109,farm_operations_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,farm_operations_im,yes,no,,,,scalar input field
+110,farm_operations_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,farm_operations_if,yes,no,,,,scalar input field
+113,farm_operations_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,farm_operations_iy,yes,no,,,,scalar input field
+116,input_supply_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,input_supply_dm,yes,no,,,,scalar input field
+117,input_supply_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,input_supply_df,yes,no,,,,scalar input field
+120,input_supply_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,input_supply_dy,yes,no,,,,scalar input field
+121,input_supply_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,input_supply_im,yes,no,,,,scalar input field
+122,input_supply_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,input_supply_if,yes,no,,,,scalar input field
+125,input_supply_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,input_supply_iy,yes,no,,,,scalar input field
+128,weeding_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,weeding_dm,yes,no,,,,scalar input field
+129,weeding_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,weeding_df,yes,no,,,,scalar input field
+132,weeding_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,weeding_dy,yes,no,,,,scalar input field
+133,weeding_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,weeding_im,yes,no,,,,scalar input field
+134,weeding_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,weeding_if,yes,no,,,,scalar input field
+137,weeding_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,weeding_iy,yes,no,,,,scalar input field
+140,pest_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,pest_dm,yes,no,,,,scalar input field
+141,pest_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,pest_df,yes,no,,,,scalar input field
+144,pest_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,pest_dy,yes,no,,,,scalar input field
+145,pest_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,pest_im,yes,no,,,,scalar input field
+146,pest_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,pest_if,yes,no,,,,scalar input field
+149,pest_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,pest_iy,yes,no,,,,scalar input field
+152,harvesting_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,harvesting_dm,yes,no,,,,scalar input field
+153,harvesting_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,harvesting_df,yes,no,,,,scalar input field
+156,harvesting_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,harvesting_dy,yes,no,,,,scalar input field
+157,harvesting_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,harvesting_im,yes,no,,,,scalar input field
+158,harvesting_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,harvesting_if,yes,no,,,,scalar input field
+161,harvesting_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,harvesting_iy,yes,no,,,,scalar input field
+164,postharvest_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,postharvest_dm,yes,no,,,,scalar input field
+165,postharvest_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,postharvest_df,yes,no,,,,scalar input field
+168,postharvest_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,postharvest_dy,yes,no,,,,scalar input field
+169,postharvest_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,postharvest_im,yes,no,,,,scalar input field
+170,postharvest_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,postharvest_if,yes,no,,,,scalar input field
+173,postharvest_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,postharvest_iy,yes,no,,,,scalar input field
+176,storage_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,storage_dm,yes,no,,,,scalar input field
+177,storage_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,storage_df,yes,no,,,,scalar input field
+180,storage_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,storage_dy,yes,no,,,,scalar input field
+181,storage_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,storage_im,yes,no,,,,scalar input field
+182,storage_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,storage_if,yes,no,,,,scalar input field
+185,storage_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,storage_iy,yes,no,,,,scalar input field
+188,transport_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,transport_dm,yes,no,,,,scalar input field
+189,transport_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,transport_df,yes,no,,,,scalar input field
+192,transport_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,transport_dy,yes,no,,,,scalar input field
+193,transport_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,transport_im,yes,no,,,,scalar input field
+194,transport_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,transport_if,yes,no,,,,scalar input field
+197,transport_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,transport_iy,yes,no,,,,scalar input field
+200,processing_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,processing_dm,yes,no,,,,scalar input field
+201,processing_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,processing_df,yes,no,,,,scalar input field
+204,processing_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,processing_dy,yes,no,,,,scalar input field
+205,processing_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,processing_im,yes,no,,,,scalar input field
+206,processing_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,processing_if,yes,no,,,,scalar input field
+209,processing_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,processing_iy,yes,no,,,,scalar input field
+212,aquaculture_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,aquaculture_dm,yes,no,,,,scalar input field
+213,aquaculture_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,aquaculture_df,yes,no,,,,scalar input field
+216,aquaculture_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,aquaculture_dy,yes,no,,,,scalar input field
+217,aquaculture_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,aquaculture_im,yes,no,,,,scalar input field
+218,aquaculture_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,aquaculture_if,yes,no,,,,scalar input field
+221,aquaculture_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,aquaculture_iy,yes,no,,,,scalar input field
+224,landing_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,landing_dm,yes,no,,,,scalar input field
+225,landing_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,landing_df,yes,no,,,,scalar input field
+228,landing_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,landing_dy,yes,no,,,,scalar input field
+229,landing_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,landing_im,yes,no,,,,scalar input field
+230,landing_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,landing_if,yes,no,,,,scalar input field
+233,landing_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,landing_iy,yes,no,,,,scalar input field
+236,aquaponics_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,aquaponics_dm,yes,no,,,,scalar input field
+237,aquaponics_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,aquaponics_df,yes,no,,,,scalar input field
+240,aquaponics_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,aquaponics_dy,yes,no,,,,scalar input field
+241,aquaponics_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,aquaponics_im,yes,no,,,,scalar input field
+242,aquaponics_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,aquaponics_if,yes,no,,,,scalar input field
+245,aquaponics_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,aquaponics_iy,yes,no,,,,scalar input field
+248,marketing_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,marketing_dm,yes,no,,,,scalar input field
+249,marketing_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,marketing_df,yes,no,,,,scalar input field
+252,marketing_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,marketing_dy,yes,no,,,,scalar input field
+253,marketing_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,marketing_im,yes,no,,,,scalar input field
+254,marketing_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,marketing_if,yes,no,,,,scalar input field
+257,marketing_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,marketing_iy,yes,no,,,,scalar input field
+260,consumption_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,consumption_dm,yes,no,,,,scalar input field
+261,consumption_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,consumption_df,yes,no,,,,scalar input field
+264,consumption_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,consumption_dy,yes,no,,,,scalar input field
+265,consumption_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,consumption_im,yes,no,,,,scalar input field
+266,consumption_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,consumption_if,yes,no,,,,scalar input field
+269,consumption_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,consumption_iy,yes,no,,,,scalar input field
+272,training_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,training_dm,yes,no,,,,scalar input field
+273,training_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,training_df,yes,no,,,,scalar input field
+276,training_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,training_dy,yes,no,,,,scalar input field
+277,training_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,training_im,yes,no,,,,scalar input field
+278,training_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,training_if,yes,no,,,,scalar input field
+281,training_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,training_iy,yes,no,,,,scalar input field
+284,aracsa_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,aracsa_dm,yes,no,,,,scalar input field
+285,aracsa_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,aracsa_df,yes,no,,,,scalar input field
+288,aracsa_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,aracsa_dy,yes,no,,,,scalar input field
+289,aracsa_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,aracsa_im,yes,no,,,,scalar input field
+290,aracsa_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,aracsa_if,yes,no,,,,scalar input field
+293,aracsa_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,aracsa_iy,yes,no,,,,scalar input field
+296,other_dm,integer,integer,Direct Male Beneficiaries,,TACATDP_Beneficiaries,other_dm,yes,no,,,,scalar input field
+297,other_df,integer,integer,Direct Female Beneficiaries,,TACATDP_Beneficiaries,other_df,yes,no,,,,scalar input field
+300,other_dy,integer,integer,Direct Youth (18-35),,TACATDP_Beneficiaries,other_dy,yes,no,,,,scalar input field
+301,other_im,integer,integer,Indirect Male Beneficiaries,,TACATDP_Beneficiaries,other_im,yes,no,,,,scalar input field
+302,other_if,integer,integer,Indirect Female Beneficiaries,,TACATDP_Beneficiaries,other_if,yes,no,,,,scalar input field
+305,other_iy,integer,integer,Indirect Youth (18-35),,TACATDP_Beneficiaries,other_iy,yes,no,,,,scalar input field
+336,exclusion_screen_passed,select_one Yes_No,select_one,Exclusion Screen Passed?,Yes_No,TACATDP_SafeguardsClimate,exclusion_screen_passedValue;exclusion_screen_passedLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+337,es_risk_category,select_one risk_category,select_one,E&S Risk Category,risk_category,TACATDP_SafeguardsClimate,es_risk_categoryValue;es_risk_categoryLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+338,disclosure_published,select_one Yes_No,select_one,Disclosure Published?,Yes_No,TACATDP_SafeguardsClimate,disclosure_publishedValue;disclosure_publishedLabel,yes,no,${es_risk_category}=‘B’,,,select_one stored as text value/label from reference data for delegation and export fidelity
+339,disclosure_date,date,date,Disclosure Date,,TACATDP_SafeguardsClimate,disclosure_date,yes,no,${disclosure_published}=‘1’,,,scalar input field
+340,grm_complaint,select_one Yes_No,select_one,GRM Complaint?,Yes_No,TACATDP_SafeguardsClimate,grm_complaintValue;grm_complaintLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+341,ess_grievance,select_one Yes_No,select_one,Is there an ESS related grievance/complaint related to project/farm?,Yes_No,TACATDP_SafeguardsClimate,ess_grievanceValue;ess_grievanceLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+342,grievance_name,text,text,Briefly name the Complaint/Grievance,,TACATDP_SafeguardsClimate,grievance_name,yes,no,${ess_grievance}=‘1’,,,scalar input field
+343,grievance_stage,select_one grievance_stage,select_one,What stage of GRM for above Compliant/Grivance?,grievance_stage,TACATDP_SafeguardsClimate,grievance_stageValue;grievance_stageLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+344,grievance_name_other,text,text,Other stage of GRM for above Compliant/Grivance?,,TACATDP_SafeguardsClimate,grievance_name_other,yes,no,${grievance_stage}=‘96’,,,scalar input field
+345,Climate_hazards,select_multiple Climate_hazards,select_multiple,Climate hazards  affected  farm/business in the past 3–5 years,Climate_hazards,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,,,,select_multiple child rows
+346,other_Climate_hazards,text,text,"Please specify the ""other"" Climate_hazards.",,TACATDP_SafeguardsClimate,other_Climate_hazards,yes,no,"selected(${Climate_hazards}, '96')",,,scalar input field
+347,frequently,select_one frequently,select_one,How frequently do these climate events occur,frequently,TACATDP_SafeguardsClimate,frequentlyValue;frequentlyLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+348,collateral,select_multiple collateral,select_multiple,Assets used as collateral for your farming/business loan?,collateral,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,,,,select_multiple child rows
+349,other_collateral,text,text,"Please specify the ""other""",,TACATDP_SafeguardsClimate,other_collateral,yes,no,"selected(${collateral}, '96')",,,scalar input field
+350,exposure_level,select_one exposure_level,select_one,How exposed is your collateral to climate risks?,exposure_level,TACATDP_SafeguardsClimate,exposure_levelValue;exposure_levelLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+354,accessed_insurance,select_one Yes_No,select_one,Accessed TACATDP Insurance,Yes_No,TACATDP_InsuranceGuarantee,accessed_insuranceValue;accessed_insuranceLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+355,insurance_year,select_one insurance_year,select_one,Insurance Year,insurance_year,TACATDP_InsuranceGuarantee,insurance_yearValue;insurance_yearLabel,yes,no,${accessed_insurance}='1',,,select_one stored as text value/label from reference data for delegation and export fidelity
+356,insurance_type,select_one insurance_type,select_one,Insurance Type,insurance_type,TACATDP_InsuranceGuarantee,insurance_typeValue;insurance_typeLabel,yes,no,${accessed_insurance}='1',,,select_one stored as text value/label from reference data for delegation and export fidelity
+359,guarantee_coverage,select_one guarantee_coverage,select_one,Guarantee Coverage %,guarantee_coverage,TACATDP_InsuranceGuarantee,guarantee_coverageValue;guarantee_coverageLabel,yes,no,${qualified_guarantee}='1',,,select_one stored as text value/label from reference data for delegation and export fidelity
+363,baseline_tech,select_one baseline_tech_list,select_one,Baseline Technology,baseline_tech_list,TACATDP_GHGWaterYield,baseline_techValue;baseline_techLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+364,other_baseline_tech,text,text,Other Baseline Technology,,TACATDP_GHGWaterYield,other_baseline_tech,yes,no,${baseline_tech}='96',,,scalar input field
+365,new_tech,select_one new_tech_list,select_one,New Financed Technology,new_tech_list,TACATDP_GHGWaterYield,new_techValue;new_techLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+366,other_new_tech,text,text,Other New Financed Technology,,TACATDP_GHGWaterYield,other_new_tech,yes,no,${new_tech}='96',,,scalar input field
+367,energy_base,select_one energy_base_list,select_one,Energy Source Baseline,energy_base_list,TACATDP_GHGWaterYield,energy_baseValue;energy_baseLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+368,other_energy_base,text,text,Other Energy Source Baseline,,TACATDP_GHGWaterYield,other_energy_base,yes,no,${energy_base}='96',,,scalar input field
+369,energy_after,select_one energy_after_list,select_one,Energy Source After,energy_after_list,TACATDP_GHGWaterYield,energy_afterValue;energy_afterLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+370,other_energy_after,text,text,Other Energy Source After,,TACATDP_GHGWaterYield,other_energy_after,yes,no,${energy_after}='96',,,scalar input field
+371,base_hours,decimal,decimal,Baseline Hours/year,,TACATDP_GHGWaterYield,base_hours,yes,no,${energy_base}='1',,,scalar input field
+372,diesel_rate,decimal,decimal,Diesel Rate (L/hr),,TACATDP_GHGWaterYield,diesel_rate,yes,no,${energy_base}='1',,,scalar input field
+378,diesel_proj,decimal,decimal,Project Diesel Use (L/year),,TACATDP_GHGWaterYield,diesel_proj,yes,no,,,,scalar input field
+382,lifespan,integer,integer,Lifespan,,TACATDP_GHGWaterYield,lifespan,yes,no,,,,scalar input field
+390,crop,select_one crop_name,select_one,Crop Type,crop_name,TACATDP_GHGWaterYield,cropValue;cropLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+391,area,decimal,decimal,Irrigated Area (Ha),,TACATDP_GHGWaterYield,area,yes,no,,,,scalar input field
+392,water_tech,select_one water_tech_list,select_one,Newly Adopted Sustainable Irrigation Technology,water_tech_list,TACATDP_GHGWaterYield,water_techValue;water_techLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+393,other_water_tech,text,text,Other Newly Adopted Sustainable Irrigation Technology,,TACATDP_GHGWaterYield,other_water_tech,yes,no,${water_tech}='96',,,scalar input field
+394,irr_base,select_one irr_base_list,select_one,Baseline Unsustainable Irrigation Practice to Be Replaced,irr_base_list,TACATDP_GHGWaterYield,irr_baseValue;irr_baseLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+395,other_irr_base,text,text,Other Baseline Unsustainable Irrigation Practice to Be Replaced,,TACATDP_GHGWaterYield,other_irr_base,yes,no,${irr_base}='96',,,scalar input field
+396,water_base,decimal,decimal,Water Baseline (m³/year),,TACATDP_GHGWaterYield,water_base,yes,no,,,,scalar input field
+397,water_after,decimal,decimal,Water After (m³/year),,TACATDP_GHGWaterYield,water_after,yes,no,,,,scalar input field
+404,yield_base,decimal,decimal,Baseline Yield (kg),,TACATDP_GHGWaterYield,yield_base,yes,no,,.>=0,,scalar input field
+405,price_base,decimal,decimal,Price Before (TZS/kg),,TACATDP_GHGWaterYield,price_base,yes,no,,.>=0,,scalar input field
+408,yield_after1,decimal,decimal,Yield After Intervention (kg),,TACATDP_GHGWaterYield,yield_after1,yes,no,,.>=0,,scalar input field
+409,price_after1,decimal,decimal,Price After (TZS/kg),,TACATDP_GHGWaterYield,price_after1,yes,no,,.>=0,,scalar input field
+417,quantify_cost,select_one Yes_No,select_one,Would you like to quantify production cost and income?,Yes_No,TACATDP_GHGWaterYield,quantify_costValue;quantify_costLabel,yes,no,,,,select_one stored as text value/label from reference data for delegation and export fidelity
+420,reporting_period,select_one reporting_period,select_one,Reporting period,reporting_period,TACATDP_ProductionIncome,reporting_periodValue;reporting_periodLabel,yes,no,${quantify_cost}='1',,,select_one stored as text value/label from reference data for delegation and export fidelity
+421,farm_size,decimal,decimal,Cultivated area (Acres),,TACATDP_ProductionIncome,farm_size,yes,no,${quantify_cost}='1',,,scalar input field
+422,production_before,decimal,decimal,Production before TACATDP (kg),,TACATDP_ProductionIncome,production_before,yes,no,${quantify_cost}='1',,,scalar input field
+423,production_after,decimal,decimal,Production after TACATDP (kg),,TACATDP_ProductionIncome,production_after,yes,no,${quantify_cost}='1',,,scalar input field
+428,vc_stages1,select_multiple vc_stages,select_multiple,Select all value chain stages with production costs,vc_stages,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,${quantify_cost}='1',,,select_multiple child rows
+430,vc1_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+431,vc1_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+432,vc1_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+433,vc1_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+437,vc2_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+438,vc2_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+439,vc2_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+440,vc2_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+444,vc3_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+445,vc3_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+446,vc3_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+447,vc3_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+451,vc4_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+452,vc4_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+453,vc4_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+454,vc4_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+458,vc5_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+459,vc5_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+460,vc5_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+461,vc5_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+465,vc6_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+466,vc6_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+467,vc6_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+468,vc6_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+472,vc7_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+473,vc7_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+474,vc7_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+475,vc7_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+479,vc8_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+480,vc8_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+481,vc8_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+482,vc8_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+486,vc9_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+487,vc9_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+488,vc9_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+489,vc9_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+493,vc10_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+494,vc10_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+495,vc10_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+496,vc10_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+500,vc11_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+501,vc11_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+502,vc11_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+503,vc11_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+507,vc12_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+508,vc12_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+509,vc12_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+510,vc12_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+514,vc13_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+515,vc13_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+516,vc13_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+517,vc13_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+521,vc14_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+522,vc14_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+523,vc14_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+524,vc14_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+528,vc15_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+529,vc15_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+530,vc15_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+531,vc15_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+535,vc16_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+536,vc16_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+537,vc16_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+538,vc16_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+542,vc17_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+543,vc17_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+544,vc17_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+545,vc17_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+549,vc18_cost_item,select_one cost_item,select_one,Production cost item,cost_item,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+550,vc18_unit,select_one unit_measure,select_one,Unit of measure,unit_measure,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+551,vc18_quantity,decimal,decimal,Quantity,,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+552,vc18_unit_cost,decimal,decimal,Unit cost (TZS),,TACATDP_ProductionCostLines,StageCode;CostItemValue;UnitValue;Quantity;UnitCostTZS,yes,no,,,,normalized production cost line
+556,qty_sold,decimal,decimal,Quantity sold,,TACATDP_ProductionIncome,qty_sold,yes,no,${quantify_cost}='1',,,scalar input field
+557,selling_price,decimal,decimal,Selling price (TZS per unit),,TACATDP_ProductionIncome,selling_price,yes,no,${quantify_cost}='1',,,scalar input field
+559,household_consumption,decimal,decimal,Quantity consumed at home,,TACATDP_ProductionIncome,household_consumption,yes,no,${quantify_cost}='1',,,scalar input field
+560,baseline_loss,decimal,decimal,Post-harvest loss before TACATDP,,TACATDP_ProductionIncome,baseline_loss,yes,no,${quantify_cost}='1',,,scalar input field
+561,current_loss,decimal,decimal,Post-harvest loss after TACATDP,,TACATDP_ProductionIncome,current_loss,yes,no,${quantify_cost}='1',,,scalar input field
+567,interventions,select_multiple intervention,select_multiple,TACATDP intervention(s) received,intervention,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,${quantify_cost}='1',,,select_multiple child rows
+568,intervention_other,text,text,Specify other intervention,,TACATDP_ProductionIncome,intervention_other,yes,no,"selected(${interventions}, '96')",,,scalar input field
+569,adaptation_result,select_multiple adaptation_result,select_multiple,Expected impact,adaptation_result,TACATDP_MultiSelectAnswers,QuestionName;ChoiceValue,yes,no,${quantify_cost}='1',,,select_multiple child rows
+570,adaptation_result_other,text,text,Specify other intervention,,TACATDP_ProductionIncome,adaptation_result_other,yes,no,"selected(${adaptation_result}, '96')",,,scalar input field
+571,verification,select_one verification,select_one,Source of verification,verification,TACATDP_ProductionIncome,verificationValue;verificationLabel,yes,no,${quantify_cost}='1',,,select_one stored as text value/label from reference data for delegation and export fidelity
+572,verification_other,text,text,Specify other source of verification,,TACATDP_ProductionIncome,verification_other,yes,no,${verification}='96',,,scalar input field

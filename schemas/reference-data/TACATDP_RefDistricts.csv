@@ -1,0 +1,185 @@
+ChoiceValue,LabelEn,LabelSw,RegionValue,SortOrder
+1,Jiji la Arusha,Jiji la Arusha,1,1
+2,Arusha,Arusha,1,2
+3,Karatu,Karatu,1,3
+4,Longido,Longido,1,4
+5,Meru,Meru,1,5
+6,Monduli,Monduli,1,6
+7,Ngorongoro,Ngorongoro,1,7
+8,Manispaa ya Ilala,Manispaa ya Ilala,2,8
+9,Manispaa ya Kigamboni,Manispaa ya Kigamboni,2,9
+10,Manispaa ya Kinondoni,Manispaa ya Kinondoni,2,10
+11,Manispaa ya Temeke,Manispaa ya Temeke,2,11
+12,Manispaa ya Ubungo,Manispaa ya Ubungo,2,12
+13,Jiji la Dodoma,Jiji la Dodoma,3,13
+14,Mji wa Kondoa,Mji wa Kondoa,3,14
+15,Bahi,Bahi,3,15
+16,Chamwino,Chamwino,3,16
+17,Chemba,Chemba,3,17
+18,Kongwa,Kongwa,3,18
+19,Kondoa,Kondoa,3,19
+20,Mpwapwa,Mpwapwa,3,20
+21,Mji wa Geita,Mji wa Geita,4,21
+22,Bukombe,Bukombe,4,22
+23,Chato,Chato,4,23
+24,Geita,Geita,4,24
+25,Mbogwe,Mbogwe,4,25
+26,Nyang'hwale,Nyang'hwale,4,26
+27,Manispaa ya Iringa,Manispaa ya Iringa,5,27
+28,Mji wa Mafinga,Mji wa Mafinga,5,28
+29,Kilolo,Kilolo,5,29
+30,Iringa,Iringa,5,30
+31,Mufindi,Mufindi,5,31
+32,Manispaa ya Bukoba,Manispaa ya Bukoba,6,32
+33,Biharamulo,Biharamulo,6,33
+34,Bukoba,Bukoba,6,34
+35,Karagwe,Karagwe,6,35
+36,Kyerwa,Kyerwa,6,36
+37,Missenyi,Missenyi,6,37
+38,Muleba,Muleba,6,38
+39,Ngara,Ngara,6,39
+40,Manispaa ya Mpanda,Manispaa ya Mpanda,7,40
+41,Mpanda,Mpanda,7,41
+42,Nsimbo,Nsimbo,7,42
+43,Mlele,Mlele,7,43
+44,Mpimbwe,Mpimbwe,7,44
+45,Mji wa Kasulu,Mji wa Kasulu,8,45
+46,Manispaa ya Kigoma,Manispaa ya Kigoma,8,46
+47,Buhigwe,Buhigwe,8,47
+48,Kakonko,Kakonko,8,48
+49,Kasulu,Kasulu,8,49
+50,Kibondo,Kibondo,8,50
+51,Kigoma,Kigoma,8,51
+52,Uvinza,Uvinza,8,52
+53,Manispaa ya Moshi,Manispaa ya Moshi,9,53
+54,Hai,Hai,9,54
+55,Siha,Siha,9,55
+56,Moshi,Moshi,9,56
+57,Mwanga,Mwanga,9,57
+58,Rombo,Rombo,9,58
+59,Same,Same,9,59
+60,Manispaa ya Lindi,Manispaa ya Lindi,10,60
+61,Mtama,Mtama,10,61
+62,Kilwa,Kilwa,10,62
+63,Ruangwa,Ruangwa,10,63
+64,Liwale,Liwale,10,64
+65,Nachingwea,Nachingwea,10,65
+66,Mji wa Babati,Mji wa Babati,11,66
+67,Mji wa Mbulu,Mji wa Mbulu,11,67
+68,Babati,Babati,11,68
+69,Kiteto,Kiteto,11,69
+70,Hanang,Hanang,11,70
+71,Mbulu,Mbulu,11,71
+72,Simanjiro,Simanjiro,11,72
+73,Mji wa  Bunda,Mji wa  Bunda,12,73
+74,Manispaa ya Musoma,Manispaa ya Musoma,12,74
+75,Mji wa Tarime,Mji wa Tarime,12,75
+76,Bunda,Bunda,12,76
+77,Butiama,Butiama,12,77
+78,Musoma,Musoma,12,78
+79,Serengeti,Serengeti,12,79
+80,Rorya,Rorya,12,80
+81,Tarime,Tarime,12,81
+82,Jiji la Mbeya,Jiji la Mbeya,13,82
+83,Busokelo,Busokelo,13,83
+84,Chunya,Chunya,13,84
+85,Kyela,Kyela,13,85
+86,Mbarali,Mbarali,13,86
+87,Mbeya,Mbeya,13,87
+88,Rungwe,Rungwe,13,88
+89,Manispaa ya Morogoro,Manispaa ya Morogoro,14,89
+90,Mji wa Ifakara,Mji wa Ifakara,14,90
+91,Gairo,Gairo,14,91
+92,Mlimba,Mlimba,14,92
+93,Kilosa,Kilosa,14,93
+94,Malinyi,Malinyi,14,94
+95,Morogoro,Morogoro,14,95
+96,Mvomero,Mvomero,14,96
+97,Ulanga,Ulanga,14,97
+98,Mji wa Masasi,Mji wa Masasi,15,98
+99,Manispaa ya Mtwara Mikindani,Manispaa ya Mtwara Mikindani,15,99
+100,Mji wa Nanyamba,Mji wa Nanyamba,15,100
+101,Mji wa Newala,Mji wa Newala,15,101
+102,Masasi,Masasi,15,102
+103,Mtwara,Mtwara,15,103
+104,Nanyumbu,Nanyumbu,15,104
+105,Newala,Newala,15,105
+106,Tandahimba,Tandahimba,15,106
+107,Manispaa ya Ilemela,Manispaa ya Ilemela,16,107
+108,Jiji la Mwanza,Jiji la Mwanza,16,108
+109,Buchosa,Buchosa,16,109
+110,Kwimba,Kwimba,16,110
+111,Magu,Magu,16,111
+112,Misungwi,Misungwi,16,112
+113,Sengerema,Sengerema,16,113
+114,Ukerewe,Ukerewe,16,114
+115,Mji wa Makambako,Mji wa Makambako,17,115
+116,Mji wa Njombe,Mji wa Njombe,17,116
+117,Ludewa,Ludewa,17,117
+118,Njombe,Njombe,17,118
+119,Makete,Makete,17,119
+120,Wanging'ombe,Wanging'ombe,17,120
+121,Mji wa Kibaha,Mji wa Kibaha,18,121
+122,Bagamoyo,Bagamoyo,18,122
+123,Chalinze,Chalinze,18,123
+124,Kibaha,Kibaha,18,124
+125,Kibiti,Kibiti,18,125
+126,Kisarawe,Kisarawe,18,126
+127,Mafia,Mafia,18,127
+128,Mkuranga,Mkuranga,18,128
+129,Rufiji,Rufiji,18,129
+130,Manispaa ya Sumbawanga,Manispaa ya Sumbawanga,19,130
+131,Kalambo,Kalambo,19,131
+132,Sumbawanga,Sumbawanga,19,132
+133,Nkasi,Nkasi,19,133
+134,Manispaa ya Songea,Manispaa ya Songea,20,134
+135,Mji wa Mbinga,Mji wa Mbinga,20,135
+136,Madaba,Madaba,20,136
+137,Mbinga,Mbinga,20,137
+138,Namtumbo,Namtumbo,20,138
+139,Nyasa,Nyasa,20,139
+140,Songea,Songea,20,140
+141,Tunduru,Tunduru,20,141
+142,Manispaa ya Shinyanga,Manispaa ya Shinyanga,21,142
+143,Mji wa Kahama,Mji wa Kahama,21,143
+144,Kishapu,Kishapu,21,144
+145,Msalala,Msalala,21,145
+146,Shinyanga,Shinyanga,21,146
+147,Ushetu,Ushetu,21,147
+148,Mji wa Bariadi,Mji wa Bariadi,22,148
+149,Bariadi,Bariadi,22,149
+150,Busega,Busega,22,150
+151,Itilima,Itilima,22,151
+152,Maswa,Maswa,22,152
+153,Meatu,Meatu,22,153
+154,Manispaa ya Singida,Manispaa ya Singida,23,154
+155,Ikungi,Ikungi,23,155
+156,Iramba,Iramba,23,156
+157,Itigi,Itigi,23,157
+158,Manyoni,Manyoni,23,158
+159,Mkalama,Mkalama,23,159
+160,Singida,Singida,23,160
+161,Mji wa Tunduma,Mji wa Tunduma,24,161
+162,Ileje,Ileje,24,162
+163,Mbozi,Mbozi,24,163
+164,Momba,Momba,24,164
+165,Songwe,Songwe,24,165
+166,Manispaa ya Tabora,Manispaa ya Tabora,25,166
+167,Mji wa Nzega,Mji wa Nzega,25,167
+168,Igunga,Igunga,25,168
+169,Kaliua,Kaliua,25,169
+170,Nzega,Nzega,25,170
+171,Sikonge,Sikonge,25,171
+172,Uyui,Uyui,25,172
+173,Urambo,Urambo,25,173
+174,Mji wa Handeni,Mji wa Handeni,26,174
+175,Mji wa Korogwe,Mji wa Korogwe,26,175
+176,Jiji la Tanga,Jiji la Tanga,26,176
+177,Bumbuli,Bumbuli,26,177
+178,Handeni,Handeni,26,178
+179,Kilindi,Kilindi,26,179
+180,Korogwe,Korogwe,26,180
+181,Lushoto,Lushoto,26,181
+182,Mkinga,Mkinga,26,182
+183,Muheza,Muheza,26,183
+184,Pangani,Pangani,26,184
