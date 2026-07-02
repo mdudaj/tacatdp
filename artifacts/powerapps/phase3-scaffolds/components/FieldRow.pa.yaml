@@ -34,13 +34,13 @@ ComponentDefinitions:
         DisplayName: "ItemsPlaceholder"
         DataType: Text
     Children:
-      - RootContainer:
-          Control: GroupContainer@1.3.0
+      - FieldRowRootContainer:
+          Control: GroupContainer@1.5.0
           Variant: AutoLayout
           Properties:
-            LayoutDirection: =LayoutDirection.Vertical
-            LayoutGap: =4
-            PaddingLeft: =0
-            PaddingRight: =0
-            PaddingTop: =0
-            PaddingBottom: =0
+            LayoutDirection: '=LayoutDirection.Vertical'
+            LayoutGap: '=4'
+            PaddingLeft: '=0'
+            PaddingRight: '=0'
+            PaddingTop: '=0'
+            PaddingBottom: '=0'
