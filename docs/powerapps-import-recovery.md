@@ -4,7 +4,9 @@
 
 `ErrOpeningDocument_UnknownError` occurred after generated Phase 3 screen/component YAML was promoted into live `app-src/Src/`.
 
-The generated YAML passed the static PA YAML schema after syntax fixes, but that was not enough to make it a reliable import/open artifact. Microsoft documents `*.pa.yaml` source files as read-only/source-control artifacts for review, and external editing is supported through Power Platform Git Integration. The Power Platform CLI `pac canvas pack/unpack` commands are preview/deprecated, and packed apps can either load from YAML or ignore YAML depending on pack options.
+The generated YAML passed the static PA YAML schema after syntax fixes, but that was not enough to make it a reliable import/open artifact. Microsoft documents `*.pa.yaml` source files as read-only/source-control artifacts for review in normal app loading, while external editing is supported through Power Platform Git Integration. The Power Platform CLI `pac canvas pack/unpack` commands are preview/deprecated, and packed apps can either load from YAML or ignore YAML depending on the `packed.json` `LoadFromYaml` flag produced by pack options.
+
+The checked-in `.msapr` file is a pack reference archive, not the direct Studio import target. Use it with the sibling `Src/` folder to build a `.msapp`; then open/import the resulting `.msapp` in Power Apps Studio.
 
 ## Decision
 
@@ -24,7 +26,7 @@ Do not manually promote generated scaffold YAML into `app-src/Src/` again unless
 
 ## Safe import path now
 
-Use the current app package/source as the baseline import target. If packing from this repo with Power Platform CLI, prefer a recovery pack that does not force the app to load from generated YAML:
+Use the current app package/source as the baseline import target. If packing from this repo with Power Platform CLI, prefer a recovery pack that does not force the app to load from YAML:
 
 ```powershell
 pac canvas pack `
@@ -35,7 +37,7 @@ pac canvas pack `
   --overwrite
 ```
 
-Then open/import the `.msapp` in Power Apps Studio and apply Phase 3 scaffolds through the maker workflow in `docs/phase-3-maker-runbook.md`.
+This creates a `.msapp` from the `.msapr` reference archive while setting `LoadFromYaml` false, so Studio uses the original internal app JSON instead of hand-edited YAML. Then open/import the `.msapp` in Power Apps Studio and apply Phase 3 scaffolds through the maker workflow in `docs/phase-3-maker-runbook.md`.
 
 ## Phase 3 path after import is stable
 
