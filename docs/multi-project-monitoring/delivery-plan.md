@@ -58,13 +58,14 @@ The fixed 33-screen TACATDP source should pause as a platform-default implementa
 
 After explicit approval, implement one TACATDP project prototype before attempting broad multi-project generalization:
 
-1. Create or prepare only the Dataverse pieces needed for one TACATDP prototype slice.
-2. Implement one normal section end-to-end.
-3. Implement the region/district/ward/village cascade using delegated reference data.
-4. Implement one multi-select pattern.
-5. Implement one repeat/line-item pattern.
-6. Validate save, edit, review, and export/codebook implications.
-7. Record prototype shortcuts and classify each as acceptable, needs refactor, or blocks platform generalization.
+1. Use `docs/tacatdp-prototype-slice-1/` as the first implementation scope.
+2. Create or prepare only the Dataverse pieces needed for one TACATDP prototype slice.
+3. Implement one normal section end-to-end.
+4. Implement the region/district/ward/village cascade using delegated reference data.
+5. Implement one multi-select pattern.
+6. Implement one repeat/line-item pattern.
+7. Validate save, edit, review, and export/codebook implications.
+8. Record prototype shortcuts and classify each as acceptable, needs refactor, or blocks platform generalization.
 
 ## Phase 6: App integration
 

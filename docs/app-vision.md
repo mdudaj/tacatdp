@@ -58,3 +58,5 @@ This vision should guide naming and schema choices, but it should not block the 
 3. Validate one normal section, one high-volume village lookup cascade, one multi-select pattern, and one repeat/line-item pattern.
 4. Record every project-specific shortcut as either acceptable prototype debt or a blocker for platform generalization.
 5. Resume broader multi-project research after the TACATDP prototype proves the first end-to-end flow.
+
+The first bounded slice is specified in `docs/tacatdp-prototype-slice-1/`.
