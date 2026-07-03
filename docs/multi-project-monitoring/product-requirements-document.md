@@ -32,6 +32,7 @@ A TACATDP-specific Dataverse schema can deliver one project but will not scale c
 | Support longitudinal monitoring. | Entities/cases and encounters link repeated visits/submissions. |
 | Support controlled variables/vocabularies. | Reusable terms can be bound to fields and filtered per project. |
 | Preserve analytics. | Project-specific exports/projections can be generated from normalized runtime data. |
+| Support metadata-driven form UX. | A reusable form runner can load and render different projects/instruments from metadata instead of requiring hand-built screens per project. |
 
 ## Users / actors
 
@@ -111,6 +112,7 @@ The controlled variables feature should follow the confirmed InvenioRDM v13 voca
 5. Controlled variables are represented through vocabulary schemes and terms, using the InvenioRDM-style pattern of stable IDs, vocabulary types, localized labels/descriptions, flexible properties, tags, links, and search/suggest support.
 6. Form versions must be immutable once published; new changes create a new `InstrumentVersion`.
 7. Submitted data must point to the exact `InstrumentVersion`, `GroupDefinition`, and `FieldDefinition` active at collection time.
+8. The long-term Canvas UX should be a metadata-driven form runner. The current 33 TACATDP screens are a transitional scaffold or generated projection, not the reusable multi-project application architecture.
 
 ## Safety and constraints
 
@@ -118,6 +120,7 @@ The controlled variables feature should follow the confirmed InvenioRDM v13 voca
 - Do not store secrets, environment IDs, or tenant-specific credentials in source.
 - Keep project-level access and data separation explicit.
 - Preserve TACATDP current deliverables while planning the more generic platform model.
+- Do not continue hand-building one screen per TACATDP section as the platform default before the form-renderer contract is reviewed.
 
 ## Acceptance criteria
 

@@ -39,7 +39,20 @@ Transform existing TACATDP artifacts:
 - mapping rows -> field/group/source traceability
 - production cost lines -> repeatable group or line-item configuration
 
-## Phase 4: Dev Dataverse implementation
+## Phase 4: Form renderer UX contract
+
+Create reviewable artifacts only:
+
+- `docs/multi-project-monitoring/form-renderer-ux.md`
+- `schemas/dataverse/form-renderer-contract.json`
+- group/page layout metadata for `GroupDefinition`
+- field appearance/control metadata for `FieldDefinition`
+- first supported rule-expression subset for required, relevance, constraint, choice filter, and calculation behavior
+- pilot flow for one normal TACATDP group and one repeat group
+
+The fixed 33-screen TACATDP source should pause as a platform-default implementation path until this contract is reviewed.
+
+## Phase 5: Dev Dataverse implementation
 
 After explicit approval:
 
@@ -50,18 +63,17 @@ After explicit approval:
 5. Import TACATDP metadata and vocabulary terms.
 6. Validate relationships and alternate keys.
 
-## Phase 5: App integration
+## Phase 6: App integration
 
-1. Keep current Canvas screens while source layout is revised.
-2. Bind screens to metadata/runtime tables or generated TACATDP projections.
-3. Implement save/read for one pilot section.
-4. Validate repeats and multi-select.
-5. Validate large reference filtering.
+1. Build a generic form runner shell rather than hand-building all TACATDP screens.
+2. Bind the runner to metadata/runtime tables or reviewed local placeholder collections shaped like those tables.
+3. Implement save/read for one pilot group and one repeat group.
+4. Validate repeats, multi-select, relevance, constraints, and large reference filtering.
+5. Keep current fixed screens only as transitional/projection artifacts.
 
-## Phase 6: Export/projection support
+## Phase 7: Export/projection support
 
 1. Generate TACATDP codebook.
 2. Generate wide export profiles.
 3. Generate Power BI-friendly views/dataflows.
 4. Preserve normalized source-of-truth data.
-

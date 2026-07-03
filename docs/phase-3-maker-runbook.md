@@ -52,6 +52,10 @@ The live generated source uses chronological screen names:
 
 The imported screen list should start with `Screen_01_demographics`, whose visible fields start at `Customer ID`. ODK ecosystem metadata fields `starttime`, `endtime`, `deviceid`, `subscriberid`, `simid`, `devicephonenum`, and `username` are not shown as data-entry rows. If those values are needed later, capture them through Power Apps app/save metadata such as `Now()`, `User()`, and device/session information rather than asking enumerators to type them.
 
+## Multi-project renderer caution
+
+The fixed screen list is a TACATDP-specific scaffold, not the long-term multi-project platform architecture. For multi-project delivery, prefer a metadata-driven form runner that loads `InstrumentVersion`, `GroupDefinition`, `FieldDefinition`, rules, vocabularies, references, and repeat definitions at runtime. Do not continue expanding hand-built TACATDP screens as the platform default until `docs/multi-project-monitoring/form-renderer-ux.md` and the renderer contract are reviewed.
+
 ## Maker execution order
 
 ### 1. Prepare the app safely
