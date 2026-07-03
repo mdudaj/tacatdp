@@ -1,0 +1,272 @@
+{
+  "generated_for_review_only": true,
+  "contract_name": "metadata-driven-form-renderer",
+  "version": "0.1.0",
+  "purpose": "Define the first reviewable contract for rendering monitoring project forms from Dataverse metadata instead of hard-coded TACATDP screens.",
+  "source_documents": [
+    "docs/multi-project-monitoring/form-renderer-ux.md",
+    "docs/multi-project-monitoring/data-model.md",
+    "schemas/dataverse/tacatdp-field-definitions.csv"
+  ],
+  "environment_write": false,
+  "renderer_surfaces": [
+    {
+      "surface": "project_instrument_picker",
+      "responsibility": "Select MonitoringProject, Instrument, InstrumentVersion, and optional EventDefinition or Encounter."
+    },
+    {
+      "surface": "form_runner_shell",
+      "responsibility": "Load ordered GroupDefinition records, manage progress, navigation, validation, save state, and submit/review actions."
+    },
+    {
+      "surface": "field_renderer",
+      "responsibility": "Choose input controls from FieldDefinition data type, control kind, appearance, vocabulary binding, reference binding, and rule metadata."
+    },
+    {
+      "surface": "repeat_manager",
+      "responsibility": "Create and navigate repeatable GroupInstance rows without hard-coded repeat screens."
+    },
+    {
+      "surface": "review_summary",
+      "responsibility": "Show completion state, required visible errors, repeat summaries, and final submission actions."
+    }
+  ],
+  "dataverse_metadata_extensions": {
+    "mp_GroupDefinition": [
+      {
+        "column": "RenderMode",
+        "type": "Choice",
+        "values": [
+          "Page",
+          "FieldList",
+          "RepeatList",
+          "ReviewOnly"
+        ],
+        "default": "Page",
+        "purpose": "Controls whether the group renders as a page, a multi-field page, a repeat manager/list, or a review-only summary."
+      },
+      {
+        "column": "NavigationMode",
+        "type": "Choice",
+        "values": [
+          "Linear",
+          "SectionJumpAllowed",
+          "ReviewOnly"
+        ],
+        "default": "Linear",
+        "purpose": "Controls back/next behavior and whether users can jump to this group from a section index."
+      },
+      {
+        "column": "VisibleExpression",
+        "type": "MultilineText",
+        "purpose": "Optional group-level relevance expression evaluated against the current answer context."
+      },
+      {
+        "column": "LayoutDensity",
+        "type": "Choice",
+        "values": [
+          "Comfortable",
+          "Compact"
+        ],
+        "default": "Comfortable",
+        "purpose": "Controls vertical spacing; one field per row remains the default within the chosen density."
+      },
+      {
+        "column": "ProgressLabel",
+        "type": "Text",
+        "purpose": "Short label for progress display, breadcrumbs, and section index."
+      }
+    ],
+    "mp_FieldDefinition": [
+      {
+        "column": "ControlKind",
+        "type": "Choice",
+        "values": [
+          "TextInput",
+          "NumberInput",
+          "DecimalInput",
+          "CurrencyInput",
+          "DatePicker",
+          "DateTimeInput",
+          "Toggle",
+          "SingleSelect",
+          "MultiSelect",
+          "ReferenceLookup",
+          "Geopoint",
+          "Attachment",
+          "Note",
+          "Computed"
+        ],
+        "purpose": "Renderer control family selected after data type, appearance, and reference binding are resolved."
+      },
+      {
+        "column": "Appearance",
+        "type": "Text",
+        "purpose": "XLSForm/renderer appearance hint such as numbers_phone, placement-map, minimal, search, or field-list-derived behavior."
+      },
+      {
+        "column": "HelperText",
+        "type": "MultilineText",
+        "purpose": "Resolved helper text shown below the visible label and above inline errors."
+      },
+      {
+        "column": "VisibleExpression",
+        "type": "MultilineText",
+        "purpose": "Field-level relevance expression evaluated before required/constraint validation."
+      },
+      {
+        "column": "LookupProviderType",
+        "type": "Choice",
+        "values": [
+          "None",
+          "VocabularyTerm",
+          "ReferenceTable"
+        ],
+        "default": "None",
+        "purpose": "Controls whether choices come from vocabulary terms or a dedicated delegated reference table."
+      },
+      {
+        "column": "LookupSource",
+        "type": "Text",
+        "purpose": "Vocabulary scheme code or reference table logical name such as mp_VillageReference."
+      },
+      {
+        "column": "ChoiceFilterExpression",
+        "type": "MultilineText",
+        "purpose": "Delegation-safe cascade/filter expression derived from XLSForm choice_filter where supported."
+      },
+      {
+        "column": "ConstraintExpression",
+        "type": "MultilineText",
+        "purpose": "Supported constraint expression evaluated before navigation/save."
+      },
+      {
+        "column": "CalculationExpression",
+        "type": "MultilineText",
+        "purpose": "Supported calculated/default expression for computed or prefilled values."
+      }
+    ]
+  },
+  "supported_rule_expression_subset": [
+    {
+      "rule_type": "required",
+      "supported_first_slice": true,
+      "notes": "Required is enforced only when the group and field are visible/relevant."
+    },
+    {
+      "rule_type": "relevance",
+      "supported_first_slice": true,
+      "operators": [
+        "IsBlank",
+        "Not",
+        "=",
+        "<>",
+        ">",
+        ">=",
+        "<",
+        "<=",
+        "And",
+        "Or",
+        "selected"
+      ],
+      "notes": "First implementation should translate a reviewed subset of XLSForm relevance expressions to Power Fx."
+    },
+    {
+      "rule_type": "constraint",
+      "supported_first_slice": true,
+      "operators": [
+        "=",
+        "<>",
+        ">",
+        ">=",
+        "<",
+        "<=",
+        "regex",
+        "string-length"
+      ],
+      "notes": "Use explicit visible errors; do not silently accept invalid values."
+    },
+    {
+      "rule_type": "choice_filter",
+      "supported_first_slice": true,
+      "notes": "Must be delegation-safe for Dataverse. Village filters use mp_VillageReference RegionCode, DistrictCode, and WardCode indexes."
+    },
+    {
+      "rule_type": "calculation",
+      "supported_first_slice": "limited",
+      "notes": "Support simple arithmetic and selected-count summaries first; defer complex XPath/repeat calculations."
+    }
+  ],
+  "control_mapping": [
+    {
+      "field_data_type": "Text",
+      "default_control_kind": "TextInput",
+      "answer_storage": "mp_AnswerValue.TextValue"
+    },
+    {
+      "field_data_type": "WholeNumber",
+      "default_control_kind": "NumberInput",
+      "answer_storage": "mp_AnswerValue.NumberValue"
+    },
+    {
+      "field_data_type": "Decimal",
+      "default_control_kind": "DecimalInput",
+      "answer_storage": "mp_AnswerValue.DecimalValue"
+    },
+    {
+      "field_data_type": "LookupVocabularyTerm",
+      "default_control_kind": "SingleSelect",
+      "answer_storage": "mp_AnswerValue.RawValue plus term/code snapshot until lookup answer support is finalized"
+    },
+    {
+      "field_data_type": "MultiSelectVocabularyTermRows",
+      "default_control_kind": "MultiSelect",
+      "answer_storage": "mp_MultiSelectAnswer"
+    },
+    {
+      "field_data_type": "LookupReferenceVillage",
+      "default_control_kind": "ReferenceLookup",
+      "answer_storage": "mp_AnswerValue.RawValue plus village code/label snapshot until reference lookup answer support is finalized"
+    },
+    {
+      "field_data_type": "Geopoint",
+      "default_control_kind": "Geopoint",
+      "answer_storage": "mp_AnswerValue.GeopointLatitude/Longitude/Altitude/Accuracy"
+    }
+  ],
+  "pilot_flows": [
+    {
+      "flow": "normal_group",
+      "project_code": "tacatdp",
+      "instrument_code": "impact_evaluation",
+      "version_code": "phase3_source_v1",
+      "group_code": "screen_01_demographics",
+      "goals": [
+        "Render one field per row from metadata.",
+        "Apply required-visible validation.",
+        "Load region/district/ward from vocabulary terms and village from mp_VillageReference.",
+        "Persist scalar answers as mp_AnswerValue-shaped records."
+      ]
+    },
+    {
+      "flow": "repeat_group",
+      "project_code": "tacatdp",
+      "instrument_code": "impact_evaluation",
+      "version_code": "phase3_source_v1",
+      "group_code": "production_cost_lines",
+      "goals": [
+        "Render a repeat manager for line items.",
+        "Create one GroupInstance per production-cost line.",
+        "Persist each line item's scalar answers under its GroupInstance.",
+        "Show a repeat summary before submission."
+      ]
+    }
+  ],
+  "deferred": [
+    "Full XPath evaluator",
+    "Offline sync conflict resolution",
+    "Arbitrary nested repeat UI beyond one pilot repeat group",
+    "Dynamic custom component generation",
+    "Direct Dataverse environment creation"
+  ]
+}

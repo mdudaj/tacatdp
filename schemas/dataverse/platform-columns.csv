@@ -38,6 +38,11 @@ mp_GroupDefinition,mp_name,Name,Text,yes,yes,no,4,Display name
 mp_GroupDefinition,mp_repeatable,Repeatable,Boolean,yes,yes,no,5,Whether group repeats
 mp_GroupDefinition,mp_displayorder,DisplayOrder,WholeNumber,no,yes,no,6,Ordering
 mp_GroupDefinition,mp_sourcescreen,SourceScreen,Text,no,yes,no,7,Canvas/source screen name
+mp_GroupDefinition,mp_rendermode,RenderMode,Choice,yes,yes,no,8,Renderer mode: Page/FieldList/RepeatList/ReviewOnly
+mp_GroupDefinition,mp_navigationmode,NavigationMode,Choice,yes,yes,no,9,Renderer navigation behavior: Linear/SectionJumpAllowed/ReviewOnly
+mp_GroupDefinition,mp_visibleexpression,VisibleExpression,MultilineText,no,no,no,10,Group-level relevance expression evaluated against current answers
+mp_GroupDefinition,mp_layoutdensity,LayoutDensity,Choice,no,no,no,11,Comfortable/Compact layout density while preserving one field per row
+mp_GroupDefinition,mp_progresslabel,ProgressLabel,Text,no,yes,no,12,Short label for progress display and section index
 mp_FieldDefinition,mp_groupdefinition,GroupDefinition,Lookup:mp_GroupDefinition,yes,yes,no,1,Owning group
 mp_FieldDefinition,mp_fieldcode,FieldCode,Text,yes,yes,no,2,Stable field/question code
 mp_FieldDefinition,mp_labelen,LabelEn,Text,yes,yes,no,3,English label
@@ -47,6 +52,15 @@ mp_FieldDefinition,mp_datatype,DataType,Choice,yes,yes,no,6,Data type
 mp_FieldDefinition,mp_requiredmode,RequiredMode,Choice,yes,yes,no,7,optional/required_if_visible/system
 mp_FieldDefinition,mp_displayorder,DisplayOrder,WholeNumber,yes,yes,no,8,Ordering
 mp_FieldDefinition,mp_sourcesurveyrow,SourceSurveyRow,WholeNumber,no,yes,no,9,Original XLSForm row
+mp_FieldDefinition,mp_controlkind,ControlKind,Choice,no,yes,no,10,Renderer control family such as TextInput/SingleSelect/ReferenceLookup
+mp_FieldDefinition,mp_appearance,Appearance,Text,no,no,no,11,XLSForm or renderer appearance hint
+mp_FieldDefinition,mp_helpertext,HelperText,MultilineText,no,no,no,12,Resolved helper text shown below the label
+mp_FieldDefinition,mp_visibleexpression,VisibleExpression,MultilineText,no,no,no,13,Field-level relevance expression
+mp_FieldDefinition,mp_lookupprovidertype,LookupProviderType,Choice,no,yes,no,14,None/VocabularyTerm/ReferenceTable
+mp_FieldDefinition,mp_lookupsource,LookupSource,Text,no,yes,no,15,Vocabulary scheme code or reference table logical name
+mp_FieldDefinition,mp_choicefilterexpression,ChoiceFilterExpression,MultilineText,no,no,no,16,Delegation-safe choice/reference filter expression
+mp_FieldDefinition,mp_constraintexpression,ConstraintExpression,MultilineText,no,no,no,17,Supported constraint expression for validation
+mp_FieldDefinition,mp_calculationexpression,CalculationExpression,MultilineText,no,no,no,18,Supported calculated/default expression
 mp_FieldRule,mp_fielddefinition,FieldDefinition,Lookup:mp_FieldDefinition,yes,yes,no,1,Target field
 mp_FieldRule,mp_ruletype,RuleType,Choice,yes,yes,no,2,required/relevance/constraint/calculate/default/choice_filter
 mp_FieldRule,mp_expression,Expression,MultilineText,yes,no,no,3,Source rule expression

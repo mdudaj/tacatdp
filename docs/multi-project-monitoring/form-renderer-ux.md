@@ -50,3 +50,7 @@ Before editing Canvas screens again, create a review-only renderer contract:
 - pilot renderer flow for one TACATDP section and one repeat group
 
 No Power Platform environment writes should happen until this renderer contract is reviewed.
+
+## Contract status
+
+`schemas/dataverse/form-renderer-contract.json` now defines the first review-only renderer contract. It adds proposed metadata extensions for group render mode, navigation mode, field control kind, lookup provider type/source, choice filters, constraints, calculations, control mapping, and pilot flows for demographics and production-cost repeat entry.

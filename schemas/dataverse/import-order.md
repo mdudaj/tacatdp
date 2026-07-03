@@ -8,6 +8,7 @@ Generated review artifact for TACATDP. This document does not authorize or perfo
 - Field source: `docs/xlsform-field-inventory.csv` and `schemas/xlsform-to-list-mapping.csv`
 - Vocabulary source: `schemas/reference-data/*.csv`
 - High-volume village source: `schemas/reference-data/TACATDP_RefVillages.csv`
+- Renderer contract: `schemas/dataverse/form-renderer-contract.json`
 - Platform publisher prefix placeholder: `mp`
 - TACATDP project code: `tacatdp`
 
@@ -17,13 +18,14 @@ Generated review artifact for TACATDP. This document does not authorize or perfo
 2. Create project/governance tables from `platform-tables.json` and `platform-columns.csv`.
 3. Create instrument metadata tables and relationships: `mp_Instrument`, `mp_InstrumentVersion`, `mp_EventDefinition`, `mp_InstrumentEventBinding`, `mp_GroupDefinition`, `mp_FieldDefinition`, `mp_FieldRule`.
 4. Create controlled vocabulary tables and relationships: `mp_VocabularyScheme`, `mp_VocabularyTerm`, `mp_VocabularyTermLabel`, `mp_VocabularyTermRelation`, `mp_ProjectVocabularyBinding`, `mp_FieldVocabularyBinding`, `mp_ExternalAuthorityIdentifier`.
-5. Create high-volume reference data table `mp_VillageReference` with indexed `RegionCode`, `DistrictCode`, and `WardCode` columns for delegated cascading lookup filters.
-6. Create runtime tables and relationships: `mp_TrackedEntity`, `mp_EntityIdentifier`, `mp_Encounter`, `mp_Submission`, `mp_GroupInstance`, `mp_AnswerValue`, `mp_MultiSelectAnswer`, `mp_Attachment`, `mp_SubmissionReview`, `mp_AuditEvent`.
-7. Create projection/export tables: `mp_ExportProfile`, `mp_ExportColumn`.
-8. Add alternate keys from `platform-alternate-keys.csv` after referenced columns exist.
-9. Import seed records in this order: `mp_Project`, `mp_Instrument`, `mp_InstrumentVersion`, `mp_EventDefinition`, `mp_GroupDefinition`, `mp_VocabularyScheme`, non-village `mp_VocabularyTerm`, `mp_VocabularyTermLabel`, `mp_VillageReference`, `mp_FieldDefinition`, `mp_FieldRule`, vocabulary/reference bindings, and project bindings.
-10. Import TACATDP metadata from `tacatdp-field-definitions.csv`, `tacatdp-vocabulary-terms.csv`, and `tacatdp-village-reference.csv` only after the generated rows are reviewed.
-11. Bind the Canvas app only after the reviewed dev Dataverse schema exists.
+5. Review renderer metadata extensions in `form-renderer-contract.json`, especially `RenderMode`, `NavigationMode`, `ControlKind`, `LookupProviderType`, and rule-expression scope, before adding them to Dataverse.
+6. Create high-volume reference data table `mp_VillageReference` with indexed `RegionCode`, `DistrictCode`, and `WardCode` columns for delegated cascading lookup filters.
+7. Create runtime tables and relationships: `mp_TrackedEntity`, `mp_EntityIdentifier`, `mp_Encounter`, `mp_Submission`, `mp_GroupInstance`, `mp_AnswerValue`, `mp_MultiSelectAnswer`, `mp_Attachment`, `mp_SubmissionReview`, `mp_AuditEvent`.
+8. Create projection/export tables: `mp_ExportProfile`, `mp_ExportColumn`.
+9. Add alternate keys from `platform-alternate-keys.csv` after referenced columns exist.
+10. Import seed records in this order: `mp_Project`, `mp_Instrument`, `mp_InstrumentVersion`, `mp_EventDefinition`, `mp_GroupDefinition`, `mp_VocabularyScheme`, non-village `mp_VocabularyTerm`, `mp_VocabularyTermLabel`, `mp_VillageReference`, `mp_FieldDefinition`, `mp_FieldRule`, vocabulary/reference bindings, and project bindings.
+11. Import TACATDP metadata from `tacatdp-field-definitions.csv`, `tacatdp-vocabulary-terms.csv`, and `tacatdp-village-reference.csv` only after the generated rows are reviewed.
+12. Bind the Canvas app only after the reviewed dev Dataverse schema exists.
 
 ## Reference-data decision
 
@@ -40,9 +42,10 @@ Villages are intentionally not stored as generic `mp_VocabularyTerm` rows in thi
 ## Generated artifact inventory
 
 - `platform-tables.json`: 30 platform/reference tables.
-- `platform-columns.csv`: 170 platform/reference columns.
+- `platform-columns.csv`: 184 platform/reference/renderer columns.
 - `platform-relationships.csv`: 46 relationships.
 - `platform-alternate-keys.csv`: 22 alternate keys.
+- `form-renderer-contract.json`: renderer surfaces, metadata extensions, supported rule subset, control mapping, and pilot flows.
 - `tacatdp-field-definitions.csv`: 292 TACATDP field definitions.
 - `tacatdp-vocabulary-terms.csv`: 5190 TACATDP non-village vocabulary terms.
 - `tacatdp-village-reference.csv`: 66297 TACATDP village reference rows.
