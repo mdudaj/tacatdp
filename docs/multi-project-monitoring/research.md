@@ -93,13 +93,14 @@ Implication for our platform:
 
 ## InvenioRDM controlled vocabulary patterns
 
-InvenioRDM uses controlled vocabularies for resource types, subjects, affiliations, names, languages, licenses, and relation types. Relevant patterns:
+InvenioRDM v13 uses controlled vocabularies for resource types, date types, creator/contributor roles, languages, licenses, relation types, affiliations, names, and subjects. Relevant patterns:
 
 - Vocabularies have stable identifiers, schemes, labels, and optional external authority IDs.
-- Vocabularies can be loaded from YAML/data fixtures and customized by an institution.
-- Subjects can be organized by scheme, such as OECD, MeSH, FAST, or local taxonomies.
-- Affiliations can map to external registries such as ROR.
-- Resource types map local values to external standards such as DataCite or Schema.org.
+- Vocabularies can be changed for local institutional needs or imported from external sources.
+- Subjects can use external classification vocabularies such as MeSH, and InvenioRDM ships with OECD Fields of Science and Technology.
+- Vocabulary records are exposed through APIs with `id`, `type`, localized `title` and `description`, `props`, `tags`, and links.
+- The vocabulary API supports search, suggestions/autocomplete, pagination, sorting, tags, and locale-aware labels.
+- Larger/specific vocabularies have their own endpoint families, including affiliations, names, funders, awards, and subjects.
 
 Implication for our platform:
 
@@ -110,8 +111,9 @@ Implication for our platform:
 
 References:
 
-- `https://inveniordm.docs.cern.ch/use/operate/vocabularies/`
-- `https://invenio-vocabularies.readthedocs.io/`
+- `https://inveniordm.docs.cern.ch/`
+- `https://inveniordm.docs.cern.ch/features/customization/`
+- `https://inveniordm.docs.cern.ch/reference/rest_api_vocabularies/`
 
 ## Architecture conclusion
 
@@ -123,4 +125,3 @@ The robust path is a reusable monitoring platform model:
 4. **Project-specific projections**: optional wide exports or Dataverse views/tables for analytics, generated from normalized source data.
 
 TACATDP should become the first configured monitoring project on this platform, not the hard-coded platform schema.
-

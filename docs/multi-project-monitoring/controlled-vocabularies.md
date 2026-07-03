@@ -16,6 +16,25 @@ Implement an InvenioRDM-inspired controlled vocabulary feature for monitoring pr
 | Project binding | Which terms from a scheme are allowed in a project. |
 | Field binding | Which scheme/terms a field may use. |
 
+## InvenioRDM-inspired API shape
+
+Current InvenioRDM vocabulary API records expose a useful implementation target for our own controlled variables:
+
+- `id`: stable term identifier.
+- `type`: vocabulary type/scheme.
+- `title`: localized labels, for example `{ "en": "English" }`.
+- `description`: localized descriptions.
+- `props`: extensible term metadata.
+- `tags`: searchable/filterable classifications.
+- `links`: API navigation and self links.
+
+The API supports search, autocomplete suggestions, paging, sorting, tag filters, and locale-aware responses. Our monitoring platform should mirror those ideas with Dataverse tables and later API endpoints: stable IDs/codes, multilingual labels, flexible properties, tags, and project/field-specific filtering.
+
+Confirmed references:
+
+- `https://inveniordm.docs.cern.ch/features/customization/`
+- `https://inveniordm.docs.cern.ch/reference/rest_api_vocabularies/`
+
 ## Required behavior
 
 1. Terms must have stable codes independent of display labels.
@@ -60,4 +79,3 @@ crop,maize,Maize,Mahindi,,10,active,,
 - Unit
 - Safeguards/climate choices
 - Insurance/guarantee choices
-
