@@ -1,0 +1,301 @@
+{
+  "generated_for_review_only": true,
+  "generated_on": "2026-07-03",
+  "publisher_prefix_placeholder": "mp",
+  "source_documents": [
+    "docs/multi-project-monitoring/data-model.md",
+    "docs/multi-project-monitoring/controlled-vocabularies.md"
+  ],
+  "tables": [
+    {
+      "logical_name": "mp_Project",
+      "display_name": "Project",
+      "schema_group": "Project and governance",
+      "primary_name_column": "Name",
+      "ownership": "UserOrTeam",
+      "purpose": "Monitoring project/program boundary",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_ProjectRoleAssignment",
+      "display_name": "ProjectRoleAssignment",
+      "schema_group": "Project and governance",
+      "primary_name_column": "Name",
+      "ownership": "UserOrTeam",
+      "purpose": "Project-scoped access assignment",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_ProjectSetting",
+      "display_name": "ProjectSetting",
+      "schema_group": "Project and governance",
+      "primary_name_column": "SettingKey",
+      "ownership": "UserOrTeam",
+      "purpose": "Non-secret project setting",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_Instrument",
+      "display_name": "Instrument",
+      "schema_group": "Instrument metadata",
+      "primary_name_column": "Name",
+      "ownership": "UserOrTeam",
+      "purpose": "Reusable form/survey concept owned by a project",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_InstrumentVersion",
+      "display_name": "InstrumentVersion",
+      "schema_group": "Instrument metadata",
+      "primary_name_column": "VersionCode",
+      "ownership": "UserOrTeam",
+      "purpose": "Versioned instrument metadata package",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_EventDefinition",
+      "display_name": "EventDefinition",
+      "schema_group": "Instrument metadata",
+      "primary_name_column": "Name",
+      "ownership": "UserOrTeam",
+      "purpose": "Visit/reporting/follow-up event definition",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_InstrumentEventBinding",
+      "display_name": "InstrumentEventBinding",
+      "schema_group": "Instrument metadata",
+      "primary_name_column": "Name",
+      "ownership": "UserOrTeam",
+      "purpose": "Binding of instrument version to event definition",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_GroupDefinition",
+      "display_name": "GroupDefinition",
+      "schema_group": "Instrument metadata",
+      "primary_name_column": "Name",
+      "ownership": "UserOrTeam",
+      "purpose": "Section or repeat group metadata",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_FieldDefinition",
+      "display_name": "FieldDefinition",
+      "schema_group": "Instrument metadata",
+      "primary_name_column": "FieldCode",
+      "ownership": "UserOrTeam",
+      "purpose": "Question/variable metadata",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_FieldRule",
+      "display_name": "FieldRule",
+      "schema_group": "Instrument metadata",
+      "primary_name_column": "RuleType",
+      "ownership": "UserOrTeam",
+      "purpose": "Required/relevance/constraint/calculate/default rule",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_VocabularyScheme",
+      "display_name": "VocabularyScheme",
+      "schema_group": "Controlled vocabularies",
+      "primary_name_column": "Name",
+      "ownership": "UserOrTeam",
+      "purpose": "Controlled vocabulary namespace",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_VocabularyTerm",
+      "display_name": "VocabularyTerm",
+      "schema_group": "Controlled vocabularies",
+      "primary_name_column": "PreferredLabel",
+      "ownership": "UserOrTeam",
+      "purpose": "Stable controlled term",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_VocabularyTermLabel",
+      "display_name": "VocabularyTermLabel",
+      "schema_group": "Controlled vocabularies",
+      "primary_name_column": "Label",
+      "ownership": "UserOrTeam",
+      "purpose": "Localized preferred/alternate label",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_VocabularyTermRelation",
+      "display_name": "VocabularyTermRelation",
+      "schema_group": "Controlled vocabularies",
+      "primary_name_column": "RelationType",
+      "ownership": "UserOrTeam",
+      "purpose": "Vocabulary hierarchy or mapping relation",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_ProjectVocabularyBinding",
+      "display_name": "ProjectVocabularyBinding",
+      "schema_group": "Controlled vocabularies",
+      "primary_name_column": "Name",
+      "ownership": "UserOrTeam",
+      "purpose": "Project-specific allowed vocabulary scope",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_FieldVocabularyBinding",
+      "display_name": "FieldVocabularyBinding",
+      "schema_group": "Controlled vocabularies",
+      "primary_name_column": "Name",
+      "ownership": "UserOrTeam",
+      "purpose": "Field-specific vocabulary binding",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_ExternalAuthorityIdentifier",
+      "display_name": "ExternalAuthorityIdentifier",
+      "schema_group": "Controlled vocabularies",
+      "primary_name_column": "Identifier",
+      "ownership": "UserOrTeam",
+      "purpose": "External authority identifier for a term",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_TrackedEntity",
+      "display_name": "TrackedEntity",
+      "schema_group": "Runtime data",
+      "primary_name_column": "DisplayName",
+      "ownership": "UserOrTeam",
+      "purpose": "Longitudinal subject such as farmer, facility, school, site, or household",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_EntityIdentifier",
+      "display_name": "EntityIdentifier",
+      "schema_group": "Runtime data",
+      "primary_name_column": "IdentifierValue",
+      "ownership": "UserOrTeam",
+      "purpose": "Additional identifier for a tracked entity",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_Encounter",
+      "display_name": "Encounter",
+      "schema_group": "Runtime data",
+      "primary_name_column": "Name",
+      "ownership": "UserOrTeam",
+      "purpose": "Event occurrence for an entity/project",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_Submission",
+      "display_name": "Submission",
+      "schema_group": "Runtime data",
+      "primary_name_column": "SubmissionKey",
+      "ownership": "UserOrTeam",
+      "purpose": "One filled instrument instance",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_GroupInstance",
+      "display_name": "GroupInstance",
+      "schema_group": "Runtime data",
+      "primary_name_column": "InstanceKey",
+      "ownership": "UserOrTeam",
+      "purpose": "One section or repeat occurrence inside a submission",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_AnswerValue",
+      "display_name": "AnswerValue",
+      "schema_group": "Runtime data",
+      "primary_name_column": "Name",
+      "ownership": "UserOrTeam",
+      "purpose": "Scalar answer row with typed nullable value columns",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_MultiSelectAnswer",
+      "display_name": "MultiSelectAnswer",
+      "schema_group": "Runtime data",
+      "primary_name_column": "Name",
+      "ownership": "UserOrTeam",
+      "purpose": "One selected controlled term for a multi-select field",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_Attachment",
+      "display_name": "Attachment",
+      "schema_group": "Runtime data",
+      "primary_name_column": "FileName",
+      "ownership": "UserOrTeam",
+      "purpose": "File/media answer row",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_SubmissionReview",
+      "display_name": "SubmissionReview",
+      "schema_group": "Runtime data",
+      "primary_name_column": "ReviewState",
+      "ownership": "UserOrTeam",
+      "purpose": "Submission review/approval state",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_AuditEvent",
+      "display_name": "AuditEvent",
+      "schema_group": "Runtime data",
+      "primary_name_column": "Action",
+      "ownership": "UserOrTeam",
+      "purpose": "Data lineage/correction/audit event",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_ExportProfile",
+      "display_name": "ExportProfile",
+      "schema_group": "Projection/export",
+      "primary_name_column": "Name",
+      "ownership": "UserOrTeam",
+      "purpose": "Named export/projection definition",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    },
+    {
+      "logical_name": "mp_ExportColumn",
+      "display_name": "ExportColumn",
+      "schema_group": "Projection/export",
+      "primary_name_column": "ColumnName",
+      "ownership": "UserOrTeam",
+      "purpose": "Column mapping for an export profile",
+      "source_decision": "docs/multi-project-monitoring/data-model.md",
+      "environment_write": false
+    }
+  ]
+}

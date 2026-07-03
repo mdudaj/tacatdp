@@ -1,0 +1,161 @@
+table_logical_name,column_logical_name,display_name,data_type,required,indexed,unique,display_order,notes
+mp_Project,mp_projectcode,ProjectCode,Text,yes,yes,no,1,Stable project code such as tacatdp
+mp_Project,mp_name,Name,Text,yes,yes,no,2,Display name
+mp_Project,mp_status,Status,Choice,yes,yes,no,3,draft/active/paused/closed
+mp_Project,mp_ownerteam,OwnerTeam,LookupTeam,no,yes,no,4,Owning Dataverse team
+mp_Project,mp_description,Description,MultilineText,no,no,no,5,Project description
+mp_ProjectRoleAssignment,mp_project,Project,Lookup:mp_Project,yes,yes,no,1,Project scope
+mp_ProjectRoleAssignment,mp_userorteam,UserOrTeam,Customer,yes,yes,no,2,User or team principal
+mp_ProjectRoleAssignment,mp_role,Role,Choice,yes,yes,no,3,Project role
+mp_ProjectRoleAssignment,mp_status,Status,Choice,yes,yes,no,4,active/inactive
+mp_ProjectSetting,mp_project,Project,Lookup:mp_Project,yes,yes,no,1,Project scope
+mp_ProjectSetting,mp_settingkey,SettingKey,Text,yes,yes,no,2,Non-secret setting key
+mp_ProjectSetting,mp_value,Value,MultilineText,no,no,no,3,Non-secret setting value
+mp_ProjectSetting,mp_valuetype,ValueType,Choice,no,no,no,4,text/number/boolean/json
+mp_Instrument,mp_project,Project,Lookup:mp_Project,yes,yes,no,1,Owning project
+mp_Instrument,mp_instrumentcode,InstrumentCode,Text,yes,yes,no,2,Stable instrument code
+mp_Instrument,mp_name,Name,Text,yes,yes,no,3,Display name
+mp_Instrument,mp_purpose,Purpose,MultilineText,no,no,no,4,Instrument purpose
+mp_Instrument,mp_status,Status,Choice,yes,yes,no,5,draft/active/retired
+mp_InstrumentVersion,mp_instrument,Instrument,Lookup:mp_Instrument,yes,yes,no,1,Owning instrument
+mp_InstrumentVersion,mp_versioncode,VersionCode,Text,yes,yes,no,2,Stable version code
+mp_InstrumentVersion,mp_lifecyclestatus,LifecycleStatus,Choice,yes,yes,no,3,draft/published/retired
+mp_InstrumentVersion,mp_publishedat,PublishedAt,DateTime,no,yes,no,4,Publish timestamp
+mp_InstrumentVersion,mp_sourceartifactversion,SourceArtifactVersion,Text,no,no,no,5,Source document/version reference
+mp_EventDefinition,mp_project,Project,Lookup:mp_Project,yes,yes,no,1,Owning project
+mp_EventDefinition,mp_eventcode,EventCode,Text,yes,yes,no,2,Stable event code
+mp_EventDefinition,mp_name,Name,Text,yes,yes,no,3,Display name
+mp_EventDefinition,mp_repeatable,Repeatable,Boolean,yes,yes,no,4,Whether multiple encounters may exist
+mp_EventDefinition,mp_displayorder,DisplayOrder,WholeNumber,no,yes,no,5,Ordering
+mp_InstrumentEventBinding,mp_eventdefinition,EventDefinition,Lookup:mp_EventDefinition,yes,yes,no,1,Event
+mp_InstrumentEventBinding,mp_instrumentversion,InstrumentVersion,Lookup:mp_InstrumentVersion,yes,yes,no,2,Instrument version
+mp_InstrumentEventBinding,mp_required,Required,Boolean,yes,yes,no,3,Required for event
+mp_InstrumentEventBinding,mp_displayorder,DisplayOrder,WholeNumber,no,yes,no,4,Ordering
+mp_GroupDefinition,mp_instrumentversion,InstrumentVersion,Lookup:mp_InstrumentVersion,yes,yes,no,1,Instrument version
+mp_GroupDefinition,mp_parentgroup,ParentGroup,Lookup:mp_GroupDefinition,no,yes,no,2,Parent group for nested repeats
+mp_GroupDefinition,mp_groupcode,GroupCode,Text,yes,yes,no,3,Stable group code
+mp_GroupDefinition,mp_name,Name,Text,yes,yes,no,4,Display name
+mp_GroupDefinition,mp_repeatable,Repeatable,Boolean,yes,yes,no,5,Whether group repeats
+mp_GroupDefinition,mp_displayorder,DisplayOrder,WholeNumber,no,yes,no,6,Ordering
+mp_GroupDefinition,mp_sourcescreen,SourceScreen,Text,no,yes,no,7,Canvas/source screen name
+mp_FieldDefinition,mp_groupdefinition,GroupDefinition,Lookup:mp_GroupDefinition,yes,yes,no,1,Owning group
+mp_FieldDefinition,mp_fieldcode,FieldCode,Text,yes,yes,no,2,Stable field/question code
+mp_FieldDefinition,mp_labelen,LabelEn,Text,yes,yes,no,3,English label
+mp_FieldDefinition,mp_labelsw,LabelSw,Text,no,no,no,4,Swahili label
+mp_FieldDefinition,mp_hinten,HintEn,MultilineText,no,no,no,5,English hint
+mp_FieldDefinition,mp_datatype,DataType,Choice,yes,yes,no,6,Data type
+mp_FieldDefinition,mp_requiredmode,RequiredMode,Choice,yes,yes,no,7,optional/required_if_visible/system
+mp_FieldDefinition,mp_displayorder,DisplayOrder,WholeNumber,yes,yes,no,8,Ordering
+mp_FieldDefinition,mp_sourcesurveyrow,SourceSurveyRow,WholeNumber,no,yes,no,9,Original XLSForm row
+mp_FieldRule,mp_fielddefinition,FieldDefinition,Lookup:mp_FieldDefinition,yes,yes,no,1,Target field
+mp_FieldRule,mp_ruletype,RuleType,Choice,yes,yes,no,2,required/relevance/constraint/calculate/default/choice_filter
+mp_FieldRule,mp_expression,Expression,MultilineText,yes,no,no,3,Source rule expression
+mp_FieldRule,mp_message,Message,MultilineText,no,no,no,4,Validation/help message
+mp_FieldRule,mp_status,Status,Choice,yes,yes,no,5,active/draft/retired
+mp_VocabularyScheme,mp_schemecode,SchemeCode,Text,yes,yes,no,1,Stable scheme code
+mp_VocabularyScheme,mp_name,Name,Text,yes,yes,no,2,Display name
+mp_VocabularyScheme,mp_authority,Authority,Text,no,yes,no,3,Owning authority
+mp_VocabularyScheme,mp_version,Version,Text,no,yes,no,4,Scheme version
+mp_VocabularyScheme,mp_status,Status,Choice,yes,yes,no,5,draft/active/deprecated/retired
+mp_VocabularyTerm,mp_scheme,Scheme,Lookup:mp_VocabularyScheme,yes,yes,no,1,Owning scheme
+mp_VocabularyTerm,mp_termcode,TermCode,Text,yes,yes,no,2,Stable term code
+mp_VocabularyTerm,mp_preferredlabel,PreferredLabel,Text,yes,yes,no,3,Default preferred label
+mp_VocabularyTerm,mp_status,Status,Choice,yes,yes,no,4,active/deprecated/draft/retired
+mp_VocabularyTerm,mp_sortorder,SortOrder,WholeNumber,no,yes,no,5,Display ordering
+mp_VocabularyTerm,mp_propsjson,PropsJson,MultilineText,no,no,no,6,Extensible term metadata
+mp_VocabularyTermLabel,mp_term,Term,Lookup:mp_VocabularyTerm,yes,yes,no,1,Vocabulary term
+mp_VocabularyTermLabel,mp_languagecode,LanguageCode,Text,yes,yes,no,2,BCP-47 language code
+mp_VocabularyTermLabel,mp_label,Label,Text,yes,yes,no,3,Label text
+mp_VocabularyTermLabel,mp_labeltype,LabelType,Choice,yes,yes,no,4,preferred/alternate/hidden
+mp_VocabularyTermRelation,mp_sourceterm,SourceTerm,Lookup:mp_VocabularyTerm,yes,yes,no,1,Source term
+mp_VocabularyTermRelation,mp_relationtype,RelationType,Choice,yes,yes,no,2,parent/child/broader/narrower/exactMatch/replaces
+mp_VocabularyTermRelation,mp_targetterm,TargetTerm,Lookup:mp_VocabularyTerm,yes,yes,no,3,Target term
+mp_ProjectVocabularyBinding,mp_project,Project,Lookup:mp_Project,yes,yes,no,1,Project
+mp_ProjectVocabularyBinding,mp_scheme,Scheme,Lookup:mp_VocabularyScheme,yes,yes,no,2,Vocabulary scheme
+mp_ProjectVocabularyBinding,mp_filterrule,FilterRule,MultilineText,no,no,no,3,Project subset/filter
+mp_ProjectVocabularyBinding,mp_status,Status,Choice,yes,yes,no,4,active/inactive
+mp_FieldVocabularyBinding,mp_fielddefinition,FieldDefinition,Lookup:mp_FieldDefinition,yes,yes,no,1,Field
+mp_FieldVocabularyBinding,mp_scheme,Scheme,Lookup:mp_VocabularyScheme,yes,yes,no,2,Vocabulary scheme
+mp_FieldVocabularyBinding,mp_selectionmode,SelectionMode,Choice,yes,yes,no,3,single/multiple/reference
+mp_FieldVocabularyBinding,mp_requiredtermfilter,RequiredTermFilter,MultilineText,no,no,no,4,Field-specific subset/filter
+mp_ExternalAuthorityIdentifier,mp_term,Term,Lookup:mp_VocabularyTerm,yes,yes,no,1,Vocabulary term
+mp_ExternalAuthorityIdentifier,mp_authority,Authority,Text,yes,yes,no,2,Authority name
+mp_ExternalAuthorityIdentifier,mp_identifier,Identifier,Text,yes,yes,no,3,External identifier
+mp_ExternalAuthorityIdentifier,mp_uri,Uri,Url,no,no,no,4,External URI
+mp_TrackedEntity,mp_project,Project,Lookup:mp_Project,yes,yes,no,1,Project
+mp_TrackedEntity,mp_entitytype,EntityType,Choice,yes,yes,no,2,farmer/customer/facility/school/site/household/etc
+mp_TrackedEntity,mp_entitykey,EntityKey,Text,yes,yes,no,3,Project-scoped stable key
+mp_TrackedEntity,mp_displayname,DisplayName,Text,yes,yes,no,4,Display name
+mp_TrackedEntity,mp_status,Status,Choice,yes,yes,no,5,active/inactive/merged
+mp_EntityIdentifier,mp_trackedentity,TrackedEntity,Lookup:mp_TrackedEntity,yes,yes,no,1,Entity
+mp_EntityIdentifier,mp_identifiertype,IdentifierType,Choice,yes,yes,no,2,Identifier type
+mp_EntityIdentifier,mp_identifiervalue,IdentifierValue,Text,yes,yes,no,3,Identifier value or hash
+mp_EntityIdentifier,mp_status,Status,Choice,yes,yes,no,4,active/inactive
+mp_Encounter,mp_project,Project,Lookup:mp_Project,yes,yes,no,1,Project
+mp_Encounter,mp_trackedentity,TrackedEntity,Lookup:mp_TrackedEntity,no,yes,no,2,Subject entity
+mp_Encounter,mp_eventdefinition,EventDefinition,Lookup:mp_EventDefinition,yes,yes,no,3,Event definition
+mp_Encounter,mp_encounterdate,EncounterDate,DateOnly,yes,yes,no,4,Encounter date
+mp_Encounter,mp_status,Status,Choice,yes,yes,no,5,planned/in_progress/complete/cancelled
+mp_Submission,mp_project,Project,Lookup:mp_Project,yes,yes,no,1,Project
+mp_Submission,mp_instrumentversion,InstrumentVersion,Lookup:mp_InstrumentVersion,yes,yes,no,2,Instrument version
+mp_Submission,mp_encounter,Encounter,Lookup:mp_Encounter,no,yes,no,3,Encounter
+mp_Submission,mp_submissionkey,SubmissionKey,Text,yes,yes,no,4,Offline-safe submission key
+mp_Submission,mp_status,Status,Choice,yes,yes,no,5,draft/submitted/reviewed/approved/rejected
+mp_Submission,mp_startedat,StartedAt,DateTime,no,yes,no,6,Start timestamp
+mp_Submission,mp_submittedat,SubmittedAt,DateTime,no,yes,no,7,Submit timestamp
+mp_Submission,mp_enumerator,Enumerator,Customer,no,yes,no,8,Submitting user/team
+mp_GroupInstance,mp_submission,Submission,Lookup:mp_Submission,yes,yes,no,1,Submission
+mp_GroupInstance,mp_groupdefinition,GroupDefinition,Lookup:mp_GroupDefinition,yes,yes,no,2,Group metadata
+mp_GroupInstance,mp_parentgroupinstance,ParentGroupInstance,Lookup:mp_GroupInstance,no,yes,no,3,Parent repeat instance
+mp_GroupInstance,mp_repeatindex,RepeatIndex,WholeNumber,yes,yes,no,4,Repeat order
+mp_GroupInstance,mp_instancekey,InstanceKey,Text,yes,yes,no,5,Offline-safe group instance key
+mp_AnswerValue,mp_submission,Submission,Lookup:mp_Submission,yes,yes,no,1,Submission
+mp_AnswerValue,mp_groupinstance,GroupInstance,Lookup:mp_GroupInstance,yes,yes,no,2,Group instance
+mp_AnswerValue,mp_fielddefinition,FieldDefinition,Lookup:mp_FieldDefinition,yes,yes,no,3,Field metadata
+mp_AnswerValue,mp_textvalue,TextValue,MultilineText,no,no,no,4,Text answer
+mp_AnswerValue,mp_numbervalue,NumberValue,WholeNumber,no,no,no,5,Integer answer
+mp_AnswerValue,mp_decimalvalue,DecimalValue,Decimal,no,no,no,6,Decimal answer
+mp_AnswerValue,mp_currencyvalue,CurrencyValue,Currency,no,no,no,7,Currency answer
+mp_AnswerValue,mp_datevalue,DateValue,DateOnly,no,no,no,8,Date answer
+mp_AnswerValue,mp_datetimevalue,DateTimeValue,DateTime,no,no,no,9,Date/time answer
+mp_AnswerValue,mp_booleanvalue,BooleanValue,Boolean,no,no,no,10,Boolean answer
+mp_AnswerValue,mp_geopointlatitude,GeopointLatitude,Decimal,no,no,no,11,Latitude
+mp_AnswerValue,mp_geopointlongitude,GeopointLongitude,Decimal,no,no,no,12,Longitude
+mp_AnswerValue,mp_geopointaltitude,GeopointAltitude,Decimal,no,no,no,13,Altitude
+mp_AnswerValue,mp_geopointaccuracy,GeopointAccuracy,Decimal,no,no,no,14,Accuracy
+mp_AnswerValue,mp_jsonvalue,JsonValue,MultilineText,no,no,no,15,Rare structured answer
+mp_AnswerValue,mp_rawvalue,RawValue,MultilineText,no,no,no,16,Original import value
+mp_MultiSelectAnswer,mp_submission,Submission,Lookup:mp_Submission,yes,yes,no,1,Submission
+mp_MultiSelectAnswer,mp_groupinstance,GroupInstance,Lookup:mp_GroupInstance,yes,yes,no,2,Group instance
+mp_MultiSelectAnswer,mp_fielddefinition,FieldDefinition,Lookup:mp_FieldDefinition,yes,yes,no,3,Field metadata
+mp_MultiSelectAnswer,mp_vocabularyterm,VocabularyTerm,Lookup:mp_VocabularyTerm,yes,yes,no,4,Selected term
+mp_MultiSelectAnswer,mp_termcodesnapshot,TermCodeSnapshot,Text,no,yes,no,5,Term code snapshot
+mp_MultiSelectAnswer,mp_labelsnapshot,LabelSnapshot,Text,no,no,no,6,Label snapshot
+mp_Attachment,mp_submission,Submission,Lookup:mp_Submission,yes,yes,no,1,Submission
+mp_Attachment,mp_fielddefinition,FieldDefinition,Lookup:mp_FieldDefinition,yes,yes,no,2,Field metadata
+mp_Attachment,mp_file,File,File,yes,no,no,3,Dataverse file
+mp_Attachment,mp_filename,FileName,Text,yes,yes,no,4,File name
+mp_Attachment,mp_mediatype,MediaType,Text,no,yes,no,5,Media type
+mp_Attachment,mp_checksum,Checksum,Text,no,yes,no,6,Checksum
+mp_SubmissionReview,mp_submission,Submission,Lookup:mp_Submission,yes,yes,no,1,Submission
+mp_SubmissionReview,mp_reviewstate,ReviewState,Choice,yes,yes,no,2,pending/approved/rejected/changes_requested
+mp_SubmissionReview,mp_reviewer,Reviewer,Customer,no,yes,no,3,Reviewer
+mp_SubmissionReview,mp_comment,Comment,MultilineText,no,no,no,4,Review comment
+mp_SubmissionReview,mp_reviewedat,ReviewedAt,DateTime,no,yes,no,5,Review timestamp
+mp_AuditEvent,mp_project,Project,Lookup:mp_Project,yes,yes,no,1,Project
+mp_AuditEvent,mp_entitylogicalname,EntityLogicalName,Text,yes,yes,no,2,Target entity/table
+mp_AuditEvent,mp_recordkey,RecordKey,Text,yes,yes,no,3,Target record key
+mp_AuditEvent,mp_action,Action,Choice,yes,yes,no,4,created/updated/deleted/imported/corrected
+mp_AuditEvent,mp_actor,Actor,Customer,no,yes,no,5,Actor
+mp_AuditEvent,mp_occurredat,OccurredAt,DateTime,yes,yes,no,6,Timestamp
+mp_AuditEvent,mp_detailsjson,DetailsJson,MultilineText,no,no,no,7,Structured details
+mp_ExportProfile,mp_project,Project,Lookup:mp_Project,yes,yes,no,1,Project
+mp_ExportProfile,mp_profilecode,ProfileCode,Text,yes,yes,no,2,Stable export profile code
+mp_ExportProfile,mp_name,Name,Text,yes,yes,no,3,Display name
+mp_ExportProfile,mp_outputshape,OutputShape,Choice,yes,yes,no,4,normalized/wide/codebook/powerbi
+mp_ExportProfile,mp_status,Status,Choice,yes,yes,no,5,draft/active/retired
+mp_ExportColumn,mp_exportprofile,ExportProfile,Lookup:mp_ExportProfile,yes,yes,no,1,Export profile
+mp_ExportColumn,mp_fielddefinition,FieldDefinition,Lookup:mp_FieldDefinition,no,yes,no,2,Field metadata
+mp_ExportColumn,mp_columnname,ColumnName,Text,yes,yes,no,3,Export column name
+mp_ExportColumn,mp_columnorder,ColumnOrder,WholeNumber,yes,yes,no,4,Ordering
+mp_ExportColumn,mp_transformexpression,TransformExpression,MultilineText,no,no,no,5,Projection transform
