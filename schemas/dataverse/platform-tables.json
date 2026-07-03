@@ -178,6 +178,16 @@
       "environment_write": false
     },
     {
+      "logical_name": "mp_VillageReference",
+      "display_name": "VillageReference",
+      "schema_group": "Reference data",
+      "primary_name_column": "VillageName",
+      "ownership": "UserOrTeam",
+      "purpose": "High-volume village lookup optimized for delegated cascading filters by region, district, and ward",
+      "source_decision": "schemas/dataverse/import-order.md",
+      "environment_write": false
+    },
+    {
       "logical_name": "mp_TrackedEntity",
       "display_name": "TrackedEntity",
       "schema_group": "Runtime data",

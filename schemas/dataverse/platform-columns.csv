@@ -159,3 +159,13 @@ mp_ExportColumn,mp_fielddefinition,FieldDefinition,Lookup:mp_FieldDefinition,no,
 mp_ExportColumn,mp_columnname,ColumnName,Text,yes,yes,no,3,Export column name
 mp_ExportColumn,mp_columnorder,ColumnOrder,WholeNumber,yes,yes,no,4,Ordering
 mp_ExportColumn,mp_transformexpression,TransformExpression,MultilineText,no,no,no,5,Projection transform
+mp_VillageReference,mp_project,Project,Lookup:mp_Project,yes,yes,no,1,Project scope
+mp_VillageReference,mp_villagecode,VillageCode,Text,yes,yes,no,2,Stable village code from source reference data
+mp_VillageReference,mp_villagename,VillageName,Text,yes,yes,no,3,Village display name
+mp_VillageReference,mp_villagenamesw,VillageNameSw,Text,no,no,no,4,Swahili/local display name
+mp_VillageReference,mp_regioncode,RegionCode,Text,yes,yes,no,5,Region code for delegated cascade filters
+mp_VillageReference,mp_districtcode,DistrictCode,Text,yes,yes,no,6,District code for delegated cascade filters
+mp_VillageReference,mp_wardcode,WardCode,Text,yes,yes,no,7,Ward code for delegated cascade filters
+mp_VillageReference,mp_sortorder,SortOrder,WholeNumber,no,yes,no,8,Display ordering
+mp_VillageReference,mp_status,Status,Choice,yes,yes,no,9,active/deprecated/retired
+mp_VillageReference,mp_sourcefile,SourceFile,Text,no,no,no,10,Source artifact path
