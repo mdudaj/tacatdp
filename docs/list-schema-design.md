@@ -1,5 +1,7 @@
 # Phase 2: Microsoft Lists Schema Design
 
+> Status: fallback. Dataverse is now the primary development backend. This document remains useful as evidence for the original hybrid decomposition and as a Microsoft Lists fallback if production constraints require it. See `docs/dataverse-first/`.
+
 ## Purpose
 
 Design a Microsoft Lists-backed data model for the TACATDP Power Apps canvas app that supports the extracted XLSForm requirements without forcing all 292 input fields into one fragile list.

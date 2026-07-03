@@ -2,14 +2,15 @@
 
 ## Context and evidence
 
-TACATDP Phase 3 converts a long XLSForm-style survey into a guided Power Apps Canvas app backed by Microsoft Lists/SharePoint. The current ordered native-control branch imports successfully in Studio and contains 33 chronological screens with 393 field rows and 226 scaffold-required rows. The next slice must define screen-level validation and save behavior before formulas or live data connections are implemented.
+TACATDP Phase 3 converts a long XLSForm-style survey into a guided Power Apps Canvas app. Dataverse is now the primary development backend, with Microsoft Lists/SharePoint retained as fallback evidence. The current ordered native-control branch imports successfully in Studio and contains 33 chronological screens with 393 field rows and 226 scaffold-required rows. The next slice must define screen-level validation and save behavior before formulas or live data connections are implemented.
 
 Key evidence:
 
 - `artifacts/powerapps/phase3-preview/summary.json`
 - `app-src/Src/Screen_*.pa.yaml`
 - `schemas/xlsform-to-list-mapping.csv`
-- `schemas/sharepoint-lists-schema.json`
+- `docs/dataverse-first/`
+- `schemas/sharepoint-lists-schema.json` as fallback/source decomposition evidence
 - `docs/design-system.md`
 - `docs/phase-3-requirements.md`
 - `docs/phase-3-delivery-plan.md`
@@ -18,7 +19,7 @@ Key evidence:
 
 ## Problem
 
-The app has an importable native-control screen scaffold, but it does not yet have durable, screen-by-screen requirements for validation, validation-summary behavior, placeholder save orchestration, and later Microsoft Lists replacement. Implementing formulas without that map risks ad-hoc fixes, hidden-field validation bugs, incorrect list writes, repeated import failures, and UX drift.
+The app has an importable native-control screen scaffold, but it does not yet have durable, screen-by-screen requirements for validation, validation-summary behavior, placeholder save orchestration, and later Dataverse replacement. Implementing formulas without that map risks ad-hoc fixes, hidden-field validation bugs, incorrect table writes, repeated import failures, and UX drift.
 
 ## Users and actors
 
@@ -152,4 +153,3 @@ See `requirements-traceability.md`.
 - What is the approved target SharePoint site and list naming convention for the controlled environment?
 - What target device sizes should be treated as blocking for screen-level UX verification?
 - What offline/low-connectivity behavior is expected beyond local draft placeholder state?
-

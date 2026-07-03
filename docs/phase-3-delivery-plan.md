@@ -10,13 +10,13 @@ Use `docs/phase-3-maker-runbook.md` as the ordered Power Apps Studio execution g
 
 ### 1. Placeholder UX and component prototype
 
-Status: selected as Milestone 1 while the Windows/PowerShell environment is controlled and Microsoft Lists cannot yet be created.
+Status: selected as Milestone 1 while the Dataverse-first schema is being designed and reviewed.
 
 Inputs:
 
 - `docs/design-system.md`
 - `docs/milestone-1-placeholder-plan.md`
-- `schemas/sharepoint-fields.csv`
+- `docs/dataverse-first/product-requirements-document.md`
 - `schemas/xlsform-to-list-mapping.csv`
 
 Outputs:
@@ -25,14 +25,16 @@ Outputs:
 - Placeholder section progress.
 - Placeholder reusable components.
 - Placeholder `scrHome`, `scrProfile`, `scrAgriculture`, and `scrReviewSubmit`.
-- Local sample collections shaped for later replacement with Microsoft Lists.
+- Local sample collections shaped for later replacement with Dataverse tables.
 
 ### 2. Confirm runtime environment
 
 Inputs:
 
-- SharePoint site URL.
-- Created Microsoft Lists.
+- Power Platform dev environment.
+- Dataverse database enabled.
+- TACATDP solution and publisher prefix.
+- Created Dataverse tables.
 - Imported reference data.
 - Power Apps Studio access.
 - Target device profile.
@@ -40,7 +42,7 @@ Inputs:
 Outputs:
 
 - Confirmed data source names in Power Apps.
-- Connection names and list availability documented.
+- Connection names and Dataverse table availability documented.
 
 ### 3. Define app shell and reusable components
 
@@ -155,7 +157,7 @@ Minimum verification scenarios:
 3. Implement placeholder `scrAgriculture` to demonstrate reference ComboBox and `select_multiple` UX.
 4. Implement placeholder validation summary and save status.
 5. Implement placeholder `scrReviewSubmit`.
-6. Connect generated Microsoft Lists as data sources after the Windows/PowerShell environment is ready.
+6. Connect generated Dataverse tables as data sources after the schema is reviewed and created in the dev environment.
 7. Swap placeholder collections for real data sources section by section.
 8. Implement real `Patch` save orchestration.
 9. Replicate section patterns across remaining screens.
@@ -167,7 +169,7 @@ Before any publish or production connection, complete the manual QA checklist in
 
 - Power Apps YAML source may not support large manual structural edits reliably; Studio validation is required.
 - Modern controls may lack a needed behavior, requiring a controlled fallback to classic controls.
-- Reference-data imports may be slow for 66,297 villages.
+- Dataverse reference-data imports may be slow for 66,297 villages and should use reviewed batching/dataflow strategy.
 - Offline collection is not designed yet; if required, it changes the data loading/save strategy.
 - Complex formulas can drift if copied section-by-section; reusable components/formula conventions are required.
 - Placeholder screens can become technical debt if they do not follow `docs/design-system.md`.
