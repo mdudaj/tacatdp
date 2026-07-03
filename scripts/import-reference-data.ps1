@@ -2,7 +2,12 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$SiteUrl,
 
-    [string]$ReferenceDataPath = "../schemas/reference-data"
+    [string]$ReferenceDataPath = "../schemas/reference-data",
+
+    [string]$ClientId = $env:ENTRAID_APP_ID,
+
+    [ValidateSet("Interactive", "DeviceLogin", "OSLogin")]
+    [string]$AuthMode = "Interactive"
 )
 
 $ErrorActionPreference = "Stop"
@@ -31,7 +36,48 @@ function Ensure-PnPPowerShell {
 Ensure-PnPPowerShell
 
 $resolvedReferencePath = Resolve-Path $ReferenceDataPath
-Connect-PnPOnline -Url $SiteUrl -Interactive
+
+function Resolve-PnPClientId {
+    if (-not [string]::IsNullOrWhiteSpace($ClientId)) {
+        return $ClientId
+    }
+
+    $fallbackNames = @("ENTRAID_CLIENT_ID", "PNP_CLIENT_ID")
+    foreach ($name in $fallbackNames) {
+        $value = [Environment]::GetEnvironmentVariable($name)
+        if (-not [string]::IsNullOrWhiteSpace($value)) {
+            return $value
+        }
+    }
+
+    throw @"
+PnP.PowerShell now requires a ClientId for interactive authentication.
+
+Create or use an approved Entra ID App Registration, then rerun with:
+  .\import-reference-data.cmd -SiteUrl "$SiteUrl" -ClientId "<application-client-id>"
+
+You can also set ENTRAID_APP_ID, ENTRAID_CLIENT_ID, or PNP_CLIENT_ID.
+If the popup login is unsupported on this machine, add -AuthMode DeviceLogin.
+"@
+}
+
+function Connect-TacatdpPnPOnline {
+    $resolvedClientId = Resolve-PnPClientId
+
+    switch ($AuthMode) {
+        "Interactive" {
+            Connect-PnPOnline -Url $SiteUrl -Interactive -ClientId $resolvedClientId
+        }
+        "DeviceLogin" {
+            Connect-PnPOnline -Url $SiteUrl -DeviceLogin -ClientId $resolvedClientId
+        }
+        "OSLogin" {
+            Connect-PnPOnline -Url $SiteUrl -OSLogin -ClientId $resolvedClientId
+        }
+    }
+}
+
+Connect-TacatdpPnPOnline
 
 Get-ChildItem -Path $resolvedReferencePath -Filter "*.csv" | ForEach-Object {
     $listTitle = $_.BaseName

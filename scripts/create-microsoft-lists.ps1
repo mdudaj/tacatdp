@@ -2,7 +2,14 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$SiteUrl,
 
-    [string]$SchemaPath = "../schemas/sharepoint-lists-schema.json"
+    [string]$SchemaPath = "../schemas/sharepoint-lists-schema.json",
+
+    [string]$ClientId = $env:ENTRAID_APP_ID,
+
+    [ValidateSet("Interactive", "DeviceLogin", "OSLogin")]
+    [string]$AuthMode = "Interactive",
+
+    [int]$MaxColumnsPerList = 300
 )
 
 $ErrorActionPreference = "Stop"
@@ -33,7 +40,68 @@ Ensure-PnPPowerShell
 $resolvedSchemaPath = Resolve-Path $SchemaPath
 $schema = Get-Content $resolvedSchemaPath -Raw | ConvertFrom-Json
 
-Connect-PnPOnline -Url $SiteUrl -Interactive
+function Resolve-PnPClientId {
+    if (-not [string]::IsNullOrWhiteSpace($ClientId)) {
+        return $ClientId
+    }
+
+    $fallbackNames = @("ENTRAID_CLIENT_ID", "PNP_CLIENT_ID")
+    foreach ($name in $fallbackNames) {
+        $value = [Environment]::GetEnvironmentVariable($name)
+        if (-not [string]::IsNullOrWhiteSpace($value)) {
+            return $value
+        }
+    }
+
+    throw @"
+PnP.PowerShell now requires a ClientId for interactive authentication.
+
+Create or use an approved Entra ID App Registration, then rerun with:
+  .\create-microsoft-lists.cmd -SiteUrl "$SiteUrl" -ClientId "<application-client-id>"
+
+You can also set ENTRAID_APP_ID, ENTRAID_CLIENT_ID, or PNP_CLIENT_ID.
+If the popup login is unsupported on this machine, add -AuthMode DeviceLogin.
+"@
+}
+
+function Test-ListColumnLimits {
+    param(
+        [Parameter(Mandatory = $true)]
+        $Schema,
+
+        [Parameter(Mandatory = $true)]
+        [int]$Limit
+    )
+
+    foreach ($list in $Schema.lists) {
+        $fieldCount = @($list.fields).Count
+        if ($fieldCount -gt $Limit) {
+            throw "List '$($list.title)' defines $fieldCount generated columns, which exceeds the configured limit of $Limit. Split this list before importing."
+        }
+        if ($fieldCount -gt ($Limit - 25)) {
+            Write-Warning "List '$($list.title)' defines $fieldCount generated columns and is close to the configured limit of $Limit."
+        }
+    }
+}
+
+function Connect-TacatdpPnPOnline {
+    $resolvedClientId = Resolve-PnPClientId
+
+    switch ($AuthMode) {
+        "Interactive" {
+            Connect-PnPOnline -Url $SiteUrl -Interactive -ClientId $resolvedClientId
+        }
+        "DeviceLogin" {
+            Connect-PnPOnline -Url $SiteUrl -DeviceLogin -ClientId $resolvedClientId
+        }
+        "OSLogin" {
+            Connect-PnPOnline -Url $SiteUrl -OSLogin -ClientId $resolvedClientId
+        }
+    }
+}
+
+Test-ListColumnLimits -Schema $schema -Limit $MaxColumnsPerList
+Connect-TacatdpPnPOnline
 
 foreach ($list in $schema.lists) {
     $existingList = Get-PnPList -Identity $list.title -ErrorAction SilentlyContinue
