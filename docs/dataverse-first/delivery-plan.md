@@ -7,10 +7,11 @@
 3. Choose publisher prefix, for example `tacatdp`.
 4. Record environment-specific values outside source control.
 
-## Phase 1: Dataverse schema design
+## Phase 1: Multi-project platform schema design
 
 Inputs:
 
+- `docs/multi-project-monitoring/`
 - `schemas/xlsform-to-list-mapping.csv`
 - `schemas/sharepoint-lists-schema.json`
 - `docs/xlsform-field-inventory.csv`
@@ -19,11 +20,12 @@ Inputs:
 
 Outputs:
 
-- Dataverse table inventory.
+- Platform table inventory for projects, instruments, versions, groups, fields, entities, encounters, submissions, group instances, answers, vocabularies, and projections.
 - Column inventory with Dataverse data types.
 - Relationship inventory.
 - Alternate-key inventory.
-- Choice/reference-table decision matrix.
+- Controlled vocabulary decision matrix.
+- TACATDP metadata import plan.
 - Import-order plan.
 
 ## Phase 2: Dataverse schema generation artifacts
@@ -65,5 +67,4 @@ After explicit approval:
 
 ## Immediate next slice
 
-Generate the Dataverse schema design artifacts from the existing XLSForm/list-mapping files without writing to any environment.
-
+Generate multi-project Dataverse schema design artifacts from `docs/multi-project-monitoring/` and the existing XLSForm/list-mapping files without writing to any environment.

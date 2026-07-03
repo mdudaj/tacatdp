@@ -6,6 +6,7 @@ TACATDP converts a long XLSForm-style survey into a guided Power Apps Canvas app
 
 Evidence:
 
+- `docs/multi-project-monitoring/`
 - `docs/dataverse-first/research.md`
 - `docs/list-schema-design.md`
 - `schemas/xlsform-to-list-mapping.csv`
@@ -67,6 +68,8 @@ No UX layout change is introduced by the backend pivot. Existing requirements re
 
 ### Proposed table groups
 
+The multi-project monitoring model in `docs/multi-project-monitoring/data-model.md` supersedes a TACATDP-only table design. TACATDP should be implemented as the first configured `MonitoringProject` with instrument/group/field metadata, controlled vocabularies, submissions, group instances, answer values, and export projections.
+
 | Group | Proposed Dataverse table(s) | Notes |
 | --- | --- | --- |
 | Parent | `tacatdp_Submission` | One row per survey; alternate key `SubmissionKey`. |
@@ -110,4 +113,3 @@ See `definition-of-done.md`.
 ## Traceability
 
 See `requirements-traceability.md`.
-
