@@ -12,7 +12,10 @@ Evidence:
 - `docs/list-schema-design.md`
 - ODK Central docs for projects, forms, submissions, entities, and repeats
 - OpenClinica/CDISC ODM hierarchy: study, event, form, item group, item
-- InvenioRDM controlled vocabulary patterns
+- InvenioRDM v13 controlled vocabulary patterns:
+  - `https://inveniordm.docs.cern.ch/`
+  - `https://inveniordm.docs.cern.ch/features/customization/`
+  - `https://inveniordm.docs.cern.ch/reference/rest_api_vocabularies/`
 
 ## Problem
 
@@ -82,13 +85,30 @@ A TACATDP-specific Dataverse schema can deliver one project but will not scale c
 | `ProjectionTable/View` | Optional generated reporting shape. |
 | `VariableDictionaryExport` | Human-readable codebook/data dictionary. |
 
+## Controlled vocabulary requirements
+
+The controlled variables feature should follow the confirmed InvenioRDM v13 vocabulary pattern, adapted for monitoring data:
+
+| Requirement | PRD expectation |
+| --- | --- |
+| Stable identifiers | Each term must have a stable code/ID independent of display label changes. |
+| Vocabulary type/scheme | Terms must belong to a scheme/type, such as geography, crop, branch, unit, cost item, intervention, or project-specific code list. |
+| Localized labels | Terms must support localized titles/labels and descriptions, including English and Swahili where needed. |
+| Flexible metadata | Terms must support extensible properties for source XLSForm value, sort order, parent filters, authority metadata, or project metadata. |
+| Tags/filtering | Terms must support tags or equivalent classifications so UI controls and APIs can filter them. |
+| Links/external IDs | Terms should support external authority identifiers and links where applicable. |
+| Search/autocomplete | The platform should eventually expose search/suggest behavior for large vocabularies, mirroring InvenioRDM's vocabulary API pattern. |
+| Specific vocabularies | Large or special vocabularies, such as villages, organizations, funders, facilities, or subjects, may need dedicated views/endpoints rather than generic dropdown loading. |
+| Project binding | Projects must be able to use a subset of global terms without duplicating the global vocabulary. |
+| Field binding | Field definitions must bind to a scheme and specify single-select, multi-select, or reference lookup behavior. |
+
 ## Key architecture decisions
 
 1. The normalized runtime model is the source of truth.
 2. TACATDP-specific section tables should become projections or generated performance optimizations, not the core model.
 3. Repeating groups are represented as `GroupInstance` rows with repeat indexes and optional parent group instance.
 4. Multi-select values are represented as `MultiSelectAnswer` rows that reference vocabulary terms.
-5. Controlled variables are represented through vocabulary schemes and terms, inspired by InvenioRDM-style vocabularies.
+5. Controlled variables are represented through vocabulary schemes and terms, using the InvenioRDM-style pattern of stable IDs, vocabulary types, localized labels/descriptions, flexible properties, tags, links, and search/suggest support.
 6. Form versions must be immutable once published; new changes create a new `InstrumentVersion`.
 7. Submitted data must point to the exact `InstrumentVersion`, `GroupDefinition`, and `FieldDefinition` active at collection time.
 
@@ -102,4 +122,3 @@ A TACATDP-specific Dataverse schema can deliver one project but will not scale c
 ## Acceptance criteria
 
 See `acceptance-criteria.md`.
-
