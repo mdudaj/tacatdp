@@ -1,8 +1,10 @@
 # Metadata-Driven Form Renderer UX
 
-## Decision
+## Vision decision
 
-The multi-project platform should not hard-code one Canvas screen per TACATDP section as the long-term app design. The fixed 33-screen TACATDP source can remain a transitional prototype, import recovery artifact, or generated project-specific projection, but the reusable platform should render forms from `InstrumentVersion`, `GroupDefinition`, `FieldDefinition`, `FieldRule`, vocabulary/reference bindings, and repeat metadata.
+The project platform should not hard-code one Canvas screen per TACATDP section as the long-term app design. The fixed 33-screen TACATDP source can remain a transitional prototype, import recovery artifact, or generated project-specific projection, but the reusable platform vision should render forms from `Project`, `InstrumentVersion`, `GroupDefinition`, `FieldDefinition`, `FieldRule`, vocabulary/reference bindings, and repeat metadata.
+
+The renderer remains the app vision and research track. It should guide naming, schema, and prototype seams, but the first implementation should be a TACATDP single-project prototype rather than the full generic renderer.
 
 ## Research basis
 
@@ -16,7 +18,7 @@ ODK/XLSForm separates the form definition from the form filling UI:
 
 ## Implication for TACATDP
 
-The current 33-screen design is not wrong as a TACATDP-specific scaffold, but it is wrong as the reusable platform architecture. A multi-project platform needs a small set of generic screens/components:
+The current 33-screen design is not wrong as a TACATDP-specific scaffold, but it is wrong as the reusable platform architecture. A future project platform needs a small set of generic screens/components:
 
 | Surface | Purpose |
 | --- | --- |
@@ -41,7 +43,7 @@ The current 33-screen design is not wrong as a TACATDP-specific scaffold, but it
 
 ## Recommended next design slice
 
-Before editing Canvas screens again, create a review-only renderer contract:
+For the vision track, maintain the review-only renderer contract:
 
 - `schemas/dataverse/form-renderer-contract.json`
 - group/page layout metadata columns for `mp_GroupDefinition`
@@ -49,7 +51,9 @@ Before editing Canvas screens again, create a review-only renderer contract:
 - rule-expression subset supported in Power Fx for the first implementation
 - pilot renderer flow for one TACATDP section and one repeat group
 
-No Power Platform environment writes should happen until this renderer contract is reviewed.
+No Power Platform environment writes should happen for the generic renderer until this renderer contract is reviewed.
+
+For the implementation track, proceed with a TACATDP single-project prototype and record any shortcuts that must be revisited before platform generalization.
 
 ## Contract status
 

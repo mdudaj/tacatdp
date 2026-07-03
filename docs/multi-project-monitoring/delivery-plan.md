@@ -1,9 +1,10 @@
-# Delivery Plan: Multi-Project Monitoring Model
+# Delivery Plan: Project Platform Vision and TACATDP Prototype
 
-## Phase 1: Approve conceptual model
+## Phase 1: Preserve app vision
 
 Review:
 
+- `../app-vision.md`
 - `research.md`
 - `product-requirements-document.md`
 - `data-model.md`
@@ -11,9 +12,10 @@ Review:
 
 Decision needed:
 
-- confirm metadata-driven platform model;
-- confirm TACATDP as first project configuration;
-- confirm generic normalized runtime data as source of truth.
+- confirm Project as the general top-level concept;
+- confirm metadata-driven platform model as long-term vision;
+- confirm TACATDP as the first single-project prototype;
+- confirm generic normalized runtime data as a guardrail, not a blocker.
 
 ## Phase 2: Generate Dataverse schema artifacts
 
@@ -52,26 +54,33 @@ Create reviewable artifacts only:
 
 The fixed 33-screen TACATDP source should pause as a platform-default implementation path until this contract is reviewed.
 
-## Phase 5: Dev Dataverse implementation
+## Phase 5: TACATDP prototype implementation
 
-After explicit approval:
+After explicit approval, implement one TACATDP project prototype before attempting broad multi-project generalization:
 
-1. Create the core platform solution.
-2. Create metadata/control-plane tables.
-3. Create runtime data tables.
-4. Create controlled vocabulary tables.
-5. Import TACATDP metadata and vocabulary terms.
-6. Validate relationships and alternate keys.
+1. Create or prepare only the Dataverse pieces needed for one TACATDP prototype slice.
+2. Implement one normal section end-to-end.
+3. Implement the region/district/ward/village cascade using delegated reference data.
+4. Implement one multi-select pattern.
+5. Implement one repeat/line-item pattern.
+6. Validate save, edit, review, and export/codebook implications.
+7. Record prototype shortcuts and classify each as acceptable, needs refactor, or blocks platform generalization.
 
 ## Phase 6: App integration
 
-1. Build a generic form runner shell rather than hand-building all TACATDP screens.
-2. Bind the runner to metadata/runtime tables or reviewed local placeholder collections shaped like those tables.
-3. Implement save/read for one pilot group and one repeat group.
+1. Use the renderer contract as a guide, but do not require a full generic renderer before the prototype.
+2. Prefer prototype code that can later migrate into the form runner.
+3. Bind the prototype to metadata/runtime tables or reviewed local placeholder collections shaped like those tables.
 4. Validate repeats, multi-select, relevance, constraints, and large reference filtering.
-5. Keep current fixed screens only as transitional/projection artifacts.
+5. Keep fixed screens as TACATDP prototype/projection artifacts.
 
-## Phase 7: Export/projection support
+## Phase 7: Multi-project research continuation
+
+1. Research how ODK Collect, Enketo, REDCap, OpenClinica, and related tools handle form loading, offline behavior, expression evaluation, repeat UX, and web/mobile parity.
+2. Decide whether the long-term renderer is Power Apps-only, shared metadata with Power Apps and custom web renderers, or a custom renderer outside Power Apps.
+3. Refine the renderer contract after TACATDP prototype lessons.
+
+## Phase 8: Export/projection support
 
 1. Generate TACATDP codebook.
 2. Generate wide export profiles.

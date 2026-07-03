@@ -1,8 +1,8 @@
-# PRD: Multi-Project Monitoring Platform Data Model
+# PRD: Project Platform Vision and TACATDP Prototype
 
 ## Context and evidence
 
-TACATDP started as one Power Apps survey conversion. During Dataverse planning, we identified that hard-coding TACATDP sections as the platform data model would make future monitoring projects difficult. Research into ODK Central, OpenClinica/CDISC ODM, REDCap, and InvenioRDM shows that robust platforms separate project metadata, instrument definitions, runtime submission data, repeat instances, entities/encounters, and controlled vocabularies.
+TACATDP started as one Power Apps survey conversion. During Dataverse planning, we identified that hard-coding TACATDP sections as the platform data model would make future projects difficult. Research into ODK Central, OpenClinica/CDISC ODM, REDCap, and InvenioRDM shows that robust form/data platforms separate project metadata, instrument definitions, runtime submission data, repeat instances, entities/encounters, and controlled vocabularies.
 
 Evidence:
 
@@ -19,13 +19,14 @@ Evidence:
 
 ## Problem
 
-A TACATDP-specific Dataverse schema can deliver one project but will not scale cleanly to multiple monitoring projects with different instruments, repeats, longitudinal follow-ups, and controlled vocabularies. We need a reusable platform model that can host TACATDP as the first configured project.
+A TACATDP-specific Dataverse schema can deliver one project but will not scale cleanly to multiple projects with different instruments, repeats, longitudinal follow-ups, and controlled vocabularies. The reusable platform is the long-term vision, but implementing the full multi-project platform now is a large research and engineering effort. TACATDP should be delivered first as a single-project prototype that validates the core patterns.
 
 ## Goals
 
 | Goal | Success measure |
 | --- | --- |
-| Support multiple monitoring projects. | Project is first-class and all definitions/data are project-scoped. |
+| Preserve project-platform vision. | Project is first-class and all definitions/data can become project-scoped. |
+| Deliver TACATDP prototype first. | One TACATDP end-to-end flow can be built without waiting for full multi-project generalization. |
 | Support arbitrary forms and versions. | Instruments and versions can evolve without rewriting core tables. |
 | Support repeating groups. | Runtime data stores repeat group instances with occurrence identity. |
 | Support multi-select. | Multi-select choices are stored as normalized rows. |
@@ -37,7 +38,7 @@ A TACATDP-specific Dataverse schema can deliver one project but will not scale c
 ## Users / actors
 
 - Platform admin: creates projects, vocabularies, and permissions.
-- Project manager: configures monitoring project instruments and versions.
+- Project manager: configures project instruments and versions.
 - Data collector/enumerator: submits project data.
 - Reviewer/QA: reviews submissions and data quality.
 - Data manager: manages vocabularies, imports reference data, exports datasets.
@@ -49,7 +50,7 @@ A TACATDP-specific Dataverse schema can deliver one project but will not scale c
 
 | Concept | Purpose |
 | --- | --- |
-| `MonitoringProject` | Top-level project/program boundary. |
+| `Project` | Top-level project/program boundary. |
 | `ProjectRoleAssignment` | Project-specific user/role mapping. |
 | `Instrument` | Form/survey definition container. |
 | `InstrumentVersion` | Versioned form definition, draft/published/retired. |
@@ -113,6 +114,7 @@ The controlled variables feature should follow the confirmed InvenioRDM v13 voca
 6. Form versions must be immutable once published; new changes create a new `InstrumentVersion`.
 7. Submitted data must point to the exact `InstrumentVersion`, `GroupDefinition`, and `FieldDefinition` active at collection time.
 8. The long-term Canvas UX should be a metadata-driven form runner. The current 33 TACATDP screens are a transitional scaffold or generated projection, not the reusable multi-project application architecture.
+9. The near-term implementation should be a TACATDP single-project prototype. Multi-project and generic renderer implementation remain the app vision and research track, not a prerequisite for the first working prototype.
 
 ## Safety and constraints
 
@@ -121,6 +123,7 @@ The controlled variables feature should follow the confirmed InvenioRDM v13 voca
 - Keep project-level access and data separation explicit.
 - Preserve TACATDP current deliverables while planning the more generic platform model.
 - Do not continue hand-building one screen per TACATDP section as the platform default before the form-renderer contract is reviewed.
+- Do not let the full multi-project vision block a TACATDP prototype; document prototype shortcuts and revisit them before platform generalization.
 
 ## Acceptance criteria
 

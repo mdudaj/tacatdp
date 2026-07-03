@@ -56,6 +56,8 @@ The imported screen list should start with `Screen_01_demographics`, whose visib
 
 The fixed screen list is a TACATDP-specific scaffold, not the long-term multi-project platform architecture. For multi-project delivery, prefer a metadata-driven form runner that loads `InstrumentVersion`, `GroupDefinition`, `FieldDefinition`, rules, vocabularies, references, and repeat definitions at runtime. Do not continue expanding hand-built TACATDP screens as the platform default until `docs/multi-project-monitoring/form-renderer-ux.md` and the renderer contract are reviewed.
 
+The near-term delivery path is still allowed to implement TACATDP as a one-project prototype. Prototype screens must be documented as TACATDP-specific and should keep seams that can later migrate into the project-platform renderer.
+
 ## Maker execution order
 
 ### 1. Prepare the app safely
