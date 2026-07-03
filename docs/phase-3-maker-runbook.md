@@ -44,6 +44,14 @@ It contains:
 
 The active import source remains the Studio-exported baseline under `app-src/Src/`. The Phase 3 screens and components remain in `artifacts/powerapps/phase3-scaffolds/` until they are created or normalized through Power Apps Studio, Git Integration, or a verified `pac canvas pack --layout SourceCode` workflow.
 
+## Screen naming and ODK metadata
+
+The live generated source uses chronological screen names:
+
+`Screen_<two-digit-order>_<semantic_name>.pa.yaml`
+
+The imported screen list should start with `Screen_01_demographics`, whose visible fields start at `Customer ID`. ODK ecosystem metadata fields `starttime`, `endtime`, `deviceid`, `subscriberid`, `simid`, `devicephonenum`, and `username` are not shown as data-entry rows. If those values are needed later, capture them through Power Apps app/save metadata such as `Now()`, `User()`, and device/session information rather than asking enumerators to type them.
+
 ## Maker execution order
 
 ### 1. Prepare the app safely

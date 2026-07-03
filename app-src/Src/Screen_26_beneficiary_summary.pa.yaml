@@ -1,0 +1,930 @@
+# Phase 3 native Canvas source candidate.
+# Generated from artifacts/powerapps/phase3-scaffolds without custom components.
+Screens:
+  Screen_26_beneficiary_summary:
+    Properties:
+      LoadingSpinnerColor: '=RGBA(0, 120, 212, 1)'
+    Children:
+      - Screen_26_beneficiary_summary_Title:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Bold'
+            Height: '=40'
+            Size: '=18'
+            Text: '="Summary Dashboard"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=24'
+      - Screen_26_beneficiary_summary_Progress:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="26 Beneficiary Summary"'
+            Width: '=1240'
+            X: '=40'
+            Y: '=68'
+      - Screen_26_beneficiary_summary_Row_001_Row_001_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum direct male"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=112'
+      - Screen_26_beneficiary_summary_Row_001_Row_001_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=144'
+      - Screen_26_beneficiary_summary_Row_001_Row_001_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=192'
+      - Screen_26_beneficiary_summary_Row_002_Row_002_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum_direct_male: ${sum_direct_male}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=232'
+      - Screen_26_beneficiary_summary_Row_002_Row_002_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=264'
+      - Screen_26_beneficiary_summary_Row_002_Row_002_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=312'
+      - Screen_26_beneficiary_summary_Row_003_Row_003_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum direct female"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=352'
+      - Screen_26_beneficiary_summary_Row_003_Row_003_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=384'
+      - Screen_26_beneficiary_summary_Row_003_Row_003_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=432'
+      - Screen_26_beneficiary_summary_Row_004_Row_004_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum_direct_female: ${sum_direct_female}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=472'
+      - Screen_26_beneficiary_summary_Row_004_Row_004_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=504'
+      - Screen_26_beneficiary_summary_Row_004_Row_004_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=552'
+      - Screen_26_beneficiary_summary_Row_005_Row_005_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum direct total"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=592'
+      - Screen_26_beneficiary_summary_Row_005_Row_005_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=624'
+      - Screen_26_beneficiary_summary_Row_005_Row_005_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=672'
+      - Screen_26_beneficiary_summary_Row_006_Row_006_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum_direct_total: ${sum_direct_total}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=712'
+      - Screen_26_beneficiary_summary_Row_006_Row_006_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=744'
+      - Screen_26_beneficiary_summary_Row_006_Row_006_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=792'
+      - Screen_26_beneficiary_summary_Row_007_Row_007_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum direct youth"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=832'
+      - Screen_26_beneficiary_summary_Row_007_Row_007_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=864'
+      - Screen_26_beneficiary_summary_Row_007_Row_007_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=912'
+      - Screen_26_beneficiary_summary_Row_008_Row_008_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum_direct_youth: ${sum_direct_youth}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=952'
+      - Screen_26_beneficiary_summary_Row_008_Row_008_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=984'
+      - Screen_26_beneficiary_summary_Row_008_Row_008_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1032'
+      - Screen_26_beneficiary_summary_Row_009_Row_009_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum indirect male"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1072'
+      - Screen_26_beneficiary_summary_Row_009_Row_009_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1104'
+      - Screen_26_beneficiary_summary_Row_009_Row_009_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1152'
+      - Screen_26_beneficiary_summary_Row_010_Row_010_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum_indirect_male: ${sum_indirect_male}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1192'
+      - Screen_26_beneficiary_summary_Row_010_Row_010_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1224'
+      - Screen_26_beneficiary_summary_Row_010_Row_010_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1272'
+      - Screen_26_beneficiary_summary_Row_011_Row_011_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum indirect female"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1312'
+      - Screen_26_beneficiary_summary_Row_011_Row_011_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1344'
+      - Screen_26_beneficiary_summary_Row_011_Row_011_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1392'
+      - Screen_26_beneficiary_summary_Row_012_Row_012_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum_indirect_female: ${sum_indirect_female}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1432'
+      - Screen_26_beneficiary_summary_Row_012_Row_012_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1464'
+      - Screen_26_beneficiary_summary_Row_012_Row_012_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1512'
+      - Screen_26_beneficiary_summary_Row_013_Row_013_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum indirect total"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1552'
+      - Screen_26_beneficiary_summary_Row_013_Row_013_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1584'
+      - Screen_26_beneficiary_summary_Row_013_Row_013_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1632'
+      - Screen_26_beneficiary_summary_Row_014_Row_014_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum_indirect_total: ${sum_indirect_total}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1672'
+      - Screen_26_beneficiary_summary_Row_014_Row_014_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1704'
+      - Screen_26_beneficiary_summary_Row_014_Row_014_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1752'
+      - Screen_26_beneficiary_summary_Row_015_Row_015_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum indirect youth"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1792'
+      - Screen_26_beneficiary_summary_Row_015_Row_015_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1824'
+      - Screen_26_beneficiary_summary_Row_015_Row_015_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1872'
+      - Screen_26_beneficiary_summary_Row_016_Row_016_Control_sum__Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="sum_indirect_youth: ${sum_indirect_youth}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1912'
+      - Screen_26_beneficiary_summary_Row_016_Row_016_Control_sum__Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1944'
+      - Screen_26_beneficiary_summary_Row_016_Row_016_Control_sum__Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=1992'
+      - Screen_26_beneficiary_summary_Row_017_Row_017_Control_over_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="overall male"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2032'
+      - Screen_26_beneficiary_summary_Row_017_Row_017_Control_over_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2064'
+      - Screen_26_beneficiary_summary_Row_017_Row_017_Control_over_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2112'
+      - Screen_26_beneficiary_summary_Row_018_Row_018_Control_over_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="overall_male: ${overall_male}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2152'
+      - Screen_26_beneficiary_summary_Row_018_Row_018_Control_over_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2184'
+      - Screen_26_beneficiary_summary_Row_018_Row_018_Control_over_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2232'
+      - Screen_26_beneficiary_summary_Row_019_Row_019_Control_over_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="overall female"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2272'
+      - Screen_26_beneficiary_summary_Row_019_Row_019_Control_over_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2304'
+      - Screen_26_beneficiary_summary_Row_019_Row_019_Control_over_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2352'
+      - Screen_26_beneficiary_summary_Row_020_Row_020_Control_over_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="overall_female: ${overall_female}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2392'
+      - Screen_26_beneficiary_summary_Row_020_Row_020_Control_over_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2424'
+      - Screen_26_beneficiary_summary_Row_020_Row_020_Control_over_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2472'
+      - Screen_26_beneficiary_summary_Row_021_Row_021_Control_gran_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="grand total"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2512'
+      - Screen_26_beneficiary_summary_Row_021_Row_021_Control_gran_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2544'
+      - Screen_26_beneficiary_summary_Row_021_Row_021_Control_gran_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2592'
+      - Screen_26_beneficiary_summary_Row_022_Row_022_Control_gran_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="grand_total: ${grand_total}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2632'
+      - Screen_26_beneficiary_summary_Row_022_Row_022_Control_gran_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2664'
+      - Screen_26_beneficiary_summary_Row_022_Row_022_Control_gran_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2712'
+      - Screen_26_beneficiary_summary_Row_023_Row_023_Control_over_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="overall youth"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2752'
+      - Screen_26_beneficiary_summary_Row_023_Row_023_Control_over_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2784'
+      - Screen_26_beneficiary_summary_Row_023_Row_023_Control_over_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2832'
+      - Screen_26_beneficiary_summary_Row_024_Row_024_Control_over_Label:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 18, 107, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=28'
+            Size: '=12'
+            Text: '="overall_youth: ${overall_youth}"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2872'
+      - Screen_26_beneficiary_summary_Row_024_Row_024_Control_over_Input:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            BorderColor: '=RGBA(166, 166, 166, 1)'
+            Default: '=""'
+            DelayOutput: '=true'
+            Font: '=Font.''Open Sans'''
+            Height: '=44'
+            HintText: '="Enter value"'
+            HoverBorderColor: '=RGBA(0, 120, 212, 1)'
+            PaddingLeft: '=8'
+            Size: '=12'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2904'
+      - Screen_26_beneficiary_summary_Row_024_Row_024_Control_over_Help:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(96, 96, 96, 1)'
+            Font: '=Font.''Open Sans'''
+            Height: '=24'
+            Size: '=10'
+            Text: '="Optional field."'
+            Width: '=1160'
+            X: '=40'
+            Y: '=2952'
+      - Screen_26_beneficiary_summary_CommandHint:
+          Control: Label@2.5.1
+          Properties:
+            Color: '=RGBA(0, 120, 212, 1)'
+            Font: '=Font.''Open Sans'''
+            FontWeight: '=FontWeight.Semibold'
+            Height: '=32'
+            Size: '=12'
+            Text: '="Back | Save Draft | Next - wire navigation after Studio opens this source"'
+            Width: '=1160'
+            X: '=40'
+            Y: '=3000'

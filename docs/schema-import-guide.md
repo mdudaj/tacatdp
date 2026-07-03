@@ -35,20 +35,22 @@ The generated schema uses the agreed hybrid design:
 
 Use PowerShell 7+ (`pwsh`) on Windows. PnP.PowerShell is installed automatically in `CurrentUser` scope if it is missing from the current PowerShell profile.
 
+PnP.PowerShell interactive authentication now requires a client ID from an approved Entra ID App Registration. Do not commit the client ID into scripts or documentation. Pass it on the command line for the current run, or set `ENTRAID_APP_ID`, `ENTRAID_CLIENT_ID`, or `PNP_CLIENT_ID` in the local Windows session.
+
 Recommended Windows command prompt flow:
 
 ```bat
 cd scripts
-create-microsoft-lists.cmd -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>"
-import-reference-data.cmd -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>"
+create-microsoft-lists.cmd -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>" -ClientId "<application-client-id>"
+import-reference-data.cmd -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>" -ClientId "<application-client-id>"
 ```
 
 If you prefer calling PowerShell directly:
 
 ```powershell
 cd scripts
-pwsh -NoProfile -ExecutionPolicy Bypass -File .\create-microsoft-lists.ps1 -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>"
-pwsh -NoProfile -ExecutionPolicy Bypass -File .\import-reference-data.ps1 -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>"
+pwsh -NoProfile -ExecutionPolicy Bypass -File .\create-microsoft-lists.ps1 -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>" -ClientId "<application-client-id>"
+pwsh -NoProfile -ExecutionPolicy Bypass -File .\import-reference-data.ps1 -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>" -ClientId "<application-client-id>"
 ```
 
 The `-ExecutionPolicy Bypass` flag applies only to that process, so it does not require changing the machine policy.
@@ -57,17 +59,25 @@ Create lists and typed fields:
 
 ```powershell
 cd scripts
-.\create-microsoft-lists.ps1 -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>"
+.\create-microsoft-lists.ps1 -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>" -ClientId "<application-client-id>"
 ```
 
 Import reference data:
 
 ```powershell
 cd scripts
-.\import-reference-data.ps1 -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>"
+.\import-reference-data.ps1 -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>" -ClientId "<application-client-id>"
 ```
 
 The reference import includes 66,297 village rows, so it can take time. Run it after confirming the target SharePoint site and list names.
+
+If the browser popup flow fails with `Specified method is not supported`, use device-code authentication:
+
+```bat
+create-microsoft-lists.cmd -SiteUrl "https://<tenant>.sharepoint.com/sites/<site>" -ClientId "<application-client-id>" -AuthMode DeviceLogin
+```
+
+The script checks the generated schema before connecting. By default, it fails if any generated list contains more than 300 generated columns. The current hybrid schema remains below that per-list limit; the largest generated list is `TACATDP_Beneficiaries`.
 
 ## Windows troubleshooting
 

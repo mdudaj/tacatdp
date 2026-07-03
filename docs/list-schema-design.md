@@ -45,7 +45,8 @@ Research findings from Microsoft documentation:
 3. SharePoint connector data types map to Power Apps as basic types (`Text`, `Number`, `Boolean`, `DateTime`) or `Complex` types (`Choice`, `Lookup`, `Person`, managed metadata, and similar).
 4. SharePoint delegable operations are better for simple `Text`, `Number`, `Boolean`, and `DateTime` columns. Complex columns have more limitations, especially for sorting and subfield search.
 5. SharePoint connector supports large lists, but app formulas must use delegable filters and indexed columns for predictable behavior.
-6. A single wide list is a poor fit for this workbook because it has 292 input fields, 176 numeric fields, repeated cost-stage structures, and large/cascading reference choices.
+6. Microsoft Lists/SharePoint column limits make a single wide list fragile. The project should keep each generated list below 300 generated columns, and lower where possible because SharePoint also has type-specific and system-column constraints.
+7. A single wide list is a poor fit for this workbook because it has 292 input fields, 176 numeric fields, repeated cost-stage structures, and large/cascading reference choices.
 
 Key references:
 
