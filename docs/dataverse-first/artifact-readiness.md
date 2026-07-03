@@ -26,7 +26,8 @@ Ready for the next planning/implementation slice after:
 1. The Dataverse-first docs are reviewed.
 2. A publisher prefix is chosen.
 3. The dev environment name and region are recorded outside source control if tenant-specific.
-4. The next slice is scoped to schema generation/design, not production deployment.
+4. The multi-project monitoring model is treated as the source architecture, with TACATDP-specific tables allowed only as projections if justified.
+5. The next slice is scoped to schema generation/design, not production deployment.
 
 ## Safe implementation boundary
 
@@ -34,4 +35,3 @@ Ready for the next planning/implementation slice after:
 - Create tables only in a trial/dev environment after explicit user confirmation.
 - Do not create, modify, or delete production tables.
 - Do not store environment IDs, credentials, or connection references as secrets in source.
-

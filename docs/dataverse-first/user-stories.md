@@ -8,9 +8,9 @@ As a TACATDP maker, I want a Dataverse-first backend plan so that app developmen
 
 As an enumerator, I want each survey session to create one stable submission record so that draft, resume, submit, and review actions remain linked across all sections.
 
-## DV-US-03: Section table saves
+## DV-US-03: Generic section/group saves
 
-As a maker, I want each form section mapped to a related Dataverse table so that screen-level save formulas are understandable and failures can be handled per section.
+As a maker, I want each form section or repeat group mapped to generic group definitions, group instances, and answer rows so that TACATDP and future projects can share one save model while still surfacing section-level validation and save failures.
 
 ## DV-US-04: Normalized multi-select answers
 
@@ -26,5 +26,4 @@ As an enumerator, I want region, district, ward, village, branch, and choice con
 
 ## DV-US-07: ALM-ready solution
 
-As an admin, I want TACATDP tables, relationships, choices, app, flows, and environment variables packaged in a solution so that dev/test/prod movement is controlled.
-
+As an admin, I want the monitoring platform tables, relationships, vocabularies, app, flows, projections, and environment variables packaged in a solution so that dev/test/prod movement is controlled.

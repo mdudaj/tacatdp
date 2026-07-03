@@ -52,8 +52,8 @@ After explicit approval:
 ## Phase 4: Canvas app connection pivot
 
 1. Keep current screen source and UX layout.
-2. Replace placeholder/Microsoft Lists data source assumptions with Dataverse table names.
-3. Update save formulas section by section.
+2. Replace placeholder/Microsoft Lists data source assumptions with the generic Dataverse platform tables and any reviewed TACATDP projections.
+3. Update save formulas screen by screen against group instances, answer rows, multi-select answer rows, and vocabulary terms.
 4. Validate one screen before replicating.
 5. Use App Checker and Monitor.
 

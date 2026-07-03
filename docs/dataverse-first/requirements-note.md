@@ -17,12 +17,12 @@ This is an architecture and requirements pivot only. It does not create Datavers
 | ID | Requirement | Priority | Evidence |
 | --- | --- | --- | --- |
 | DV-RQ-01 | TACATDP must use Dataverse as the primary development backend. | P0 | User decision and enabled Dataverse environment |
-| DV-RQ-02 | The model must preserve one parent submission and related section/child/reference data. | P0 | Existing hybrid schema and XLSForm mapping |
-| DV-RQ-03 | Every submission must keep a stable `SubmissionKey` alternate/integration key. | P0 | Existing save-map artifacts and ODK-style workflow |
-| DV-RQ-04 | Section data should be stored in Dataverse tables with relationships to Submission. | P0 | Current section list design |
-| DV-RQ-05 | `select_multiple` answers must remain normalized as child rows. | P0 | `TACATDP_MultiSelectAnswers` mapping |
-| DV-RQ-06 | Production cost stage details must remain normalized as line rows. | P0 | `TACATDP_ProductionCostLines` mapping |
-| DV-RQ-07 | Large reference choices must be Dataverse tables with delegable filters, not huge static choices. | P0 | 66,297 villages and delegation guidance |
+| DV-RQ-02 | The model must preserve project, instrument, version, group, field, submission, repeat, answer, entity, encounter, and vocabulary boundaries. | P0 | Multi-project monitoring model |
+| DV-RQ-03 | Every submission must keep a stable `SubmissionKey` alternate/integration key while relating to project, instrument version, entity, and encounter records. | P0 | Existing save-map artifacts and ODK-style workflow |
+| DV-RQ-04 | TACATDP section data must be represented through generic group definitions, group instances, field definitions, and answer rows; TACATDP-specific section tables are projections only if needed. | P0 | Multi-project monitoring model |
+| DV-RQ-05 | `select_multiple` answers must remain normalized as child rows linked to field definitions and vocabulary terms. | P0 | `TACATDP_MultiSelectAnswers` mapping |
+| DV-RQ-06 | Production cost stage details must be modeled as repeat/group instances and answer rows or line-item projections, not fixed TACATDP-only core tables. | P0 | `TACATDP_ProductionCostLines` mapping |
+| DV-RQ-07 | Large reference choices must be vocabulary/reference tables with delegable filters, not huge static choices. | P0 | 66,297 villages and delegation guidance |
 | DV-RQ-08 | Power Platform solution packaging must be planned before implementation. | P1 | Power Platform ALM guidance |
 | DV-RQ-09 | Microsoft Lists scripts and docs must be marked fallback until production confirms platform choice. | P1 | Existing Lists work remains reviewable |
 | DV-RQ-10 | No production Dataverse write, app publish, or environment permission change may occur without explicit approval. | P0 | TACATDP safety gates |
@@ -43,3 +43,6 @@ This is an architecture and requirements pivot only. It does not create Datavers
 - Which fields need Dataverse business rules versus app-only Power Fx validation?
 - Should choices use Dataverse choice columns for small lists or reference tables consistently for export fidelity?
 
+## Design stance
+
+Use a metadata-driven, multi-project core model, not one fixed Dataverse table per TACATDP section as the long-term source of truth. Project-specific typed/wide tables may still be generated later for analytics, exports, performance, or maker ergonomics, but they are projections derived from the normalized model.

@@ -11,8 +11,8 @@ This artifact slice is done when:
 
 The next schema implementation slice is done only when:
 
-1. A Dataverse table/column/relationship/alternate-key design exists for all mapped fields.
-2. Reference data import order is defined.
-3. Solution packaging strategy is defined.
-4. A maker can review the generated schema before anything is created in an environment.
-
+1. A multi-project Dataverse table/column/relationship/alternate-key design exists for projects, instruments, versions, groups, fields, vocabularies, entities, encounters, submissions, group instances, answers, reviews, audits, and projections.
+2. TACATDP's 292 mapped fields are represented as metadata and runtime answer mappings.
+3. Reference/vocabulary import order is defined.
+4. Solution packaging strategy is defined.
+5. A maker can review the generated schema before anything is created in an environment.
