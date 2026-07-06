@@ -1,18 +1,16 @@
-# Definition of Done: Dataverse-First Pivot
+# Definition of Done: July 7 Metadata-Driven MVP
 
-This artifact slice is done when:
+The MVP is done when:
 
-1. Dataverse-first research, requirements, PRD, stories, acceptance criteria, traceability, readiness, delivery plan, and verification artifacts exist.
-2. Existing Phase 3 requirements and delivery docs no longer describe Microsoft Lists as the only active target.
-3. Microsoft Lists artifacts are preserved but marked fallback.
-4. Karakana OKF memory for TACATDP is updated to Dataverse-first.
-5. No live Dataverse or SharePoint write has been executed.
-6. Handoff is refreshed.
-
-The next schema implementation slice is done only when:
-
-1. A multi-project Dataverse table/column/relationship/alternate-key design exists for projects, instruments, versions, groups, fields, vocabularies, entities, encounters, submissions, group instances, answers, reviews, audits, and projections.
-2. TACATDP's 292 mapped fields are represented as metadata and runtime answer mappings.
-3. Reference/vocabulary import order is defined.
-4. Solution packaging strategy is defined.
-5. A maker can review the generated schema before anything is created in an environment.
+- Power Apps/Entra authentication is used with no custom login.
+- One active published form version is assigned to one test user.
+- The assigned forms screen shows that form for the test user.
+- The Canvas App renders sections/questions from Dataverse metadata.
+- Text, integer, decimal, date, select one, select many, and one file/photo field work.
+- Required, one-prior-answer relevance, and simple numeric/text constraints work.
+- Save Draft persists `Submissions`, `SubmissionAnswers`, and `SubmissionFiles`.
+- Submit changes status to `Submitted`.
+- Draft and Submitted records are editable.
+- Locked records are read-only.
+- The user can view their own submission history for the selected form.
+- Deferred scope remains out of the implementation unless explicitly re-approved.

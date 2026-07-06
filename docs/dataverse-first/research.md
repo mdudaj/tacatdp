@@ -1,3 +1,7 @@
+# MVP Supersession Note
+
+Status: updated by `docs/mvp-july-7.md`. The Dataverse-first conclusion remains valid, but the July 7 implementation uses the smaller MVP tables and defers multi-select child tables, production-cost line rows, repeat groups, and full platform schema until after the first vertical slice.
+
 # TACATDP Dataverse-First Research Note
 
 ## Decision

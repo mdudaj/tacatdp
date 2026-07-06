@@ -139,6 +139,8 @@ mp_AnswerValue,mp_geopointaltitude,GeopointAltitude,Decimal,no,no,no,13,Altitude
 mp_AnswerValue,mp_geopointaccuracy,GeopointAccuracy,Decimal,no,no,no,14,Accuracy
 mp_AnswerValue,mp_jsonvalue,JsonValue,MultilineText,no,no,no,15,Rare structured answer
 mp_AnswerValue,mp_rawvalue,RawValue,MultilineText,no,no,no,16,Original import value
+mp_AnswerValue,mp_vocabularyterm,VocabularyTerm,Lookup:mp_VocabularyTerm,no,yes,no,17,Optional relational term lookup for select_one answers; keep raw/code/label snapshots for export stability
+mp_AnswerValue,mp_villagereference,VillageReference,Lookup:mp_VillageReference,no,yes,no,18,Optional relational village lookup for geography answers; keep village code/label snapshots for export stability
 mp_MultiSelectAnswer,mp_submission,Submission,Lookup:mp_Submission,yes,yes,no,1,Submission
 mp_MultiSelectAnswer,mp_groupinstance,GroupInstance,Lookup:mp_GroupInstance,yes,yes,no,2,Group instance
 mp_MultiSelectAnswer,mp_fielddefinition,FieldDefinition,Lookup:mp_FieldDefinition,yes,yes,no,3,Field metadata

@@ -1,3 +1,7 @@
+# Legacy Research Note
+
+Status: superseded for July 7 MVP. The active backend is Dataverse and the active delivery scope is `docs/mvp-july-7.md`. Microsoft Lists research below remains useful as fallback/context only.
+
 # TACATDP Power Apps Research Notes
 
 ## Goal

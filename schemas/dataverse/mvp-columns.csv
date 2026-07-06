@@ -1,0 +1,50 @@
+table,column,type,required,notes
+Forms,FormCode,Text,yes,Stable form code
+Forms,Name,Text,yes,Display name
+Forms,Status,Choice,yes,Draft/Active/Retired
+FormVersions,Form,Lookup:Forms,yes,Parent form
+FormVersions,VersionCode,Text,yes,Stable version code
+FormVersions,LifecycleStatus,Choice,yes,Draft/Published/Retired
+FormVersions,PublishedAt,DateTime,no,Publish timestamp
+Sections,FormVersion,Lookup:FormVersions,yes,Parent form version
+Sections,SectionCode,Text,yes,Stable section code
+Sections,Name,Text,yes,Display name
+Sections,DisplayOrder,WholeNumber,yes,Renderer order
+Questions,Section,Lookup:Sections,yes,Parent section
+Questions,QuestionCode,Text,yes,Stable question code
+Questions,Type,Choice,yes,text/integer/decimal/date/select_one/select_many/file_photo/gps
+Questions,Label,Text,yes,Visible label
+Questions,HelpText,MultilineText,no,Helper text
+Questions,Required,Boolean,no,Required true/false
+Questions,DisplayOrder,WholeNumber,yes,Renderer order
+Choices,Question,Lookup:Questions,yes,Parent question
+Choices,ChoiceCode,Text,yes,Stored value code
+Choices,Label,Text,yes,Displayed label
+Choices,DisplayOrder,WholeNumber,no,Choice order
+ValidationRules,Question,Lookup:Questions,yes,Parent question
+ValidationRules,RuleType,Choice,yes,required/relevant/constraint
+ValidationRules,Expression,MultilineText,no,MVP subset only
+ValidationRules,Message,MultilineText,no,Visible error/help message
+FormAssignments,FormVersion,Lookup:FormVersions,yes,Assigned published form version
+FormAssignments,User,Lookup:SystemUser,no,Dataverse user where available
+FormAssignments,UserEmail,Text,no,Email fallback/filter key
+FormAssignments,Status,Choice,yes,Active/Inactive
+Submissions,FormVersion,Lookup:FormVersions,yes,Submitted form version
+Submissions,AssignedUser,Lookup:SystemUser,no,Collector user where available
+Submissions,UserEmail,Text,no,Collector email snapshot
+Submissions,Status,Choice,yes,Draft/Submitted/Locked
+Submissions,StartedAt,DateTime,no,Start timestamp
+Submissions,SubmittedAt,DateTime,no,Submit timestamp
+SubmissionAnswers,Submission,Lookup:Submissions,yes,Parent submission
+SubmissionAnswers,Question,Lookup:Questions,yes,Question answered
+SubmissionAnswers,ValueText,Text,no,Text/select code snapshot
+SubmissionAnswers,ValueNumber,WholeNumber,no,Integer value
+SubmissionAnswers,ValueDecimal,Decimal,no,Decimal value
+SubmissionAnswers,ValueDate,Date,no,Date value
+SubmissionAnswers,ValueBoolean,Boolean,no,Boolean value
+SubmissionAnswers,ValueJson,MultilineText,no,Select-many/GPS/rare complex MVP values
+SubmissionFiles,Submission,Lookup:Submissions,yes,Parent submission
+SubmissionFiles,Question,Lookup:Questions,yes,Attachment question
+SubmissionFiles,File,File,yes,Dataverse file column
+SubmissionFiles,FileName,Text,no,Original filename
+SubmissionFiles,MediaType,Text,no,MIME/media type

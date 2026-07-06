@@ -1,30 +1,28 @@
-# Artifact Readiness: Multi-Project Monitoring Model
+# Artifact Readiness: July 7 Metadata-Driven MVP
 
-## Ready now
+## Ready items
 
-- Research note exists.
-- Requirements note exists.
-- PRD exists.
-- Data model exists.
-- Controlled vocabulary feature note exists.
-- User stories and acceptance criteria exist.
-- Delivery plan exists.
-- Traceability exists.
-- Verification summary exists.
+- PAC service-principal authentication has been validated against Dataverse.
+- The MVP scope is bounded in `docs/mvp-july-7.md`.
+- The active data model is limited to ten MVP tables.
+- The first vertical slice is defined as one assigned published form rendered from metadata.
+- Deferred scope is explicit.
 
-## Ready for next slice
+## Required before implementation
 
-The next slice may generate Dataverse schema artifacts if:
+- Confirm dev Dataverse write approval.
+- Confirm solution name and publisher prefix.
+- Confirm the test user for the first `FormAssignments` row.
+- Confirm the seeded form fields for the MVP slice.
+- Confirm whether GPS is included or deferred.
+- Prepare a small seed JSON/YAML or manual import checklist.
 
-1. The metadata-driven model is accepted.
-2. Generic normalized runtime data is accepted as source of truth.
-3. TACATDP section-specific tables are accepted as optional projections, not the core platform.
-4. No environment writes are attempted without explicit approval.
+## Not ready / deferred
 
-## Not ready for
-
-- Creating Dataverse tables.
-- Publishing Power Apps.
-- Migrating production data.
-- Replacing current Canvas source.
-
+- Full XLSForm compiler.
+- Repeat groups and nested repeats.
+- Complex XPath expression support.
+- Offline-first sync.
+- Barcode.
+- Admin publishing UI.
+- Dashboards and export projections.

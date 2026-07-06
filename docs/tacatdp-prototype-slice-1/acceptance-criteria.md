@@ -1,41 +1,45 @@
-# Acceptance Criteria: TACATDP Prototype Slice 1
+# Acceptance Criteria: July 7 Metadata-Driven MVP
 
-## AC-01 Submission context
+## AC-01 Authentication
 
-Given the prototype starts, when the user begins Slice 1, then the app has TACATDP project, instrument, version, and submission key context available.
+Given the user opens the app, when Power Apps loads, then the app uses the signed-in Entra/Power Apps identity and does not show a custom login flow.
 
-## AC-02 Demographics layout
+## AC-02 Assigned forms
 
-Given the user views demographics, when fields render, then each input has a visible label above the control, helper/error text below the control, consistent spacing, and one-field-per-row layout.
+Given one published form version is assigned to the signed-in user, when the assigned forms screen loads, then only active assigned forms for that user are shown.
 
-## AC-03 Required-visible validation
+## AC-03 Metadata rendering
 
-Given a required visible field is blank, when the user continues or saves, then navigation/save is blocked and an inline text error plus validation summary entry is shown.
+Given a published form has sections, questions, choices, and validation rules, when the user opens the form, then the app renders supported fields from metadata rather than from hard-coded TACATDP section screens.
 
-## AC-04 Constraint validation
+## AC-04 Supported field types
 
-Given the phone or loan amount field has an invalid value, when the user continues or saves, then the source constraint message is shown and the app does not save as successful.
+Given the seeded form includes text, integer, decimal, date, select one, select many, and file/photo fields, when the form renders, then each supported type has an appropriate input and readable label/helper/error space.
 
-## AC-05 Cascading geography
+## AC-05 Rule subset
 
-Given the user selects a region, district, and ward, when village choices load, then only villages matching those selected codes are available through the dedicated village reference source.
+Given a field is required, relevant based on one prior answer, or has a simple numeric/text constraint, when the user saves or submits invalid data, then the app shows visible errors and blocks successful save/submit as appropriate.
 
-## AC-06 Multi-select child rows
+## AC-06 Drafts
 
-Given the user selects multiple values for the chosen agricultural multi-select field, when the prototype saves, then each selected value is represented as one child row or placeholder row with submission key, field/question identity, choice value, and label/code snapshot.
+Given the user saves a draft, when storage succeeds, then `Submissions`, `SubmissionAnswers`, and any `SubmissionFiles` are created or updated with status `Draft`.
 
-## AC-07 Repeat/line item
+## AC-07 Submit
 
-Given the user adds a production-cost line, when the prototype saves, then the line is represented as one repeat/line-item record with stage, item, unit, quantity, cost, and submission key.
+Given the draft passes required visible validation, when Submit is selected, then the submission status changes to `Submitted`.
 
-## AC-08 Save failure visibility
+## AC-08 Edit until locked
 
-Given save fails, when the user attempts Save Draft or Continue, then the app shows visible failed state and does not navigate as if the save succeeded.
+Given a submission status is `Draft` or `Submitted`, when the user opens it from history, then fields are editable. Given status is `Locked`, when opened, then fields are read-only.
 
-## AC-09 Review summary
+## AC-09 Attachment
 
-Given the user opens review summary, when in-scope data exists, then the summary shows demographics completion, selected multi-select values, production-cost line items, totals, and validation blockers.
+Given the form includes one file/photo question, when the user attaches a file/photo and saves, then a `SubmissionFiles` row is linked to the submission and question.
 
-## AC-10 Prototype debt register
+## AC-10 History
 
-Given implementation is complete, when the slice is reviewed, then all project-specific shortcuts are documented as acceptable prototype debt, needs refactor, or blocks platform generalization.
+Given the user has drafts or submissions for a selected form, when the history screen loads, then the user sees only their own submissions with status and timestamp.
+
+## AC-11 Deferred scope protection
+
+Given the July 7 slice is reviewed, when repeat groups, nested repeats, full XLSForm compiler, complex XPath, offline-first sync, barcode, dashboards, admin publishing UI, or version migration appear in implementation scope, then they are marked deferred unless explicitly re-approved.

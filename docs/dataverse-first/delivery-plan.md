@@ -1,70 +1,89 @@
 # Dataverse-First Delivery Plan
 
+## Current delivery target
+
+Deliver the July 7, 2026 MVP from `docs/mvp-july-7.md`:
+
+> One published form assigned to one user, rendered dynamically in Canvas from Dataverse metadata, with draft/save/submit/history and one attachment field.
+
 ## Phase 0: Confirm dev environment
 
-1. Confirm the trial/dev environment has Dataverse enabled.
-2. Choose or create a Power Platform solution for TACATDP.
-3. Choose publisher prefix, for example `tacatdp`.
-4. Record environment-specific values outside source control.
+Completed enough to proceed with development planning:
 
-## Phase 1: Multi-project platform schema design
+1. Dataverse environment is available.
+2. Service principal can authenticate.
+3. `pac solution list` succeeds.
+4. `pac org who` succeeds.
 
-Inputs:
+Environment-specific IDs and secrets must stay outside source control.
 
-- `docs/multi-project-monitoring/`
-- `schemas/xlsform-to-list-mapping.csv`
-- `schemas/sharepoint-lists-schema.json`
-- `docs/xlsform-field-inventory.csv`
-- `docs/xlsform-choice-lists.csv`
-- `docs/dataverse-first/product-requirements-document.md`
+## Phase 1: Create the MVP solution and tables
 
-Outputs:
+After explicit approval for dev Dataverse writes, create or prepare a dev solution containing only the MVP tables:
 
-- Platform table inventory for projects, instruments, versions, groups, fields, entities, encounters, submissions, group instances, answers, vocabularies, and projections.
-- Column inventory with Dataverse data types.
-- Relationship inventory.
-- Alternate-key inventory.
-- Controlled vocabulary decision matrix.
-- TACATDP metadata import plan.
-- Import-order plan.
+- `Forms`;
+- `FormVersions`;
+- `Sections`;
+- `Questions`;
+- `Choices`;
+- `ValidationRules`;
+- `FormAssignments`;
+- `Submissions`;
+- `SubmissionAnswers`;
+- `SubmissionFiles`.
 
-## Phase 2: Dataverse schema generation artifacts
+Do not create the full multi-project schema before the MVP vertical slice works.
 
-Create reviewable generated artifacts before environment writes:
+## Phase 2: Seed one form
 
-- `schemas/dataverse/tables.json`
-- `schemas/dataverse/columns.csv`
-- `schemas/dataverse/relationships.csv`
-- `schemas/dataverse/alternate-keys.csv`
-- `schemas/dataverse/import-order.md`
-- optional Power Platform CLI or PAC script plan.
+Seed one published TACATDP form version with a small manually reviewed JSON/YAML artifact or manual import:
 
-## Phase 3: Dev environment creation
+1. one `Forms` row;
+2. one `FormVersions` row with published status;
+3. a small set of `Sections`;
+4. MVP-supported `Questions`;
+5. `Choices` for select one / select many fields;
+6. simple `ValidationRules`;
+7. one `FormAssignments` row for the test user.
 
-After explicit approval:
+Do not build the full XLSForm compiler in this phase.
 
-1. Create tables in the dev solution.
-2. Create relationships and alternate keys.
-3. Import small reference tables first.
-4. Import large reference tables such as villages with batching/dataflows.
-5. Validate lookups and delegation.
+## Phase 3: Build the Canvas metadata renderer
 
-## Phase 4: Canvas app connection pivot
+Implement generic screens/components:
 
-1. Keep current screen source and UX layout.
-2. Replace placeholder/Microsoft Lists data source assumptions with the generic Dataverse platform tables and any reviewed TACATDP projections.
-3. Update save formulas screen by screen against group instances, answer rows, multi-select answer rows, and vocabulary terms.
-4. Validate one screen before replicating.
-5. Use App Checker and Monitor.
+1. Assigned forms list.
+2. Submission history for selected form.
+3. Form runner shell.
+4. Field renderer for text, integer, decimal, date, select one, select many, file/photo attachment, and GPS if quick enough.
+5. Save Draft and Submit actions.
+6. Locked read-only behavior.
 
-## Phase 5: Review and deployment readiness
+## Phase 4: Verify vertical slice
 
-1. Export unmanaged solution from dev.
-2. Review solution components.
-3. Define test/prod deployment path.
-4. Use managed solution for non-dev environments when ready.
-5. Document licensing/admin dependencies.
+Verify:
 
-## Immediate next slice
+1. user sees only assigned published forms;
+2. user opens assigned form;
+3. app renders questions from metadata;
+4. required/relevance/constraint subset works;
+5. draft saves;
+6. submit changes status;
+7. submitted record remains editable until locked;
+8. locked record is read-only;
+9. attachment persists;
+10. history shows the user's own submissions.
 
-Generate multi-project Dataverse schema design artifacts from `docs/multi-project-monitoring/` and the existing XLSForm/list-mapping files without writing to any environment.
+## Deferred phases
+
+After MVP validation, plan:
+
+- XLSForm-to-Dataverse metadata compiler;
+- repeat groups and nested repeats;
+- advanced ODK/XPath expression support;
+- offline-first sync;
+- barcode;
+- admin publishing UI;
+- version migration;
+- dashboards/export projections;
+- richer review/locking workflow.

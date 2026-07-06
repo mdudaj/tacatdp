@@ -1,62 +1,65 @@
-# App Vision and TACATDP Prototype Strategy
+# App Vision and MVP Strategy
 
-## Decision
+## Current decision
 
-The long-term vision is a reusable project platform, not only a monitoring-project app. The platform may eventually support monitoring, evaluation, field operations, case workflows, inspections, audits, research instruments, and other structured data-collection projects.
+The long-term vision is a reusable dynamic data collection platform powered by Dataverse. It should mirror the useful architecture of ODK Central and ODK Collect while using Power Apps, Dataverse, Entra authentication, and Power Platform ALM.
 
-The near-term implementation should not attempt the full multi-project platform. TACATDP should be implemented first as a single-project prototype that validates the core data-entry, validation, reference-data, repeat, save, review, and export patterns.
+The near-term deliverable is the July 7, 2026 MVP described in `docs/mvp-july-7.md`:
 
-## Why prototype first
+> One published form assigned to one user, rendered dynamically in Canvas from Dataverse metadata, with draft/save/submit/history and one attachment field.
 
-Multi-project support is a significant product and engineering effort. It requires deeper research and decisions across:
+## Product shape
 
-- project lifecycle and governance;
-- instrument authoring and versioning;
-- form renderer architecture for web and Power Apps mobile;
-- offline and sync behavior;
-- expression/rule evaluation;
-- repeat group UX;
-- controlled vocabularies and high-volume reference lookup;
-- security and project-scoped permissions;
-- export/projection/codebook generation;
-- migration from a project-specific prototype into reusable platform services.
+- **ODK Central equivalent**: Dataverse plus future admin surfaces for forms, versions, assignments, submissions, exports, monitoring, and publishing.
+- **ODK Collect equivalent**: one Canvas App runtime that authenticates with Entra, shows assigned forms, renders form metadata, saves drafts, submits data, and shows history.
+- **Compiler/import path**: seed one form manually or from a small JSON/YAML artifact for MVP; build XLSForm-to-Dataverse metadata compilation after the runtime path is proven.
 
-Trying to implement all of this before proving TACATDP would slow delivery and increase risk. A single-project TACATDP prototype gives us a concrete app to validate the patterns while preserving the larger architecture vision.
+## Why a metadata renderer now
 
-## Terminology
+Generating one Power App per form is not the platform architecture. It would create duplicated screens, formulas, permissions, and ALM work for every instrument.
 
-Use **Project** as the general top-level concept. Avoid locking future documents to **MonitoringProject** unless the context is specifically monitoring and evaluation.
+The app should instead render metadata:
 
-TACATDP is the first configured project/prototype.
+- `Forms`;
+- `FormVersions`;
+- `Sections`;
+- `Questions`;
+- `Choices`;
+- `ValidationRules`;
+- `FormAssignments`.
 
-## Prototype boundary
+Runtime data should be generic:
 
-The TACATDP prototype may use project-specific shortcuts when they accelerate learning, provided they do not contradict the future platform direction:
+- `Submissions`;
+- `SubmissionAnswers`;
+- `SubmissionFiles`.
 
-1. Dataverse remains the preferred backend.
-2. TACATDP may use project-specific screens or generated screens for the prototype.
-3. Runtime data should still preserve the normalized answer/repeat principles where practical.
-4. High-volume references such as villages should use delegated reference tables.
-5. Requiredness must remain visible/relevance-aware rather than unsafe backend-required columns.
-6. Project-specific tables, screens, and exports are prototypes/projections, not the final platform contract.
+## MVP boundary
 
-## Vision boundary
+The July 7 MVP is intentionally narrow:
 
-The multi-project form renderer remains the app vision and research track:
+1. Use Power Apps / Entra authentication; no custom login.
+2. Show assigned published forms for the current user.
+3. Render text, integer, decimal, date, select one, select many, file/photo attachment, and GPS if quick enough.
+4. Save drafts and submit using `Draft`, `Submitted`, and `Locked` statuses.
+5. Allow edits until locked.
+6. Show the user's own submission history for a selected form.
+7. Seed one form; do not build the full XLSForm compiler yet.
 
-- forms load from project/instrument metadata, similar to how ODK Collect loads a form definition;
-- a published instrument version defines groups, fields, rules, choices, references, and repeats;
-- generic renderers can target Power Apps web/mobile first and possibly a custom web renderer later;
-- submissions store answers in normalized runtime structures.
+## Deferred platform capabilities
 
-This vision should guide naming and schema choices, but it should not block the TACATDP prototype.
+After the first working vertical slice, add:
 
-## Next implementation direction
+- XLSForm parser/compiler;
+- repeat groups and nested repeats;
+- richer XPath expression support;
+- offline-first sync and conflict handling;
+- barcode;
+- admin publishing UI;
+- version migration;
+- dashboards and export projections;
+- richer locking/review workflows.
 
-1. Implement a TACATDP prototype slice for one project.
-2. Use the renderer contract and multi-project artifacts as guardrails, not blockers.
-3. Validate one normal section, one high-volume village lookup cascade, one multi-select pattern, and one repeat/line-item pattern.
-4. Record every project-specific shortcut as either acceptable prototype debt or a blocker for platform generalization.
-5. Resume broader multi-project research after the TACATDP prototype proves the first end-to-end flow.
+## Relationship to older artifacts
 
-The first bounded slice is specified in `docs/tacatdp-prototype-slice-1/`.
+Older TACATDP generated screen artifacts and section-specific plans remain useful as source material and reference, but they are not the default implementation path for the platform. The active implementation path is the metadata-driven MVP documented in `docs/mvp-july-7.md` and the updated `docs/tacatdp-prototype-slice-1/` artifacts.

@@ -1,65 +1,93 @@
-# Delivery Plan: TACATDP Prototype Slice 1
+# Delivery Plan: July 7 Metadata-Driven MVP Slice
 
-## Step 1: Confirm implementation storage
+## Step 1: Confirm access
 
-Default to local placeholder collections shaped like future Dataverse tables unless explicit approval is given for dev Dataverse table creation/import.
+Already validated enough to proceed:
 
-## Step 2: Implement submission context
+- service-principal auth works;
+- `pac solution list` works;
+- `pac org who` works.
 
-Create TACATDP prototype context:
+## Step 2: Prepare MVP Dataverse solution
 
-- project code: `tacatdp`
-- instrument code: `impact_evaluation`
-- version code: `phase3_source_v1`
-- submission key
-- save status
+After explicit dev-write approval, create only the MVP tables:
 
-## Step 3: Implement demographics flow
+- `Forms`;
+- `FormVersions`;
+- `Sections`;
+- `Questions`;
+- `Choices`;
+- `ValidationRules`;
+- `FormAssignments`;
+- `Submissions`;
+- `SubmissionAnswers`;
+- `SubmissionFiles`.
 
-Use `Screen_01_demographics` or a focused prototype equivalent:
+## Step 3: Seed one published form
 
-- one field per row;
-- visible labels;
-- helper/error text;
-- required-visible validation;
-- phone and loan amount constraints;
-- location cascade.
+Seed a small TACATDP form definition manually or from JSON/YAML:
 
-## Step 4: Implement delegated geography cascade
+1. one form;
+2. one published form version;
+3. two or three sections;
+4. representative supported field types;
+5. choices for one select-one and one select-many question;
+6. one file/photo question;
+7. simple required/relevance/constraint rules;
+8. one assignment for the test user.
 
-Use source-shaped reference data:
+## Step 4: Build assigned forms and history
 
-- regions;
-- districts filtered by region;
-- wards filtered by region and district;
-- villages filtered by region, district, and ward using dedicated village reference shape.
+Canvas screens:
 
-## Step 5: Implement one multi-select pattern
+1. assigned forms list filtered by current user/email and active published version;
+2. selected form history showing the user's own `Draft`, `Submitted`, and `Locked` submissions.
 
-Recommended first field: `crop_name`, unless implementation review selects another agricultural field.
+## Step 5: Build form runner
 
-Persist one row per selected value in a child shape aligned with `mp_MultiSelectAnswer`.
+Render sections/questions from metadata. Support:
 
-## Step 6: Implement one repeat/line-item pattern
+- text;
+- integer;
+- decimal;
+- date;
+- select one;
+- select many;
+- file/photo attachment;
+- GPS only if quick after the core controls work.
 
-Use production cost detail as the repeat pilot:
+## Step 6: Build save/submit/edit behavior
 
-- stage;
-- cost item;
-- unit;
-- quantity;
-- cost;
-- add/edit/remove;
-- line total and summary.
+1. Save Draft creates/updates `Submissions`, `SubmissionAnswers`, and `SubmissionFiles`.
+2. Submit changes status to `Submitted`.
+3. Draft and Submitted remain editable.
+4. Locked is read-only.
 
-## Step 7: Implement save draft and review summary
+## Step 7: Verify vertical slice
 
-Save in-scope parent and child data to approved prototype storage. Review summary must show saved values, blockers, and totals.
+Verify one user can:
 
-## Step 8: Record prototype debt
+1. authenticate through Power Apps/Entra;
+2. see one assigned form;
+3. open the form;
+4. capture supported fields;
+5. attach one file/photo;
+6. save draft;
+7. reopen from history;
+8. submit;
+9. edit until locked;
+10. see locked read-only behavior.
 
-Add an implementation note classifying shortcuts as:
+## Deferred implementation
 
-- acceptable prototype debt;
-- needs refactor;
-- blocks platform generalization.
+Do not implement these in the July 7 slice unless explicitly re-approved:
+
+- full XLSForm compiler;
+- repeat groups;
+- nested repeats;
+- complex XPath;
+- offline-first sync;
+- barcode;
+- admin publishing UI;
+- dashboards;
+- version migration.

@@ -1,114 +1,113 @@
-# Product Requirements Document: Dataverse-First TACATDP Backend
+# Product Requirements Document: Dataverse-First Dynamic Data Collection MVP
 
 ## Context and evidence
 
-TACATDP converts a long XLSForm-style survey into a guided Power Apps Canvas app. Earlier planning used Microsoft Lists because Dataverse privileges were unavailable. The development environment now has Dataverse enabled, making a stronger relational backend available.
+TACATDP now has working Power Platform service-principal access to the Dataverse development environment. The next deliverable should use that access to prove a small metadata-driven data collection platform instead of continuing with a generated one-screen-per-form approach.
 
 Evidence:
 
-- `docs/multi-project-monitoring/`
-- `docs/dataverse-first/research.md`
-- `docs/list-schema-design.md`
-- `schemas/xlsform-to-list-mapping.csv`
-- `schemas/sharepoint-lists-schema.json`
-- `docs/phase-3-validation-save-map/product-requirements-document.md`
-- `docs/phase-3-requirements.md`
-- `docs/phase-3-delivery-plan.md`
+- `docs/mvp-july-7.md`;
+- `docs/app-vision.md`;
+- `docs/multi-project-monitoring/form-renderer-ux.md`;
+- `schemas/dataverse/form-renderer-contract.json`;
+- PAC validation: service-principal `pac solution list` and `pac org who` succeeded against the Dataverse org.
 
 ## Problem
 
-The current Microsoft Lists plan works around missing Dataverse access by splitting a large form into multiple SharePoint lists and manually joining records with `SubmissionKey`. That approach is acceptable as a fallback but adds avoidable complexity for relationships, validation, large reference data, ALM, and save orchestration. TACATDP needs a robust development architecture now that Dataverse is available.
+The project needs an MVP quickly, but the full ODK-style platform is too broad for the July 7 target. A TACATDP-specific app with many fixed screens would deliver visible UI but would not prove the platform architecture. A full XLSForm compiler, repeat engine, offline sync, and admin publishing UI would overrun the MVP.
+
+## Goal
+
+Deliver the first vertical slice of a Dynamic Data Collection Platform powered by Dataverse:
+
+> One published form assigned to one user, rendered dynamically in Canvas from Dataverse metadata, with draft/save/submit/history and one attachment field.
 
 ## Users / actors
 
-- Enumerator: enters survey data in a guided app.
-- Maker: builds tables, app screens, formulas, and solution components.
-- Data manager: imports reference data and exports/analyses submissions.
-- Reviewer/QA: validates completeness, constraints, and save behavior.
-- Admin: manages environment, licensing, security roles, and solution deployment.
-
-## Goals and success measures
-
-| Goal | Success measure |
-| --- | --- |
-| Move to Dataverse-first architecture. | Planning artifacts identify multi-project Dataverse metadata, runtime, vocabulary, projection, relationship, key, and ALM paths. |
-| Preserve XLSForm semantics. | Required, relevance, constraints, choices, multi-select, repeats, calculations, and versions remain mapped through generic metadata. |
-| Improve relational integrity. | Projects, instruments, versions, entities, encounters, submissions, group instances, answer rows, and vocabulary terms use Dataverse relationships plus stable alternate keys. |
-| Keep app implementation safe. | No production write/publish occurs before explicit approval and readiness checks. |
-| Keep fallback path. | Microsoft Lists artifacts remain available but marked fallback. |
+- Data collector: signs into Power Apps, sees assigned forms, captures data, saves drafts, submits, edits until locked, attaches evidence, and views history.
+- Project manager/admin: seeds one published form version and assigns it to a user.
+- Developer/maker: builds the Dataverse MVP tables and the Canvas metadata renderer.
+- Reviewer/data manager: verifies submissions, status, attachment, and history behavior.
 
 ## Functional requirements
 
-| ID | Requirement | Source / evidence | Priority |
-| --- | --- | --- | --- |
-| DV-RQ-01 | Use Dataverse as the primary development backend. | User decision, enabled Dataverse environment | P0 |
-| DV-RQ-02 | Create a Power Platform solution to contain generic platform tables, relationships, vocabulary tables, app components, flows, projections, and environment variables. | Microsoft ALM guidance, multi-project PRD | P0 |
-| DV-RQ-03 | Model TACATDP as the first `MonitoringProject`, not as the hard-coded platform schema. | `docs/multi-project-monitoring/` | P0 |
-| DV-RQ-04 | Model instruments, versions, events, groups, fields, field rules, and vocabulary bindings as metadata/control-plane records. | ODK, CDISC ODM, REDCap patterns | P0 |
-| DV-RQ-05 | Model submissions, group instances, scalar answers, multi-select answers, attachments, reviews, and audit events as normalized runtime records. | ODK submissions/repeats, CDISC item group data | P0 |
-| DV-RQ-06 | Model long-lived entities/cases and encounters/follow-ups for longitudinal monitoring. | ODK Entities, OpenClinica events | P0 |
-| DV-RQ-07 | Model controlled variables as reusable vocabulary schemes and terms, including large geography/reference vocabularies. | InvenioRDM vocabulary patterns, XLSForm choice inventory | P0 |
-| DV-RQ-08 | Define alternate keys for integration/upsert values such as project code, instrument version, `SubmissionKey`, entity keys, field codes, and vocabulary term codes. | Microsoft alternate key guidance | P1 |
-| DV-RQ-09 | Keep large reference filters delegable in Power Apps. | Microsoft delegation guidance | P0 |
-| DV-RQ-10 | Update save-map and validation artifacts to refer to the generic Dataverse platform model first, with TACATDP-specific exports/projections generated from it. | Existing validation/save-map artifacts, multi-project model | P0 |
+| ID | Requirement | Priority |
+| --- | --- | --- |
+| MVP-RQ-01 | Use Power Apps / Entra authentication; do not build custom login. | P0 |
+| MVP-RQ-02 | Show assigned forms from `FormAssignments`, filtered by the current Dataverse user/email and active published form version. | P0 |
+| MVP-RQ-03 | Render one published form from Dataverse metadata using `Forms`, `FormVersions`, `Sections`, `Questions`, `Choices`, and `ValidationRules`. | P0 |
+| MVP-RQ-04 | Support text, integer, decimal, date, select one, and select many question types. | P0 |
+| MVP-RQ-05 | Support one photo/file attachment linked to a submission/question. | P0 |
+| MVP-RQ-06 | Support GPS point only if it does not endanger the July 7 vertical slice. | P1 |
+| MVP-RQ-07 | Save drafts in `Submissions`, `SubmissionAnswers`, and `SubmissionFiles`. | P0 |
+| MVP-RQ-08 | Submit a draft by changing submission status to `Submitted`. | P0 |
+| MVP-RQ-09 | Allow editing while status is `Draft` or `Submitted`; block editing when status is `Locked`. | P0 |
+| MVP-RQ-10 | Show the signed-in user's submission history for the selected form. | P0 |
+| MVP-RQ-11 | Seed one form into Dataverse metadata manually or from a small JSON/YAML artifact; do not build the full XLSForm compiler yet. | P0 |
+| MVP-RQ-12 | Implement only the July 7 rule subset: required true/false, relevance depending on one prior answer, and simple numeric/text constraints. | P0 |
+
+## Dataverse table requirements
+
+Use these MVP tables:
+
+- `Forms`;
+- `FormVersions`;
+- `Sections`;
+- `Questions`;
+- `Choices`;
+- `ValidationRules`;
+- `FormAssignments`;
+- `Submissions`;
+- `SubmissionAnswers`;
+- `SubmissionFiles`.
+
+Do not add a custom `Users` table unless profile metadata is needed. Use Dataverse system users and assignment rows referencing user/email.
+
+## Generic answer model
+
+`SubmissionAnswers` stores generic typed values:
+
+- `Submission`;
+- `Question`;
+- `ValueText`;
+- `ValueNumber`;
+- `ValueDecimal`;
+- `ValueDate`;
+- `ValueBoolean`;
+- `ValueJson`.
+
+For MVP, select-many can use `ValueJson` to avoid designing repeat answer child rows before the renderer is proven.
+
+## Deferred scope
+
+Defer until after the first working vertical slice:
+
+- full XLSForm parser/compiler;
+- repeat groups and nested repeats;
+- complex XPath expressions;
+- offline-first sync;
+- barcode;
+- admin publishing UI;
+- version migration;
+- dashboards;
+- locking workflow beyond a simple status field.
 
 ## UX requirements
 
-No UX layout change is introduced by the backend pivot. Existing requirements remain:
+- Assigned forms list first, not a landing page.
+- Form runner shows one field per row with visible labels, helper/error text, and clear required markers.
+- Save Draft, Submit, and status are visible.
+- Locked submissions are readable but not editable.
+- History is scannable by form, status, and updated/submitted timestamp.
 
-- one field per row by default;
-- visible labels above inputs;
-- helper/error text below inputs;
-- validation summary;
-- draft/saved/submitted/save-failed states;
-- wizard-style navigation;
-- accessible focus order and touch targets.
+## Safety and constraints
 
-## Architecture and data requirements
-
-### Platform table groups
-
-The multi-project monitoring model in `docs/multi-project-monitoring/data-model.md` supersedes a TACATDP-only table design. TACATDP-specific section tables such as `tacatdp_Profile`, `tacatdp_Agriculture`, or `tacatdp_ProductionIncome` should not be the core source-of-truth model. If needed later, they may be generated as projections, views, or performance/readability surfaces from the normalized platform model.
-
-| Group | Platform concepts | Purpose |
-| --- | --- | --- |
-| Project and governance | `MonitoringProject`, role assignments, project settings | Multi-project boundary and access control. |
-| Instrument metadata | `Instrument`, `InstrumentVersion`, `EventDefinition`, `InstrumentEventBinding` | Versioned forms and monitoring occasions. |
-| Form structure metadata | `GroupDefinition`, `FieldDefinition`, `FieldRule` | Sections, repeatable groups, fields, relevance, constraints, calculations, order. |
-| Controlled vocabularies | `VocabularyScheme`, `VocabularyTerm`, labels, relations, project bindings, field bindings, external IDs | Reusable controlled variables, choices, reference data, and large vocabularies. |
-| Runtime entities | `TrackedEntity`, identifiers, `Encounter` | Longitudinal cases/sites/customers/farmers/facilities and follow-ups. |
-| Runtime submissions | `Submission`, `GroupInstance`, `AnswerValue`, `MultiSelectAnswer`, `Attachment`, review, audit | Normalized collected data and repeat instances. |
-| Export/projection layer | export profiles, generated views/tables, variable dictionary | Project-specific wide/long reporting outputs derived from normalized source data. |
-
-### Key rules
-
-- Dataverse GUID primary keys are internal; human/integration keys such as `ProjectCode`, `InstrumentCode`, `SubmissionKey`, `EntityKey`, `FieldCode`, and `TermCode` remain alternate keys where appropriate.
-- Use relationships for project, instrument, version, group, field, entity, encounter, submission, group instance, answer, and vocabulary integrity.
-- Use generic normalized runtime tables as source of truth; use TACATDP-specific tables only as projections if later justified.
-- Use vocabulary terms for controlled variables and large/filtered choices; avoid huge static choice columns.
-- Store selected term references plus code/label snapshots where export fidelity matters.
-- Preserve current field inventory and XLSForm names in metadata-generation artifacts.
-
-## Safety, privacy, and operational constraints
-
-- Do not commit environment IDs, connection strings, tokens, secrets, or tenant-specific credentials.
-- Do not create or modify production Dataverse tables without explicit approval.
-- Use trial/dev environment first.
-- Package future Dataverse work in a solution.
-- Document any production licensing/tenant dependency before committing to deployment.
+- No secrets, tenant IDs, environment IDs, or credentials in source.
+- No production writes.
+- Dev Dataverse writes require explicit approval.
+- Package created tables/app in a solution.
+- Keep the MVP schema small enough to review manually.
 
 ## Acceptance criteria
 
-See `acceptance-criteria.md`.
-
-## Definition of ready
-
-See `artifact-readiness.md`.
-
-## Definition of done
-
-See `definition-of-done.md`.
-
-## Traceability
-
-See `requirements-traceability.md`.
+See `docs/tacatdp-prototype-slice-1/acceptance-criteria.md`.

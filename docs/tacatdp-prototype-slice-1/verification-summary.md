@@ -1,20 +1,20 @@
-# Verification Summary: TACATDP Prototype Slice 1
+# Verification Summary: July 7 Metadata-Driven MVP
 
-## Pre-implementation verification
+## Planned verification
 
-| Check | Status | Evidence |
-| --- | --- | --- |
-| Handoff loaded before work. | Passed | Karakana handoff loaded for TACATDP. |
-| Prototype-first vision exists. | Passed | `docs/app-vision.md`. |
-| Renderer contract exists as guardrail. | Passed | `schemas/dataverse/form-renderer-contract.json`. |
-| Slice scope avoids environment writes. | Passed | Requirements and delivery plan explicitly require approval before Dataverse/Power Platform writes. |
-| Village reference artifact exists. | Passed | `schemas/dataverse/tacatdp-village-reference.csv`. |
-| Demographics and production-cost source mapping exists. | Passed | `docs/phase-3-validation-save-map/product-requirements-document.md`. |
+1. `pac auth who` confirms the intended service principal or maker identity.
+2. `pac solution list --environment "$POWER_PLATFORM_ENVIRONMENT_URL"` confirms Dataverse connectivity.
+3. The MVP solution contains only the approved MVP tables unless extra tables are explicitly justified.
+4. Seed data creates one form, one published version, sections, questions, choices, rules, and one assignment.
+5. Canvas assigned forms list shows only the assigned published form.
+6. Form runner renders fields from metadata.
+7. Save Draft creates/updates submission, answer, and file rows.
+8. Submit changes status to `Submitted`.
+9. History shows only the current user's submissions.
+10. Locked state blocks editing.
 
-## Implementation verification to run later
+## Current verification state
 
-1. Source diff check.
-2. Power Apps source pack/unpack or Studio validation when applicable.
-3. App Checker after Canvas changes when available.
-4. Manual validation against `acceptance-criteria.md`.
-5. Record prototype shortcut classification before completion.
+- PAC/Dataverse connection: validated by user-provided `pac solution list` and `pac org who` output.
+- Documentation alignment: updated to make `docs/mvp-july-7.md` the canonical MVP scope.
+- Dataverse environment writes: not performed by this documentation update.

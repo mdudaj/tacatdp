@@ -1,0 +1,57 @@
+{
+  "generated_for_review_only": true,
+  "generated_on": "2026-07-06",
+  "purpose": "July 7 MVP Dataverse tables for the metadata-driven data collection vertical slice.",
+  "environment_write": false,
+  "tables": [
+    {
+      "logical_name": "Forms",
+      "purpose": "Form/instrument container"
+    },
+    {
+      "logical_name": "FormVersions",
+      "purpose": "Published version metadata and lifecycle status"
+    },
+    {
+      "logical_name": "Sections",
+      "purpose": "Ordered form sections/pages"
+    },
+    {
+      "logical_name": "Questions",
+      "purpose": "Question metadata and renderer hints"
+    },
+    {
+      "logical_name": "Choices",
+      "purpose": "Select-one/select-many options"
+    },
+    {
+      "logical_name": "ValidationRules",
+      "purpose": "Required, simple relevance, and simple constraints"
+    },
+    {
+      "logical_name": "FormAssignments",
+      "purpose": "Assign active published form versions to users"
+    },
+    {
+      "logical_name": "Submissions",
+      "purpose": "One form instance with Draft/Submitted/Locked status"
+    },
+    {
+      "logical_name": "SubmissionAnswers",
+      "purpose": "Generic typed answer rows"
+    },
+    {
+      "logical_name": "SubmissionFiles",
+      "purpose": "Photos/documents linked to submission/question"
+    }
+  ],
+  "deferred_tables": [
+    "Users",
+    "GroupInstances",
+    "MultiSelectAnswers",
+    "TrackedEntities",
+    "Encounters",
+    "Dashboards",
+    "ExportProfiles"
+  ]
+}

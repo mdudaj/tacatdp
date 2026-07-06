@@ -1,17 +1,16 @@
-# Requirements Traceability: Multi-Project Monitoring Model
+# Requirements Traceability: July 7 Metadata-Driven MVP
 
-| Requirement | Evidence | Design surface | Verification |
-| --- | --- | --- | --- |
-| MP-RQ-01 Multiple projects | ODK Project pattern | `mp_Project` | Schema review |
-| MP-RQ-02 Instruments and versions | ODK Form drafts/versions, CDISC FormDef | `mp_Instrument`, `mp_InstrumentVersion` | Metadata import test |
-| MP-RQ-03 Groups and fields | CDISC ItemGroup/Item | `mp_GroupDefinition`, `mp_FieldDefinition` | TACATDP coverage check |
-| MP-RQ-04 Repeating groups | ODK repeats, CDISC repeating ItemGroup | `mp_GroupInstance` | Repeat scenario test |
-| MP-RQ-05 Field rules | XLSForm logic, current TACATDP mapping | `mp_FieldRule` | Rule inventory coverage |
-| MP-RQ-06 Multi-select rows | ODK/REDCap export caveats, analytics need | `mp_MultiSelectAnswer` | Multi-select save test |
-| MP-RQ-07 Runtime separation | ODK submissions, CDISC clinical data | `mp_Submission`, `mp_GroupInstance`, `mp_AnswerValue` | Submission shape review |
-| MP-RQ-08 Entities/encounters | ODK Entities, OpenClinica events | `mp_TrackedEntity`, `mp_Encounter` | Longitudinal scenario |
-| MP-RQ-09 Controlled vocabularies | InvenioRDM vocabularies | `mp_VocabularyScheme`, `mp_VocabularyTerm` | Vocabulary import test |
-| MP-RQ-10 Term metadata | Invenio labels/schemes/external IDs | labels, relations, external IDs | Vocabulary governance review |
-| MP-RQ-12 Projections | REDCap/ODK exports | export profiles/views | Wide export fixture |
-| MP-RQ-13 TACATDP as project | Current TACATDP artifacts | TACATDP metadata migration | 292-field coverage |
-
+| Requirement | Story | Acceptance criteria | Source artifact | Implementation surface |
+| --- | --- | --- | --- | --- |
+| MVP-RQ-01 Authentication | MVP-US-01 | AC-01 | `docs/mvp-july-7.md` | Power Apps user context |
+| MVP-RQ-02 Assigned forms | MVP-US-01 | AC-02 | `docs/mvp-july-7.md` | `FormAssignments`, assigned forms screen |
+| MVP-RQ-03 Metadata rendering | MVP-US-02 | AC-03 | `docs/app-vision.md`, `docs/multi-project-monitoring/form-renderer-ux.md` | Form runner shell |
+| MVP-RQ-04 Supported field types | MVP-US-02 | AC-04 | `docs/mvp-july-7.md` | Field renderer |
+| MVP-RQ-05 Attachment | MVP-US-05 | AC-09 | `docs/mvp-july-7.md` | `SubmissionFiles`, attachment control |
+| MVP-RQ-06 GPS if quick | MVP-US-02 | AC-04 | `docs/mvp-july-7.md` | Optional GPS field renderer |
+| MVP-RQ-07 Save draft | MVP-US-03 | AC-06 | `docs/mvp-july-7.md` | `Submissions`, `SubmissionAnswers`, `SubmissionFiles` |
+| MVP-RQ-08 Submit | MVP-US-04 | AC-07 | `docs/mvp-july-7.md` | Submission status update |
+| MVP-RQ-09 Edit until locked | MVP-US-04 | AC-08 | `docs/mvp-july-7.md` | Edit/read-only state logic |
+| MVP-RQ-10 History | MVP-US-03, MVP-US-04 | AC-10 | `docs/mvp-july-7.md` | Submission history screen |
+| MVP-RQ-11 Admin seed | MVP-US-06 | AC-03, AC-11 | `docs/mvp-july-7.md` | Seed JSON/YAML or manual import |
+| MVP-RQ-12 Rule subset | MVP-US-02 | AC-05 | `docs/mvp-july-7.md`, ODK form logic reference | Validation rule evaluator |

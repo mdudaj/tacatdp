@@ -1,24 +1,20 @@
-# Verification Summary: Dataverse-First Pivot
+# Verification Summary: July 7 Metadata-Driven MVP
 
-## Completed checks
+## Planned verification
 
-| Check | Result |
-| --- | --- |
-| Loaded TACATDP Karakana handoff and skillpack context. | Passed |
-| Started requirements protocol for Dataverse-first planning. | Passed |
-| Reviewed current list/schema docs. | Passed |
-| Reviewed current XLSForm-to-list mapping summary. | Passed |
-| Confirmed current mapping has 292 rows. | Passed |
-| Confirmed current model already has parent/section/child/reference decomposition. | Passed |
-| Reviewed Microsoft Dataverse, database creation, alternate-key, ALM, and delegation documentation. | Passed |
-| Confirmed no Dataverse, SharePoint, app publish, or permission-changing command was run. | Passed |
+1. `pac auth who` confirms the intended service principal or maker identity.
+2. `pac solution list --environment "$POWER_PLATFORM_ENVIRONMENT_URL"` confirms Dataverse connectivity.
+3. The MVP solution contains only the approved MVP tables unless extra tables are explicitly justified.
+4. Seed data creates one form, one published version, sections, questions, choices, rules, and one assignment.
+5. Canvas assigned forms list shows only the assigned published form.
+6. Form runner renders fields from metadata.
+7. Save Draft creates/updates submission, answer, and file rows.
+8. Submit changes status to `Submitted`.
+9. History shows only the current user's submissions.
+10. Locked state blocks editing.
 
-## Deferred checks
+## Current verification state
 
-| Check | Reason | Next action |
-| --- | --- | --- |
-| Dataverse schema creation | This slice is artifact-only. | Generate reviewable schema artifacts next. |
-| Dataverse table creation | Requires explicit approval and dev environment target. | Run only after schema review. |
-| App Checker delegation validation | Requires Power Apps Studio with Dataverse data sources. | Run after app is connected. |
-| Solution export/import | Requires solution components. | Run after dev schema/app work. |
-
+- PAC/Dataverse connection: validated by user-provided `pac solution list` and `pac org who` output.
+- Documentation alignment: updated to make `docs/mvp-july-7.md` the canonical MVP scope.
+- Dataverse environment writes: not performed by this documentation update.

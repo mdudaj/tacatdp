@@ -37,13 +37,14 @@ Villages are intentionally not stored as generic `mp_VocabularyTerm` rows in thi
 - Confirm whether the 72 fields without a `source_screen` match should stay grouped by old save-target projection or be assigned to explicit metadata groups. These are not missing XLSForm fields; they are fields whose labels did not map cleanly to the current Canvas screen YAML, mostly production-cost line-item fields.
 - Confirm `mp_VillageReference` naming and key columns before creating tables.
 - Confirm field-level requiredness remains app-visible-only; `required_in_dataverse` is intentionally `no` for imported TACATDP fields.
+- Confirm `mp_AnswerValue` includes optional `mp_vocabularyterm` and `mp_villagereference` lookups before table creation, while retaining raw/code/label snapshots for export stability.
 - Confirm alternate keys do not exceed Dataverse key constraints in the target environment.
 
 ## Generated artifact inventory
 
 - `platform-tables.json`: 30 platform/reference tables.
-- `platform-columns.csv`: 184 platform/reference/renderer columns.
-- `platform-relationships.csv`: 46 relationships.
+- `platform-columns.csv`: 186 platform/reference/renderer columns.
+- `platform-relationships.csv`: 48 relationships.
 - `platform-alternate-keys.csv`: 22 alternate keys.
 - `form-renderer-contract.json`: renderer surfaces, metadata extensions, supported rule subset, control mapping, and pilot flows.
 - `tacatdp-field-definitions.csv`: 292 TACATDP field definitions.

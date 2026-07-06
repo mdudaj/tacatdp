@@ -1,3 +1,7 @@
+# Phase 3 Supersession Note
+
+Status: superseded for July 7 MVP except as historical requirements context. The current MVP defers repeat groups, full XLSForm compiler, offline sync, barcode, dashboards, and admin publishing UI.
+
 # Phase 3 App Architecture Requirements
 
 ## Objective

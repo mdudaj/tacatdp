@@ -1,3 +1,7 @@
+# Legacy Implementation Plan Note
+
+Status: superseded for July 7 MVP. Use `docs/mvp-july-7.md` and `docs/tacatdp-prototype-slice-1/delivery-plan.md` for current implementation. Microsoft Lists and placeholder-screen steps below are historical/fallback context.
+
 # TACATDP Power Apps Implementation Plan
 
 ## Phase 0: Repository baseline

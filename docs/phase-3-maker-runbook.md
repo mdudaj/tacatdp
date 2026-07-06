@@ -1,3 +1,7 @@
+# Maker Runbook Supersession Note
+
+Status: superseded for July 7 MVP except as historical Canvas maker context. The active path is a metadata-driven Canvas runtime over Dataverse MVP tables, not Microsoft Lists placeholders or generated fixed screens.
+
 # Phase 3 Maker Execution Runbook
 
 ## Purpose

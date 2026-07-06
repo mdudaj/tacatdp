@@ -1,89 +1,60 @@
-# Delivery Plan: Project Platform Vision and TACATDP Prototype
+# Delivery Plan: Dynamic Data Collection Platform
 
-## Phase 1: Preserve app vision
+## Current MVP target
 
-Review:
+By July 7, 2026, deliver:
 
-- `../app-vision.md`
-- `research.md`
-- `product-requirements-document.md`
-- `data-model.md`
-- `controlled-vocabularies.md`
+> One published form assigned to one user, rendered dynamically in Canvas from Dataverse metadata, with draft/save/submit/history and one attachment field.
 
-Decision needed:
+`docs/mvp-july-7.md` is the canonical near-term scope.
 
-- confirm Project as the general top-level concept;
-- confirm metadata-driven platform model as long-term vision;
-- confirm TACATDP as the first single-project prototype;
-- confirm generic normalized runtime data as a guardrail, not a blocker.
+## Phase 1: MVP schema and seed data
 
-## Phase 2: Generate Dataverse schema artifacts
+After explicit approval for dev Dataverse writes:
 
-Create reviewable artifacts only:
+1. Create the small MVP tables: `Forms`, `FormVersions`, `Sections`, `Questions`, `Choices`, `ValidationRules`, `FormAssignments`, `Submissions`, `SubmissionAnswers`, `SubmissionFiles`.
+2. Seed one TACATDP form manually or from a small JSON/YAML artifact.
+3. Publish one form version.
+4. Assign it to one test user.
 
-- `schemas/dataverse/platform-tables.json`
-- `schemas/dataverse/platform-columns.csv`
-- `schemas/dataverse/platform-relationships.csv`
-- `schemas/dataverse/platform-alternate-keys.csv`
-- `schemas/dataverse/tacatdp-field-definitions.csv`
-- `schemas/dataverse/tacatdp-vocabulary-terms.csv`
-- `schemas/dataverse/import-order.md`
+Do not build a full XLSForm compiler in this phase.
 
-No environment writes in this phase.
+## Phase 2: Canvas runtime MVP
 
-## Phase 3: TACATDP metadata migration
+Build the generic Canvas runtime surfaces:
 
-Transform existing TACATDP artifacts:
+1. Assigned forms list.
+2. Submission history for selected form.
+3. Form runner shell.
+4. Field renderer for text, integer, decimal, date, select one, select many, file/photo attachment, and GPS if quick enough.
+5. Save Draft.
+6. Submit.
+7. Edit-until-locked / locked read-only behavior.
 
-- XLSForm field inventory -> `FieldDefinition`
-- screen/section map -> `GroupDefinition`
-- choice lists -> `VocabularyScheme` and `VocabularyTerm`
-- mapping rows -> field/group/source traceability
-- production cost lines -> repeatable group or line-item configuration
+## Phase 3: MVP verification
 
-## Phase 4: Form renderer UX contract
+Verify:
 
-Create reviewable artifacts only:
+1. Entra/Power Apps auth identifies the user.
+2. Only assigned active published forms appear.
+3. Form metadata renders without hard-coded TACATDP screens.
+4. Required, one-prior-answer relevance, and simple constraints work.
+5. Draft, submit, edit, lock, attachment, and history work.
 
-- `docs/multi-project-monitoring/form-renderer-ux.md`
-- `schemas/dataverse/form-renderer-contract.json`
-- group/page layout metadata for `GroupDefinition`
-- field appearance/control metadata for `FieldDefinition`
-- first supported rule-expression subset for required, relevance, constraint, choice filter, and calculation behavior
-- pilot flow for one normal TACATDP group and one repeat group
+## Phase 4: Post-MVP expansion
 
-The fixed 33-screen TACATDP source should pause as a platform-default implementation path until this contract is reviewed.
+Only after the vertical slice works, add:
 
-## Phase 5: TACATDP prototype implementation
+- XLSForm-to-Dataverse compiler;
+- repeat groups and nested repeats;
+- complex XPath expressions;
+- offline-first sync;
+- barcode;
+- admin publishing UI;
+- version migration;
+- dashboards and export projections;
+- richer review and locking workflow.
 
-After explicit approval, implement one TACATDP project prototype before attempting broad multi-project generalization:
+## Existing artifacts
 
-1. Use `docs/tacatdp-prototype-slice-1/` as the first implementation scope.
-2. Create or prepare only the Dataverse pieces needed for one TACATDP prototype slice.
-3. Implement one normal section end-to-end.
-4. Implement the region/district/ward/village cascade using delegated reference data.
-5. Implement one multi-select pattern.
-6. Implement one repeat/line-item pattern.
-7. Validate save, edit, review, and export/codebook implications.
-8. Record prototype shortcuts and classify each as acceptable, needs refactor, or blocks platform generalization.
-
-## Phase 6: App integration
-
-1. Use the renderer contract as a guide, but do not require a full generic renderer before the prototype.
-2. Prefer prototype code that can later migrate into the form runner.
-3. Bind the prototype to metadata/runtime tables or reviewed local placeholder collections shaped like those tables.
-4. Validate repeats, multi-select, relevance, constraints, and large reference filtering.
-5. Keep fixed screens as TACATDP prototype/projection artifacts.
-
-## Phase 7: Multi-project research continuation
-
-1. Research how ODK Collect, Enketo, REDCap, OpenClinica, and related tools handle form loading, offline behavior, expression evaluation, repeat UX, and web/mobile parity.
-2. Decide whether the long-term renderer is Power Apps-only, shared metadata with Power Apps and custom web renderers, or a custom renderer outside Power Apps.
-3. Refine the renderer contract after TACATDP prototype lessons.
-
-## Phase 8: Export/projection support
-
-1. Generate TACATDP codebook.
-2. Generate wide export profiles.
-3. Generate Power BI-friendly views/dataflows.
-4. Preserve normalized source-of-truth data.
+The existing multi-project schema and renderer artifacts remain useful as long-term reference, but they should not expand the July 7 MVP. Any implementation task that adds deferred scope must explicitly justify why it is necessary for the vertical slice.

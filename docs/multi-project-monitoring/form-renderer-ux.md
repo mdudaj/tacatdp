@@ -1,60 +1,66 @@
 # Metadata-Driven Form Renderer UX
 
-## Vision decision
+## MVP decision
 
-The project platform should not hard-code one Canvas screen per TACATDP section as the long-term app design. The fixed 33-screen TACATDP source can remain a transitional prototype, import recovery artifact, or generated project-specific projection, but the reusable platform vision should render forms from `Project`, `InstrumentVersion`, `GroupDefinition`, `FieldDefinition`, `FieldRule`, vocabulary/reference bindings, and repeat metadata.
+The Canvas App should be a runtime engine that renders Dataverse metadata. The July 7 MVP must prove this with one assigned published form, not with generated fixed screens.
 
-The renderer remains the app vision and research track. It should guide naming, schema, and prototype seams, but the first implementation should be a TACATDP single-project prototype rather than the full generic renderer.
+Canonical MVP scope: `docs/mvp-july-7.md`.
 
-## Research basis
-
-ODK/XLSForm separates the form definition from the form filling UI:
-
-- XLSForm uses a `survey` worksheet to define form structure and question behavior, and a `choices` worksheet to define reusable choice lists. The XLSForm definition is converted to an ODK XForm that can run across mobile and web data collection tools. Reference: `https://xlsform.org/en/`.
-- The `survey` rows include question type, variable name, label, hints, appearance, constraints, relevance, calculations, groups, and repeats. This means one renderer can present many different forms without manually building a screen per project. Reference: `https://xlsform.org/en/`.
-- ODK form logic treats groups and repeats like nested paths. Questions are files; groups and repeats are folders; repeat instances are multiple occurrences of the same path. This supports metadata-driven grouping, nested repeats, calculations, and summaries. Reference: `https://docs.getodk.org/form-logic/#groups-and-repeats`.
-- XPath predicates are used for repeat filtering and cascading select filters, which maps well to `FieldRule`, `choice_filter`, and indexed reference-data tables in Dataverse. Reference: `https://docs.getodk.org/form-logic/#groups-and-repeats`.
-- XLSForm appearances such as `field-list` and page-style navigation influence how a renderer lays out questions without changing the source data model. Reference: `https://xlsform.org/en/#field-list`.
-
-## Implication for TACATDP
-
-The current 33-screen design is not wrong as a TACATDP-specific scaffold, but it is wrong as the reusable platform architecture. A future project platform needs a small set of generic screens/components:
+## MVP renderer surfaces
 
 | Surface | Purpose |
 | --- | --- |
-| Project/instrument picker | Select monitoring project, instrument, version, and optional event/encounter. |
-| Form runner shell | Renders the current group/page from metadata and manages navigation, save state, validation, and progress. |
-| Field renderer | Selects the correct control for each `FieldDefinition` data type and appearance. |
-| Choice/reference provider | Loads small vocabularies from vocabulary terms and high-volume lookups from dedicated reference tables such as `mp_VillageReference`. |
-| Repeat manager | Adds, edits, lists, and removes `GroupInstance` rows for repeatable groups. |
-| Review/summary screen | Shows completion, required visible errors, repeat summaries, and submit/review actions. |
+| Assigned forms | Show active published forms assigned to the signed-in user. |
+| Submission history | Show the user's own submissions for the selected form. |
+| Form runner shell | Load sections/questions from metadata, manage progress, validation, save state, submit, and locked read-only state. |
+| Field renderer | Render supported MVP field types from question metadata. |
+| Attachment capture | Attach one photo/file to a submission/question. |
 
-## Renderer requirements
+## MVP supported controls
 
-1. Load a published `InstrumentVersion` and its ordered `GroupDefinition` tree.
-2. Render only fields whose `relevance` evaluates true for the current submission context.
-3. Validate required-visible fields, constraints, and field rules before navigating away from a group/page.
-4. Support one-field-per-row as the default layout within a rendered page/group.
-5. Support page/group layout metadata so some groups can render as one question per step and others as a `field-list` page.
-6. Store scalar answers as `mp_AnswerValue`, multi-select choices as `mp_MultiSelectAnswer`, and repeat occurrences as `mp_GroupInstance`.
-7. Treat high-volume references, such as villages, as delegated lookup providers rather than local collections or generic dropdowns.
-8. Preserve stable field codes, labels, hints, required markers, helper text, inline errors, and accessible focus order.
-9. Keep TACATDP-specific wide screens/tables as optional projections, not the source-of-truth UI model.
+Support only:
 
-## Recommended next design slice
+- text;
+- integer;
+- decimal;
+- date;
+- select one;
+- select many;
+- file/photo attachment;
+- GPS point if quick enough.
 
-For the vision track, maintain the review-only renderer contract:
+Defer repeat groups, barcode, advanced calculations, complex XPath, and offline-first sync.
 
-- `schemas/dataverse/form-renderer-contract.json`
-- group/page layout metadata columns for `mp_GroupDefinition`
-- field appearance/control metadata columns for `mp_FieldDefinition`
-- rule-expression subset supported in Power Fx for the first implementation
-- pilot renderer flow for one TACATDP section and one repeat group
+## MVP validation behavior
 
-No Power Platform environment writes should happen for the generic renderer until this renderer contract is reviewed.
+Support only:
 
-For the implementation track, proceed with a TACATDP single-project prototype and record any shortcuts that must be revisited before platform generalization.
+- required true/false;
+- relevance depending on one prior answer;
+- simple numeric/text comparisons.
 
-## Contract status
+Show visible inline errors and a validation summary. Requiredness applies only to visible/relevant fields.
 
-`schemas/dataverse/form-renderer-contract.json` now defines the first review-only renderer contract. It adds proposed metadata extensions for group render mode, navigation mode, field control kind, lookup provider type/source, choice filters, constraints, calculations, control mapping, and pilot flows for demographics and production-cost repeat entry.
+## MVP layout rules
+
+- One field per row by default.
+- Visible label above each input.
+- Helper/error text below each input.
+- Clear Save Draft and Submit actions.
+- Status is visible: Draft, Submitted, Locked.
+- Locked submissions are read-only.
+- History is scannable by status and timestamp.
+
+## Long-term renderer direction
+
+After the MVP proves the runtime, expand toward richer ODK Collect-style behavior:
+
+- repeat manager;
+- nested repeats;
+- advanced relevance/constraint/calculation expressions;
+- barcode;
+- offline and sync conflict behavior;
+- richer media/GPS behavior;
+- admin-managed publishing/versioning.
+
+The current 33 TACATDP screens remain reference/prototype artifacts, not the platform default.

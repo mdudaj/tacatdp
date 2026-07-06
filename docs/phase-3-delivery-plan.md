@@ -1,3 +1,7 @@
+# Phase 3 Supersession Note
+
+Status: superseded for July 7 MVP except as historical delivery context. Use `docs/mvp-july-7.md` for the current metadata-driven Dataverse slice.
+
 # Phase 3 Delivery Plan
 
 ## Delivery strategy

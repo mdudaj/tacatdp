@@ -1,37 +1,28 @@
-# Artifact Readiness: Dataverse-First Pivot
+# Artifact Readiness: July 7 Metadata-Driven MVP
 
-## Work type
+## Ready items
 
-Architecture and requirements pivot from Microsoft Lists fallback to Dataverse-first development.
+- PAC service-principal authentication has been validated against Dataverse.
+- The MVP scope is bounded in `docs/mvp-july-7.md`.
+- The active data model is limited to ten MVP tables.
+- The first vertical slice is defined as one assigned published form rendered from metadata.
+- Deferred scope is explicit.
 
-## Required artifacts
+## Required before implementation
 
-| Artifact | Required? | Present? | Path / evidence |
-| --- | --- | --- | --- |
-| Research note | Yes | Yes | `docs/dataverse-first/research.md` |
-| Requirements note | Yes | Yes | `docs/dataverse-first/requirements-note.md` |
-| PRD | Yes | Yes | `docs/dataverse-first/product-requirements-document.md` |
-| User stories | Yes | Yes | `docs/dataverse-first/user-stories.md` |
-| Acceptance criteria | Yes | Yes | `docs/dataverse-first/acceptance-criteria.md` |
-| Traceability | Yes | Yes | `docs/dataverse-first/requirements-traceability.md` |
-| Delivery plan | Yes | Yes | `docs/dataverse-first/delivery-plan.md` |
-| Definition of done | Yes | Yes | `docs/dataverse-first/definition-of-done.md` |
-| Verification summary | Yes | Yes | `docs/dataverse-first/verification-summary.md` |
-| OKF memory update | Yes | Yes | Karakana `ubongo/projects/tacatdp/overview.md` |
+- Confirm dev Dataverse write approval.
+- Confirm solution name and publisher prefix.
+- Confirm the test user for the first `FormAssignments` row.
+- Confirm the seeded form fields for the MVP slice.
+- Confirm whether GPS is included or deferred.
+- Prepare a small seed JSON/YAML or manual import checklist.
 
-## Ready decision
+## Not ready / deferred
 
-Ready for the next planning/implementation slice after:
-
-1. The Dataverse-first docs are reviewed.
-2. A publisher prefix is chosen.
-3. The dev environment name and region are recorded outside source control if tenant-specific.
-4. The multi-project monitoring model is treated as the source architecture, with TACATDP-specific tables allowed only as projections if justified.
-5. The next slice is scoped to schema generation/design, not production deployment.
-
-## Safe implementation boundary
-
-- Generate Dataverse schema artifacts locally.
-- Create tables only in a trial/dev environment after explicit user confirmation.
-- Do not create, modify, or delete production tables.
-- Do not store environment IDs, credentials, or connection references as secrets in source.
+- Full XLSForm compiler.
+- Repeat groups and nested repeats.
+- Complex XPath expression support.
+- Offline-first sync.
+- Barcode.
+- Admin publishing UI.
+- Dashboards and export projections.

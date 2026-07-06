@@ -1,8 +1,8 @@
 {
   "generated_for_review_only": true,
   "contract_name": "metadata-driven-form-renderer",
-  "version": "0.1.0",
-  "purpose": "Define the first reviewable contract for rendering monitoring project forms from Dataverse metadata instead of hard-coded TACATDP screens.",
+  "version": "0.2.0",
+  "purpose": "Define the July 7 MVP renderer contract for one assigned published form rendered from Dataverse metadata, with drafts, submit, edit-until-locked, history, and one attachment field.",
   "source_documents": [
     "docs/multi-project-monitoring/form-renderer-ux.md",
     "docs/multi-project-monitoring/data-model.md",
@@ -11,24 +11,24 @@
   "environment_write": false,
   "renderer_surfaces": [
     {
-      "surface": "project_instrument_picker",
-      "responsibility": "Select MonitoringProject, Instrument, InstrumentVersion, and optional EventDefinition or Encounter."
+      "surface": "assigned_forms",
+      "responsibility": "Show active published forms assigned to the signed-in Dataverse user/email."
+    },
+    {
+      "surface": "submission_history",
+      "responsibility": "Show the current user's own Draft, Submitted, and Locked submissions for a selected form."
     },
     {
       "surface": "form_runner_shell",
-      "responsibility": "Load ordered GroupDefinition records, manage progress, navigation, validation, save state, and submit/review actions."
+      "responsibility": "Load ordered Sections and Questions, manage progress, validation, save state, submit, and read-only locked state."
     },
     {
       "surface": "field_renderer",
-      "responsibility": "Choose input controls from FieldDefinition data type, control kind, appearance, vocabulary binding, reference binding, and rule metadata."
+      "responsibility": "Render MVP field types from Questions, Choices, and ValidationRules metadata."
     },
     {
-      "surface": "repeat_manager",
-      "responsibility": "Create and navigate repeatable GroupInstance rows without hard-coded repeat screens."
-    },
-    {
-      "surface": "review_summary",
-      "responsibility": "Show completion state, required visible errors, repeat summaries, and final submission actions."
+      "surface": "attachment_capture",
+      "responsibility": "Attach one photo/file to a Submission and Question through SubmissionFiles."
     }
   ],
   "dataverse_metadata_extensions": {
@@ -199,74 +199,118 @@
   ],
   "control_mapping": [
     {
-      "field_data_type": "Text",
+      "question_type": "text",
       "default_control_kind": "TextInput",
-      "answer_storage": "mp_AnswerValue.TextValue"
+      "answer_storage": "SubmissionAnswers.ValueText"
     },
     {
-      "field_data_type": "WholeNumber",
+      "question_type": "integer",
       "default_control_kind": "NumberInput",
-      "answer_storage": "mp_AnswerValue.NumberValue"
+      "answer_storage": "SubmissionAnswers.ValueNumber"
     },
     {
-      "field_data_type": "Decimal",
+      "question_type": "decimal",
       "default_control_kind": "DecimalInput",
-      "answer_storage": "mp_AnswerValue.DecimalValue"
+      "answer_storage": "SubmissionAnswers.ValueDecimal"
     },
     {
-      "field_data_type": "LookupVocabularyTerm",
+      "question_type": "date",
+      "default_control_kind": "DatePicker",
+      "answer_storage": "SubmissionAnswers.ValueDate"
+    },
+    {
+      "question_type": "select_one",
       "default_control_kind": "SingleSelect",
-      "answer_storage": "mp_AnswerValue.RawValue plus term/code snapshot until lookup answer support is finalized"
+      "answer_storage": "SubmissionAnswers.ValueText with choice code/label snapshot"
     },
     {
-      "field_data_type": "MultiSelectVocabularyTermRows",
+      "question_type": "select_many",
       "default_control_kind": "MultiSelect",
-      "answer_storage": "mp_MultiSelectAnswer"
+      "answer_storage": "SubmissionAnswers.ValueJson for MVP"
     },
     {
-      "field_data_type": "LookupReferenceVillage",
-      "default_control_kind": "ReferenceLookup",
-      "answer_storage": "mp_AnswerValue.RawValue plus village code/label snapshot until reference lookup answer support is finalized"
+      "question_type": "file_photo_attachment",
+      "default_control_kind": "Attachment",
+      "answer_storage": "SubmissionFiles"
     },
     {
-      "field_data_type": "Geopoint",
+      "question_type": "gps",
       "default_control_kind": "Geopoint",
-      "answer_storage": "mp_AnswerValue.GeopointLatitude/Longitude/Altitude/Accuracy"
+      "answer_storage": "SubmissionAnswers.ValueJson if included"
     }
   ],
   "pilot_flows": [
     {
-      "flow": "normal_group",
-      "project_code": "tacatdp",
-      "instrument_code": "impact_evaluation",
-      "version_code": "phase3_source_v1",
-      "group_code": "screen_01_demographics",
+      "flow": "july_7_vertical_slice",
+      "form": "one seeded TACATDP form",
       "goals": [
-        "Render one field per row from metadata.",
-        "Apply required-visible validation.",
-        "Load region/district/ward from vocabulary terms and village from mp_VillageReference.",
-        "Persist scalar answers as mp_AnswerValue-shaped records."
-      ]
-    },
-    {
-      "flow": "repeat_group",
-      "project_code": "tacatdp",
-      "instrument_code": "impact_evaluation",
-      "version_code": "phase3_source_v1",
-      "group_code": "production_cost_lines",
-      "goals": [
-        "Render a repeat manager for line items.",
-        "Create one GroupInstance per production-cost line.",
-        "Persist each line item's scalar answers under its GroupInstance.",
-        "Show a repeat summary before submission."
+        "Show one assigned published form for one user.",
+        "Render supported questions from metadata.",
+        "Save Draft to Submissions and SubmissionAnswers.",
+        "Attach one file/photo via SubmissionFiles.",
+        "Submit and preserve edit-until-locked behavior.",
+        "Show current user submission history."
       ]
     }
   ],
   "deferred": [
-    "Full XPath evaluator",
-    "Offline sync conflict resolution",
-    "Arbitrary nested repeat UI beyond one pilot repeat group",
-    "Dynamic custom component generation",
-    "Direct Dataverse environment creation"
-  ]
+    "Full XLSForm parser/compiler",
+    "Repeat groups",
+    "Nested repeats",
+    "Complex XPath evaluator",
+    "Offline-first sync conflict resolution",
+    "Barcode",
+    "Admin publishing UI",
+    "Version migration",
+    "Dashboards",
+    "Richer locking workflow"
+  ],
+  "mvp_scope": {
+    "target_date": "2026-07-07",
+    "vertical_slice": "One published form assigned to one user, rendered dynamically in Canvas from Dataverse metadata, with draft/save/submit/history and one attachment field.",
+    "tables": [
+      "Forms",
+      "FormVersions",
+      "Sections",
+      "Questions",
+      "Choices",
+      "ValidationRules",
+      "FormAssignments",
+      "Submissions",
+      "SubmissionAnswers",
+      "SubmissionFiles"
+    ],
+    "supported_field_types": [
+      "text",
+      "integer",
+      "decimal",
+      "date",
+      "select_one",
+      "select_many",
+      "file_photo_attachment",
+      "gps_if_quick"
+    ],
+    "submission_statuses": [
+      "Draft",
+      "Submitted",
+      "Locked"
+    ],
+    "rule_subset": [
+      "required true/false",
+      "relevant depends on one prior answer",
+      "simple numeric/text constraint"
+    ],
+    "deferred": [
+      "full XLSForm parser/compiler",
+      "repeat groups",
+      "nested repeats",
+      "complex XPath expressions",
+      "offline-first sync",
+      "barcode",
+      "admin publishing UI",
+      "version migration",
+      "dashboards",
+      "locking workflow beyond simple status"
+    ]
+  }
 }

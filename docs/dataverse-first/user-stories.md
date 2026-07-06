@@ -1,29 +1,61 @@
-# User Stories: Dataverse-First TACATDP Backend
+# User Stories: July 7 Metadata-Driven MVP
 
-## DV-US-01: Dataverse development backend
+## MVP-US-01: See assigned forms
 
-As a TACATDP maker, I want a Dataverse-first backend plan so that app development can use relationships, typed tables, and Power Platform solutions instead of manual SharePoint list joins.
+As a data collector, I want to see forms assigned to me so that I know what data I am expected to capture.
 
-## DV-US-02: Submission-centered data model
+Acceptance:
 
-As an enumerator, I want each survey session to create one stable submission record so that draft, resume, submit, and review actions remain linked across all sections.
+1. The app uses my Power Apps/Entra identity.
+2. The assigned forms list is filtered to active published form versions assigned to me.
+3. No custom login is shown.
 
-## DV-US-03: Generic section/group saves
+## MVP-US-02: Fill a metadata-rendered form
 
-As a maker, I want each form section or repeat group mapped to generic group definitions, group instances, and answer rows so that TACATDP and future projects can share one save model while still surfacing section-level validation and save failures.
+As a data collector, I want the app to render a form from Dataverse metadata so that different forms can run in the same Canvas App.
 
-## DV-US-04: Normalized multi-select answers
+Acceptance:
 
-As a data manager, I want multi-select answers stored as one row per selected option so that reporting can count and filter choices without parsing delimited text.
+1. Sections and questions come from metadata.
+2. Text, integer, decimal, date, select one, and select many fields render.
+3. Labels, helper text, and errors are visible.
 
-## DV-US-05: Production cost line items
+## MVP-US-03: Save and resume a draft
 
-As a data manager, I want production costs stored as line items so that costs can be analyzed by stage, item, unit, quantity, and total.
+As a data collector, I want to save a draft and reopen it from history so that I can continue incomplete work.
 
-## DV-US-06: Large reference filters
+Acceptance:
 
-As an enumerator, I want region, district, ward, village, branch, and choice controls to filter quickly so that I can select the right value without loading thousands of options at once.
+1. Save Draft stores a `Draft` submission and answer rows.
+2. The draft appears in my history.
+3. Reopening the draft restores saved answers.
 
-## DV-US-07: ALM-ready solution
+## MVP-US-04: Submit and edit until locked
 
-As an admin, I want the monitoring platform tables, relationships, vocabularies, app, flows, projections, and environment variables packaged in a solution so that dev/test/prod movement is controlled.
+As a data collector, I want to submit a form and still edit it until it is locked so that corrections are possible before review closes the record.
+
+Acceptance:
+
+1. Submit changes status to `Submitted`.
+2. Draft and Submitted records remain editable.
+3. Locked records are read-only.
+
+## MVP-US-05: Attach evidence
+
+As a data collector, I want to attach a photo or document so that evidence can be stored with a submission.
+
+Acceptance:
+
+1. One file/photo question is available in the seeded form.
+2. Saving links the file to the submission and question.
+3. The attachment is visible when reopening the submission.
+
+## MVP-US-06: Seed one form without a compiler
+
+As a developer/maker, I want to seed one form manually or from a small JSON/YAML artifact so that the renderer can be proven before building the XLSForm compiler.
+
+Acceptance:
+
+1. One form, version, sections, questions, choices, rules, and assignment are seeded.
+2. The seed is reviewable.
+3. Full XLSForm compiler work is deferred.

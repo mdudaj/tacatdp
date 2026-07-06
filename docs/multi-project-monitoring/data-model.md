@@ -1,118 +1,73 @@
-# Multi-Project Monitoring Data Model
+# Dynamic Data Collection Data Model
 
-## Recommended Dataverse-first schema groups
+## July 7 MVP model
 
-### 1. Project and governance
+The MVP uses a deliberately small Dataverse model to prove runtime collection before the full platform schema is built.
 
-| Table | Key columns | Notes |
+| Table | Key columns | Purpose |
 | --- | --- | --- |
-| `mp_Project` | `ProjectCode`, `Name`, `Status`, `OwnerTeam` | Top-level monitoring project/program. |
-| `mp_ProjectRoleAssignment` | `Project`, `UserOrTeam`, `Role` | Project-scoped access model. |
-| `mp_ProjectSetting` | `Project`, `SettingKey`, `Value` | Non-secret project configuration. |
+| `Forms` | `FormCode`, `Name`, `Status` | Form/instrument container. |
+| `FormVersions` | `Form`, `VersionCode`, `LifecycleStatus`, `PublishedAt` | Published version metadata. |
+| `Sections` | `FormVersion`, `SectionCode`, `Name`, `DisplayOrder` | Ordered form sections/pages. |
+| `Questions` | `Section`, `QuestionCode`, `Type`, `Label`, `Required`, `DisplayOrder` | Renderer metadata for a question. |
+| `Choices` | `Question`, `ChoiceCode`, `Label`, `DisplayOrder` | Select one / select many options. |
+| `ValidationRules` | `Question`, `RuleType`, `Expression`, `Message` | Required, simple relevance, and simple constraints. |
+| `FormAssignments` | `FormVersion`, `User`, `UserEmail`, `Status` | Assigns a published form version to a user. |
+| `Submissions` | `FormVersion`, `AssignedUser`, `Status`, timestamps | One filled form instance. |
+| `SubmissionAnswers` | `Submission`, `Question`, typed value columns | Generic answer row. |
+| `SubmissionFiles` | `Submission`, `Question`, `File`, `FileName`, `MediaType` | Photo/document evidence. |
 
-### 2. Instrument metadata
+Do not create a custom `Users` table for the MVP unless profile metadata becomes necessary. Use Dataverse system users and `FormAssignments`.
 
-| Table | Key columns | Notes |
-| --- | --- | --- |
-| `mp_Instrument` | `Project`, `InstrumentCode`, `Name`, `Purpose` | Form/survey concept. |
-| `mp_InstrumentVersion` | `Instrument`, `VersionCode`, `LifecycleStatus`, `PublishedAt` | Draft/published/retired version. |
-| `mp_EventDefinition` | `Project`, `EventCode`, `Name`, `Repeatable` | Visit/reporting period/follow-up occasion. |
-| `mp_InstrumentEventBinding` | `EventDefinition`, `InstrumentVersion`, `Required` | Which form applies to which event. |
-| `mp_GroupDefinition` | `InstrumentVersion`, `ParentGroup`, `GroupCode`, `Name`, `Repeatable`, `DisplayOrder` | Section or repeating group. |
-| `mp_FieldDefinition` | `GroupDefinition`, `FieldCode`, `DataType`, `RequiredMode`, `DisplayOrder` | Question/variable metadata. |
-| `mp_FieldRule` | `FieldDefinition`, `RuleType`, `Expression`, `Message` | Required, relevance, constraint, calculate, default. |
+## Generic answer typed columns
 
-### 3. Controlled vocabularies
+`SubmissionAnswers` should store typed nullable values:
 
-| Table | Key columns | Notes |
-| --- | --- | --- |
-| `mp_VocabularyScheme` | `SchemeCode`, `Name`, `Authority`, `Version`, `Status` | Example: TACATDP crop, ROR affiliation, region, OECD subject. |
-| `mp_VocabularyTerm` | `Scheme`, `TermCode`, `PreferredLabel`, `Status`, `SortOrder` | Stable coded value. |
-| `mp_VocabularyTermLabel` | `Term`, `LanguageCode`, `Label`, `LabelType` | Preferred/alternate labels; supports i18n and aliases. |
-| `mp_VocabularyTermRelation` | `SourceTerm`, `RelationType`, `TargetTerm` | Parent/child, exactMatch, broader, narrower. |
-| `mp_ProjectVocabularyBinding` | `Project`, `Scheme`, `FilterRule`, `Status` | Project-specific allowed subset. |
-| `mp_FieldVocabularyBinding` | `FieldDefinition`, `Scheme`, `SelectionMode`, `RequiredTermFilter` | Binds select_one/select_multiple/reference fields. |
-| `mp_ExternalAuthorityIdentifier` | `Term`, `Authority`, `Identifier`, `Uri` | ROR, DataCite, custom registry IDs. |
+- `ValueText`;
+- `ValueNumber`;
+- `ValueDecimal`;
+- `ValueDate`;
+- `ValueBoolean`;
+- `ValueJson`.
 
-### 4. Runtime entities and submissions
+For MVP, select-many and GPS can use `ValueJson` if that keeps the renderer simple. Later analytics can use projection/export tables.
 
-| Table | Key columns | Notes |
-| --- | --- | --- |
-| `mp_TrackedEntity` | `Project`, `EntityType`, `EntityKey`, `DisplayName`, `Status` | Farmer, customer, school, facility, household, site. |
-| `mp_EntityIdentifier` | `TrackedEntity`, `IdentifierType`, `IdentifierValue` | Customer ID, facility code, national ID hash, etc. |
-| `mp_Encounter` | `Project`, `TrackedEntity`, `EventDefinition`, `EncounterDate`, `Status` | Visit/follow-up/reporting period occurrence. |
-| `mp_Submission` | `Project`, `InstrumentVersion`, `Encounter`, `SubmissionKey`, `Status`, timestamps | One filled form instance. |
-| `mp_GroupInstance` | `Submission`, `GroupDefinition`, `ParentGroupInstance`, `RepeatIndex`, `InstanceKey` | One section/repeat occurrence. |
-| `mp_AnswerValue` | `Submission`, `GroupInstance`, `FieldDefinition`, typed value columns | Scalar answer source of truth. |
-| `mp_MultiSelectAnswer` | `Submission`, `GroupInstance`, `FieldDefinition`, `VocabularyTerm` | One row per selected option. |
-| `mp_Attachment` | `Submission`, `FieldDefinition`, `File`, `MediaType`, checksum | Photos/files/media. |
-| `mp_SubmissionReview` | `Submission`, `ReviewState`, `Reviewer`, `Comment` | Review/approval workflow. |
-| `mp_AuditEvent` | `Project`, `Entity`, `Action`, `Actor`, timestamp | Data lineage and corrections. |
+## Submission statuses
 
-## AnswerValue typed columns
+Use a simple status field:
 
-`mp_AnswerValue` should avoid storing everything as text. Use typed nullable columns and exactly one active value per row:
+- `Draft`;
+- `Submitted`;
+- `Locked`.
 
-- `TextValue`
-- `NumberValue`
-- `DecimalValue`
-- `CurrencyValue`
-- `DateValue`
-- `DateTimeValue`
-- `BooleanValue`
-- `GeopointLatitude`
-- `GeopointLongitude`
-- `GeopointAltitude`
-- `GeopointAccuracy`
-- `JsonValue` for rare complex data
+The Canvas App may edit `Draft` and `Submitted` submissions. `Locked` submissions are read-only.
 
-Store original/raw values when useful for audit or import fidelity.
+## July 7 supported rules
 
-## Repeat groups
+Support only:
 
-Repeats are not columns. A repeat is:
+- required true/false;
+- relevance depending on one prior answer;
+- simple numeric/text comparisons.
 
-1. `GroupDefinition.Repeatable = true`.
-2. One or more `GroupInstance` rows for a submission.
-3. `RepeatIndex` and `InstanceKey` identify occurrence order.
-4. Nested repeats use `ParentGroupInstance`.
-5. Answers inside a repeat point to that repeat's `GroupInstance`.
+Defer complex XPath expressions and repeat-aware calculations.
 
-## Multiple select
+## Long-term platform model
 
-Multiple select is not delimited text in the source model:
+After the MVP works, evolve toward the richer platform model:
 
-1. The field has `FieldVocabularyBinding.SelectionMode = Multiple`.
-2. Each selected term creates one `mp_MultiSelectAnswer`.
-3. Export profiles can generate ODK/REDCap-style wide columns if needed.
+| Long-term concept | Purpose |
+| --- | --- |
+| `Project` | Top-level project/program boundary. |
+| `ProjectRoleAssignment` | Project-specific user/role mapping. |
+| `Instrument` / `InstrumentVersion` | Versioned form definitions. |
+| `GroupDefinition` / `FieldDefinition` | Rich sections, repeats, and question metadata. |
+| `FieldRule` | Required, relevance, constraint, calculation, default, and choice filters. |
+| `VocabularyScheme` / `VocabularyTerm` | Reusable controlled vocabularies and reference data. |
+| `TrackedEntity` / `Encounter` | Longitudinal subjects and visits. |
+| `GroupInstance` | Repeat group occurrences. |
+| `MultiSelectAnswer` | Normalized selected terms for analytics. |
+| `SubmissionReview` / `AuditEvent` | Review, locking, and audit workflow. |
+| Export/projection tables | Wide/long reporting outputs derived from normalized source data. |
 
-## Controlled variables / controlled vocabularies
-
-Controlled variables should be implemented as reusable vocabulary schemes and terms:
-
-- stable codes;
-- preferred labels;
-- multilingual labels;
-- aliases/synonyms;
-- hierarchy and mappings;
-- external authority identifiers;
-- term lifecycle status;
-- project-specific subsets;
-- field-specific bindings;
-- import/export fixtures.
-
-This supports TACATDP choices now and future project vocabularies later.
-
-## TACATDP mapping stance
-
-TACATDP becomes:
-
-- `mp_Project(ProjectCode = "tacatdp")`
-- one or more `mp_Instrument` records for the Phase 3 survey;
-- 33 current screens mapped to `GroupDefinition` or UI screen definitions;
-- 292 XLSForm fields mapped to `FieldDefinition`;
-- current select lists mapped to `VocabularyScheme` and `VocabularyTerm`;
-- current `TACATDP_MultiSelectAnswers` and `TACATDP_ProductionCostLines` mapped to normalized runtime tables.
-
-The old section-list/table names remain useful as export profiles or generated views but should not be the long-term source of truth.
-
+These long-term concepts remain valid, but they are deferred until after the first metadata-rendered MVP slice proves the runtime path.

@@ -1,3 +1,7 @@
+# Legacy Requirements Note
+
+Status: superseded for July 7 MVP. The active implementation scope is `docs/mvp-july-7.md`: one assigned published form rendered dynamically from Dataverse metadata with draft/save/submit/history and one attachment field. Microsoft Lists and full XLSForm conversion content below is retained as historical/fallback context.
+
 # TACATDP Power Apps Requirements
 
 ## Product objective
