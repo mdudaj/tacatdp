@@ -174,10 +174,13 @@ class Verifier:
             )
             self.check(f"table permission {table} linked to authenticated users", bool(link_rows))
             enhanced_link_rows = self.rows(
-                "powerpagecomponent_powerpagecomponent?$select=powerpagecomponentidone,powerpagecomponentidtwo"
-                f"&$filter=powerpagecomponentidone eq {row['mspp_entitypermissionid']} and powerpagecomponentidtwo eq {role_id}&$top=1"
+                f"powerpagecomponents({row['mspp_entitypermissionid']})/powerpagecomponent_powerpagecomponent"
+                "?$select=powerpagecomponentid&$top=50"
             )
-            self.check(f"enhanced table permission {table} linked to authenticated users", bool(enhanced_link_rows))
+            self.check(
+                f"enhanced table permission {table} linked to authenticated users",
+                any(link.get("powerpagecomponentid") == role_id for link in enhanced_link_rows),
+            )
 
     def verify_smoke_page(self) -> None:
         rows = self.rows(

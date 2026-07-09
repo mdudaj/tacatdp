@@ -176,11 +176,7 @@ class PagesConfigClient:
         print("created: permission Authenticated Users role link")
 
     def ensure_enhanced_permission_role(self, permission_id: str, role_id: str, execute: bool) -> None:
-        existing = self.dv.get_json(
-            "powerpagecomponent_powerpagecomponent?$select=powerpagecomponentidone,powerpagecomponentidtwo"
-            f"&$filter=powerpagecomponentidone eq {permission_id} and powerpagecomponentidtwo eq {role_id}&$top=1"
-        )
-        if (existing or {}).get("value"):
+        if self.enhanced_permission_role_exists(permission_id, role_id):
             print("exists: enhanced permission Authenticated Users component link")
             return
         if not execute:
@@ -192,7 +188,16 @@ class PagesConfigClient:
             message = self.deploy.safe_error(response)
             if "already" not in message.lower() and "duplicate" not in message.lower():
                 raise RuntimeError(f"Associate enhanced permission role failed: HTTP {response.status_code} {message}")
+        if not self.enhanced_permission_role_exists(permission_id, role_id):
+            raise RuntimeError("Associate enhanced permission role did not create a readable component link")
         print("created: enhanced permission Authenticated Users component link")
+
+    def enhanced_permission_role_exists(self, permission_id: str, role_id: str) -> bool:
+        existing = self.dv.get_json(
+            f"powerpagecomponents({permission_id})/powerpagecomponent_powerpagecomponent"
+            "?$select=powerpagecomponentid&$top=50"
+        )
+        return any(row.get("powerpagecomponentid") == role_id for row in (existing or {}).get("value", []))
 
 
 def main() -> int:
