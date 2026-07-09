@@ -85,6 +85,7 @@ The verifier checks:
 - the 16 named `Webapi/mp_*` site settings,
 - absence of nameless site settings,
 - 8 table permissions and Authenticated Users web-role links,
+- 8 enhanced data model table permission component links to the Authenticated Users web-role component,
 - 2 `/api-smoke` page rows,
 - a portal contact exists for the seeded test user,
 - at least one assignment, form version with XForm XML, and form record.

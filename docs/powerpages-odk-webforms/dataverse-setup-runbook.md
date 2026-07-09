@@ -77,14 +77,16 @@ Verified on 2026-07-09 against `PowerPagesDeveloper-070926-125720`:
 - 16 named Web API site settings exist: enabled and fields settings for all 8 `mp_*` tables.
 - 8 table permissions exist: metadata tables are read-only; submission tables allow read/create/write/append/append-to.
 - All 8 table permissions are linked to the Power Pages `Authenticated Users` web role through `mspp_entitypermission_webroleset`.
+- In the enhanced data model, all 8 table permission `powerpagecomponent` rows are also linked to the `Authenticated Users` web-role `powerpagecomponent` through `powerpagecomponent_powerpagecomponent`.
 - A portal `Contact` exists for `TACATDP_SEED_USER_EMAIL` or the default seeded test email. Power Pages table permissions are evaluated through web roles and portal contacts; a Dataverse maker/admin `systemuser` sign-in alone is not enough for browser `/_api` authorization.
 
 If `/api-smoke/` shows `90040120` / "You don't have permission to read the mp_formassignment table":
 
 1. Confirm the signed-in portal user has a `Contact` row in the Power Pages environment with `emailaddress1` matching the seeded assignment email.
-2. If no contact exists, create/invite the contact from the Power Pages Portal Management app: `Security > Contacts`, then create/send an invitation and assign the needed web roles during invitation redemption.
-3. After changing contacts, web roles, table permissions, or site settings, clear/restart the Power Pages site cache from the Power Pages admin experience or `_services/about` as an administrator, then sign out and sign in again.
-4. Rerun `python3 scripts/verify-powerpages-api-smoke-hosted.py --env-file .env`.
+2. Confirm `python3 scripts/verify-powerpages-api-smoke-hosted.py --env-file .env` passes both legacy `mspp_entitypermission_webroleset` links and enhanced `powerpagecomponent_powerpagecomponent` links.
+3. If no contact exists, create/invite the contact from the Power Pages Portal Management app: `Security > Contacts`, then create/send an invitation and assign the needed web roles during invitation redemption.
+4. After changing contacts, web roles, table permissions, or site settings, clear/restart the Power Pages site cache from the Power Pages admin experience or `_services/about` as an administrator, then sign out and sign in again.
+5. Rerun `python3 scripts/verify-powerpages-api-smoke-hosted.py --env-file .env`.
 
 Known dev-environment cleanup note: an earlier script run created 28 nameless `mspp_sitesetting` rows before `mspp_name` was added to the create payload. They are not usable Power Pages Web API settings and are not committed in source. Delete them only through a separately approved Dataverse cleanup.
 

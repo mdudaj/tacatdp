@@ -153,6 +153,7 @@ class PagesConfigClient:
             permission_id = parse_guid_from_entity_id(response.headers.get("OData-EntityId", ""))
             print(f"created: table permission {logical}")
         self.ensure_permission_role(permission_id, role_id, execute)
+        self.ensure_enhanced_permission_role(permission_id, role_id, execute)
         return permission_id
 
     def ensure_permission_role(self, permission_id: str, role_id: str, execute: bool) -> None:
@@ -173,6 +174,25 @@ class PagesConfigClient:
             if "already" not in message.lower() and "duplicate" not in message.lower():
                 raise RuntimeError(f"Associate permission role failed: HTTP {response.status_code} {message}")
         print("created: permission Authenticated Users role link")
+
+    def ensure_enhanced_permission_role(self, permission_id: str, role_id: str, execute: bool) -> None:
+        existing = self.dv.get_json(
+            "powerpagecomponent_powerpagecomponent?$select=powerpagecomponentidone,powerpagecomponentidtwo"
+            f"&$filter=powerpagecomponentidone eq {permission_id} and powerpagecomponentidtwo eq {role_id}&$top=1"
+        )
+        if (existing or {}).get("value"):
+            print("exists: enhanced permission Authenticated Users component link")
+            return
+        if not execute:
+            print("would create: enhanced permission Authenticated Users component link")
+            return
+        payload = {"@odata.id": f"{self.dv.base}/powerpagecomponents({role_id})"}
+        response = self.dv.request("POST", f"powerpagecomponents({permission_id})/powerpagecomponent_powerpagecomponent/$ref", payload=payload)
+        if response.status_code >= 400:
+            message = self.deploy.safe_error(response)
+            if "already" not in message.lower() and "duplicate" not in message.lower():
+                raise RuntimeError(f"Associate enhanced permission role failed: HTTP {response.status_code} {message}")
+        print("created: enhanced permission Authenticated Users component link")
 
 
 def main() -> int:
