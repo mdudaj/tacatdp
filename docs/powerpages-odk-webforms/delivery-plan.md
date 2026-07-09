@@ -54,5 +54,5 @@ Implementation instructions:
 1. Inspect `docs/powerpages-odk-webforms/api-smoke-test.md`, `powerpages/tacatdp-monitoring-tool/.powerpages-site/web-pages/api-smoke/`, and Microsoft Power Pages Web API/table-permission docs.
 2. Validate source with `python3 scripts/validate-powerpages-api-smoke.py`.
 3. Upload only after confirming `pac env who` and `pac pages list` still point to `PowerPagesDeveloper-070926-125720` and website `fccc0cc6-7f5e-4885-aeb8-2272e68130a3`.
-4. Browser-test `/api-smoke` while signed in. The page must display assignment, form version, form metadata, and an explicit pass/fail status.
-5. Do not add ODK Web Forms packages until this read path passes in the hosted site.
+4. Run `python3 scripts/verify-powerpages-api-smoke-hosted.py --env-file .env`; it must verify hosted page records, Web API settings, permissions, role links, assignment seed, form version, and form metadata.
+5. Do not add ODK Web Forms packages until the automated hosted verifier passes. Manual browser navigation to `/api-smoke` is optional observation, not the delivery gate.

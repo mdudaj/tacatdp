@@ -69,17 +69,30 @@ pac pages download-code-site \
   --overwrite
 ```
 
-## Browser Verification
+## Automated Hosted Verification
 
-1. Open the Power Pages site while signed in.
-2. Navigate to `/api-smoke`.
-3. Confirm the status says `Power Pages /_api read smoke test passed.`
-4. Confirm at least one assignment, form version, and form record are displayed.
-5. If it fails, capture the status text. Expected failure families are 401 missing session/CSRF, 403 missing table permission, 404 wrong EntitySetName or table not exposed, and empty assignment data.
+Do not make manual browser navigation the delivery gate. Verify the hosted state programmatically:
+
+```bash
+python3 scripts/verify-powerpages-api-smoke-hosted.py --env-file .env
+```
+
+The verifier checks:
+
+- the local smoke-page source and JavaScript syntax,
+- the expected Power Pages website,
+- the 8 `mp_*` Dataverse EntitySetName values,
+- the 16 named `Webapi/mp_*` site settings,
+- absence of nameless site settings,
+- 8 table permissions and Authenticated Users web-role links,
+- 2 `/api-smoke` page rows,
+- at least one assignment, form version with XForm XML, and form record.
+
+Opening `/api-smoke` remains an optional observation step, not the release gate.
 
 ## Next Slice
 
-After this smoke page passes in the hosted site, add the first ODK shell that loads `FormVersions.XFormXml` from the form version result and renders the form through the selected ODK Web Forms package versions.
+After the automated hosted smoke verifier passes, add the first ODK shell that loads `FormVersions.XFormXml` from the form version result and renders the form through the selected ODK Web Forms package versions.
 
 ## PAC 2.8.1 Upload Note
 
