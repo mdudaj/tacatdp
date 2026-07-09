@@ -17,3 +17,14 @@
 - Browser code contains no client secret, bearer token, or Dataverse OAuth endpoint.
 - `python3 scripts/verify-powerpages-api-smoke-hosted.py --env-file .env` passes against the hosted environment.
 - Manual browser navigation to `/api-smoke` is optional observation, not the delivery gate.
+
+## SPA Foundation Slice Acceptance
+
+- `docs/powerpages-odk-webforms/user-stories.md` exists and maps stories to requirements.
+- `docs/powerpages-odk-webforms/slice-checklist.md` identifies completed, current, next, and deferred work.
+- `docs/powerpages-odk-webforms/package-review.md` exists and blocks dependency installation until accepted.
+- `powerpages/webforms-spa/` contains a private Vite/Vue package skeleton.
+- SPA source uses Power Pages `/_api` paths and includes anti-forgery token handling for future writes.
+- SPA source contains no raw Dataverse OAuth endpoint, client secret, bearer token, or custom login.
+- `python3 scripts/validate-webforms-spa-foundation.py` passes.
+- Hosted state remains verified by `python3 scripts/verify-powerpages-api-smoke-hosted.py --env-file .env`.

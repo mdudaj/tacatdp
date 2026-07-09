@@ -47,7 +47,7 @@ powerpages/
 - Attachment upload creates `SubmissionAttachments`.
 
 
-## Current Slice: Authenticated `/_api` Read Smoke
+## Completed Slice: Authenticated `/_api` Read Smoke
 
 Implementation instructions:
 
@@ -56,3 +56,13 @@ Implementation instructions:
 3. Upload only after confirming `pac env who` and `pac pages list` still point to `PowerPagesDeveloper-070926-125720` and website `fccc0cc6-7f5e-4885-aeb8-2272e68130a3`.
 4. Run `python3 scripts/verify-powerpages-api-smoke-hosted.py --env-file .env`; it must verify hosted page records, Web API settings, permissions, role links, assignment seed, form version, and form metadata.
 5. Do not add ODK Web Forms packages until the automated hosted verifier passes. Manual browser navigation to `/api-smoke` is optional observation, not the delivery gate.
+
+## Current Slice: SPA Foundation
+
+Implementation instructions:
+
+1. Inspect `requirements.md`, `user-stories.md`, `slice-checklist.md`, `package-review.md`, and `powerpages/webforms-spa/`.
+2. Validate source with `python3 scripts/validate-webforms-spa-foundation.py`.
+3. Keep `python3 scripts/verify-powerpages-api-smoke-hosted.py --env-file .env` as the hosted-state gate.
+4. Do not run `npm install` or import ODK packages until package/version/license review is accepted.
+5. The next implementation slice is package review plus first ODK runtime proof.
