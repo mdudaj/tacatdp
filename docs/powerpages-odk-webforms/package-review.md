@@ -25,13 +25,13 @@ Package installation changes the local supply-chain state and must use the appro
 
 ## Compatibility Notes
 
-- Local Node: `v24.14.1`; local npm: `11.11.0`.
+- Local Node validated for this slice: `v24.18.0`; local npm: `11.16.0`.
 - Current Vite and Vue engine requirement is satisfied by local Node.
-- ODK packages declare Node `^24.16.0` and npm `11`; local Node is `v24.14.1`, so `npm install` emits `EBADENGINE` warnings. The production build passes on this machine, but runtime proof work should use Node `>=24.16.0` when available.
+- ODK packages declare Node `^24.16.0` and npm `11`; Node `v24.18.0` satisfies this requirement.
 - `@getodk/web-forms` depends on Vue peer `^3.5.29`; pinned Vue `3.5.39` satisfies it.
 - `@getodk/xforms-engine` includes `solid-js` as a dependency and also declares peer `solid-js ^1.9.7`; install output must be checked for unmet peer warnings.
 - ODK packages were modified on npm on 2026-07-03 and point to `getodk/central-frontend`, so this is an emerging package path and must be validated with a build before runtime integration.
-- `npm install` completed with `found 0 vulnerabilities`; only the ODK Node engine warnings appeared.
+- `npm install` completed with `found 0 vulnerabilities` and no ODK Node engine warning under Node `v24.18.0`.
 - `npm audit --audit-level=moderate` completed with `found 0 vulnerabilities`.
 - `npm run build` completed successfully after pinning TypeScript to `5.9.3`.
 
