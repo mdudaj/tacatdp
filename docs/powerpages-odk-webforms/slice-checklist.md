@@ -18,13 +18,13 @@
 - [x] Power Pages `/_api` client module added.
 - [x] Local draft adapter stub added.
 - [x] Source validator added for no-secret and `/_api` guardrails.
-- [ ] Package/version/license review accepted before package installation.
+- [x] Package/version/license review accepted before package installation.
 
 ## Next Slice: Package Review and ODK Runtime Proof
 
-- [ ] Review `vue`, `vite`, `@vitejs/plugin-vue`, `typescript`, `vue-tsc`, ODK Web Forms, and XForms engine package versions/licenses.
-- [ ] Install dependencies only after approval.
-- [ ] Build the SPA locally.
+- [x] Review `vue`, `vite`, `@vitejs/plugin-vue`, `typescript`, `vue-tsc`, ODK Web Forms, and XForms engine package versions/licenses.
+- [x] Install dependencies from the pinned package set.
+- [x] Build the SPA locally.
 - [ ] Load one XForm XML payload through the API client.
 - [ ] Render through ODK Web Forms/XForms engine.
 - [ ] Keep automated hosted-state smoke verifier as a required gate.

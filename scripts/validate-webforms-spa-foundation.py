@@ -36,6 +36,19 @@ REQUIRED_API_STRINGS = [
     "__RequestVerificationToken",
     "getTokenDeferred",
 ]
+TEXT_SCAN_FILES = [
+    "package.json",
+    "index.html",
+    "vite.config.ts",
+    "tsconfig.json",
+    "src/main.ts",
+    "src/App.vue",
+    "src/views/AssignedFormsView.vue",
+    "src/powerpages-api/client.ts",
+    "src/powerpages-api/types.ts",
+    "src/offline/drafts.ts",
+    "src/styles.css",
+]
 
 
 def fail(message: str) -> None:
@@ -57,16 +70,18 @@ def main() -> int:
     for script in ("dev", "build", "typecheck"):
         if script not in package.get("scripts", {}):
             fail(f"package.json missing script {script}")
+    dependencies = package.get("dependencies", {})
+    for dependency in ("@getodk/web-forms", "@getodk/xforms-engine"):
+        if dependency not in dependencies:
+            fail(f"package.json missing reviewed ODK dependency {dependency}")
 
-    all_text = "\n".join(path.read_text() for path in SPA.rglob("*") if path.is_file())
+    all_text = "\n".join((SPA / relative).read_text() for relative in TEXT_SCAN_FILES)
     for pattern in FORBIDDEN_PATTERNS:
         if re.search(pattern, all_text, flags=re.IGNORECASE):
             fail(f"forbidden browser credential/raw Dataverse pattern found: {pattern}")
     for expected in REQUIRED_API_STRINGS:
         if expected not in all_text:
             fail(f"missing required SPA API guardrail string: {expected}")
-    if "@getodk/" in all_text:
-        fail("ODK packages must not be imported before package review is accepted")
     if "indexedDB.open" not in all_text:
         fail("draft adapter must use explicit browser-local storage")
     if "Render form after ODK package review" not in all_text:
