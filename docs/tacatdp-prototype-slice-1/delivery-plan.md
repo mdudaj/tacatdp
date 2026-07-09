@@ -91,3 +91,11 @@ Do not implement these in the July 7 slice unless explicitly re-approved:
 - admin publishing UI;
 - dashboards;
 - version migration.
+
+## Dataverse schema delivery artifacts
+
+Use `docs/dataverse-schema-cli/` for the reviewed CLI/Web API schema setup requirements, ADR, user stories, checklist, delivery plan, and verification notes.
+
+## Canvas renderer artifacts
+
+Use `docs/canvas-renderer-mvp/` for the systematic Canvas implementation plan after the Dataverse schema and seed are verified.

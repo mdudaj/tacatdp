@@ -1,0 +1,79 @@
+# ************************************************************************************************
+# TACATDP Canvas metadata renderer MVP slice.
+# This source scaffold is implementation-ready review material for Power Apps Studio/Git Integration.
+# Microsoft treats Canvas YAML source as preview; normalize and save from Studio before treating it as canonical app source.
+# ************************************************************************************************
+Screens:
+  HistoryScreen:
+    Properties:
+      OnVisible: '=Refresh(Submissions)'
+    Children:
+      - HistoryBack:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Back to assigned forms"'
+            Text: '="Back"'
+            OnSelect: '=Navigate(AssignedFormsScreen, ScreenTransition.None)'
+            X: '=24'
+            Y: '=20'
+            Width: '=96'
+            Height: '=40'
+      - HistoryTitle:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Submission history screen heading"'
+            Text: '=Coalesce(gblFormVersion.''VersionCode'', "Submission history")'
+            X: '=136'
+            Y: '=20'
+            Width: '=Parent.Width - 280'
+            Height: '=40'
+      - HistoryUserHeader:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Signed in as " & gblUserEmail'
+            X: '=24'
+            Y: '=68'
+            Width: '=Parent.Width - 48'
+            Height: '=28'
+      - NewDraftButton:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Create new draft submission"'
+            Text: '="New"'
+            DisplayMode: '=If(IsBlank(gblFormVersion), DisplayMode.Disabled, DisplayMode.Edit)'
+            OnSelect: '=Set(gblSubmission, Patch(Submissions, Defaults(Submissions), {FormVersion: gblFormVersion, UserEmail: gblUserEmail, StartedAt: Now()})); Navigate(RunnerScreen, ScreenTransition.None);'
+            X: '=Parent.Width - 120'
+            Y: '=20'
+            Width: '=96'
+            Height: '=40'
+      - HistoryStatus:
+          Control: Label@2.5.1
+          Properties:
+            Text: '=If(CountRows(Filter(Submissions, UserEmail = gblUserEmail && FormVersion.FormVersions = gblFormVersion.FormVersions)) = 0, "No submissions yet. Select New to start a draft.", "Latest submission is ready to reopen.")'
+            X: '=24'
+            Y: '=116'
+            Width: '=Parent.Width - 48'
+            Height: '=32'
+      - OpenLatestSubmissionButton:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Open latest submission"'
+            Text: '="Open latest"'
+            DisplayMode: '=If(CountRows(Filter(Submissions, UserEmail = gblUserEmail && FormVersion.FormVersions = gblFormVersion.FormVersions)) = 0, DisplayMode.Disabled, DisplayMode.Edit)'
+            OnSelect: '=Set(gblSubmission, First(SortByColumns(Filter(Submissions, UserEmail = gblUserEmail && FormVersion.FormVersions = gblFormVersion.FormVersions), "modifiedon", SortOrder.Descending))); Navigate(RunnerScreen, ScreenTransition.None)'
+            X: '=24'
+            Y: '=160'
+            Width: '=160'
+            Height: '=40'
+      - SubmissionHistoryGallery:
+          Control: Gallery@2.15.0
+          Variant: BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0
+          Properties:
+            AccessibleLabel: '="My submission history list"'
+            TabIndex: '=0'
+            Items: '=SortByColumns(Filter(Submissions, UserEmail = gblUserEmail && FormVersion.FormVersions = gblFormVersion.FormVersions), "modifiedon", SortOrder.Descending)'
+            OnSelect: '=Set(gblSubmission, ThisItem); Navigate(RunnerScreen, ScreenTransition.None);'
+            X: '=24'
+            Y: '=216'
+            Width: '=Parent.Width - 48'
+            Height: '=Parent.Height - 240'

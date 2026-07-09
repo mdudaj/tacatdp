@@ -1,0 +1,10 @@
+# ************************************************************************************************
+# TACATDP Canvas metadata renderer MVP slice.
+# This source scaffold is implementation-ready review material for Power Apps Studio/Git Integration.
+# Microsoft treats Canvas YAML source as preview; normalize and save from Studio before treating it as canonical app source.
+# ************************************************************************************************
+App:
+  Properties:
+    StartScreen: '=AssignedFormsScreen'
+    OnStart: '=Set(gblUserEmail, Lower(User().Email)); ClearCollect(colPendingAnswers, Table({Question: Blank(), ValueText: Blank(), ValueNumber: Blank(), ValueJson: Blank()})); RemoveIf(colPendingAnswers, true); ClearCollect(colValidationErrors, Table({Question: Blank()})); RemoveIf(colValidationErrors, true)'
+    Theme: '=PowerAppsTheme'

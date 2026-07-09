@@ -1,0 +1,494 @@
+{
+  "generated_for_review_only": true,
+  "generated_on": "2026-07-09",
+  "schema_name": "tacatdp_odk_central_inspired_mvp_schema",
+  "target_host": "Power Pages hosted Vue SPA with ODK Web Forms",
+  "environment_write": false,
+  "solution_header": "MSCRM.SolutionUniqueName=$POWER_PLATFORM_SOLUTION_UNIQUE_NAME",
+  "publisher_prefix": "$POWER_PLATFORM_PUBLISHER_PREFIX",
+  "scope": "One assigned XForm-backed published form rendered in Power Pages with local draft, online submit, versioned payload, and one attachment.",
+  "source_model": "ODK Central-inspired: projects, forms, form versions, assignments, submissions, submission versions, and attachments.",
+  "tables": [
+    {
+      "name": "Projects",
+      "display_name": "Projects",
+      "singular_name": "Project",
+      "purpose": "Top-level project container, equivalent to ODK Central project scope.",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "Name",
+      "columns": [
+        {
+          "name": "ProjectCode",
+          "type": "Text",
+          "required": true,
+          "notes": "Stable project code."
+        },
+        {
+          "name": "Name",
+          "type": "Text",
+          "required": true,
+          "notes": "Project display name."
+        },
+        {
+          "name": "Description",
+          "type": "MultilineText",
+          "required": false,
+          "notes": "Project description."
+        },
+        {
+          "name": "LifecycleStatus",
+          "type": "Choice",
+          "required": true,
+          "notes": "Active/Archived.",
+          "choices": [
+            "Active",
+            "Archived"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Forms",
+      "display_name": "Forms",
+      "singular_name": "Form",
+      "purpose": "ODK form identity within a project. XmlFormId should match the XForm form id.",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "Name",
+      "columns": [
+        {
+          "name": "Project",
+          "type": "Lookup:Projects",
+          "required": true,
+          "notes": "Parent project."
+        },
+        {
+          "name": "XmlFormId",
+          "type": "Text",
+          "required": true,
+          "notes": "ODK XML form id."
+        },
+        {
+          "name": "Name",
+          "type": "Text",
+          "required": true,
+          "notes": "Form display name."
+        },
+        {
+          "name": "Description",
+          "type": "MultilineText",
+          "required": false,
+          "notes": "Form description."
+        },
+        {
+          "name": "LifecycleStatus",
+          "type": "Choice",
+          "required": true,
+          "notes": "Draft/Open/Closed.",
+          "choices": [
+            "Draft",
+            "Open",
+            "Closed"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FormVersions",
+      "display_name": "FormVersions",
+      "singular_name": "FormVersion",
+      "purpose": "Versioned canonical XForm XML and publish state.",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "Version",
+      "columns": [
+        {
+          "name": "Form",
+          "type": "Lookup:Forms",
+          "required": true,
+          "notes": "Parent form."
+        },
+        {
+          "name": "Version",
+          "type": "Text",
+          "required": true,
+          "notes": "ODK form version string."
+        },
+        {
+          "name": "Hash",
+          "type": "Text",
+          "required": false,
+          "notes": "Form definition hash when available."
+        },
+        {
+          "name": "XFormXml",
+          "type": "MultilineText",
+          "required": true,
+          "notes": "Canonical XForm XML used by ODK Web Forms."
+        },
+        {
+          "name": "WebFormsEnabled",
+          "type": "Boolean",
+          "required": false,
+          "notes": "Whether this version is fillable in the Power Pages Web Forms runtime."
+        },
+        {
+          "name": "LifecycleStatus",
+          "type": "Choice",
+          "required": true,
+          "notes": "Draft/Published/Retired.",
+          "choices": [
+            "Draft",
+            "Published",
+            "Retired"
+          ]
+        },
+        {
+          "name": "PublishedAt",
+          "type": "DateTime",
+          "required": false,
+          "notes": "Publish timestamp."
+        }
+      ]
+    },
+    {
+      "name": "FormAttachments",
+      "display_name": "FormAttachments",
+      "singular_name": "FormAttachment",
+      "purpose": "Media/data files referenced by a form version.",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "FileName",
+      "columns": [
+        {
+          "name": "FormVersion",
+          "type": "Lookup:FormVersions",
+          "required": true,
+          "notes": "Parent form version."
+        },
+        {
+          "name": "FileName",
+          "type": "Text",
+          "required": true,
+          "notes": "Attachment filename as referenced by the XForm."
+        },
+        {
+          "name": "MediaType",
+          "type": "Text",
+          "required": false,
+          "notes": "MIME/media type."
+        },
+        {
+          "name": "File",
+          "type": "File",
+          "required": false,
+          "notes": "Dataverse file column for binary attachment."
+        }
+      ]
+    },
+    {
+      "name": "FormAssignments",
+      "display_name": "FormAssignments",
+      "singular_name": "FormAssignment",
+      "purpose": "Assign published form versions to Dataverse/Power Pages users or email fallback keys.",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "AssignmentKey",
+      "columns": [
+        {
+          "name": "FormVersion",
+          "type": "Lookup:FormVersions",
+          "required": true,
+          "notes": "Assigned published form version."
+        },
+        {
+          "name": "User",
+          "type": "Lookup:SystemUser",
+          "required": false,
+          "notes": "Dataverse system user where available."
+        },
+        {
+          "name": "UserEmail",
+          "type": "Text",
+          "required": false,
+          "notes": "Normalized email fallback/filter key."
+        },
+        {
+          "name": "AssignmentKey",
+          "type": "Text",
+          "required": true,
+          "notes": "Stable key, for example xmlFormId:version:userEmail."
+        },
+        {
+          "name": "LifecycleStatus",
+          "type": "Choice",
+          "required": true,
+          "notes": "Active/Inactive.",
+          "choices": [
+            "Active",
+            "Inactive"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Submissions",
+      "display_name": "Submissions",
+      "singular_name": "Submission",
+      "purpose": "Submission header keyed by ODK instanceId.",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "InstanceId",
+      "columns": [
+        {
+          "name": "FormVersion",
+          "type": "Lookup:FormVersions",
+          "required": true,
+          "notes": "Submitted form version."
+        },
+        {
+          "name": "InstanceId",
+          "type": "Text",
+          "required": true,
+          "notes": "ODK instanceId."
+        },
+        {
+          "name": "Submitter",
+          "type": "Lookup:SystemUser",
+          "required": false,
+          "notes": "Dataverse user where available."
+        },
+        {
+          "name": "UserEmail",
+          "type": "Text",
+          "required": false,
+          "notes": "Submitter email snapshot."
+        },
+        {
+          "name": "LifecycleStatus",
+          "type": "Choice",
+          "required": true,
+          "notes": "Draft/Submitted/Locked.",
+          "choices": [
+            "Draft",
+            "Submitted",
+            "Locked"
+          ]
+        },
+        {
+          "name": "ReviewState",
+          "type": "Choice",
+          "required": false,
+          "notes": "ODK Central-inspired review state.",
+          "choices": [
+            "Received",
+            "Edited",
+            "HasIssues",
+            "Rejected",
+            "Approved"
+          ]
+        },
+        {
+          "name": "StartedAt",
+          "type": "DateTime",
+          "required": false,
+          "notes": "Draft start timestamp."
+        },
+        {
+          "name": "SubmittedAt",
+          "type": "DateTime",
+          "required": false,
+          "notes": "Submit timestamp."
+        },
+        {
+          "name": "UpdatedAt",
+          "type": "DateTime",
+          "required": false,
+          "notes": "Latest local/server update timestamp."
+        }
+      ]
+    },
+    {
+      "name": "SubmissionVersions",
+      "display_name": "SubmissionVersions",
+      "singular_name": "SubmissionVersion",
+      "purpose": "Versioned immutable/current submission payloads.",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "VersionKey",
+      "columns": [
+        {
+          "name": "Submission",
+          "type": "Lookup:Submissions",
+          "required": true,
+          "notes": "Parent submission."
+        },
+        {
+          "name": "VersionKey",
+          "type": "Text",
+          "required": true,
+          "notes": "Stable key such as instanceId:versionNumber."
+        },
+        {
+          "name": "VersionNumber",
+          "type": "WholeNumber",
+          "required": true,
+          "notes": "Sequential submission payload version."
+        },
+        {
+          "name": "InstanceId",
+          "type": "Text",
+          "required": true,
+          "notes": "ODK instanceId snapshot."
+        },
+        {
+          "name": "XFormSubmissionXml",
+          "type": "MultilineText",
+          "required": true,
+          "notes": "Canonical submitted instance XML."
+        },
+        {
+          "name": "SubmissionJson",
+          "type": "MultilineText",
+          "required": false,
+          "notes": "JSON projection for app convenience and diagnostics."
+        },
+        {
+          "name": "Current",
+          "type": "Boolean",
+          "required": false,
+          "notes": "True when this is the current payload version."
+        },
+        {
+          "name": "UserAgent",
+          "type": "Text",
+          "required": false,
+          "notes": "Browser user agent snapshot."
+        },
+        {
+          "name": "DeviceId",
+          "type": "Text",
+          "required": false,
+          "notes": "Optional field device/client id."
+        },
+        {
+          "name": "CreatedAt",
+          "type": "DateTime",
+          "required": false,
+          "notes": "Payload version creation timestamp."
+        }
+      ]
+    },
+    {
+      "name": "SubmissionAttachments",
+      "display_name": "SubmissionAttachments",
+      "singular_name": "SubmissionAttachment",
+      "purpose": "Media/files attached to a submission version.",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "FileName",
+      "columns": [
+        {
+          "name": "SubmissionVersion",
+          "type": "Lookup:SubmissionVersions",
+          "required": true,
+          "notes": "Parent submission version."
+        },
+        {
+          "name": "FileName",
+          "type": "Text",
+          "required": true,
+          "notes": "Original filename or XForm media reference."
+        },
+        {
+          "name": "MediaType",
+          "type": "Text",
+          "required": false,
+          "notes": "MIME/media type."
+        },
+        {
+          "name": "File",
+          "type": "File",
+          "required": false,
+          "notes": "Dataverse file column."
+        },
+        {
+          "name": "CapturedAt",
+          "type": "DateTime",
+          "required": false,
+          "notes": "Capture timestamp when known."
+        },
+        {
+          "name": "UploadedAt",
+          "type": "DateTime",
+          "required": false,
+          "notes": "Upload timestamp."
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "referenced_table": "Projects",
+      "referencing_table": "Forms",
+      "lookup_column": "Project",
+      "required": true,
+      "notes": "Project forms."
+    },
+    {
+      "referenced_table": "Forms",
+      "referencing_table": "FormVersions",
+      "lookup_column": "Form",
+      "required": true,
+      "notes": "Form versions."
+    },
+    {
+      "referenced_table": "FormVersions",
+      "referencing_table": "FormAttachments",
+      "lookup_column": "FormVersion",
+      "required": true,
+      "notes": "Form media attachments."
+    },
+    {
+      "referenced_table": "FormVersions",
+      "referencing_table": "FormAssignments",
+      "lookup_column": "FormVersion",
+      "required": true,
+      "notes": "Assigned form version."
+    },
+    {
+      "referenced_table": "SystemUser",
+      "referencing_table": "FormAssignments",
+      "lookup_column": "User",
+      "required": false,
+      "notes": "Assigned user."
+    },
+    {
+      "referenced_table": "FormVersions",
+      "referencing_table": "Submissions",
+      "lookup_column": "FormVersion",
+      "required": true,
+      "notes": "Submitted form version."
+    },
+    {
+      "referenced_table": "SystemUser",
+      "referencing_table": "Submissions",
+      "lookup_column": "Submitter",
+      "required": false,
+      "notes": "Submitter user."
+    },
+    {
+      "referenced_table": "Submissions",
+      "referencing_table": "SubmissionVersions",
+      "lookup_column": "Submission",
+      "required": true,
+      "notes": "Submission payload versions."
+    },
+    {
+      "referenced_table": "SubmissionVersions",
+      "referencing_table": "SubmissionAttachments",
+      "lookup_column": "SubmissionVersion",
+      "required": true,
+      "notes": "Submission media/files."
+    }
+  ],
+  "deferred_tables": [
+    "Datasets",
+    "Entities",
+    "EntityVersions",
+    "SubmissionAnswers"
+  ]
+}

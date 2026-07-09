@@ -22,6 +22,7 @@ Choices,ChoiceCode,Text,yes,Stored value code
 Choices,Label,Text,yes,Displayed label
 Choices,DisplayOrder,WholeNumber,no,Choice order
 ValidationRules,Question,Lookup:Questions,yes,Parent question
+ValidationRules,Name,Text,yes,Primary display name for Dataverse metadata
 ValidationRules,RuleType,Choice,yes,required/relevant/constraint
 ValidationRules,Expression,MultilineText,no,MVP subset only
 ValidationRules,Message,MultilineText,no,Visible error/help message

@@ -140,3 +140,11 @@ Reference: ODK form logic is richer and continuously re-evaluates calculations, 
 5. Build the metadata-driven form runner for the supported MVP field types.
 6. Implement Save Draft, Submit, edit-until-locked, attachment upload, and history.
 7. Verify with one assigned user and one published form.
+
+## Dataverse schema delivery artifacts
+
+Use `docs/dataverse-schema-cli/` for the reviewed CLI/Web API schema setup requirements, full schema definition, ADR, user stories, checklist, delivery plan, and verification notes.
+
+## Canvas renderer delivery artifacts
+
+Use `docs/canvas-renderer-mvp/` for the Canvas metadata renderer research, ADR, requirements, user stories, acceptance criteria, formula blueprint, checklist, delivery plan, and verification notes.

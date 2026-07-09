@@ -1,8 +1,10 @@
 # Dataverse Dev Deployment Harness
 
-This harness prepares TACATDP for a reviewed dev Dataverse deployment. It is dry-run first and does not write to Dataverse by itself.
+This harness prepares TACATDP for reviewed dev Dataverse schema setup. It is dry-run first and does not write to Dataverse by itself.
 
-## Local Configuration
+The active schema setup artifact pack is `docs/dataverse-schema-cli/`.
+
+## Local configuration
 
 Copy `.env.example` to `.env` and fill local values. Do not commit `.env`.
 
@@ -19,7 +21,7 @@ Required local values:
 - `POWER_PLATFORM_PUBLISHER_PREFIX`
 - `TACATDP_DATAVERSE_SCHEMA_DIR`
 
-Keep `TACATDP_DRY_RUN=true` and `TACATDP_ALLOW_ENVIRONMENT_WRITE=false` until the exact deployment command is reviewed and approved.
+Keep `TACATDP_DRY_RUN=true` and `TACATDP_ALLOW_ENVIRONMENT_WRITE=false` until the exact dev schema write command is reviewed and approved.
 
 ## Preflight
 
@@ -41,23 +43,59 @@ Machine-readable output:
 python3 scripts/dataverse-deploy-preflight.py --env-file .env --json
 ```
 
-## Service Principal Requirements
+## Schema operation plan
 
-Before any service-principal deployment, the app registration must be added as an application user in the target Power Platform environment and assigned the required security roles. The local client secret remains only in `.env` or the operator's secret manager.
+Generate a reviewable dry-run operation plan:
 
-## Deployment Boundary
+```bash
+python3 scripts/dataverse-schema-plan.py --schema-dir schemas/dataverse
+```
 
-This harness only validates:
+The plan must list only the ten MVP tables from `mvp-tables.json`, columns from `mvp-columns.csv`, and relationships from `mvp-schema-definition.json` / `schema-definition.md`.
+
+## Microsoft-backed delivery path
+
+- PAC handles auth and solution lifecycle: `pac auth who`, `pac solution list`, `pac solution export`, `pac solution import`, `pac solution check`.
+- Dataverse Web API metadata operations create tables, columns, and relationships after approval.
+- Metadata create calls should include `MSCRM.SolutionUniqueName` so components land in the intended unmanaged dev solution.
+- PAC data import is for small configuration/seed data and is not the large-data import path.
+
+## Deployment boundary
+
+This harness validates and plans:
 
 - local configuration presence;
-- review-only schema artifact presence and row counts;
-- required prototype tables;
-- `mp_AnswerValue` lookup columns for vocabulary terms and village references;
-- required relationships for those lookups;
+- MVP schema artifact presence;
+- required MVP table set;
+- required generic answer/file/status columns;
 - whether `pac` is available on PATH.
 
 It does not authenticate, create tables, import data, publish apps, change permissions, or deploy solutions.
 
-## Next Reviewed Command
+## Next reviewed command
 
-After preflight passes and the dev target is approved, create a separate reviewed deployment command that uses the reduced prototype schema set only. Keep production deployment out of scope.
+After preflight and plan pass, create a separate reviewed deployment command that uses the MVP schema set only, targets dev only, and refuses destructive operations by default.
+
+## Live schema command
+
+After review and explicit approval, execute dev schema setup with:
+
+```bash
+python3 scripts/dataverse-schema-deploy.py --env-file .env --execute
+```
+
+Verify idempotently without republishing:
+
+```bash
+python3 scripts/dataverse-schema-deploy.py --env-file .env --execute --no-publish
+```
+
+## MVP seed command
+
+After schema setup succeeds, seed the first renderer form with:
+
+```bash
+python3 scripts/dataverse-seed-mvp-form.py --env-file .env --execute
+```
+
+Set `TACATDP_SEED_USER_EMAIL` in `.env` to override the default assignment user.

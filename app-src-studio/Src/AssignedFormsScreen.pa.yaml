@@ -1,0 +1,58 @@
+# ************************************************************************************************
+# TACATDP Canvas metadata renderer MVP slice.
+# This source scaffold is implementation-ready review material for Power Apps Studio/Git Integration.
+# Microsoft treats Canvas YAML source as preview; normalize and save from Studio before treating it as canonical app source.
+# ************************************************************************************************
+Screens:
+  AssignedFormsScreen:
+    Properties:
+      OnVisible: '=Refresh(FormAssignments); Refresh(FormVersions);'
+    Children:
+      - AssignedFormsTitle:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="TACATDP monitoring tool screen heading"'
+            Text: '="TACATDP Monitoring Tool"'
+            X: '=24'
+            Y: '=20'
+            Width: '=Parent.Width - 48'
+            Height: '=40'
+      - AssignedFormsUserHeader:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Signed in as " & gblUserEmail'
+            X: '=24'
+            Y: '=68'
+            Width: '=Parent.Width - 48'
+            Height: '=28'
+      - AssignedFormsStatus:
+          Control: Label@2.5.1
+          Properties:
+            Text: '=If(IsBlank(LookUp(FormAssignments, UserEmail = gblUserEmail)), "No assigned forms available.", "Select an assigned form to continue.")'
+            X: '=24'
+            Y: '=112'
+            Width: '=Parent.Width - 48'
+            Height: '=32'
+      - OpenAssignedFormButton:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Open assigned form"'
+            Text: '=Coalesce(LookUp(FormAssignments, UserEmail = gblUserEmail).FormVersion.Form.Name, "TACATDP MVP Field Visit") & " - " & Coalesce(LookUp(FormAssignments, UserEmail = gblUserEmail).FormVersion.VersionCode, "2026-07-07-v1")'
+            DisplayMode: '=If(IsBlank(LookUp(FormAssignments, UserEmail = gblUserEmail)), DisplayMode.Disabled, DisplayMode.Edit)'
+            OnSelect: '=Set(gblAssignment, LookUp(FormAssignments, UserEmail = gblUserEmail)); Set(gblFormVersion, gblAssignment.FormVersion); Navigate(HistoryScreen, ScreenTransition.None);'
+            X: '=24'
+            Y: '=160'
+            Width: '=Parent.Width - 48'
+            Height: '=56'
+      - AssignedFormsGallery:
+          Control: Gallery@2.15.0
+          Variant: BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0
+          Properties:
+            AccessibleLabel: '="Assigned published forms list"'
+            TabIndex: '=0'
+            Items: '=SortByColumns(Filter(FormAssignments, UserEmail = gblUserEmail), "modifiedon", SortOrder.Descending)'
+            OnSelect: '=Set(gblAssignment, ThisItem); Set(gblFormVersion, ThisItem.FormVersion); Navigate(HistoryScreen, ScreenTransition.None);'
+            X: '=24'
+            Y: '=240'
+            Width: '=Parent.Width - 48'
+            Height: '=Parent.Height - 264'

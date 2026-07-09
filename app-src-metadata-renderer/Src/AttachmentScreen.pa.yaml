@@ -1,0 +1,57 @@
+# ************************************************************************************************
+# TACATDP Canvas metadata renderer MVP slice.
+# This source scaffold is implementation-ready review material for Power Apps Studio/Git Integration.
+# Microsoft treats Canvas YAML source as preview; normalize and save from Studio before treating it as canonical app source.
+# ************************************************************************************************
+Screens:
+  AttachmentScreen:
+    Properties:
+      OnVisible: '=Set(locAttachmentQuestion, LookUp(Questions, Section.Sections = gblCurrentSection.Sections && ''Type'' = ''Type (Questions)''.file_photo_attachment));'
+    Children:
+      - AttachmentBack:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Back to form runner"'
+            Text: '="Back"'
+            OnSelect: '=Navigate(RunnerScreen, ScreenTransition.None)'
+            X: '=24'
+            Y: '=20'
+            Width: '=96'
+            Height: '=40'
+      - AttachmentTitle:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Attachment screen heading"'
+            Text: '="Attachment"'
+            X: '=136'
+            Y: '=20'
+            Width: '=Parent.Width - 160'
+            Height: '=40'
+      - AttachmentUserHeader:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Signed in as " & gblUserEmail'
+            X: '=24'
+            Y: '=68'
+            Width: '=Parent.Width - 48'
+            Height: '=28'
+      - AttachmentInstruction:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Attachment instructions"'
+            Text: '="Use a Dataverse edit form bound to SubmissionFiles here. The Attachments control must remain inside a form."'
+            X: '=24'
+            Y: '=116'
+            Width: '=Parent.Width - 48'
+            Height: '=64'
+      - AttachmentSaveStub:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Save attachment metadata"'
+            Text: '="Save file row"'
+            DisplayMode: '=If(IsBlank(gblSubmission), DisplayMode.Disabled, DisplayMode.Edit)'
+            OnSelect: '=IfError(Patch(SubmissionFiles, Defaults(SubmissionFiles), {Submission: gblSubmission, Question: locAttachmentQuestion, FileName: "pending-upload", MediaType: "application/octet-stream"}); Notify("File metadata saved. Add the Dataverse attachment control in Studio for binary upload.", NotificationType.Success), Notify("File metadata could not be saved.", NotificationType.Error))'
+            X: '=24'
+            Y: '=196'
+            Width: '=160'
+            Height: '=40'

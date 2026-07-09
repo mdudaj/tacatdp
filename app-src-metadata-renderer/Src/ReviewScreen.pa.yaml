@@ -1,0 +1,104 @@
+# ************************************************************************************************
+# TACATDP Canvas metadata renderer MVP slice.
+# This source scaffold is implementation-ready review material for Power Apps Studio/Git Integration.
+# Microsoft treats Canvas YAML source as preview; normalize and save from Studio before treating it as canonical app source.
+# ************************************************************************************************
+Screens:
+  ReviewScreen:
+    Properties:
+      OnVisible: '=Set(gblReviewFarmerName, FarmerNameInput.Text); Set(gblReviewFarmerAge, FarmerAgeInput.Text); Set(gblReviewLandSize, LandSizeInput.Text); Set(gblReviewVisitDate, VisitDateInput.Text); Set(gblReviewPrimaryCrop, PrimaryCropInput.Text); Set(gblReviewSupportNeeded, SupportNeededInput.Text)'
+    Children:
+      - ReviewBack:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Back to edit answers"'
+            Text: '="Back"'
+            OnSelect: '=Navigate(RunnerScreen, ScreenTransition.None)'
+            X: '=24'
+            Y: '=20'
+            Width: '=96'
+            Height: '=40'
+      - ReviewTitle:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Review submission screen heading"'
+            Text: '="Review"'
+            X: '=136'
+            Y: '=20'
+            Width: '=Parent.Width - 280'
+            Height: '=40'
+      - ReviewUserHeader:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Signed in as " & gblUserEmail'
+            X: '=24'
+            Y: '=68'
+            Width: '=Parent.Width - 48'
+            Height: '=28'
+      - ReviewSubmitButton:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Submit reviewed submission"'
+            Text: '="Submit"'
+            DisplayMode: '=If(IsBlank(gblSubmission), DisplayMode.Disabled, DisplayMode.Edit)'
+            OnSelect: '=If(IsBlank(gblReviewFarmerName) || IsBlank(gblReviewVisitDate) || IsBlank(gblReviewPrimaryCrop), Notify("Complete farmer name, visit date, and primary crop before submitting.", NotificationType.Error); Navigate(RunnerScreen, ScreenTransition.None), IfError(Patch(Submissions, gblSubmission, {SubmittedAt: Now()}); Notify("Submitted.", NotificationType.Success); Navigate(HistoryScreen, ScreenTransition.None), Notify("Submit failed.", NotificationType.Error)))'
+            X: '=Parent.Width - 120'
+            Y: '=20'
+            Width: '=96'
+            Height: '=40'
+      - ReviewInstruction:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Check the draft before submitting. Use Back to correct an answer."'
+            X: '=24'
+            Y: '=116'
+            Width: '=Parent.Width - 48'
+            Height: '=32'
+      - ReviewFarmerName:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Farmer name: " & Coalesce(gblReviewFarmerName, "")'
+            X: '=24'
+            Y: '=164'
+            Width: '=Parent.Width - 48'
+            Height: '=32'
+      - ReviewFarmerAge:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Farmer age: " & Coalesce(gblReviewFarmerAge, "")'
+            X: '=24'
+            Y: '=208'
+            Width: '=Parent.Width - 48'
+            Height: '=32'
+      - ReviewLandSize:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Land size acres: " & Coalesce(gblReviewLandSize, "")'
+            X: '=24'
+            Y: '=252'
+            Width: '=Parent.Width - 48'
+            Height: '=32'
+      - ReviewVisitDate:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Visit date: " & Coalesce(gblReviewVisitDate, "")'
+            X: '=24'
+            Y: '=296'
+            Width: '=Parent.Width - 48'
+            Height: '=32'
+      - ReviewPrimaryCrop:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Primary crop: " & Coalesce(gblReviewPrimaryCrop, "")'
+            X: '=24'
+            Y: '=340'
+            Width: '=Parent.Width - 48'
+            Height: '=32'
+      - ReviewSupportNeeded:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Support needed: " & Coalesce(gblReviewSupportNeeded, "")'
+            X: '=24'
+            Y: '=384'
+            Width: '=Parent.Width - 48'
+            Height: '=32'

@@ -1,0 +1,208 @@
+# ************************************************************************************************
+# TACATDP Canvas metadata renderer MVP slice.
+# This source scaffold is implementation-ready review material for Power Apps Studio/Git Integration.
+# Microsoft treats Canvas YAML source as preview; normalize and save from Studio before treating it as canonical app source.
+# ************************************************************************************************
+Screens:
+  RunnerScreen:
+    Properties:
+      OnVisible: '=Set(gblCurrentSection, First(SortByColumns(Filter(Sections, FormVersion.FormVersions = gblFormVersion.FormVersions), "mp_displayorder"))); ClearCollect(colPendingAnswers, Table({Question: Blank(), ValueText: Blank(), ValueNumber: Blank(), ValueJson: Blank()})); RemoveIf(colPendingAnswers, true); ClearCollect(colValidationErrors, Table({Questions: Blank()})); RemoveIf(colValidationErrors, true);'
+    Children:
+      - RunnerBack:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Back to submission history"'
+            Text: '="Back"'
+            OnSelect: '=Navigate(HistoryScreen, ScreenTransition.None)'
+            X: '=24'
+            Y: '=20'
+            Width: '=96'
+            Height: '=40'
+      - RunnerTitle:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Form runner screen heading"'
+            Text: '=Coalesce(gblFormVersion.''VersionCode'', "Form")'
+            X: '=136'
+            Y: '=20'
+            Width: '=Parent.Width - 376'
+            Height: '=40'
+      - RunnerUserHeader:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Signed in as " & gblUserEmail'
+            X: '=24'
+            Y: '=68'
+            Width: '=Parent.Width - 48'
+            Height: '=28'
+      - SaveDraftButton:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Save draft submission"'
+            Text: '="Save"'
+            DisplayMode: '=If(IsBlank(gblSubmission), DisplayMode.Disabled, DisplayMode.Edit)'
+            OnSelect: '=IfError(Set(gblSubmission, Patch(Submissions, gblSubmission, {UserEmail: gblUserEmail})); Patch(SubmissionAnswers, Coalesce(LookUp(SubmissionAnswers, Submission.Submissions = gblSubmission.Submissions && Question.Questions = LookUp(Questions, ''QuestionCode'' = "farmer_name").Questions), Defaults(SubmissionAnswers)), {Submission: gblSubmission, Question: LookUp(Questions, ''QuestionCode'' = "farmer_name"), ValueText: FarmerNameInput.Text}); Patch(SubmissionAnswers, Coalesce(LookUp(SubmissionAnswers, Submission.Submissions = gblSubmission.Submissions && Question.Questions = LookUp(Questions, ''QuestionCode'' = "farmer_age").Questions), Defaults(SubmissionAnswers)), {Submission: gblSubmission, Question: LookUp(Questions, ''QuestionCode'' = "farmer_age"), ValueText: FarmerAgeInput.Text}); Patch(SubmissionAnswers, Coalesce(LookUp(SubmissionAnswers, Submission.Submissions = gblSubmission.Submissions && Question.Questions = LookUp(Questions, ''QuestionCode'' = "land_size_acres").Questions), Defaults(SubmissionAnswers)), {Submission: gblSubmission, Question: LookUp(Questions, ''QuestionCode'' = "land_size_acres"), ValueText: LandSizeInput.Text}); Patch(SubmissionAnswers, Coalesce(LookUp(SubmissionAnswers, Submission.Submissions = gblSubmission.Submissions && Question.Questions = LookUp(Questions, ''QuestionCode'' = "visit_date").Questions), Defaults(SubmissionAnswers)), {Submission: gblSubmission, Question: LookUp(Questions, ''QuestionCode'' = "visit_date"), ValueText: VisitDateInput.Text}); Patch(SubmissionAnswers, Coalesce(LookUp(SubmissionAnswers, Submission.Submissions = gblSubmission.Submissions && Question.Questions = LookUp(Questions, ''QuestionCode'' = "primary_crop").Questions), Defaults(SubmissionAnswers)), {Submission: gblSubmission, Question: LookUp(Questions, ''QuestionCode'' = "primary_crop"), ValueText: PrimaryCropInput.Text}); Patch(SubmissionAnswers, Coalesce(LookUp(SubmissionAnswers, Submission.Submissions = gblSubmission.Submissions && Question.Questions = LookUp(Questions, ''QuestionCode'' = "support_needed").Questions), Defaults(SubmissionAnswers)), {Submission: gblSubmission, Question: LookUp(Questions, ''QuestionCode'' = "support_needed"), ValueText: SupportNeededInput.Text}); If(!IsBlank(locGpsQuestion) && !IsBlank(LookUp(colPendingAnswers, Question.Questions = locGpsQuestion.Questions).ValueJson), Patch(SubmissionAnswers, Coalesce(LookUp(SubmissionAnswers, Submission.Submissions = gblSubmission.Submissions && Question.Questions = locGpsQuestion.Questions), Defaults(SubmissionAnswers)), {Submission: gblSubmission, Question: locGpsQuestion, ValueJson: LookUp(colPendingAnswers, Question.Questions = locGpsQuestion.Questions).ValueJson})); RemoveIf(colPendingAnswers, true); Notify("Draft saved.", NotificationType.Success), Notify("Draft could not be saved.", NotificationType.Error))'
+            X: '=Parent.Width - 224'
+            Y: '=20'
+            Width: '=96'
+            Height: '=40'
+      - ReviewButton:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Review current draft before submission"'
+            Text: '="Review"'
+            DisplayMode: '=If(IsBlank(gblSubmission), DisplayMode.Disabled, DisplayMode.Edit)'
+            OnSelect: '=Set(gblReviewFarmerName, FarmerNameInput.Text); Set(gblReviewFarmerAge, FarmerAgeInput.Text); Set(gblReviewLandSize, LandSizeInput.Text); Set(gblReviewVisitDate, VisitDateInput.Text); Set(gblReviewPrimaryCrop, PrimaryCropInput.Text); Set(gblReviewSupportNeeded, SupportNeededInput.Text); Select(SaveDraftButton); Navigate(ReviewScreen, ScreenTransition.None)'
+            X: '=Parent.Width - 120'
+            Y: '=20'
+            Width: '=96'
+            Height: '=40'
+      - FarmerNameLabel:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Farmer name *"'
+            X: '=24'
+            Y: '=116'
+            Width: '=Parent.Width - 48'
+            Height: '=24'
+      - FarmerNameInput:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            Default: '=Coalesce(LookUp(SubmissionAnswers, Submission.Submissions = gblSubmission.Submissions && Question.Questions = LookUp(Questions, ''QuestionCode'' = "farmer_name").Questions).ValueText, "")'
+            DelayOutput: '=true'
+            HintText: '="Enter value"'
+            X: '=24'
+            Y: '=144'
+            Width: '=Parent.Width - 48'
+            Height: '=44'
+      - FarmerAgeLabel:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Farmer age"'
+            X: '=24'
+            Y: '=200'
+            Width: '=Parent.Width - 48'
+            Height: '=24'
+      - FarmerAgeInput:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            Default: '=Coalesce(LookUp(SubmissionAnswers, Submission.Submissions = gblSubmission.Submissions && Question.Questions = LookUp(Questions, ''QuestionCode'' = "farmer_age").Questions).ValueText, "")'
+            DelayOutput: '=true'
+            HintText: '="Enter value"'
+            X: '=24'
+            Y: '=228'
+            Width: '=Parent.Width - 48'
+            Height: '=44'
+      - LandSizeLabel:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Land size acres"'
+            X: '=24'
+            Y: '=284'
+            Width: '=Parent.Width - 48'
+            Height: '=24'
+      - LandSizeInput:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            Default: '=Coalesce(LookUp(SubmissionAnswers, Submission.Submissions = gblSubmission.Submissions && Question.Questions = LookUp(Questions, ''QuestionCode'' = "land_size_acres").Questions).ValueText, "")'
+            DelayOutput: '=true'
+            HintText: '="Enter value"'
+            X: '=24'
+            Y: '=312'
+            Width: '=Parent.Width - 48'
+            Height: '=44'
+      - VisitDateLabel:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Visit date *"'
+            X: '=24'
+            Y: '=368'
+            Width: '=Parent.Width - 48'
+            Height: '=24'
+      - VisitDateInput:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            Default: '=Coalesce(LookUp(SubmissionAnswers, Submission.Submissions = gblSubmission.Submissions && Question.Questions = LookUp(Questions, ''QuestionCode'' = "visit_date").Questions).ValueText, "")'
+            DelayOutput: '=true'
+            HintText: '="Enter value"'
+            X: '=24'
+            Y: '=396'
+            Width: '=Parent.Width - 48'
+            Height: '=44'
+      - PrimaryCropLabel:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Primary crop *"'
+            X: '=24'
+            Y: '=452'
+            Width: '=Parent.Width - 48'
+            Height: '=24'
+      - PrimaryCropInput:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            Default: '=Coalesce(LookUp(SubmissionAnswers, Submission.Submissions = gblSubmission.Submissions && Question.Questions = LookUp(Questions, ''QuestionCode'' = "primary_crop").Questions).ValueText, "maize")'
+            DelayOutput: '=true'
+            HintText: '="Enter value"'
+            X: '=24'
+            Y: '=480'
+            Width: '=Parent.Width - 48'
+            Height: '=44'
+      - SupportNeededLabel:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Support needed"'
+            X: '=24'
+            Y: '=536'
+            Width: '=Parent.Width - 48'
+            Height: '=24'
+      - SupportNeededInput:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            Default: '=Coalesce(LookUp(SubmissionAnswers, Submission.Submissions = gblSubmission.Submissions && Question.Questions = LookUp(Questions, ''QuestionCode'' = "support_needed").Questions).ValueText, "training")'
+            DelayOutput: '=true'
+            HintText: '="Enter value"'
+            X: '=24'
+            Y: '=564'
+            Width: '=Parent.Width - 48'
+            Height: '=44'
+      - AttachmentPromptLabel:
+          Control: Label@2.5.1
+          Properties:
+            Text: '="Attachment: use the attachment screen after saving draft."'
+            X: '=24'
+            Y: '=620'
+            Width: '=Parent.Width - 48'
+            Height: '=28'
+      - QuestionsGallery:
+          Control: Gallery@2.15.0
+          Variant: BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0
+          Properties:
+            AccessibleLabel: '="Questions metadata list"'
+            TabIndex: '=0'
+            Items: '=SortByColumns(Filter(Questions, Section.Sections = gblCurrentSection.Sections), "mp_displayorder")'
+            X: '=24'
+            Y: '=Parent.Height - 2'
+            Width: '=Parent.Width - 48'
+            Height: '=1'
+      - RunnerNextButton:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Save draft and review answers"'
+            Text: '="Next"'
+            DisplayMode: '=If(IsBlank(gblSubmission), DisplayMode.Disabled, DisplayMode.Edit)'
+            OnSelect: '=Set(gblReviewFarmerName, FarmerNameInput.Text); Set(gblReviewFarmerAge, FarmerAgeInput.Text); Set(gblReviewLandSize, LandSizeInput.Text); Set(gblReviewVisitDate, VisitDateInput.Text); Set(gblReviewPrimaryCrop, PrimaryCropInput.Text); Set(gblReviewSupportNeeded, SupportNeededInput.Text); Select(SaveDraftButton); Navigate(ReviewScreen, ScreenTransition.None)'
+            X: '=Parent.Width - 120'
+            Y: '=Parent.Height - 56'
+            Width: '=96'
+            Height: '=40'
+      - GpsCaptureButton:
+          Control: Button
+          Properties:
+            AccessibleLabel: '="Capture GPS location"'
+            Text: '="GPS"'
+            DisplayMode: '=If(IsBlank(gblSubmission), DisplayMode.Disabled, DisplayMode.Edit)'
+            OnSelect: '=Set(locGpsQuestion, LookUp(Questions, Section.Sections = gblCurrentSection.Sections && ''QuestionCode'' = "gps_point")); If(!IsBlank(locGpsQuestion), Collect(colPendingAnswers, {Question: locGpsQuestion, ValueJson: JSON({latitude: Location.Latitude, longitude: Location.Longitude, altitude: Location.Altitude, capturedAt: Text(Now(), DateTimeFormat.UTC)}, JSONFormat.Compact)}); Notify("GPS captured.", NotificationType.Success), Notify("No GPS question on this form.", NotificationType.Information))'
+            X: '=24'
+            Y: '=Parent.Height - 56'
+            Width: '=96'
+            Height: '=40'

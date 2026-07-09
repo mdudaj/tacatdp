@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Dry-run preflight for TACATDP Dataverse dev deployment.
+"""Dry-run preflight for TACATDP Dataverse MVP schema delivery.
 
-This script validates local configuration and review-only schema artifacts. It does
-not authenticate, create tables, import data, publish apps, or write to Dataverse.
+This script validates local configuration and review-only MVP schema artifacts. It
+does not authenticate, create tables, import data, publish apps, or write to Dataverse.
 """
 
 from __future__ import annotations
@@ -26,6 +26,7 @@ REQUIRED_ALWAYS = [
     "TACATDP_DRY_RUN",
     "TACATDP_ALLOW_ENVIRONMENT_WRITE",
     "TACATDP_DATAVERSE_SCHEMA_DIR",
+    "TACATDP_DATAVERSE_SCHEMA_FILE",
 ]
 
 SERVICE_PRINCIPAL_REQUIRED_FOR_WRITE = [
@@ -34,45 +35,49 @@ SERVICE_PRINCIPAL_REQUIRED_FOR_WRITE = [
     "POWER_PLATFORM_CLIENT_SECRET",
 ]
 
-EXPECTED_ARTIFACTS = {
-    "platform-tables.json": None,
-    "platform-columns.csv": 186,
-    "platform-relationships.csv": 48,
-    "platform-alternate-keys.csv": 22,
-    "form-renderer-contract.json": None,
-    "import-order.md": None,
-    "tacatdp-field-definitions.csv": 292,
-    "tacatdp-vocabulary-terms.csv": 5190,
-    "tacatdp-village-reference.csv": 66297,
+EXPECTED_MVP_TABLES = {
+    "Forms",
+    "FormVersions",
+    "Sections",
+    "Questions",
+    "Choices",
+    "ValidationRules",
+    "FormAssignments",
+    "Submissions",
+    "SubmissionAnswers",
+    "SubmissionFiles",
 }
 
-REQUIRED_PROTOTYPE_TABLES = {
-    "mp_Project",
-    "mp_Instrument",
-    "mp_InstrumentVersion",
-    "mp_GroupDefinition",
-    "mp_FieldDefinition",
-    "mp_FieldRule",
-    "mp_VocabularyScheme",
-    "mp_VocabularyTerm",
-    "mp_FieldVocabularyBinding",
-    "mp_VillageReference",
-    "mp_Submission",
-    "mp_GroupInstance",
-    "mp_AnswerValue",
-    "mp_MultiSelectAnswer",
-}
-
-REQUIRED_ANSWERVALUE_LOOKUPS = {
-    "mp_vocabularyterm",
-    "mp_villagereference",
+REQUIRED_MVP_COLUMNS = {
+    ("FormVersions", "Form"),
+    ("Sections", "FormVersion"),
+    ("Questions", "Section"),
+    ("Choices", "Question"),
+    ("ValidationRules", "Question"),
+    ("FormAssignments", "FormVersion"),
+    ("FormAssignments", "User"),
+    ("FormAssignments", "UserEmail"),
+    ("Submissions", "FormVersion"),
+    ("Submissions", "AssignedUser"),
+    ("Submissions", "Status"),
+    ("SubmissionAnswers", "Submission"),
+    ("SubmissionAnswers", "Question"),
+    ("SubmissionAnswers", "ValueText"),
+    ("SubmissionAnswers", "ValueNumber"),
+    ("SubmissionAnswers", "ValueDecimal"),
+    ("SubmissionAnswers", "ValueDate"),
+    ("SubmissionAnswers", "ValueBoolean"),
+    ("SubmissionAnswers", "ValueJson"),
+    ("SubmissionFiles", "Submission"),
+    ("SubmissionFiles", "Question"),
+    ("SubmissionFiles", "File"),
 }
 
 PLACEHOLDER_VALUES = {"", "<required>", "changeme", "todo", "TODO"}
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Validate TACATDP Dataverse deployment configuration without writing to an environment.")
+    parser = argparse.ArgumentParser(description="Validate TACATDP Dataverse MVP schema delivery configuration without writing to an environment.")
     parser.add_argument("--env-file", default=".env", help="Local env file to read. Defaults to .env.")
     parser.add_argument("--repo-root", default=".", help="TACATDP repo root. Defaults to current directory.")
     parser.add_argument("--allow-placeholders", action="store_true", help="Allow blank/example values; useful for validating .env.example shape.")
@@ -125,6 +130,7 @@ def main() -> int:
     allow_write = is_truthy(get_value(env, "TACATDP_ALLOW_ENVIRONMENT_WRITE"))
     dry_run = is_truthy(get_value(env, "TACATDP_DRY_RUN"))
     auth_mode = get_value(env, "POWER_PLATFORM_AUTH_MODE") or "servicePrincipal"
+    deploy_target = get_value(env, "TACATDP_DEPLOY_TARGET").lower()
 
     for key in REQUIRED_ALWAYS:
         value = get_value(env, key)
@@ -141,6 +147,8 @@ def main() -> int:
     elif not any(get_value(env, key) and not is_placeholder(get_value(env, key)) for key in env_target_keys):
         issues.append("Missing required configuration: POWER_PLATFORM_ENVIRONMENT_ID or POWER_PLATFORM_ENVIRONMENT_URL")
 
+    if deploy_target and deploy_target != "dev":
+        issues.append(f"Only dev target is allowed for MVP schema setup; got TACATDP_DEPLOY_TARGET={deploy_target}")
     if allow_write and dry_run:
         issues.append("TACATDP_ALLOW_ENVIRONMENT_WRITE=true conflicts with TACATDP_DRY_RUN=true")
     if allow_write and auth_mode == "servicePrincipal":
@@ -156,55 +164,63 @@ def main() -> int:
     if not schema_dir.exists():
         issues.append(f"Schema directory not found: {schema_dir}")
     else:
-        for name, expected_rows in EXPECTED_ARTIFACTS.items():
-            artifact = schema_dir / name
+        schema_file_value = get_value(env, "TACATDP_DATAVERSE_SCHEMA_FILE") or "schemas/dataverse/mvp-schema-definition.json"
+        definition_path = repo_root / schema_file_value
+        tables_path = schema_dir / "mvp-tables.json"
+        columns_path = schema_dir / "mvp-columns.csv"
+        renderer_path = schema_dir / "form-renderer-contract.json"
+        for artifact in [definition_path]:
             if not artifact.exists():
-                issues.append(f"Missing schema artifact: {artifact}")
-                continue
-            if name.endswith(".csv") and expected_rows is not None:
-                rows = read_csv(artifact)
-                if len(rows) != expected_rows:
-                    issues.append(f"Unexpected row count for {name}: expected {expected_rows}, got {len(rows)}")
-            elif name.endswith(".json"):
-                json.loads(artifact.read_text(encoding="utf-8"))
+                issues.append(f"Missing schema definition artifact: {artifact}")
 
-        tables_path = schema_dir / "platform-tables.json"
-        if tables_path.exists():
+        legacy_mvp_mode = definition_path.name == "mvp-schema-definition.json"
+        for artifact in ([tables_path, columns_path, renderer_path] if legacy_mvp_mode else []):
+            if not artifact.exists():
+                issues.append(f"Missing MVP schema artifact: {artifact}")
+
+        if legacy_mvp_mode and tables_path.exists():
             data = json.loads(tables_path.read_text(encoding="utf-8"))
             tables = {row.get("logical_name") for row in data.get("tables", [])}
-            missing = sorted(REQUIRED_PROTOTYPE_TABLES - tables)
+            missing = sorted(EXPECTED_MVP_TABLES - tables)
+            extra = sorted(tables - EXPECTED_MVP_TABLES)
             if missing:
-                issues.append("Missing prototype tables: " + ", ".join(missing))
+                issues.append("Missing MVP tables: " + ", ".join(missing))
+            if extra:
+                issues.append("Unexpected non-MVP tables in mvp-tables.json: " + ", ".join(extra))
 
-        columns_path = schema_dir / "platform-columns.csv"
-        if columns_path.exists():
-            columns = read_csv(columns_path)
-            answer_columns = {row["column_logical_name"] for row in columns if row["table_logical_name"] == "mp_AnswerValue"}
-            missing = sorted(REQUIRED_ANSWERVALUE_LOOKUPS - answer_columns)
+        if legacy_mvp_mode and columns_path.exists():
+            rows = read_csv(columns_path)
+            columns = {(row.get("table") or "", row.get("column") or "") for row in rows}
+            missing = sorted(REQUIRED_MVP_COLUMNS - columns)
             if missing:
-                issues.append("Missing mp_AnswerValue lookup columns: " + ", ".join(missing))
+                issues.append("Missing MVP columns: " + ", ".join(f"{table}.{column}" for table, column in missing))
+            column_tables = {table for table, _ in columns}
+            extra_tables = sorted(column_tables - EXPECTED_MVP_TABLES)
+            if extra_tables:
+                issues.append("mvp-columns.csv includes non-MVP tables: " + ", ".join(extra_tables))
 
-        rels_path = schema_dir / "platform-relationships.csv"
-        if rels_path.exists():
-            rels = read_csv(rels_path)
-            rel_keys = {(row["child_table"], row["parent_table"], row["lookup_column_logical_name"]) for row in rels}
-            for rel in [
-                ("mp_AnswerValue", "mp_VocabularyTerm", "mp_vocabularyterm"),
-                ("mp_AnswerValue", "mp_VillageReference", "mp_villagereference"),
-            ]:
-                if rel not in rel_keys:
-                    issues.append("Missing relationship: " + " -> ".join(rel))
+        if legacy_mvp_mode and renderer_path.exists():
+            json.loads(renderer_path.read_text(encoding="utf-8"))
+
+        if definition_path.exists():
+            definition = json.loads(definition_path.read_text(encoding="utf-8"))
+            definition_tables = {row.get("name") for row in definition.get("tables", [])}
+            if legacy_mvp_mode:
+                missing_definition = sorted(EXPECTED_MVP_TABLES - definition_tables)
+                if missing_definition:
+                    issues.append("Missing MVP tables in mvp-schema-definition.json: " + ", ".join(missing_definition))
+            elif not definition_tables:
+                issues.append("Schema definition has no tables: " + str(definition_path))
 
     if shutil.which("pac") is None:
         warnings.append("Power Platform CLI 'pac' was not found on PATH; install/verify it before live deployment.")
 
     plan.extend([
         "No Dataverse write will be performed by this preflight.",
-        "Create or select dev environment after explicit approval.",
-        "Create/verify solution and publisher prefix.",
-        "Create reduced prototype table set first.",
-        "Create relationships and alternate keys after referenced columns exist.",
-        "Seed project, instrument, version, groups, fields, vocabulary, and village reference data.",
+        "Run scripts/dataverse-schema-plan.py to review table/column/relationship operations.",
+        "Use PAC to verify auth and solution state.",
+        "Create tables and columns through approved Dataverse Web API metadata operations only after review.",
+        "Seed one published form and one assignment after schema exists.",
         "Bind Canvas app only after dev schema and seed data are reviewed.",
     ])
 
@@ -212,6 +228,7 @@ def main() -> int:
         "status": "failed" if issues else "passed",
         "env_file": str(env_file),
         "schema_dir": str(schema_dir),
+        "schema_file": str(definition_path),
         "dry_run": dry_run,
         "allow_environment_write": allow_write,
         "issues": issues,
@@ -222,10 +239,11 @@ def main() -> int:
     if args.json:
         print(json.dumps(result, indent=2, sort_keys=True))
     else:
-        print("# TACATDP Dataverse Deployment Preflight")
+        print("# TACATDP Dataverse MVP Schema Preflight")
         print(f"Status: {result['status']}")
         print(f"Env file: {env_file}")
         print(f"Schema dir: {schema_dir}")
+        print(f"Schema file: {definition_path}")
         print(f"Dry run: {dry_run}")
         print(f"Allow environment write: {allow_write}")
         print("\n## Issues")

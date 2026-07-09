@@ -1,0 +1,671 @@
+{
+  "generated_for_review_only": true,
+  "generated_on": "2026-07-06",
+  "schema_name": "tacatdp_dataverse_mvp_schema",
+  "target_date": "2026-07-07",
+  "environment_write": false,
+  "solution_header": "MSCRM.SolutionUniqueName=$POWER_PLATFORM_SOLUTION_UNIQUE_NAME",
+  "publisher_prefix": "$POWER_PLATFORM_PUBLISHER_PREFIX",
+  "scope": "One assigned published form rendered from Dataverse metadata with draft, submit, edit-until-locked, history, and one attachment field.",
+  "dataverse_notes": [
+    "Use PAC for authentication and solution lifecycle.",
+    "Use Dataverse Web API metadata operations for deterministic table, column, choice, and relationship creation.",
+    "Use MSCRM.SolutionUniqueName on metadata create requests so components land in the reviewed unmanaged solution.",
+    "Do not create a custom Users table for the MVP; use systemuser lookups plus email fallback fields.",
+    "This artifact is a definition and dry-run contract only; it performs no writes."
+  ],
+  "tables": [
+    {
+      "name": "Forms",
+      "display_name": "Forms",
+      "purpose": "Form/instrument container",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "Name",
+      "columns": [
+        {
+          "name": "FormCode",
+          "type": "Text",
+          "dataverse_metadata_type": "StringAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Stable form code"
+        },
+        {
+          "name": "Name",
+          "type": "Text",
+          "dataverse_metadata_type": "StringAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Display name"
+        },
+        {
+          "name": "Status",
+          "type": "Choice",
+          "dataverse_metadata_type": "PicklistAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Draft/Active/Retired",
+          "choices": [
+            "Draft",
+            "Active",
+            "Retired"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FormVersions",
+      "display_name": "FormVersions",
+      "purpose": "Published version metadata and lifecycle status",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "VersionCode",
+      "columns": [
+        {
+          "name": "Form",
+          "type": "Lookup:Forms",
+          "dataverse_metadata_type": "LookupAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Parent form",
+          "referenced_table": "Forms"
+        },
+        {
+          "name": "VersionCode",
+          "type": "Text",
+          "dataverse_metadata_type": "StringAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Stable version code"
+        },
+        {
+          "name": "LifecycleStatus",
+          "type": "Choice",
+          "dataverse_metadata_type": "PicklistAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Draft/Published/Retired",
+          "choices": [
+            "Draft",
+            "Published",
+            "Retired"
+          ]
+        },
+        {
+          "name": "PublishedAt",
+          "type": "DateTime",
+          "dataverse_metadata_type": "DateTimeAttributeMetadata(UserLocal)",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Publish timestamp"
+        }
+      ]
+    },
+    {
+      "name": "Sections",
+      "display_name": "Sections",
+      "purpose": "Ordered form sections/pages",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "Name",
+      "columns": [
+        {
+          "name": "FormVersion",
+          "type": "Lookup:FormVersions",
+          "dataverse_metadata_type": "LookupAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Parent form version",
+          "referenced_table": "FormVersions"
+        },
+        {
+          "name": "SectionCode",
+          "type": "Text",
+          "dataverse_metadata_type": "StringAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Stable section code"
+        },
+        {
+          "name": "Name",
+          "type": "Text",
+          "dataverse_metadata_type": "StringAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Display name"
+        },
+        {
+          "name": "DisplayOrder",
+          "type": "WholeNumber",
+          "dataverse_metadata_type": "IntegerAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Renderer order"
+        }
+      ]
+    },
+    {
+      "name": "Questions",
+      "display_name": "Questions",
+      "purpose": "Question metadata and renderer hints",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "QuestionCode",
+      "columns": [
+        {
+          "name": "Section",
+          "type": "Lookup:Sections",
+          "dataverse_metadata_type": "LookupAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Parent section",
+          "referenced_table": "Sections"
+        },
+        {
+          "name": "QuestionCode",
+          "type": "Text",
+          "dataverse_metadata_type": "StringAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Stable question code"
+        },
+        {
+          "name": "Type",
+          "type": "Choice",
+          "dataverse_metadata_type": "PicklistAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "text/integer/decimal/date/select_one/select_many/file_photo/gps",
+          "choices": [
+            "text",
+            "integer",
+            "decimal",
+            "date",
+            "select_one",
+            "select_many",
+            "file_photo_attachment",
+            "gps"
+          ]
+        },
+        {
+          "name": "Label",
+          "type": "Text",
+          "dataverse_metadata_type": "StringAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Visible label"
+        },
+        {
+          "name": "HelpText",
+          "type": "MultilineText",
+          "dataverse_metadata_type": "MemoAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Helper text"
+        },
+        {
+          "name": "Required",
+          "type": "Boolean",
+          "dataverse_metadata_type": "BooleanAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Required true/false"
+        },
+        {
+          "name": "DisplayOrder",
+          "type": "WholeNumber",
+          "dataverse_metadata_type": "IntegerAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Renderer order"
+        }
+      ]
+    },
+    {
+      "name": "Choices",
+      "display_name": "Choices",
+      "purpose": "Select-one/select-many options",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "ChoiceCode",
+      "columns": [
+        {
+          "name": "Question",
+          "type": "Lookup:Questions",
+          "dataverse_metadata_type": "LookupAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Parent question",
+          "referenced_table": "Questions"
+        },
+        {
+          "name": "ChoiceCode",
+          "type": "Text",
+          "dataverse_metadata_type": "StringAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Stored value code"
+        },
+        {
+          "name": "Label",
+          "type": "Text",
+          "dataverse_metadata_type": "StringAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Displayed label"
+        },
+        {
+          "name": "DisplayOrder",
+          "type": "WholeNumber",
+          "dataverse_metadata_type": "IntegerAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Choice order"
+        }
+      ]
+    },
+    {
+      "name": "ValidationRules",
+      "display_name": "ValidationRules",
+      "purpose": "Required, simple relevance, and simple constraints",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "Name",
+      "columns": [
+        {
+          "name": "Question",
+          "type": "Lookup:Questions",
+          "dataverse_metadata_type": "LookupAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Parent question",
+          "referenced_table": "Questions"
+        },
+        {
+          "name": "Name",
+          "type": "Text",
+          "dataverse_metadata_type": "StringAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Primary display name for Dataverse metadata"
+        },
+        {
+          "name": "RuleType",
+          "type": "Choice",
+          "dataverse_metadata_type": "PicklistAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "required/relevant/constraint",
+          "choices": [
+            "required",
+            "relevant",
+            "constraint"
+          ]
+        },
+        {
+          "name": "Expression",
+          "type": "MultilineText",
+          "dataverse_metadata_type": "MemoAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "MVP subset only"
+        },
+        {
+          "name": "Message",
+          "type": "MultilineText",
+          "dataverse_metadata_type": "MemoAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Visible error/help message"
+        }
+      ]
+    },
+    {
+      "name": "FormAssignments",
+      "display_name": "FormAssignments",
+      "purpose": "Assign active published form versions to users",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "UserEmail",
+      "columns": [
+        {
+          "name": "FormVersion",
+          "type": "Lookup:FormVersions",
+          "dataverse_metadata_type": "LookupAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Assigned published form version",
+          "referenced_table": "FormVersions"
+        },
+        {
+          "name": "User",
+          "type": "Lookup:SystemUser",
+          "dataverse_metadata_type": "LookupAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Dataverse user where available",
+          "referenced_table": "SystemUser"
+        },
+        {
+          "name": "UserEmail",
+          "type": "Text",
+          "dataverse_metadata_type": "StringAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Email fallback/filter key"
+        },
+        {
+          "name": "Status",
+          "type": "Choice",
+          "dataverse_metadata_type": "PicklistAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Active/Inactive",
+          "choices": [
+            "Active",
+            "Inactive"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Submissions",
+      "display_name": "Submissions",
+      "purpose": "One form instance with Draft/Submitted/Locked status",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "UserEmail",
+      "columns": [
+        {
+          "name": "FormVersion",
+          "type": "Lookup:FormVersions",
+          "dataverse_metadata_type": "LookupAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Submitted form version",
+          "referenced_table": "FormVersions"
+        },
+        {
+          "name": "AssignedUser",
+          "type": "Lookup:SystemUser",
+          "dataverse_metadata_type": "LookupAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Collector user where available",
+          "referenced_table": "SystemUser"
+        },
+        {
+          "name": "UserEmail",
+          "type": "Text",
+          "dataverse_metadata_type": "StringAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Collector email snapshot"
+        },
+        {
+          "name": "Status",
+          "type": "Choice",
+          "dataverse_metadata_type": "PicklistAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Draft/Submitted/Locked",
+          "choices": [
+            "Draft",
+            "Submitted",
+            "Locked"
+          ]
+        },
+        {
+          "name": "StartedAt",
+          "type": "DateTime",
+          "dataverse_metadata_type": "DateTimeAttributeMetadata(UserLocal)",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Start timestamp"
+        },
+        {
+          "name": "SubmittedAt",
+          "type": "DateTime",
+          "dataverse_metadata_type": "DateTimeAttributeMetadata(UserLocal)",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Submit timestamp"
+        }
+      ]
+    },
+    {
+      "name": "SubmissionAnswers",
+      "display_name": "SubmissionAnswers",
+      "purpose": "Generic typed answer rows",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "ValueText",
+      "columns": [
+        {
+          "name": "Submission",
+          "type": "Lookup:Submissions",
+          "dataverse_metadata_type": "LookupAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Parent submission",
+          "referenced_table": "Submissions"
+        },
+        {
+          "name": "Question",
+          "type": "Lookup:Questions",
+          "dataverse_metadata_type": "LookupAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Question answered",
+          "referenced_table": "Questions"
+        },
+        {
+          "name": "ValueText",
+          "type": "Text",
+          "dataverse_metadata_type": "StringAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Text/select code snapshot"
+        },
+        {
+          "name": "ValueNumber",
+          "type": "WholeNumber",
+          "dataverse_metadata_type": "IntegerAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Integer value"
+        },
+        {
+          "name": "ValueDecimal",
+          "type": "Decimal",
+          "dataverse_metadata_type": "DecimalAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Decimal value"
+        },
+        {
+          "name": "ValueDate",
+          "type": "Date",
+          "dataverse_metadata_type": "DateTimeAttributeMetadata(DateOnly)",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Date value"
+        },
+        {
+          "name": "ValueBoolean",
+          "type": "Boolean",
+          "dataverse_metadata_type": "BooleanAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Boolean value"
+        },
+        {
+          "name": "ValueJson",
+          "type": "MultilineText",
+          "dataverse_metadata_type": "MemoAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Select-many/GPS/rare complex MVP values"
+        }
+      ]
+    },
+    {
+      "name": "SubmissionFiles",
+      "display_name": "SubmissionFiles",
+      "purpose": "Photos/documents linked to submission/question",
+      "ownership_type": "UserOwned",
+      "primary_name_column": "FileName",
+      "columns": [
+        {
+          "name": "Submission",
+          "type": "Lookup:Submissions",
+          "dataverse_metadata_type": "LookupAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Parent submission",
+          "referenced_table": "Submissions"
+        },
+        {
+          "name": "Question",
+          "type": "Lookup:Questions",
+          "dataverse_metadata_type": "LookupAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Attachment question",
+          "referenced_table": "Questions"
+        },
+        {
+          "name": "File",
+          "type": "File",
+          "dataverse_metadata_type": "FileAttributeMetadata",
+          "required": true,
+          "requirement_level": "ApplicationRequired",
+          "notes": "Dataverse file column"
+        },
+        {
+          "name": "FileName",
+          "type": "Text",
+          "dataverse_metadata_type": "StringAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "Original filename"
+        },
+        {
+          "name": "MediaType",
+          "type": "Text",
+          "dataverse_metadata_type": "StringAttributeMetadata",
+          "required": false,
+          "requirement_level": "None",
+          "notes": "MIME/media type"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "name": "Forms_FormVersions_Form",
+      "referenced_table": "Forms",
+      "referencing_table": "FormVersions",
+      "lookup_column": "Form",
+      "required": true,
+      "notes": "Parent form"
+    },
+    {
+      "name": "FormVersions_Sections_FormVersion",
+      "referenced_table": "FormVersions",
+      "referencing_table": "Sections",
+      "lookup_column": "FormVersion",
+      "required": true,
+      "notes": "Parent form version"
+    },
+    {
+      "name": "Sections_Questions_Section",
+      "referenced_table": "Sections",
+      "referencing_table": "Questions",
+      "lookup_column": "Section",
+      "required": true,
+      "notes": "Parent section"
+    },
+    {
+      "name": "Questions_Choices_Question",
+      "referenced_table": "Questions",
+      "referencing_table": "Choices",
+      "lookup_column": "Question",
+      "required": true,
+      "notes": "Parent question"
+    },
+    {
+      "name": "Questions_ValidationRules_Question",
+      "referenced_table": "Questions",
+      "referencing_table": "ValidationRules",
+      "lookup_column": "Question",
+      "required": true,
+      "notes": "Parent question"
+    },
+    {
+      "name": "FormVersions_FormAssignments_FormVersion",
+      "referenced_table": "FormVersions",
+      "referencing_table": "FormAssignments",
+      "lookup_column": "FormVersion",
+      "required": true,
+      "notes": "Assigned published form version"
+    },
+    {
+      "name": "SystemUser_FormAssignments_User",
+      "referenced_table": "SystemUser",
+      "referencing_table": "FormAssignments",
+      "lookup_column": "User",
+      "required": false,
+      "notes": "Dataverse user where available"
+    },
+    {
+      "name": "FormVersions_Submissions_FormVersion",
+      "referenced_table": "FormVersions",
+      "referencing_table": "Submissions",
+      "lookup_column": "FormVersion",
+      "required": true,
+      "notes": "Submitted form version"
+    },
+    {
+      "name": "SystemUser_Submissions_AssignedUser",
+      "referenced_table": "SystemUser",
+      "referencing_table": "Submissions",
+      "lookup_column": "AssignedUser",
+      "required": false,
+      "notes": "Collector user where available"
+    },
+    {
+      "name": "Submissions_SubmissionAnswers_Submission",
+      "referenced_table": "Submissions",
+      "referencing_table": "SubmissionAnswers",
+      "lookup_column": "Submission",
+      "required": true,
+      "notes": "Parent submission"
+    },
+    {
+      "name": "Questions_SubmissionAnswers_Question",
+      "referenced_table": "Questions",
+      "referencing_table": "SubmissionAnswers",
+      "lookup_column": "Question",
+      "required": true,
+      "notes": "Question answered"
+    },
+    {
+      "name": "Submissions_SubmissionFiles_Submission",
+      "referenced_table": "Submissions",
+      "referencing_table": "SubmissionFiles",
+      "lookup_column": "Submission",
+      "required": true,
+      "notes": "Parent submission"
+    },
+    {
+      "name": "Questions_SubmissionFiles_Question",
+      "referenced_table": "Questions",
+      "referencing_table": "SubmissionFiles",
+      "lookup_column": "Question",
+      "required": true,
+      "notes": "Attachment question"
+    }
+  ],
+  "deferred": [
+    "Users",
+    "GroupInstances",
+    "MultiSelectAnswers",
+    "TrackedEntities",
+    "Encounters",
+    "Dashboards",
+    "ExportProfiles"
+  ]
+}

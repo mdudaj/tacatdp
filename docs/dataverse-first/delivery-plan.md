@@ -87,3 +87,11 @@ After MVP validation, plan:
 - version migration;
 - dashboards/export projections;
 - richer review/locking workflow.
+
+## Dataverse schema delivery artifacts
+
+Use `docs/dataverse-schema-cli/` for the reviewed CLI/Web API schema setup requirements, ADR, user stories, checklist, delivery plan, and verification notes.
+
+## Canvas renderer artifacts
+
+Use `docs/canvas-renderer-mvp/` for the systematic Canvas implementation plan after the Dataverse schema and seed are verified.
