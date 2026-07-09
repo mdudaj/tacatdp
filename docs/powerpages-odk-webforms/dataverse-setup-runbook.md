@@ -44,3 +44,19 @@ python3 scripts/dataverse-schema-deploy.py \
 2. Configure Power Pages Web API site settings.
 3. Configure table permissions/web roles.
 4. Test authenticated `/_api` read from the site.
+
+
+## Rich ODK MVP Seed
+
+After the ODK Central-inspired schema exists, seed the richer XForm-backed MVP form:
+
+```bash
+python3 scripts/dataverse-seed-odk-mvp-form.py   --env-file .env   --execute
+```
+
+The seed stores the canonical XForm XML in `FormVersions.XFormXml` and creates/updates:
+
+- one `Projects` row,
+- one `Forms` row with `XmlFormId=tacatdp_impact_evaluation`,
+- one published `FormVersions` row with about 43 fields, groups, relevance, constraints, GPS, select-one, select-many, and image upload,
+- one active `FormAssignments` row for `TACATDP_SEED_USER_EMAIL` or the default maker account.
