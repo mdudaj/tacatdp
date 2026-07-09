@@ -78,11 +78,12 @@ class CheckFailure(Exception):
 
 
 class Verifier:
-    def __init__(self, deploy: Any, dv: Any, website_id: str | None, site_name: str) -> None:
+    def __init__(self, deploy: Any, dv: Any, website_id: str | None, site_name: str, test_user_email: str) -> None:
         self.deploy = deploy
         self.dv = dv
         self.website_id = website_id
         self.site_name = site_name
+        self.test_user_email = test_user_email
         self.failures: list[str] = []
 
     def check(self, label: str, condition: bool, detail: str = "") -> None:
@@ -184,6 +185,16 @@ class Verifier:
         self.check("api-smoke root page", len(roots) == 1, str(len(roots)))
         self.check("api-smoke content page", len(content) == 1, str(len(content)))
 
+    def verify_portal_user(self) -> None:
+        email = escape_odata(self.test_user_email)
+        rows = self.rows(
+            "contacts?$select=contactid,fullname,emailaddress1,statecode,statuscode"
+            f"&$filter=emailaddress1 eq '{email}'&$top=5"
+        )
+        self.check("portal contact exists for test user", bool(rows), self.test_user_email)
+        if rows:
+            self.check("portal contact is active", any(row.get("statecode") == 0 for row in rows), self.test_user_email)
+
     def verify_seed_data(self) -> None:
         assignments = self.rows(
             "mp_formassignments?$select=mp_formassignmentid,mp_assignmentkey,mp_useremail,_mp_formversion_value&$top=10"
@@ -239,6 +250,7 @@ def main() -> int:
     env = deploy.load_env(Path(args.env_file).resolve())
     website_id = args.website_id or env.get("POWERPAGES_WEBSITE_ID") or None
     site_name = args.site_name or env.get("POWERPAGES_SITE_NAME") or "TACATDP Monitoring Tool"
+    test_user_email = env.get("TACATDP_SEED_USER_EMAIL") or env.get("POWER_PLATFORM_ASSIGNMENT_USER_EMAIL") or "john.mduda@mshirikacorp.onmicrosoft.com"
 
     print("# TACATDP Hosted Power Pages API Smoke Verification")
     print(f"Target: {settings.deploy_target}")
@@ -247,13 +259,14 @@ def main() -> int:
     run_source_validator(args.skip_source)
 
     dv = deploy.Dataverse(settings, deploy.get_token(settings))
-    verifier = Verifier(deploy, dv, website_id, site_name)
+    verifier = Verifier(deploy, dv, website_id, site_name, test_user_email)
     resolved_website_id = verifier.resolve_website()
     print(f"Website ID: {resolved_website_id}")
     verifier.verify_entity_sets()
     verifier.verify_webapi_settings(resolved_website_id)
     verifier.verify_permissions(resolved_website_id)
     verifier.verify_smoke_page()
+    verifier.verify_portal_user()
     verifier.verify_seed_data()
     verifier.finish()
     print("hosted Power Pages API smoke verification passed")
