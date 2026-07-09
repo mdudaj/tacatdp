@@ -52,21 +52,35 @@
   }
 
   function getJson(url) {
-    return fetch(url, {
-      method: "GET",
-      credentials: "same-origin",
-      headers: {
-        "Accept": "application/json",
-        "OData-MaxVersion": "4.0",
-        "OData-Version": "4.0"
+    return new Promise(function (resolve, reject) {
+      if (!window.shell || !window.shell.getTokenDeferred) {
+        reject(new Error("Power Pages anti-forgery token provider is not available."));
+        return;
       }
-    }).then(function (response) {
-      if (!response.ok) {
-        return response.text().then(function (body) {
-          throw new Error(response.status + " " + response.statusText + ": " + body.slice(0, 500));
+
+      window.shell.getTokenDeferred()
+        .done(function (token) {
+          fetch(url, {
+            method: "GET",
+            credentials: "same-origin",
+            headers: {
+              "Accept": "application/json",
+              "OData-MaxVersion": "4.0",
+              "OData-Version": "4.0",
+              "__RequestVerificationToken": token
+            }
+          }).then(function (response) {
+            if (!response.ok) {
+              return response.text().then(function (body) {
+                throw new Error(response.status + " " + response.statusText + ": " + body.slice(0, 500));
+              });
+            }
+            return response.json();
+          }).then(resolve).catch(reject);
+        })
+        .fail(function () {
+          reject(new Error("Unable to obtain Power Pages anti-forgery token."));
         });
-      }
-      return response.json();
     });
   }
 

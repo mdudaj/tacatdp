@@ -25,7 +25,7 @@ npm run dev
 
 Open the Vite URL that is printed, usually `http://localhost:5173/`.
 
-On localhost, assigned forms come from `src/dev/assignedForms.ts`. On the hosted Power Pages site, the same screen calls `/_api/mp_formassignments`, `/_api/mp_formversions`, and `/_api/mp_forms` through the signed-in Power Pages session.
+On localhost, assigned forms come from `src/dev/assignedForms.ts`. On the hosted Power Pages site, the same screen calls `/_api/mp_formassignments`, `/_api/mp_formversions`, and `/_api/mp_forms` through the signed-in Power Pages session with JSON/OData headers and the Power Pages anti-forgery token.
 
 ## Verification
 

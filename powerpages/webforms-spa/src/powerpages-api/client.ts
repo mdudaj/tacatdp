@@ -83,9 +83,12 @@ export class PowerPagesApiClient {
       headers,
     };
 
+    if (!this.shouldUseLocalFixture()) {
+      headers.__RequestVerificationToken = await this.getRequestVerificationToken();
+    }
+
     if (options.body !== undefined) {
       headers['Content-Type'] = 'application/json';
-      headers.__RequestVerificationToken = await this.getRequestVerificationToken();
       init.body = JSON.stringify(options.body);
     }
 
