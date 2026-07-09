@@ -1,1 +1,113 @@
-{}
+adx_sitesetting:
+- RecordId: 05d701d6-b47b-f111-ab0e-7c1e523612eb
+  DisplayName: 05d701d6-b47b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 0bd701d6-b47b-f111-ab0e-7c1e523612eb
+  DisplayName: 0bd701d6-b47b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 16d701d6-b47b-f111-ab0e-7c1e523612eb
+  DisplayName: 16d701d6-b47b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 1ad701d6-b47b-f111-ab0e-7c1e523612eb
+  DisplayName: 1ad701d6-b47b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 1e5544dc-b47b-f111-ab0e-7c1e523612eb
+  DisplayName: 1e5544dc-b47b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 24d701d6-b47b-f111-ab0e-7c1e523612eb
+  DisplayName: 24d701d6-b47b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 27cc8c8c-b57b-f111-ab0e-7c1e523612eb
+  DisplayName: 27cc8c8c-b57b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 285544dc-b47b-f111-ab0e-7c1e523612eb
+  DisplayName: 285544dc-b47b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 2c5544dc-b47b-f111-ab0e-7c1e523612eb
+  DisplayName: 2c5544dc-b47b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 2ccc8c8c-b57b-f111-ab0e-7c1e523612eb
+  DisplayName: 2ccc8c8c-b57b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 30cc8c8c-b57b-f111-ab0e-7c1e523612eb
+  DisplayName: 30cc8c8c-b57b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 34cc8c8c-b57b-f111-ab0e-7c1e523612eb
+  DisplayName: 34cc8c8c-b57b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 375544dc-b47b-f111-ab0e-7c1e523612eb
+  DisplayName: 375544dc-b47b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 38cc8c8c-b57b-f111-ab0e-7c1e523612eb
+  DisplayName: 38cc8c8c-b57b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 3b5544dc-b47b-f111-ab0e-7c1e523612eb
+  DisplayName: 3b5544dc-b47b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 4cebf3cf-b47b-f111-ab0e-7c1e523612eb
+  DisplayName: 4cebf3cf-b47b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 50ebf3cf-b47b-f111-ab0e-7c1e523612eb
+  DisplayName: 50ebf3cf-b47b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 5bebf3cf-b47b-f111-ab0e-7c1e523612eb
+  DisplayName: 5bebf3cf-b47b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: 62ebf3cf-b47b-f111-ab0e-7c1e523612eb
+  DisplayName: 62ebf3cf-b47b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: ac6f3c86-b57b-f111-ab0e-7c1e523612eb
+  DisplayName: ac6f3c86-b57b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: ae649892-b57b-f111-ab0e-7c1e523612eb
+  DisplayName: ae649892-b57b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: b2649892-b57b-f111-ab0e-7c1e523612eb
+  DisplayName: b2649892-b57b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: b26f3c86-b57b-f111-ab0e-7c1e523612eb
+  DisplayName: b26f3c86-b57b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: b6649892-b57b-f111-ab0e-7c1e523612eb
+  DisplayName: b6649892-b57b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: b96f3c86-b57b-f111-ab0e-7c1e523612eb
+  DisplayName: b96f3c86-b57b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: ba649892-b57b-f111-ab0e-7c1e523612eb
+  DisplayName: ba649892-b57b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: bf6f3c86-b57b-f111-ab0e-7c1e523612eb
+  DisplayName: bf6f3c86-b57b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true
+- RecordId: c56f3c86-b57b-f111-ab0e-7c1e523612eb
+  DisplayName: c56f3c86-b57b-f111-ab0e-7c1e523612eb
+  CheckSum: 
+  IsDeleted: true

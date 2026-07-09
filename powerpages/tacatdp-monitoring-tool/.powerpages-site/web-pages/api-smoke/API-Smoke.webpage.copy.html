@@ -1,0 +1,39 @@
+<section class="tacatdp-smoke" aria-labelledby="tacatdp-smoke-title">
+  <div class="tacatdp-smoke__header">
+    <div>
+      <p class="tacatdp-smoke__eyebrow">TACATDP Monitoring Tool</p>
+      <h1 id="tacatdp-smoke-title">Power Pages API Smoke</h1>
+    </div>
+    <div class="tacatdp-smoke__user" aria-label="Signed in user">
+      {% if user %}
+        <span>{{ user.fullname | escape }}</span>
+        <small>{{ user.emailaddress1 | escape }}</small>
+      {% else %}
+        <span>Not signed in</span>
+        <small>Authentication required</small>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="tacatdp-smoke__actions">
+    <button id="tacatdpSmokeRun" type="button" class="btn btn-primary">Run check</button>
+    <a class="btn btn-default" href="/">Back</a>
+  </div>
+
+  <div id="tacatdpSmokeStatus" class="tacatdp-smoke__status" role="status" aria-live="polite">Ready to check Dataverse access.</div>
+
+  <div class="tacatdp-smoke__grid" aria-label="Smoke test results">
+    <article class="tacatdp-smoke__panel">
+      <h2>Assignments</h2>
+      <div id="tacatdpAssignments"></div>
+    </article>
+    <article class="tacatdp-smoke__panel">
+      <h2>Selected form version</h2>
+      <div id="tacatdpFormVersion"></div>
+    </article>
+    <article class="tacatdp-smoke__panel">
+      <h2>Selected form</h2>
+      <div id="tacatdpForm"></div>
+    </article>
+  </div>
+</section>

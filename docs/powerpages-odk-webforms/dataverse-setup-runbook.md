@@ -79,3 +79,13 @@ Verified on 2026-07-09 against `PowerPagesDeveloper-070926-125720`:
 - All 8 table permissions are linked to the Power Pages `Authenticated Users` web role through `mspp_entitypermission_webroleset`.
 
 Known dev-environment cleanup note: an earlier script run created 28 nameless `mspp_sitesetting` rows before `mspp_name` was added to the create payload. They are not usable Power Pages Web API settings and are not committed in source. Delete them only through a separately approved Dataverse cleanup.
+
+
+## Cleanup Verification
+
+After the approved 2026-07-09 cleanup, Dataverse verification showed:
+
+- 0 nameless `mspp_sitesetting` rows.
+- 16 named TACATDP `Webapi/mp_*` site settings.
+
+The local Power Pages export was refreshed after cleanup.

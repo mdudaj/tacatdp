@@ -1,0 +1,121 @@
+.tacatdp-smoke {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.tacatdp-smoke__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.tacatdp-smoke__eyebrow {
+  margin: 0 0 6px;
+  color: #5b626b;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.tacatdp-smoke h1 {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.tacatdp-smoke__user {
+  min-width: 220px;
+  padding: 10px 12px;
+  border: 1px solid #d8dde6;
+  border-radius: 6px;
+  background: #f8fafc;
+  text-align: right;
+}
+
+.tacatdp-smoke__user span,
+.tacatdp-smoke__user small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.tacatdp-smoke__actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.tacatdp-smoke__status {
+  min-height: 44px;
+  margin-bottom: 16px;
+  padding: 12px;
+  border-left: 4px solid #6b7280;
+  background: #f8fafc;
+}
+
+.tacatdp-smoke__status[data-state="ok"] {
+  border-left-color: #107c41;
+  background: #f3fbf6;
+}
+
+.tacatdp-smoke__status[data-state="error"] {
+  border-left-color: #a4262c;
+  background: #fff5f5;
+}
+
+.tacatdp-smoke__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.tacatdp-smoke__panel {
+  min-height: 180px;
+  padding: 14px;
+  border: 1px solid #d8dde6;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.tacatdp-smoke__panel h2 {
+  margin: 0 0 10px;
+  font-size: 1.125rem;
+}
+
+.tacatdp-smoke__record {
+  display: grid;
+  gap: 4px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eef1f5;
+}
+
+.tacatdp-smoke__record:last-child {
+  border-bottom: 0;
+}
+
+.tacatdp-smoke__label {
+  color: #5b626b;
+  font-size: 0.8125rem;
+}
+
+.tacatdp-smoke__value {
+  overflow-wrap: anywhere;
+  font-weight: 600;
+}
+
+@media (max-width: 760px) {
+  .tacatdp-smoke__header,
+  .tacatdp-smoke__actions {
+    flex-direction: column;
+  }
+
+  .tacatdp-smoke__user {
+    width: 100%;
+    text-align: left;
+  }
+
+  .tacatdp-smoke__grid {
+    grid-template-columns: 1fr;
+  }
+}
