@@ -1,0 +1,10 @@
+append: true
+appendto: true
+create: true
+delete: false
+entitylogicalname: mp_submissionattachment
+entityname: mp_submissionattachment
+id: 3f5544dc-b47b-f111-ab0e-7c1e523612eb
+read: true
+scope: 756150000
+write: true

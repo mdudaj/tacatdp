@@ -60,3 +60,22 @@ The seed stores the canonical XForm XML in `FormVersions.XFormXml` and creates/u
 - one `Forms` row with `XmlFormId=tacatdp_impact_evaluation`,
 - one published `FormVersions` row with about 43 fields, groups, relevance, constraints, GPS, select-one, select-many, and image upload,
 - one active `FormAssignments` row for `TACATDP_SEED_USER_EMAIL` or the default maker account.
+
+
+## Power Pages Web API and Table Permissions
+
+After schema and seed data exist, configure authenticated Power Pages `/_api` access:
+
+```bash
+python3 scripts/powerpages-configure-webapi.py   --env-file .env   --execute
+```
+
+The script creates/updates `Webapi/<logical table>/enabled=true`, `Webapi/<logical table>/fields=*`, and Global table permissions for the Authenticated Users web role. This is acceptable for the dev POC; before production, replace broad Global submission permissions with contact/self/custom-scoped permissions.
+
+Verified on 2026-07-09 against `PowerPagesDeveloper-070926-125720`:
+
+- 16 named Web API site settings exist: enabled and fields settings for all 8 `mp_*` tables.
+- 8 table permissions exist: metadata tables are read-only; submission tables allow read/create/write/append/append-to.
+- All 8 table permissions are linked to the Power Pages `Authenticated Users` web role through `mspp_entitypermission_webroleset`.
+
+Known dev-environment cleanup note: an earlier script run created 28 nameless `mspp_sitesetting` rows before `mspp_name` was added to the create payload. They are not usable Power Pages Web API settings and are not committed in source. Delete them only through a separately approved Dataverse cleanup.
