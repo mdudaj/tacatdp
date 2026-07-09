@@ -5,6 +5,7 @@ import type {
   FormRow,
   FormVersionRow,
 } from './types';
+import { devAssignedForms } from '../dev/assignedForms';
 
 type HttpMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
@@ -25,6 +26,10 @@ declare global {
 
 export class PowerPagesApiClient {
   async listAssignedForms(): Promise<FormAssignmentSummary[]> {
+    if (this.shouldUseLocalFixture()) {
+      return devAssignedForms;
+    }
+
     const assignments = await this.get<DataverseCollection<FormAssignmentRow>>(
       '/_api/mp_formassignments?$select=mp_formassignmentid,mp_assignmentkey,mp_useremail,_mp_formversion_value&$top=20',
     );
@@ -104,5 +109,13 @@ export class PowerPagesApiClient {
       }
       deferred.done(resolve).fail(() => reject(new Error('Unable to obtain Power Pages anti-forgery token.')));
     });
+  }
+
+  private shouldUseLocalFixture(): boolean {
+    if (!import.meta.env.DEV) {
+      return false;
+    }
+
+    return window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
   }
 }

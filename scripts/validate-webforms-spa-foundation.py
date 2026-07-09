@@ -19,6 +19,8 @@ REQUIRED_FILES = [
     "src/views/AssignedFormsView.vue",
     "src/powerpages-api/client.ts",
     "src/powerpages-api/types.ts",
+    "src/dev/assignedForms.ts",
+    "src/vite-env.d.ts",
     "src/offline/drafts.ts",
     "src/styles.css",
 ]
@@ -46,6 +48,8 @@ TEXT_SCAN_FILES = [
     "src/views/AssignedFormsView.vue",
     "src/powerpages-api/client.ts",
     "src/powerpages-api/types.ts",
+    "src/dev/assignedForms.ts",
+    "src/vite-env.d.ts",
     "src/offline/drafts.ts",
     "src/styles.css",
 ]
