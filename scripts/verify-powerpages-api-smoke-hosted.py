@@ -200,8 +200,25 @@ class Verifier:
             f"&$filter=emailaddress1 eq '{email}'&$top=5"
         )
         self.check("portal contact exists for test user", bool(rows), self.test_user_email)
-        if rows:
-            self.check("portal contact is active", any(row.get("statecode") == 0 for row in rows), self.test_user_email)
+        if not rows:
+            return
+        contact = rows[0]
+        contact_id = contact["contactid"]
+        self.check("portal contact is active", any(row.get("statecode") == 0 for row in rows), self.test_user_email)
+        roles = self.rows(
+            f"contacts({contact_id})/powerpagecomponent_mspp_webrole_contact"
+            "?$select=powerpagecomponentid,name,powerpagecomponenttype&$top=50"
+        )
+        self.check(
+            "portal contact has Authenticated Users web role",
+            any(role.get("name") == "Authenticated Users" and role.get("powerpagecomponenttype") == 11 for role in roles),
+            self.test_user_email,
+        )
+        identities = self.rows(
+            "adx_externalidentities?$select=adx_externalidentityid,adx_identityprovidername,adx_username,_adx_contactid_value"
+            f"&$filter=_adx_contactid_value eq {contact_id}&$top=10"
+        )
+        self.check("portal contact has redeemed external identity", bool(identities), self.test_user_email)
 
     def verify_seed_data(self) -> None:
         assignments = self.rows(

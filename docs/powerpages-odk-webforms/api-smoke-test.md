@@ -87,10 +87,10 @@ The verifier checks:
 - 8 table permissions and Authenticated Users web-role links,
 - 8 enhanced data model table permission component links to the Authenticated Users web-role component,
 - 2 `/api-smoke` page rows,
-- a portal contact exists for the seeded test user,
+- a portal contact exists for the seeded test user, has the Authenticated Users web role, and has a redeemed external identity,
 - at least one assignment, form version with XForm XML, and form record.
 
-Browser failure `90040120` means Power Pages evaluated the request but did not grant the signed-in portal contact a table permission for the requested table. Check portal contact creation, web-role membership, and cache before changing Dataverse schema.
+Browser failure `90040120` means Power Pages evaluated the request but did not grant the signed-in portal contact a table permission for the requested table. Check portal contact creation, invitation/external identity redemption, web-role membership, and cache before changing Dataverse schema.
 
 Opening `/api-smoke` remains an optional observation step, not the release gate.
 

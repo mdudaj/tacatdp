@@ -91,6 +91,18 @@ class PagesConfigClient:
             raise RuntimeError("Authenticated Users web role not found for site")
         return values[0]["mspp_webroleid"]
 
+    def find_contact_by_email(self, email: str) -> str | None:
+        data = self.dv.get_json(
+            "contacts?$select=contactid,emailaddress1,statecode"
+            f"&$filter=emailaddress1 eq '{escape_odata(email)}'&$top=1"
+        )
+        values = (data or {}).get("value") or []
+        if not values:
+            return None
+        if values[0].get("statecode") != 0:
+            raise RuntimeError(f"Portal contact is not active: {email}")
+        return values[0]["contactid"]
+
     def ensure_site_setting(self, website_id: str, name: str, value: str, execute: bool) -> str | None:
         data = self.dv.get_json(
             "mspp_sitesettings?$select=mspp_sitesettingid,mspp_value"
@@ -199,6 +211,28 @@ class PagesConfigClient:
         )
         return any(row.get("powerpagecomponentid") == role_id for row in (existing or {}).get("value", []))
 
+    def ensure_contact_role(self, contact_id: str | None, role_id: str, email: str, execute: bool) -> None:
+        if not contact_id:
+            print(f"missing: portal contact {email}; create/redeem an invitation before browser /_api testing")
+            return
+        existing = self.dv.get_json(
+            f"powerpagecomponents({role_id})/powerpagecomponent_mspp_webrole_contact"
+            "?$select=contactid&$top=100"
+        )
+        if any(row.get("contactid") == contact_id for row in (existing or {}).get("value", [])):
+            print(f"exists: portal contact Authenticated Users role link {email}")
+            return
+        if not execute:
+            print(f"would create: portal contact Authenticated Users role link {email}")
+            return
+        payload = {"@odata.id": f"{self.dv.base}/contacts({contact_id})"}
+        response = self.dv.request("POST", f"powerpagecomponents({role_id})/powerpagecomponent_mspp_webrole_contact/$ref", payload=payload)
+        if response.status_code >= 400:
+            message = self.deploy.safe_error(response)
+            if "already" not in message.lower() and "duplicate" not in message.lower():
+                raise RuntimeError(f"Associate contact role failed: HTTP {response.status_code} {message}")
+        print(f"created: portal contact Authenticated Users role link {email}")
+
 
 def main() -> int:
     args = parse_args()
@@ -207,6 +241,7 @@ def main() -> int:
     env = deploy.load_env(Path(args.env_file).resolve())
     website_id = args.website_id or env.get("POWERPAGES_WEBSITE_ID") or None
     site_name = args.site_name or env.get("POWERPAGES_SITE_NAME") or "TACATDP Monitoring Tool"
+    seed_user_email = env.get("TACATDP_SEED_USER_EMAIL") or env.get("POWER_PLATFORM_ASSIGNMENT_USER_EMAIL") or "john.mduda@mshirikacorp.onmicrosoft.com"
 
     print("# TACATDP Power Pages Web API Configuration")
     print(f"Mode: {'execute' if args.execute else 'dry-run'}")
@@ -221,8 +256,10 @@ def main() -> int:
     client = PagesConfigClient(deploy, settings, token)
     resolved_website_id = client.find_website(website_id, site_name)
     role_id = client.find_authenticated_role(resolved_website_id)
+    contact_id = client.find_contact_by_email(seed_user_email)
     print(f"Website ID: {resolved_website_id}")
     print(f"Authenticated Users role ID: {role_id}")
+    print(f"Seed portal contact ID: {contact_id or 'missing'}")
     if not args.execute:
         print("Dry-run only. Re-run with --execute to configure Power Pages.")
 
@@ -231,6 +268,7 @@ def main() -> int:
         client.ensure_site_setting(resolved_website_id, f"Webapi/{logical}/enabled", "true", args.execute)
         client.ensure_site_setting(resolved_website_id, f"Webapi/{logical}/fields", "*", args.execute)
         client.ensure_permission(resolved_website_id, role_id, table, args.execute)
+    client.ensure_contact_role(contact_id, role_id, seed_user_email, args.execute)
 
     print("configuration complete" if args.execute else "dry-run complete")
     return 0
