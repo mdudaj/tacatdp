@@ -52,6 +52,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--env-file", default=".env", help="Environment file containing Power Platform settings.")
     parser.add_argument("--website-id", default=None, help="Power Pages website id. Defaults to POWERPAGES_WEBSITE_ID or the first matching site name.")
     parser.add_argument("--site-name", default=None, help="Power Pages site name. Defaults to POWERPAGES_SITE_NAME or TACATDP Monitoring Tool.")
+    parser.add_argument("--portal-user-email", default=None, help="Optional portal contact email to assign to the Authenticated Users web role.")
     parser.add_argument("--execute", action="store_true", help="Perform live writes. Without this flag only a dry-run summary is shown.")
     return parser.parse_args()
 
@@ -241,7 +242,7 @@ def main() -> int:
     env = deploy.load_env(Path(args.env_file).resolve())
     website_id = args.website_id or env.get("POWERPAGES_WEBSITE_ID") or None
     site_name = args.site_name or env.get("POWERPAGES_SITE_NAME") or "TACATDP Monitoring Tool"
-    seed_user_email = env.get("TACATDP_SEED_USER_EMAIL") or env.get("POWER_PLATFORM_ASSIGNMENT_USER_EMAIL") or "john.mduda@mshirikacorp.onmicrosoft.com"
+    seed_user_email = args.portal_user_email or env.get("TACATDP_SEED_USER_EMAIL") or env.get("POWER_PLATFORM_ASSIGNMENT_USER_EMAIL") or "john.mduda@mshirikacorp.onmicrosoft.com"
 
     print("# TACATDP Power Pages Web API Configuration")
     print(f"Mode: {'execute' if args.execute else 'dry-run'}")
