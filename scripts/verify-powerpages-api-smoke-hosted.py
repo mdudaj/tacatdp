@@ -11,6 +11,7 @@ import argparse
 import importlib.util
 import subprocess
 import sys
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any
 
@@ -45,6 +46,9 @@ SUBMISSION_TABLES = {
     "mp_submission",
     "mp_submissionversion",
     "mp_submissionattachment",
+}
+ASSOCIATION_TARGET_TABLES = {
+    "mp_formversion",
 }
 GLOBAL_SCOPE = 756150000
 
@@ -165,7 +169,13 @@ class Verifier:
             self.check(f"table permission {table} global scope", row.get("mspp_scope") == GLOBAL_SCOPE)
             self.check(f"table permission {table} read", row.get("mspp_read") is True)
             if table in METADATA_TABLES:
-                self.check(f"table permission {table} metadata read-only", not any(row.get(name) for name in ("mspp_create", "mspp_write", "mspp_delete", "mspp_append", "mspp_appendto")))
+                expected_appendto = table in ASSOCIATION_TARGET_TABLES
+                self.check(
+                    f"table permission {table} metadata privileges",
+                    not any(row.get(name) for name in ("mspp_create", "mspp_write", "mspp_delete", "mspp_append"))
+                    and row.get("mspp_appendto") is expected_appendto,
+                    f"appendto={row.get('mspp_appendto')}, expected {expected_appendto}",
+                )
             if table in SUBMISSION_TABLES:
                 self.check(f"table permission {table} submission write flags", all(row.get(name) is True for name in ("mspp_create", "mspp_write", "mspp_append", "mspp_appendto")) and row.get("mspp_delete") is False)
             link_rows = self.rows(
@@ -237,12 +247,42 @@ class Verifier:
         self.check("form version web forms enabled", (version or {}).get("mp_webformsenabled") is True)
         xform = (version or {}).get("mp_xformxml") or ""
         self.check("form version has XForm XML", len(xform) > 1000, f"{len(xform)} bytes")
+        if xform:
+            self.verify_xform_body_refs(xform)
         form_id = (version or {}).get("_mp_form_value")
         self.check("form version has form lookup", bool(form_id))
         if form_id:
             form = self.dv.get_json(f"mp_forms({form_id})?$select=mp_name,mp_xmlformid,mp_lifecyclestatus")
             self.check("form exists", bool(form), form_id)
             self.check("form XmlFormId populated", bool((form or {}).get("mp_xmlformid")), (form or {}).get("mp_xmlformid") or "")
+
+    def verify_xform_body_refs(self, xform: str) -> None:
+        try:
+            root = ET.fromstring(xform)
+        except ET.ParseError as exc:
+            self.check("form version XForm XML parses", False, str(exc))
+            return
+        self.check("form version XForm XML parses", True)
+        body = root.find("{http://www.w3.org/1999/xhtml}body")
+        self.check("form version XForm has h:body", body is not None)
+        if body is None:
+            return
+
+        refs: dict[str, str] = {}
+        duplicates: list[str] = []
+        for element in body.iter():
+            ref = element.attrib.get("ref")
+            if not ref:
+                continue
+            tag = element.tag.rsplit("}", 1)[-1]
+            if ref in refs:
+                duplicates.append(ref)
+            refs[ref] = tag
+        self.check(
+            "form version XForm body refs are unique",
+            not duplicates,
+            ", ".join(sorted(set(duplicates))) if duplicates else f"{len(refs)} refs",
+        )
 
     def finish(self) -> None:
         if self.failures:

@@ -22,6 +22,35 @@
 
   <div id="tacatdpSmokeStatus" class="tacatdp-smoke__status" role="status" aria-live="polite">Ready to check Dataverse access.</div>
 
+  <article class="tacatdp-smoke__panel" aria-label="Portal session diagnostics">
+    <h2>Portal session</h2>
+    {% if user %}
+      <div class="tacatdp-smoke__record">
+        <div>
+          <span class="tacatdp-smoke__label">Contact ID</span>
+          <div class="tacatdp-smoke__value">{{ user.id | escape }}</div>
+        </div>
+        <div>
+          <span class="tacatdp-smoke__label">Email</span>
+          <div class="tacatdp-smoke__value">{{ user.emailaddress1 | escape }}</div>
+        </div>
+        <div>
+          <span class="tacatdp-smoke__label">Roles</span>
+          <div class="tacatdp-smoke__value">
+            {% assign role_count = 0 %}
+            {% for role in user.roles %}
+              {% assign role_count = role_count | plus: 1 %}
+              {{ role | escape }}{% unless forloop.last %}, {% endunless %}
+            {% endfor %}
+            {% if role_count == 0 %}-{% endif %}
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <p>No portal contact is available in this page request.</p>
+    {% endif %}
+  </article>
+
   <div class="tacatdp-smoke__grid" aria-label="Smoke test results">
     <article class="tacatdp-smoke__panel">
       <h2>Assignments</h2>

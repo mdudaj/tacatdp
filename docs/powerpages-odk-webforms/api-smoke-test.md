@@ -88,11 +88,16 @@ The verifier checks:
 - 8 enhanced data model table permission component links to the Authenticated Users web-role component,
 - 2 `/api-smoke` page rows,
 - a portal contact exists for the seeded test user, has the Authenticated Users web role, and has a redeemed external identity,
-- at least one assignment, form version with XForm XML, and form record.
+- at least one assignment, form version with XForm XML, and form record,
+- the live XForm XML parses and each body control uses a unique `ref` value so ODK Web Forms does not fail with duplicate-reference errors such as `Multiple body elements for reference: /data`.
 
 Browser failure `90040120` means Power Pages evaluated the request but did not grant the signed-in portal contact a table permission for the requested table. Check portal contact creation, invitation/external identity redemption, web-role membership, and cache before changing Dataverse schema.
 
-Opening `/api-smoke` remains an optional observation step, not the release gate.
+The 2026-07-10 smoke-test fix proved one extra gate: the automated verifier can show the Dataverse rows and relationships exist while browser runtime still returns `EntityPermissionReadIsMissing`. After table permission or web-role changes, open each failing table permission in Power Pages `Edit site > Security > Table permissions`, confirm `Authenticated Users`, save, restart the site, and rerun the browser smoke test. The browser smoke test is now a required runtime gate for this slice.
+
+The smoke page includes a `Portal session` diagnostic panel showing Liquid `user.id`, `user.emailaddress1`, and `user.roles`. If it does not show the expected contact and `Authenticated Users`, fix portal contact/external identity/role membership first. If it does show the expected contact and role but `/_api` returns `EntityPermissionReadIsMissing`, fix the table permission association through the Security workspace.
+
+See `docs/powerpages-odk-webforms/power-pages-auth-permission-troubleshooting.md` for the full evidence trail.
 
 ## Next Slice
 

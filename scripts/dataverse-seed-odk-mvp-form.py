@@ -107,7 +107,7 @@ RICH_TACATDP_XFORM = """<?xml version="1.0" encoding="UTF-8"?>
     </model>
   </h:head>
   <h:body>
-    <group ref="/data"><label>Farmer identity and location</label>
+    <group><label>Farmer identity and location</label>
       <input ref="/data/Customer_ID"><label>Customer ID</label></input>
       <input ref="/data/Customer_Name"><label>Customer Name</label></input>
       <select1 ref="/data/Gender"><label>Gender</label><item><label>Male</label><value>1</value></item><item><label>Female</label><value>2</value></item></select1>
@@ -122,7 +122,7 @@ RICH_TACATDP_XFORM = """<?xml version="1.0" encoding="UTF-8"?>
       <input ref="/data/Georeference"><label>GPS point</label><hint>Measure this outside of the house, in front of the main door.</hint></input>
       <input ref="/data/Farmer_Phone"><label>Farmer Phone</label></input>
     </group>
-    <group ref="/data"><label>Farm and production profile</label>
+    <group><label>Farm and production profile</label>
       <input ref="/data/loan_amount_tzs"><label>Loan Amount (TZS)</label></input>
       <select1 ref="/data/own_farmland"><label>Farmer or household owns farmland?</label><item><label>Yes</label><value>1</value></item><item><label>No</label><value>2</value></item></select1>
       <input ref="/data/land_size_acres"><label>Land Size (Acres)</label></input>
@@ -139,7 +139,7 @@ RICH_TACATDP_XFORM = """<?xml version="1.0" encoding="UTF-8"?>
       <input ref="/data/yield_after"><label>Yield After TACATDP ARA Deployment (kg/acre)</label></input>
       <upload ref="/data/farm_photo" mediatype="image/*"><label>Farm photo</label></upload>
     </group>
-    <group ref="/data"><label>Group, household, training, and beneficiaries</label>
+    <group><label>Group, household, training, and beneficiaries</label>
       <select1 ref="/data/farmer_group_member"><label>Is farmer a member of a Farmer Group?</label><item><label>Yes</label><value>1</value></item><item><label>No</label><value>2</value></item></select1>
       <select1 ref="/data/farmer_group_type"><label>Farmer Group Type</label><item><label>Producer Group</label><value>producer_group</value></item><item><label>Cooperative</label><value>cooperative</value></item><item><label>SACCO</label><value>sacco</value></item></select1>
       <input ref="/data/male_members"><label>Male Group Members</label></input>

@@ -5,7 +5,8 @@
 - One assigned XForm-backed form can be read by an authenticated Power Pages user.
 - Draft state can be saved locally and restored.
 - Online submit creates a submission header and current submission version.
-- One attachment can be uploaded and linked to the submission version.
+- One attachment is represented as a `SubmissionAttachments` row linked to the submission version.
+- Browser binary upload through the Power Pages route is attempted with the documented Dataverse single-request file-column pattern and must report whether Power Pages accepted or rejected the binary content.
 - No raw Dataverse credentials or client secrets are present in the SPA.
 
 
@@ -16,7 +17,7 @@
 - The page calls Power Pages `/_api`, not raw Dataverse Web API.
 - Browser code contains no client secret, bearer token, or Dataverse OAuth endpoint.
 - `python3 scripts/verify-powerpages-api-smoke-hosted.py --env-file .env` passes against the hosted environment.
-- Manual browser navigation to `/api-smoke` is optional observation, not the delivery gate.
+- Browser navigation to `/api-smoke` passes after Power Pages Security workspace table-permission saves; the page must show the expected portal contact, `Authenticated Users`, and `Power Pages /_api read smoke test passed.`
 
 ## SPA Foundation Slice Acceptance
 
@@ -28,3 +29,32 @@
 - SPA source contains no raw Dataverse OAuth endpoint, client secret, bearer token, or custom login.
 - `python3 scripts/validate-webforms-spa-foundation.py` passes.
 - Hosted state remains verified by `python3 scripts/verify-powerpages-api-smoke-hosted.py --env-file .env`.
+
+## ODK Runtime Proof Acceptance
+
+- The assigned form view imports `OdkWebForm` from `@getodk/web-forms`.
+- The selected assignment's XForm XML is passed to the ODK runtime from the Power Pages `/_api` client result.
+- The runtime `loaded` event saves a browser-local IndexedDB marker and refreshes the local draft count.
+- The runtime `submit` event validates ODK payload readiness and writes the canonical instance XML through Power Pages `/_api`.
+- `npm run build` succeeds for `powerpages/webforms-spa/`.
+
+## Dataverse Submission Mapping Acceptance
+
+- The submit handler uses the ODK Web Forms submit payload, not page-local input scraping.
+- Non-ready ODK payloads are blocked before Dataverse writes.
+- The browser extracts `xml_submission_file` and preserves it in `SubmissionVersions.XFormSubmissionXml`.
+- Submit creates or reuses one `Submissions` header keyed by ODK `instanceID`.
+- Submit creates a new `SubmissionVersions` record with `Current = true`, version number, compact JSON metadata, browser user agent, and device id.
+- Mutating requests use Power Pages `/_api`, EntitySetName paths, JSON/OData headers, submission-version `@odata.bind` lookup references, and the Power Pages anti-forgery token.
+- Browser submit does not bind `Submissions.FormVersion` in the MVP because Power Pages runtime continued to return `90040106` after the documented append/append-to table permissions were verified. The submitted `SubmissionVersions` JSON must include `formVersionId`, `assignmentKey`, and `xmlFormId` until a server-side association or child-permission model is proven.
+- Attachment metadata persists to `mp_submissionattachments` and binds to the created `mp_submissionversion`.
+- Attachment binary upload uses a guarded `PATCH /_api/mp_submissionattachments(<id>)/mp_file` probe with `x-ms-file-name`; if Power Pages rejects the non-JSON file-column request, the submit remains complete and the warning is shown in the browser.
+
+## Attachment Slice Acceptance
+
+- The SPA creates a `SubmissionAttachments` row for each non-`xml_submission_file` `File` value in the ODK submit payload.
+- Each attachment row stores `FileName`, `MediaType`, `UploadedAt`, and a `SubmissionVersion` lookup.
+- The `SubmissionVersions` JSON summary stores attachment names plus file name, media type, and size metadata.
+- The hosted UI shows attachment row count, binary upload count, and any binary warning after submit.
+- The source validator guards the `mp_submissionattachments`, `mp_SubmissionVersion@odata.bind`, `mp_file`, and `x-ms-file-name` code paths.
+- Binary upload is considered proven only after the hosted Power Pages browser reports a nonzero binary upload count and Dataverse file content is verified. On 2026-07-11, the hosted browser proved metadata persistence but direct file-column binary upload failed with `400` / `0x80048d19`; production-grade binary persistence is therefore a later managed server-side slice.

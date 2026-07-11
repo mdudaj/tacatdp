@@ -34,3 +34,23 @@ export interface FormAssignmentSummary {
   version: string;
   xformXml: string;
 }
+
+export interface SubmissionRow {
+  mp_submissionid: string;
+  mp_instanceid: string;
+}
+
+export interface SubmissionVersionRow {
+  mp_submissionversionid: string;
+  mp_versionnumber: number;
+}
+
+export interface OdkSubmitResult {
+  instanceId: string;
+  submissionId: string;
+  submissionVersionId: string;
+  versionNumber: number;
+  attachmentCount: number;
+  attachmentBinaryUploadCount: number;
+  attachmentWarnings: string[];
+}

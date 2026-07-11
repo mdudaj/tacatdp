@@ -23,7 +23,10 @@ WEB_API_TABLES = [
     # metadata reads
     {"logical": "mp_project", "name": "TACATDP Projects", "read": True, "create": False, "write": False, "delete": False, "append": False, "appendto": False},
     {"logical": "mp_form", "name": "TACATDP Forms", "read": True, "create": False, "write": False, "delete": False, "append": False, "appendto": False},
-    {"logical": "mp_formversion", "name": "TACATDP FormVersions", "read": True, "create": False, "write": False, "delete": False, "append": False, "appendto": False},
+    # FormVersions remain read-only to portal users, but submission create binds
+    # mp_submission.mp_FormVersion to an existing form version. Power Pages
+    # requires Append To on the referenced table for that association.
+    {"logical": "mp_formversion", "name": "TACATDP FormVersions", "read": True, "create": False, "write": False, "delete": False, "append": False, "appendto": True},
     {"logical": "mp_formassignment", "name": "TACATDP FormAssignments", "read": True, "create": False, "write": False, "delete": False, "append": False, "appendto": False},
     {"logical": "mp_formattachment", "name": "TACATDP FormAttachments", "read": True, "create": False, "write": False, "delete": False, "append": False, "appendto": False},
     # submission writes for dev POC; tighten before production with contact/self/custom access
@@ -139,7 +142,8 @@ class PagesConfigClient:
         logical = table["logical"]
         name = table["name"]
         data = self.dv.get_json(
-            "mspp_entitypermissions?$select=mspp_entitypermissionid"
+            "mspp_entitypermissions?$select=mspp_entitypermissionid,mspp_entityname,mspp_entitylogicalname,mspp_scope,"
+            "mspp_read,mspp_create,mspp_write,mspp_delete,mspp_append,mspp_appendto"
             f"&$filter=_mspp_websiteid_value eq {website_id} and mspp_entitylogicalname eq '{escape_odata(logical)}' and mspp_scope eq {GLOBAL_SCOPE}&$top=1"
         )
         values = (data or {}).get("value") or []
@@ -157,7 +161,29 @@ class PagesConfigClient:
         }
         if values:
             permission_id = values[0]["mspp_entitypermissionid"]
-            print(f"exists: table permission {logical}")
+            current = values[0]
+            updates = {
+                key: value
+                for key, value in payload.items()
+                if key != "mspp_websiteid@odata.bind" and current.get(key) != value
+            }
+            if updates and execute:
+                privilege_payload = {
+                    "mspp_read": table["read"],
+                    "mspp_create": table["create"],
+                    "mspp_write": table["write"],
+                    "mspp_delete": table["delete"],
+                    "mspp_append": table["append"],
+                    "mspp_appendto": table["appendto"],
+                }
+                response = self.dv.request("PATCH", f"mspp_entitypermissions({permission_id})", payload=privilege_payload)
+                if response.status_code >= 400:
+                    raise RuntimeError(f"PATCH table permission {logical} failed: HTTP {response.status_code} {self.deploy.safe_error(response)}")
+                print(f"updated: table permission {logical}")
+            elif updates:
+                print(f"would update: table permission {logical}")
+            else:
+                print(f"exists: table permission {logical}")
         else:
             if not execute:
                 print(f"would create: table permission {logical}")
