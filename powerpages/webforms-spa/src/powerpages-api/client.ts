@@ -58,6 +58,11 @@ interface AttachmentPersistResult {
 
 declare global {
   interface Window {
+    __TACATDP_POWERPAGES__?: {
+      isAuthenticated?: boolean;
+      userEmail?: string;
+      userName?: string;
+    };
     shell?: {
       getTokenDeferred?: () => {
         done: (callback: (token: string) => void) => { fail: (callback: () => void) => void };
@@ -68,7 +73,17 @@ declare global {
 
 export class PowerPagesApiClient {
   hasPowerPagesSession(): boolean {
-    return this.shouldUseLocalFixture() || Boolean(window.shell?.getTokenDeferred);
+    return this.shouldUseLocalFixture() || Boolean(window.__TACATDP_POWERPAGES__?.isAuthenticated);
+  }
+
+  getSignedInUserLabel(): string {
+    if (this.shouldUseLocalFixture()) {
+      return 'local.dev@example.test';
+    }
+
+    return window.__TACATDP_POWERPAGES__?.userEmail
+      || window.__TACATDP_POWERPAGES__?.userName
+      || 'Signed in';
   }
 
   getSignInUrl(): string {

@@ -19,7 +19,7 @@ const activeView = ref<AppView>('workQueue');
 const runtimeStatus = ref('');
 const submitStatus = ref('');
 const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
-const buildMarker = 'monitoring-tool-ux-foundation-20260711-001';
+const buildMarker = 'auth-redirect-crdb-shell-20260711-001';
 const previousBuildMarker = 'renderer-spacing-submit-label-20260711-001';
 const runtimeClickStatus = ref('No ODK runtime button click observed in this page load.');
 const odkSubmitEventStatus = ref('No ODK submit event observed in this page load.');
@@ -27,7 +27,7 @@ const dataverseWriteStatus = ref('No Dataverse submit write attempted in this pa
 let odkRuntimeObserver: MutationObserver | null = null;
 
 const hasAssignments = computed(() => assignments.value.length > 0);
-const signedInUserEmail = computed(() => assignments.value.find((assignment) => assignment.userEmail)?.userEmail ?? 'Signed in');
+const signedInUserEmail = computed(() => assignments.value.find((assignment) => assignment.userEmail)?.userEmail ?? api.getSignedInUserLabel());
 const selectedDraftId = computed(() => {
   if (!selectedAssignment.value) {
     return '';
@@ -151,6 +151,7 @@ async function handleSubmit(payload: unknown, callback?: (result: unknown) => vo
 async function loadAssignments() {
   if (!api.hasPowerPagesSession()) {
     authRequired.value = true;
+    error.value = '';
     window.location.assign(api.getSignInUrl());
     return;
   }
@@ -175,7 +176,13 @@ async function loadAssignments() {
       : 'No assigned form selected.';
     draftCount.value = await draftStore.count();
   } catch (caught) {
-    error.value = caught instanceof Error ? caught.message : 'Unable to load assigned forms.';
+    const message = caught instanceof Error ? caught.message : 'Unable to load assigned forms.';
+    if ((message.includes('401') || message.includes('403')) && !api.hasPowerPagesSession()) {
+      authRequired.value = true;
+      window.location.assign(api.getSignInUrl());
+      return;
+    }
+    error.value = message;
   } finally {
     loading.value = false;
   }

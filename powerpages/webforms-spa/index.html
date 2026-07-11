@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TACATDP Monitoring Tool</title>
+    <script>
+      window.__TACATDP_POWERPAGES__ = {
+        isAuthenticated: {% if user %}true{% else %}false{% endif %},
+        userEmail: {% if user %}"{{ user.emailaddress1 | escape }}"{% else %}""{% endif %},
+        userName: {% if user %}"{{ user.fullname | escape }}"{% else %}""{% endif %}
+      };
+    </script>
   </head>
   <body>
     <div id="app"></div>
