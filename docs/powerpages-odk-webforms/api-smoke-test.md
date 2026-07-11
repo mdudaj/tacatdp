@@ -93,6 +93,16 @@ The verifier checks:
 
 Browser failure `90040120` means Power Pages evaluated the request but did not grant the signed-in portal contact a table permission for the requested table. Check portal contact creation, invitation/external identity redemption, web-role membership, and cache before changing Dataverse schema.
 
+## SPA Page Runtime Requirement
+
+The Monitoring Tool Home page must remain a Power Pages-hosted page fragment, not a full HTML document. The page template must keep `usewebsiteheaderandfooter` / `adx_usewebsiteheaderandfooter` set to `true` even though the default visual shell is blanked or replaced. Microsoft documents that Power Pages Web API requests use the Power Pages session and must include the CSRF token returned by `shell.getTokenDeferred()`. In practice, disabling the Power Pages header/footer runtime on the SPA page can leave the app signed in through Liquid but without the `window.shell.getTokenDeferred` provider, causing the work queue to show:
+
+```text
+Power Pages anti-forgery token provider is not available.
+```
+
+Do not solve this by removing CSRF headers, using raw Dataverse OAuth, exposing anonymous table permissions, or reintroducing the default visual shell. Keep the Home page as a fragment with the SPA asset references, keep the Power Pages runtime enabled, and let the CRDB/Monitoring Tool templates own the visible chrome.
+
 The 2026-07-10 smoke-test fix proved one extra gate: the automated verifier can show the Dataverse rows and relationships exist while browser runtime still returns `EntityPermissionReadIsMissing`. After table permission or web-role changes, open each failing table permission in Power Pages `Edit site > Security > Table permissions`, confirm `Authenticated Users`, save, restart the site, and rerun the browser smoke test. The browser smoke test is now a required runtime gate for this slice.
 
 The smoke page includes a `Portal session` diagnostic panel showing Liquid `user.id`, `user.emailaddress1`, and `user.roles`. If it does not show the expected contact and `Authenticated Users`, fix portal contact/external identity/role membership first. If it does show the expected contact and role but `/_api` returns `EntityPermissionReadIsMissing`, fix the table permission association through the Security workspace.

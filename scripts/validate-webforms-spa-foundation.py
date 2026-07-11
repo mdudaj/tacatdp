@@ -10,6 +10,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SPA = ROOT / "powerpages/webforms-spa"
+SITE_SOURCE = ROOT / "powerpages/tacatdp-monitoring-tool/.powerpages-site"
+SITE_UPLOAD = ROOT / "powerpages/tacatdp-monitoring-tool-upload/tacatdp-monitoring-tool"
 REQUIRED_FILES = [
     "package.json",
     "index.html",
@@ -117,6 +119,30 @@ def validate_odk_style_isolation() -> None:
         fail("ODK renderer must be mounted in a dedicated odk-runtime-host boundary")
 
 
+def validate_powerpages_hosting() -> None:
+    for site in (SITE_SOURCE, SITE_UPLOAD):
+        if not site.exists():
+            fail(f"missing Power Pages package {site.relative_to(ROOT)}")
+
+        template = site / "page-templates/Monitoring-Tool-SPA.pagetemplate.yml"
+        home = site / "web-pages/home/Home.webpage.copy.html"
+        if not template.exists():
+            fail(f"missing {template.relative_to(ROOT)}")
+        if not home.exists():
+            fail(f"missing {home.relative_to(ROOT)}")
+
+        template_text = template.read_text()
+        home_text = home.read_text()
+        if "usewebsiteheaderandfooter: true" not in template_text and "adx_usewebsiteheaderandfooter: true" not in template_text:
+            fail("Monitoring Tool SPA page template must use the Power Pages header/footer runtime so shell.getTokenDeferred is available")
+        for forbidden in ("<!doctype", "<html", "<head", "<body"):
+            if forbidden in home_text.lower():
+                fail("Monitoring Tool Home copy must be a Power Pages page fragment, not a full HTML document")
+        for required in ("__TACATDP_POWERPAGES__", "index-3K1-wZQo.mjs", "index-CLlTa1IS.css"):
+            if required not in home_text:
+                fail(f"Monitoring Tool Home copy missing required hosted asset/bootstrap: {required}")
+
+
 def main() -> int:
     if not SPA.exists():
         fail(f"missing {SPA.relative_to(ROOT)}")
@@ -179,6 +205,7 @@ def main() -> int:
             fail(f"missing required ODK runtime proof string: {expected}")
     validate_seed_xform_body_refs()
     validate_odk_style_isolation()
+    validate_powerpages_hosting()
 
     print("WebForms SPA runtime foundation validation passed")
     return 0

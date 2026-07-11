@@ -1,8 +1,8 @@
-description: Full-response SPA template for the Monitoring Tool Home page.
+description: Power Pages-hosted SPA template for the Monitoring Tool Home page.
 entityname: adx_webpage
 id: 07a0d6d5-e8f4-46f4-a38d-3e593f91052a
 isdefault: false
 name: Monitoring Tool SPA
 type: 756150001
-usewebsiteheaderandfooter: false
+usewebsiteheaderandfooter: true
 webtemplateid: 7ce6a8fa-cdc8-4c43-b864-d7d5f12171e2
