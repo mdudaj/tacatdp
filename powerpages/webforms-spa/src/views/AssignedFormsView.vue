@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { OdkWebForm, POST_SUBMIT__NEW_INSTANCE } from '@getodk/web-forms';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
-import crdbLogoUrl from '../../../../assets/images/CRDB_Bank_PLC.svg';
 import { draftStore } from '../offline/drafts';
 import { PowerPagesApiClient } from '../powerpages-api/client';
 import type { FormAssignmentSummary } from '../powerpages-api/types';
@@ -19,7 +18,7 @@ const activeView = ref<AppView>('workQueue');
 const runtimeStatus = ref('');
 const submitStatus = ref('');
 const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
-const buildMarker = 'auth-redirect-crdb-shell-20260711-001';
+const buildMarker = 'single-header-assignment-filter-20260711-001';
 const previousBuildMarker = 'renderer-spacing-submit-label-20260711-001';
 const runtimeClickStatus = ref('No ODK runtime button click observed in this page load.');
 const odkSubmitEventStatus = ref('No ODK submit event observed in this page load.');
@@ -27,7 +26,6 @@ const dataverseWriteStatus = ref('No Dataverse submit write attempted in this pa
 let odkRuntimeObserver: MutationObserver | null = null;
 
 const hasAssignments = computed(() => assignments.value.length > 0);
-const signedInUserEmail = computed(() => assignments.value.find((assignment) => assignment.userEmail)?.userEmail ?? api.getSignedInUserLabel());
 const selectedDraftId = computed(() => {
   if (!selectedAssignment.value) {
     return '';
@@ -206,20 +204,7 @@ onUnmounted(() => {
 
 <template>
   <main class="monitoring-shell" aria-labelledby="app-title">
-    <header class="app-header">
-      <a class="brand-lockup" href="/" aria-label="Monitoring Tool home">
-        <img class="brand-logo" :src="crdbLogoUrl" alt="CRDB Bank" />
-        <span class="brand-divider" aria-hidden="true"></span>
-        <span class="brand-product">Monitoring Tool</span>
-      </a>
-      <div class="session-summary" aria-label="Signed in user">
-        <span class="session-label">Signed in</span>
-        <strong>{{ signedInUserEmail }}</strong>
-      </div>
-    </header>
-
     <section v-if="authRequired" class="auth-panel" aria-labelledby="auth-title">
-      <img class="loading-logo" :src="crdbLogoUrl" alt="CRDB Bank" />
       <h1 id="auth-title">Sign in required</h1>
       <p>Use your Microsoft account to continue to Monitoring Tool.</p>
       <a class="primary-action" :href="api.getSignInUrl()">Sign in with Microsoft</a>
@@ -240,7 +225,6 @@ onUnmounted(() => {
       </section>
 
       <section v-if="loading" class="loading-panel" aria-live="polite" aria-label="Loading assignments">
-        <img class="loading-logo" :src="crdbLogoUrl" alt="CRDB Bank" />
         <h2>Loading work queue</h2>
         <p>Preparing the secure form session</p>
         <span class="loading-dots" aria-hidden="true"><i></i><i></i><i></i></span>

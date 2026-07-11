@@ -86,6 +86,14 @@ export class PowerPagesApiClient {
       || 'Signed in';
   }
 
+  getSignedInUserEmail(): string {
+    if (this.shouldUseLocalFixture()) {
+      return 'local.dev@example.test';
+    }
+
+    return window.__TACATDP_POWERPAGES__?.userEmail?.trim() ?? '';
+  }
+
   getSignInUrl(): string {
     const returnUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
     return `/SignIn?returnUrl=${encodeURIComponent(returnUrl)}`;
@@ -96,8 +104,13 @@ export class PowerPagesApiClient {
       return devAssignedForms;
     }
 
+    const signedInEmail = this.getSignedInUserEmail();
+    if (!signedInEmail) {
+      throw new Error('Power Pages session did not provide a signed-in email for assignment filtering.');
+    }
+
     const assignments = await this.get<DataverseCollection<FormAssignmentRow>>(
-      '/_api/mp_formassignments?$select=mp_formassignmentid,mp_assignmentkey,mp_useremail,_mp_formversion_value&$top=20',
+      `/_api/mp_formassignments?$select=mp_formassignmentid,mp_assignmentkey,mp_useremail,_mp_formversion_value&$filter=mp_useremail eq '${this.escapeODataString(signedInEmail)}'&$top=20`,
     );
 
     return Promise.all(assignments.value.map((assignment) => this.toSummary(assignment)));

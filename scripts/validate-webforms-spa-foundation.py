@@ -143,6 +143,20 @@ def validate_powerpages_hosting() -> None:
                 fail(f"Monitoring Tool Home copy missing required hosted asset/bootstrap: {required}")
 
 
+def validate_powerpages_session_contract() -> None:
+    view = (SPA / "src/views/AssignedFormsView.vue").read_text()
+    client = (SPA / "src/powerpages-api/client.ts").read_text()
+    if '<header class="app-header">' in view:
+        fail("SPA must not render a second CRDB/session header; use the Power Pages Header template for visible chrome")
+    for required in (
+        "getSignedInUserEmail",
+        "$filter=mp_useremail eq",
+        "Power Pages session did not provide a signed-in email",
+    ):
+        if required not in client:
+            fail(f"Power Pages assignment API must filter by the signed-in email: missing {required}")
+
+
 def main() -> int:
     if not SPA.exists():
         fail(f"missing {SPA.relative_to(ROOT)}")
@@ -206,6 +220,7 @@ def main() -> int:
     validate_seed_xform_body_refs()
     validate_odk_style_isolation()
     validate_powerpages_hosting()
+    validate_powerpages_session_contract()
 
     print("WebForms SPA runtime foundation validation passed")
     return 0
