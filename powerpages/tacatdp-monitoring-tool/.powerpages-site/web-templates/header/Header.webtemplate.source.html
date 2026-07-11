@@ -1,1 +1,144 @@
-<!-- Monitoring Tool owns app navigation. Keep the default Power Pages header blank. -->
+{% assign homeurl = website.adx_partialurl %}
+<style>
+  .mt-site-header,
+  .mt-site-header *,
+  .mt-site-header *::before,
+  .mt-site-header *::after {
+    box-sizing: border-box;
+  }
+
+  .mt-site-header {
+    width: min(1180px, 100%);
+    margin: 0 auto;
+    padding: clamp(14px, 3vw, 28px) clamp(14px, 3vw, 28px) 0;
+    color: #112219;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  }
+
+  .mt-site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 68px;
+  }
+
+  .mt-site-header__brand {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    gap: 12px;
+    color: #112219;
+    text-decoration: none;
+  }
+
+  .mt-site-header__brand:hover,
+  .mt-site-header__brand:focus {
+    color: #112219;
+    text-decoration: none;
+  }
+
+  .mt-site-header__logo {
+    display: block;
+    width: clamp(110px, 19vw, 154px);
+    height: auto;
+  }
+
+  .mt-site-header__divider {
+    width: 1px;
+    height: 32px;
+    background: #abc99f;
+  }
+
+  .mt-site-header__product {
+    color: #155315;
+    font-size: 1rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .mt-site-header__session {
+    display: grid;
+    justify-items: end;
+    gap: 4px;
+    min-width: 0;
+    color: #5c6b60;
+    font-size: 0.85rem;
+  }
+
+  .mt-site-header__session-label {
+    color: #5c6b60;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+
+  .mt-site-header__session strong,
+  .mt-site-header__session a {
+    max-width: min(48vw, 360px);
+    color: #112219;
+    overflow-wrap: anywhere;
+    text-align: right;
+  }
+
+  .mt-site-header__session a {
+    color: #155315;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .mt-site-header__session a:hover,
+  .mt-site-header__session a:focus {
+    color: #236b22;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 760px) {
+    .mt-site-header__inner {
+      display: grid;
+    }
+
+    .mt-site-header__session {
+      justify-items: start;
+    }
+
+    .mt-site-header__session strong,
+    .mt-site-header__session a {
+      max-width: 100%;
+      text-align: left;
+    }
+
+    .mt-site-header__brand {
+      align-items: flex-start;
+    }
+
+    .mt-site-header__divider {
+      display: none;
+    }
+
+    .mt-site-header__product {
+      white-space: normal;
+    }
+  }
+</style>
+
+<header class="mt-site-header" role="banner">
+  <div class="mt-site-header__inner">
+    <a class="mt-site-header__brand" href="/" aria-label="Monitoring Tool home">
+      <img class="mt-site-header__logo" src="/CRDB_Bank_PLC.svg" alt="CRDB Bank">
+      <span class="mt-site-header__divider" aria-hidden="true"></span>
+      <span class="mt-site-header__product">Monitoring Tool</span>
+    </a>
+
+    <div class="mt-site-header__session" aria-label="{% if user %}Signed in user{% else %}Authentication status{% endif %}">
+      {% if user %}
+        <span class="mt-site-header__session-label">Signed in</span>
+        <strong>{{ user.fullname | default: user.emailaddress1 | escape }}</strong>
+      {% else %}
+        <span class="mt-site-header__session-label">Secure access</span>
+        <a href="{% if homeurl %}/{{ homeurl }}{% endif %}{{ website.sign_in_url_substitution }}">Sign in with Microsoft</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
