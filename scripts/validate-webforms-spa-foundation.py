@@ -164,7 +164,7 @@ def validate_powerpages_hosting() -> None:
             for forbidden in ("<!doctype", "<html", "<head", "<body"):
                 if forbidden in home_text.lower():
                     fail(f"Monitoring Tool Home copy must be a Power Pages page fragment, not a full HTML document: {home_path}")
-            for required in ("__TACATDP_POWERPAGES__", "index-3K1-wZQo.mjs", "index-D2gciYo5.css", "xform-file-source-20260712-001"):
+            for required in ("__TACATDP_POWERPAGES__", "index-3K1-wZQo.mjs", "index-D2gciYo5.css", "runtime-error-focus-20260712-001"):
                 if required not in home_text:
                     fail(f"Monitoring Tool Home copy missing required hosted asset/bootstrap {required}: {home_path}")
         for required in (
@@ -223,7 +223,7 @@ def validate_powerpages_session_contract() -> None:
         if required not in client:
             fail(f"Global saved-record/edit API path missing required guardrail: {required}")
     for required in (
-        "xform-file-source-20260712-001",
+        "runtime-error-focus-20260712-001",
         "type AppView = 'projects' | 'records' | 'runner'",
         "Add new",
         "Saved",
@@ -322,7 +322,7 @@ def main() -> int:
         "preventRuntimeButtonDefault",
         "document.addEventListener('submit'",
         "document.addEventListener('click'",
-        "xform-file-source-20260712-001",
+        "runtime-error-focus-20260712-001",
         "Last runtime click",
         "Last ODK submit event",
         "Last Dataverse write",
@@ -331,6 +331,13 @@ def main() -> int:
         "relabelOdkSubmitButton",
         "MutationObserver",
         "aria-label', 'Submit'",
+        "focusFirstRuntimeError",
+        "focusFirstRuntimeErrorAfterRender",
+        "ODK validation is not ready",
+        "Please fix the highlighted form fields before submitting",
+        "aria-invalid=\"true\"",
+        ".p-invalid",
+        ":focus-visible",
         ".odk-runtime-host .powered-by-wrapper",
         ".odk-runtime-host .footer",
         ".odk-runtime-host .form-wrapper",

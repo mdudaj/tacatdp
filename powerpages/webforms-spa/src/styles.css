@@ -822,6 +822,32 @@ body {
   padding-bottom: 28px;
 }
 
+.odk-runtime-host :is(input, textarea, select, button, [tabindex]):focus-visible,
+.odk-runtime-host :is(.p-inputtext, .p-select, .p-multiselect, .p-checkbox-box, .p-radiobutton-box):focus,
+.odk-runtime-host :is(.p-select, .p-multiselect, .p-checkbox, .p-radiobutton):focus-within {
+  outline: 3px solid rgba(0, 122, 61, 0.34) !important;
+  outline-offset: 3px;
+  border-color: var(--mt-color-primary) !important;
+  box-shadow: 0 0 0 4px rgba(0, 122, 61, 0.12) !important;
+}
+
+.odk-runtime-host :is(.question, .field, .form-field, .p-field, .p-component):focus-within {
+  border-color: rgba(0, 122, 61, 0.45);
+  background: rgba(232, 245, 235, 0.72);
+  box-shadow: inset 4px 0 0 var(--mt-color-primary);
+  transition: background 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.odk-runtime-host :is([aria-invalid="true"], .p-invalid, .invalid, .is-invalid, [data-invalid="true"], [data-p-invalid="true"]) {
+  border-color: #b91c1c !important;
+  box-shadow: 0 0 0 4px rgba(185, 28, 28, 0.12) !important;
+}
+
+.odk-runtime-host :is(.question, .field, .form-field, .p-field, .p-component):has(:is([aria-invalid="true"], .p-invalid, .invalid, .is-invalid, [data-invalid="true"], [data-p-invalid="true"])) {
+  background: #fff7ed;
+  box-shadow: inset 4px 0 0 #b91c1c;
+}
+
 .odk-runtime-host .powered-by-wrapper {
   display: none !important;
 }

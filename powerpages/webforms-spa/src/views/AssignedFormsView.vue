@@ -13,7 +13,7 @@ import {
   RefreshCw,
   Search,
 } from '@lucide/vue';
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 import { draftStore, type LocalDraft } from '../offline/drafts';
 import { PowerPagesApiClient } from '../powerpages-api/client';
 import type { FormAssignmentSummary, SubmissionSummary } from '../powerpages-api/types';
@@ -51,7 +51,7 @@ const postSubmitMessage = ref('');
 const postSubmitTone = ref<'success' | 'warning'>('success');
 const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
 const submitting = ref(false);
-const buildMarker = 'xform-file-source-20260712-001';
+const buildMarker = 'runtime-error-focus-20260712-001';
 const previousBuildMarker = 'single-header-assignment-filter-20260711-001';
 const crdbLogoUrl = '/CRDB_Bank_PLC.svg';
 const runtimeClickStatus = ref('No ODK runtime button click observed in this page load.');
@@ -223,6 +223,45 @@ function relabelOdkSubmitButton() {
   });
 }
 
+function focusFirstRuntimeError() {
+  const runtime = document.querySelector<HTMLElement>('.odk-runtime-host');
+  if (!runtime) {
+    return;
+  }
+
+  const errorSelectors = [
+    '[aria-invalid="true"]',
+    '.p-invalid',
+    '.invalid',
+    '.is-invalid',
+    '[data-invalid="true"]',
+    '[data-p-invalid="true"]',
+    '.error',
+    '.error-message',
+  ];
+  const errorElement = errorSelectors
+    .map((selector) => runtime.querySelector<HTMLElement>(selector))
+    .find((element) => element && element.offsetParent !== null);
+  if (!errorElement) {
+    return;
+  }
+
+  const fieldContainer = errorElement.closest<HTMLElement>('.question, .field, .form-field, .p-field, .p-component, label, div') ?? errorElement;
+  const focusable = fieldContainer.querySelector<HTMLElement>(
+    'input:not([type="hidden"]):not([disabled]), textarea:not([disabled]), select:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+  ) ?? (errorElement.matches('input, textarea, select, button, [tabindex]:not([tabindex="-1"])') ? errorElement : null);
+
+  fieldContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  window.setTimeout(() => {
+    focusable?.focus({ preventScroll: true });
+  }, 180);
+}
+
+async function focusFirstRuntimeErrorAfterRender() {
+  await nextTick();
+  window.setTimeout(focusFirstRuntimeError, 80);
+}
+
 function resetRuntimeDiagnostics(assignment: FormAssignmentSummary) {
   runtimeStatus.value = selectedEditSubmission.value
     ? 'Initializing ODK Web Forms edit session...'
@@ -340,6 +379,15 @@ async function handleSubmit(payload: unknown, callback?: (result: unknown) => vo
   const candidate = payload as { status?: string; violations?: unknown };
   const violationCount = Array.isArray(candidate.violations) ? candidate.violations.length : 'unknown';
   odkSubmitEventStatus.value = `${new Date().toLocaleTimeString()} - ODK submit event received; payload status ${candidate.status ?? 'unknown'}, violations ${violationCount}.`;
+  if (candidate.status !== 'ready') {
+    submitting.value = false;
+    dataverseWriteStatus.value = `${new Date().toLocaleTimeString()} - Dataverse submit skipped because ODK validation is not ready.`;
+    submitStatus.value = `Please fix the highlighted form fields before submitting. Validation issues: ${violationCount}.`;
+    submitTone.value = 'warning';
+    void focusFirstRuntimeErrorAfterRender();
+    return;
+  }
+
   dataverseWriteStatus.value = `${new Date().toLocaleTimeString()} - Starting Dataverse submit write.`;
   submitStatus.value = 'Submitting to Dataverse...';
   submitTone.value = 'neutral';
