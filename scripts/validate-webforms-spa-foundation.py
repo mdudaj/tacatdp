@@ -181,7 +181,7 @@ def validate_powerpages_session_contract() -> None:
         if required not in client:
             fail(f"Global saved-record/edit API path missing required guardrail: {required}")
     for required in (
-        "always-visible-pagination-app-footer-20260712-001",
+        "designed-pagination-footer-20260712-001",
         "type AppView = 'projects' | 'records' | 'runner'",
         "Add new",
         "Saved",
@@ -216,7 +216,7 @@ def validate_powerpages_session_contract() -> None:
         "pagination-button--active",
         "currentYear",
         "app-footer",
-        "CRDB @{{ currentYear }}",
+        "(c) CRDB {{ currentYear }}",
         "activeView.value = selectedProject.value ? 'records' : 'projects'",
         "activeRecordTab.value = 'saved'",
         "existingSubmission: selectedEditSubmission.value",
@@ -283,7 +283,7 @@ def main() -> int:
         "preventRuntimeButtonDefault",
         "document.addEventListener('submit'",
         "document.addEventListener('click'",
-        "always-visible-pagination-app-footer-20260712-001",
+        "designed-pagination-footer-20260712-001",
         "Last runtime click",
         "Last ODK submit event",
         "Last Dataverse write",

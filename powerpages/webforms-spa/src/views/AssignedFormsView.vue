@@ -51,7 +51,7 @@ const postSubmitMessage = ref('');
 const postSubmitTone = ref<'success' | 'warning'>('success');
 const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
 const submitting = ref(false);
-const buildMarker = 'always-visible-pagination-app-footer-20260712-001';
+const buildMarker = 'designed-pagination-footer-20260712-001';
 const previousBuildMarker = 'single-header-assignment-filter-20260711-001';
 const crdbLogoUrl = '/CRDB_Bank_PLC.svg';
 const currentYear = new Date().getFullYear();
@@ -767,7 +767,7 @@ onUnmounted(() => {
     </template>
 
     <footer class="app-footer" aria-label="Application footer">
-      CRDB @{{ currentYear }}
+      (c) CRDB {{ currentYear }}
     </footer>
   </main>
 </template>
