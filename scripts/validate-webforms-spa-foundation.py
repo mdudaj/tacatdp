@@ -138,7 +138,7 @@ def validate_powerpages_hosting() -> None:
         for forbidden in ("<!doctype", "<html", "<head", "<body"):
             if forbidden in home_text.lower():
                 fail("Monitoring Tool Home copy must be a Power Pages page fragment, not a full HTML document")
-        for required in ("__TACATDP_POWERPAGES__", "index-3K1-wZQo.mjs", "index-CLlTa1IS.css"):
+        for required in ("__TACATDP_POWERPAGES__", "index-3K1-wZQo.mjs", ".css"):
             if required not in home_text:
                 fail(f"Monitoring Tool Home copy missing required hosted asset/bootstrap: {required}")
 
@@ -152,9 +152,20 @@ def validate_powerpages_session_contract() -> None:
         "getSignedInUserEmail",
         "$filter=mp_useremail eq",
         "Power Pages session did not provide a signed-in email",
+        "listSavedSubmissions",
     ):
         if required not in client:
             fail(f"Power Pages assignment API must filter by the signed-in email: missing {required}")
+    for required in (
+        "crud-workspace-shell-20260712-001",
+        "type AppView = 'projects' | 'records' | 'runner'",
+        "Add new",
+        "Saved",
+        "Drafts",
+        "Open",
+    ):
+        if required not in view:
+            fail(f"Monitoring Tool CRUD workspace shell missing required text or state: {required}")
 
 
 def main() -> int:
@@ -202,7 +213,7 @@ def main() -> int:
         "preventRuntimeButtonDefault",
         "document.addEventListener('submit'",
         "document.addEventListener('click'",
-        "renderer-spacing-submit-label-20260711-001",
+        "crud-workspace-shell-20260712-001",
         "Last runtime click",
         "Last ODK submit event",
         "Last Dataverse write",

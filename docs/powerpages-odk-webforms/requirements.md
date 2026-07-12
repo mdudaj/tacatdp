@@ -10,7 +10,8 @@ Deliver a Microsoft-managed ODK-style proof that runs inside Power Pages, render
 - Use **Monitoring Tool** as the user-facing product name.
 - Route unauthenticated users through the Power Pages / Microsoft Entra sign-in flow.
 - Show assigned published forms for the signed-in user.
-- Present assigned work through a mobile-first work queue with project/form cards, not a prototype diagnostics-first page.
+- Present assigned work through a mobile-first CRUD workspace: project cards first, then project-level saved/draft data cards.
+- Project detail must show Saved and Drafts tabs, 10 data cards per page, Open actions for existing records, and an Add new action for new submissions.
 - Load the selected `FormVersions.XFormXml`.
 - Render the form through ODK Web Forms / XForms engine.
 - Save local draft state in IndexedDB.
@@ -27,6 +28,7 @@ Deliver a Microsoft-managed ODK-style proof that runs inside Power Pages, render
 - All Dataverse browser writes must go through Power Pages auth, table permissions, and CSRF token handling.
 - The app must be mobile-first and usable on phone width.
 - The shell must use CRDB-branded tokens and reusable components documented in `monitoring-tool-ux-design-system.md`.
+- Primary shell actions must use icon+text buttons and the user-facing shell must use "Open" for existing records, not "Start".
 - The ODK runtime must remain isolated from broad host CSS. Host styling may provide spacing and documented footer/label adjustments only.
 - Prototype diagnostics must be hidden behind a developer/debug panel before sharing the MVP.
 - Offline support for MVP means local draft save/restore; offline submit sync can be introduced after the first online submit path works.

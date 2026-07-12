@@ -1,31 +1,67 @@
 <script setup lang="ts">
 import { OdkWebForm, POST_SUBMIT__NEW_INSTANCE } from '@getodk/web-forms';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
-import { draftStore } from '../offline/drafts';
+import { draftStore, type LocalDraft } from '../offline/drafts';
 import { PowerPagesApiClient } from '../powerpages-api/client';
-import type { FormAssignmentSummary } from '../powerpages-api/types';
+import type { FormAssignmentSummary, SubmissionSummary } from '../powerpages-api/types';
 
-type AppView = 'workQueue' | 'runner';
+type AppView = 'projects' | 'records' | 'runner';
+type RecordTab = 'saved' | 'drafts';
+
+interface ProjectWorkspace {
+  id: string;
+  name: string;
+  description: string;
+  assignments: FormAssignmentSummary[];
+}
 
 const api = new PowerPagesApiClient();
+const pageSize = 10;
 const loading = ref(false);
 const authRequired = ref(false);
 const error = ref('');
 const assignments = ref<FormAssignmentSummary[]>([]);
+const submissions = ref<SubmissionSummary[]>([]);
+const localDrafts = ref<LocalDraft[]>([]);
+const selectedProjectId = ref('');
 const selectedAssignment = ref<FormAssignmentSummary | null>(null);
-const draftCount = ref(0);
-const activeView = ref<AppView>('workQueue');
+const activeView = ref<AppView>('projects');
+const activeRecordTab = ref<RecordTab>('saved');
+const savedPage = ref(1);
+const draftPage = ref(1);
+const online = ref(typeof navigator === 'undefined' ? true : navigator.onLine);
 const runtimeStatus = ref('');
 const submitStatus = ref('');
 const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
-const buildMarker = 'single-header-assignment-filter-20260711-001';
-const previousBuildMarker = 'renderer-spacing-submit-label-20260711-001';
+const buildMarker = 'crud-workspace-shell-20260712-001';
+const previousBuildMarker = 'single-header-assignment-filter-20260711-001';
 const runtimeClickStatus = ref('No ODK runtime button click observed in this page load.');
 const odkSubmitEventStatus = ref('No ODK submit event observed in this page load.');
 const dataverseWriteStatus = ref('No Dataverse submit write attempted in this page load.');
 let odkRuntimeObserver: MutationObserver | null = null;
 
-const hasAssignments = computed(() => assignments.value.length > 0);
+const projectWorkspaces = computed<ProjectWorkspace[]>(() => {
+  if (assignments.value.length === 0) {
+    return [];
+  }
+
+  return [{
+    id: 'tacatdp-impact-monitoring',
+    name: 'TACATDP Impact Monitoring',
+    description: 'Secure Microsoft-hosted monitoring workspace for assigned project data.',
+    assignments: assignments.value,
+  }];
+});
+const selectedProject = computed(() => projectWorkspaces.value.find((project) => project.id === selectedProjectId.value) ?? null);
+const selectedProjectAssignments = computed(() => selectedProject.value?.assignments ?? []);
+const primaryAssignment = computed(() => selectedProjectAssignments.value[0] ?? assignments.value[0] ?? null);
+const draftCount = computed(() => localDrafts.value.length);
+const savedCount = computed(() => submissions.value.length);
+const activeRecordCount = computed(() => activeRecordTab.value === 'saved' ? savedCount.value : draftCount.value);
+const activeRecordPage = computed(() => activeRecordTab.value === 'saved' ? savedPage.value : draftPage.value);
+const activeTotalPages = computed(() => Math.max(1, Math.ceil(activeRecordCount.value / pageSize)));
+const pagedSavedSubmissions = computed(() => paginate(submissions.value, savedPage.value));
+const pagedDrafts = computed(() => paginate(localDrafts.value, draftPage.value));
 const selectedDraftId = computed(() => {
   if (!selectedAssignment.value) {
     return '';
@@ -38,6 +74,21 @@ const selectedVersionLabel = computed(() => {
   }
   return `${selectedAssignment.value.formName} v${selectedAssignment.value.version}`;
 });
+
+function paginate<T>(records: T[], page: number): T[] {
+  const start = (page - 1) * pageSize;
+  return records.slice(start, start + pageSize);
+}
+
+function formatDate(value?: string): string {
+  if (!value) {
+    return 'Not recorded';
+  }
+  return new Intl.DateTimeFormat(undefined, {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  }).format(new Date(value));
+}
 
 function isInsideOdkRuntime(target: EventTarget | null): boolean {
   return target instanceof Element && Boolean(target.closest('.odk-runtime-host'));
@@ -86,15 +137,54 @@ function resetRuntimeDiagnostics(assignment: FormAssignmentSummary) {
   selectedAssignment.value = assignment;
 }
 
-function openRunner(assignment: FormAssignmentSummary) {
+function openProject(project: ProjectWorkspace) {
+  selectedProjectId.value = project.id;
+  activeView.value = 'records';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function backToProjects() {
+  activeView.value = 'projects';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openRunner(assignment = primaryAssignment.value) {
+  if (!assignment) {
+    error.value = 'No assigned form is available for this project.';
+    return;
+  }
   resetRuntimeDiagnostics(assignment);
   activeView.value = 'runner';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function backToWorkQueue() {
-  activeView.value = 'workQueue';
+function backToRecords() {
+  activeView.value = selectedProject.value ? 'records' : 'projects';
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function selectTab(tab: RecordTab) {
+  activeRecordTab.value = tab;
+}
+
+function changePage(direction: -1 | 1) {
+  if (activeRecordTab.value === 'saved') {
+    savedPage.value = Math.min(Math.max(1, savedPage.value + direction), activeTotalPages.value);
+    return;
+  }
+  draftPage.value = Math.min(Math.max(1, draftPage.value + direction), activeTotalPages.value);
+}
+
+function handleOnline() {
+  online.value = true;
+}
+
+function handleOffline() {
+  online.value = false;
+}
+
+async function refreshLocalDrafts() {
+  localDrafts.value = await draftStore.list();
 }
 
 async function handleFormLoaded() {
@@ -113,7 +203,7 @@ async function handleFormLoaded() {
       version: selectedAssignment.value.version,
     },
   });
-  draftCount.value = await draftStore.count();
+  await refreshLocalDrafts();
   runtimeStatus.value = 'ODK Web Forms runtime loaded. Local runtime marker saved.';
   relabelOdkSubmitButton();
 }
@@ -138,6 +228,7 @@ async function handleSubmit(payload: unknown, callback?: (result: unknown) => vo
     const warningSummary = result.attachmentWarnings.length > 0 ? ` Attachment warning: ${result.attachmentWarnings.join(' ')}` : '';
     submitStatus.value = `Submitted to Dataverse. Instance ${result.instanceId}, version ${result.versionNumber}; ${attachmentSummary}.${warningSummary}`;
     submitTone.value = result.attachmentWarnings.length > 0 ? 'warning' : 'success';
+    submissions.value = await api.listSavedSubmissions();
     callback?.({ next: POST_SUBMIT__NEW_INSTANCE });
   } catch (caught) {
     dataverseWriteStatus.value = `${new Date().toLocaleTimeString()} - Dataverse submit write failed.`;
@@ -146,7 +237,7 @@ async function handleSubmit(payload: unknown, callback?: (result: unknown) => vo
   }
 }
 
-async function loadAssignments() {
+async function loadWorkspace() {
   if (!api.hasPowerPagesSession()) {
     authRequired.value = true;
     error.value = '';
@@ -158,8 +249,19 @@ async function loadAssignments() {
   error.value = '';
   authRequired.value = false;
   try {
-    assignments.value = await api.listAssignedForms();
+    const [nextAssignments, nextSubmissions] = await Promise.all([
+      api.listAssignedForms(),
+      api.listSavedSubmissions(),
+      refreshLocalDrafts(),
+    ]);
+    assignments.value = nextAssignments;
+    submissions.value = nextSubmissions;
     selectedAssignment.value = assignments.value[0] ?? null;
+    if (!selectedProjectId.value && projectWorkspaces.value[0]) {
+      selectedProjectId.value = projectWorkspaces.value[0].id;
+    }
+    savedPage.value = 1;
+    draftPage.value = 1;
     runtimeStatus.value = selectedAssignment.value ? 'Initializing ODK Web Forms runtime...' : '';
     submitStatus.value = '';
     submitTone.value = 'neutral';
@@ -172,9 +274,8 @@ async function loadAssignments() {
     dataverseWriteStatus.value = selectedAssignment.value
       ? 'No Dataverse submit write attempted for this selected form.'
       : 'No assigned form selected.';
-    draftCount.value = await draftStore.count();
   } catch (caught) {
-    const message = caught instanceof Error ? caught.message : 'Unable to load assigned forms.';
+    const message = caught instanceof Error ? caught.message : 'Unable to load workspace.';
     if ((message.includes('401') || message.includes('403')) && !api.hasPowerPagesSession()) {
       authRequired.value = true;
       window.location.assign(api.getSignInUrl());
@@ -189,14 +290,18 @@ async function loadAssignments() {
 onMounted(() => {
   document.addEventListener('submit', preventPowerPagesFormSubmit, true);
   document.addEventListener('click', preventRuntimeButtonDefault, true);
+  window.addEventListener('online', handleOnline);
+  window.addEventListener('offline', handleOffline);
   odkRuntimeObserver = new MutationObserver(relabelOdkSubmitButton);
   odkRuntimeObserver.observe(document.body, { childList: true, subtree: true });
-  void loadAssignments();
+  void loadWorkspace();
 });
 
 onUnmounted(() => {
   document.removeEventListener('submit', preventPowerPagesFormSubmit, true);
   document.removeEventListener('click', preventRuntimeButtonDefault, true);
+  window.removeEventListener('online', handleOnline);
+  window.removeEventListener('offline', handleOffline);
   odkRuntimeObserver?.disconnect();
   odkRuntimeObserver = null;
 });
@@ -207,41 +312,45 @@ onUnmounted(() => {
     <section v-if="authRequired" class="auth-panel" aria-labelledby="auth-title">
       <h1 id="auth-title">Sign in required</h1>
       <p>Use your Microsoft account to continue to Monitoring Tool.</p>
-      <a class="primary-action" :href="api.getSignInUrl()">Sign in with Microsoft</a>
+      <a class="primary-action" :href="api.getSignInUrl()">
+        <span class="action-icon" aria-hidden="true">></span>
+        Sign in with Microsoft
+      </a>
     </section>
 
-    <template v-else-if="activeView === 'workQueue'">
-      <section class="hero-panel" aria-labelledby="app-title">
+    <template v-else-if="activeView === 'projects'">
+      <section class="hero-panel hero-panel--compact" aria-labelledby="app-title">
         <div>
-          <p class="eyebrow">Field monitoring workspace</p>
-          <h1 id="app-title">Assigned work</h1>
-          <p class="hero-copy">Start a form, continue local work, or review your recent submission status.</p>
+          <p class="eyebrow">Monitoring workspace</p>
+          <h1 id="app-title">Projects</h1>
+          <p class="hero-copy">Open a project to review saved records, continue local drafts, or add a new submission.</p>
         </div>
         <div class="hero-actions">
-          <button class="secondary-action" type="button" :disabled="loading" @click="loadAssignments">
+          <button class="icon-action icon-action--secondary" type="button" :disabled="loading" aria-label="Refresh projects" @click="loadWorkspace">
+            <span class="action-icon" aria-hidden="true">R</span>
             Refresh
           </button>
         </div>
       </section>
 
-      <section v-if="loading" class="loading-panel" aria-live="polite" aria-label="Loading assignments">
-        <h2>Loading work queue</h2>
-        <p>Preparing the secure form session</p>
+      <section v-if="loading" class="loading-panel" aria-live="polite" aria-label="Loading projects">
+        <h2>Loading projects</h2>
+        <p>Preparing the secure workspace</p>
         <span class="loading-dots" aria-hidden="true"><i></i><i></i><i></i></span>
       </section>
 
       <section v-else class="status-grid" aria-label="Workspace summary">
-        <article class="metric-card">
-          <span class="metric-value">{{ assignments.length }}</span>
-          <span class="metric-label">Assigned forms</span>
+        <article class="metric-card metric-card--accent">
+          <span class="metric-value">{{ projectWorkspaces.length }}</span>
+          <span class="metric-label">Projects</span>
         </article>
         <article class="metric-card">
-          <span class="metric-value">{{ draftCount }}</span>
-          <span class="metric-label">Local drafts</span>
+          <span class="metric-value">{{ savedCount }}</span>
+          <span class="metric-label">Saved records</span>
         </article>
         <article class="metric-card">
-          <span class="metric-value">Online</span>
-          <span class="metric-label">Power Pages session</span>
+          <span class="metric-value">{{ online ? 'Online' : 'Offline' }}</span>
+          <span class="metric-label">Connection</span>
         </article>
       </section>
 
@@ -249,61 +358,166 @@ onUnmounted(() => {
         {{ error }}
       </section>
 
-      <section v-if="hasAssignments" class="workspace-grid" aria-label="Assigned projects and forms">
-        <article class="project-card">
-          <p class="eyebrow">Project</p>
-          <h2>TACATDP Impact Monitoring</h2>
-          <p>Secure Microsoft-hosted monitoring workspace for assigned project forms.</p>
-          <dl class="compact-facts">
-            <div>
-              <dt>Assigned forms</dt>
-              <dd>{{ assignments.length }}</dd>
-            </div>
-            <div>
-              <dt>Local drafts</dt>
-              <dd>{{ draftCount }}</dd>
-            </div>
-          </dl>
+      <section v-if="projectWorkspaces.length > 0" class="project-list" aria-label="Available projects">
+        <article
+          v-for="project in projectWorkspaces"
+          :key="project.id"
+          class="project-card project-card--entry"
+        >
+          <div>
+            <p class="eyebrow">Project</p>
+            <h2>{{ project.name }}</h2>
+            <p>{{ project.description }}</p>
+            <dl class="compact-facts">
+              <div>
+                <dt>Forms</dt>
+                <dd>{{ project.assignments.length }}</dd>
+              </div>
+              <div>
+                <dt>Local drafts</dt>
+                <dd>{{ draftCount }}</dd>
+              </div>
+            </dl>
+          </div>
+          <button class="icon-action" type="button" :aria-label="`Open ${project.name}`" @click="openProject(project)">
+            <span class="action-icon" aria-hidden="true">></span>
+            Open
+          </button>
         </article>
+      </section>
 
-        <div class="form-list" aria-label="Assigned forms">
+      <section v-else-if="!loading && !error" class="empty-state" aria-label="No projects">
+        <h2>No projects</h2>
+        <p>No project assignments were returned for this Power Pages session.</p>
+      </section>
+    </template>
+
+    <template v-else-if="activeView === 'records'">
+      <nav class="top-action-bar" aria-label="Project actions">
+        <button class="icon-action icon-action--secondary" type="button" aria-label="Back to projects" @click="backToProjects">
+          <span class="action-icon" aria-hidden="true"><</span>
+          Back
+        </button>
+        <div class="top-action-title">
+          <span class="eyebrow">Project</span>
+          <h1>{{ selectedProject?.name }}</h1>
+          <p>{{ online ? 'Online' : 'Offline' }} · {{ savedCount }} saved · {{ draftCount }} local draft{{ draftCount === 1 ? '' : 's' }}</p>
+        </div>
+        <button class="icon-action" type="button" :disabled="!primaryAssignment" aria-label="Add new record" @click="openRunner()">
+          <span class="action-icon" aria-hidden="true">+</span>
+          Add new
+        </button>
+      </nav>
+
+      <section v-if="error" class="status-banner status-banner--error" aria-live="polite">
+        {{ error }}
+      </section>
+
+      <section class="record-workspace" aria-label="Project records">
+        <div class="record-tabs" role="tablist" aria-label="Record views">
+          <button
+            class="record-tab"
+            :class="{ 'record-tab--active': activeRecordTab === 'saved' }"
+            type="button"
+            role="tab"
+            :aria-selected="activeRecordTab === 'saved'"
+            @click="selectTab('saved')"
+          >
+            <span class="action-icon" aria-hidden="true">S</span>
+            Saved
+            <span class="tab-count">{{ savedCount }}</span>
+          </button>
+          <button
+            class="record-tab"
+            :class="{ 'record-tab--active': activeRecordTab === 'drafts' }"
+            type="button"
+            role="tab"
+            :aria-selected="activeRecordTab === 'drafts'"
+            @click="selectTab('drafts')"
+          >
+            <span class="action-icon" aria-hidden="true">D</span>
+            Drafts
+            <span class="tab-count">{{ draftCount }}</span>
+          </button>
+        </div>
+
+        <section v-if="activeRecordTab === 'saved'" class="record-list" role="tabpanel" aria-label="Saved records">
           <article
-            v-for="assignment in assignments"
-            :key="assignment.assignmentId"
-            class="form-card"
+            v-for="submission in pagedSavedSubmissions"
+            :key="submission.submissionId"
+            class="data-card"
           >
             <div>
-              <p class="eyebrow">Form</p>
-              <h3>{{ assignment.formName }}</h3>
-              <p class="form-meta">Version {{ assignment.version }} · {{ assignment.xmlFormId }}</p>
+              <p class="eyebrow">Saved record</p>
+              <h2>{{ submission.instanceId }}</h2>
+              <p class="form-meta">Updated {{ formatDate(submission.updatedAt || submission.submittedAt) }}</p>
             </div>
-            <div class="form-card__footer">
-              <span class="state-chip">Published</span>
-              <button class="primary-action" type="button" @click="openRunner(assignment)">
-                Start form
+            <div class="data-card__actions">
+              <span class="state-chip">Submitted</span>
+              <button class="icon-action icon-action--secondary" type="button" @click="openRunner()">
+                <span class="action-icon" aria-hidden="true">></span>
+                Open
               </button>
             </div>
           </article>
-        </div>
-      </section>
+          <section v-if="savedCount === 0" class="empty-state empty-state--inline" aria-label="No saved records">
+            <h2>No saved records</h2>
+            <p>Add a new record, submit it online, then return here to review it.</p>
+          </section>
+        </section>
 
-      <section v-else-if="!loading && !error" class="empty-state" aria-label="No assigned forms">
-        <h2>No assigned forms</h2>
-        <p>No published form assignments were returned for this Power Pages session.</p>
+        <section v-else class="record-list" role="tabpanel" aria-label="Local drafts">
+          <article
+            v-for="draft in pagedDrafts"
+            :key="draft.id"
+            class="data-card data-card--draft"
+          >
+            <div>
+              <p class="eyebrow">Local draft</p>
+              <h2>{{ draft.assignmentKey }}</h2>
+              <p class="form-meta">Updated {{ formatDate(draft.updatedAt) }}</p>
+            </div>
+            <div class="data-card__actions">
+              <span class="state-chip state-chip--draft">Local</span>
+              <button class="icon-action icon-action--secondary" type="button" @click="openRunner()">
+                <span class="action-icon" aria-hidden="true">></span>
+                Open
+              </button>
+            </div>
+          </article>
+          <section v-if="draftCount === 0" class="empty-state empty-state--inline" aria-label="No local drafts">
+            <h2>No local drafts</h2>
+            <p>Open a form once to create a local draft marker for offline continuity.</p>
+          </section>
+        </section>
+
+        <nav v-if="activeRecordCount > pageSize" class="pagination-bar" aria-label="Record pagination">
+          <button class="icon-action icon-action--secondary" type="button" :disabled="activeRecordPage <= 1" @click="changePage(-1)">
+            <span class="action-icon" aria-hidden="true"><</span>
+            Previous
+          </button>
+          <span>Page {{ activeRecordPage }} of {{ activeTotalPages }}</span>
+          <button class="icon-action icon-action--secondary" type="button" :disabled="activeRecordPage >= activeTotalPages" @click="changePage(1)">
+            Next
+            <span class="action-icon" aria-hidden="true">></span>
+          </button>
+        </nav>
       </section>
     </template>
 
     <template v-else>
       <nav class="top-action-bar" aria-label="Form actions">
-        <button class="back-action" type="button" @click="backToWorkQueue">
-          Back to assigned work
+        <button class="icon-action icon-action--secondary" type="button" aria-label="Back to project records" @click="backToRecords">
+          <span class="action-icon" aria-hidden="true"><</span>
+          Back
         </button>
         <div class="top-action-title">
-          <span class="eyebrow">Form runner</span>
+          <span class="eyebrow">Form</span>
           <h1>{{ selectedAssignment?.formName }}</h1>
-          <p v-if="selectedAssignment">Version {{ selectedAssignment.version }} · {{ selectedAssignment.xmlFormId }}</p>
+          <p v-if="selectedAssignment">Version {{ selectedAssignment.version }} · {{ selectedAssignment.xmlFormId }} · {{ online ? 'Online' : 'Offline' }}</p>
         </div>
-        <button class="secondary-action" type="button" :disabled="loading" @click="loadAssignments">
+        <button class="icon-action icon-action--secondary" type="button" :disabled="loading" aria-label="Refresh workspace" @click="loadWorkspace">
+          <span class="action-icon" aria-hidden="true">R</span>
           Refresh
         </button>
       </nav>

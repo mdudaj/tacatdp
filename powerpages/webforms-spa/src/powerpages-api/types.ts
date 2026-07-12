@@ -38,6 +38,10 @@ export interface FormAssignmentSummary {
 export interface SubmissionRow {
   mp_submissionid: string;
   mp_instanceid: string;
+  mp_submittedat?: string;
+  mp_updatedat?: string;
+  mp_lifecyclestatus?: number;
+  mp_reviewstate?: number;
 }
 
 export interface SubmissionVersionRow {
@@ -53,4 +57,13 @@ export interface OdkSubmitResult {
   attachmentCount: number;
   attachmentBinaryUploadCount: number;
   attachmentWarnings: string[];
+}
+
+export interface SubmissionSummary {
+  submissionId: string;
+  instanceId: string;
+  submittedAt?: string;
+  updatedAt?: string;
+  lifecycleStatus?: number;
+  reviewState?: number;
 }

@@ -93,3 +93,14 @@ If clicking ODK Send appears to reload the page or returns to the top with answe
 - [x] Post-upload PAC download verifies Home references `index-CLUTd6fC.mjs` and `index-CLlTa1IS.css`.
 - [ ] Verify phone-width layout in a signed-in browser session.
 - [ ] Verify the signed-in browser can start the form, submit, and see the collapsed diagnostics only when expanded.
+
+## Current Slice: CRUD Workspace Revision
+
+- [x] Replace assigned-form-first shell with project cards as the first screen.
+- [x] Add project-detail workspace with icon+text Back and Add new actions.
+- [x] Add Saved and Drafts tabs for project data cards.
+- [x] Page data cards at 10 records per page.
+- [x] Use Open for existing saved/draft cards and avoid Start in the shell.
+- [x] Preserve online/offline status in the project workspace and runner top bar.
+- [x] Keep ODK Web Forms isolated inside `OdkRuntimeBoundary`.
+- [ ] Verify the signed-in browser shows only one CRDB header, project cards first, and the project detail data-card tabs.

@@ -49,16 +49,19 @@ Show the user what they can do now:
 - Recent submitted count.
 - Offline/sync status once offline sync is introduced.
 
-For the current single-project MVP, it is acceptable to show one project card and the assigned forms below it, but keep the project concept in the component model.
+For the current single-project MVP, use the same project-first pattern that will scale later: Home shows project cards only. Opening a project shows the project CRUD workspace.
 
 ### Project Detail
 
-- Top action bar with labeled Back action, project name, user/session status, and Refresh.
+- Top action bar with icon+text Back, project name, online/offline state, and icon+text Add new.
 - Sections:
-  - Assigned forms.
-  - Drafts.
-  - Recent submissions/history.
-- Form cards must show form name, version, assignment status, and last local/server activity.
+  - Saved records.
+  - Local drafts.
+- Use peer tabs for Saved and Drafts because both represent record lists inside the same project workspace.
+- Show data cards 10 per page. Cards must expose record identity, status, updated time, and an icon+text Open action.
+- The active card/list pattern should look like normal CRUD, not a survey launcher or diagnostics page.
+- Cards and action areas use a restrained CRDB left accent strip. State text must be visible; do not communicate state by color alone.
+- Use **Open** for existing work and **Add new** for new submissions. Avoid "Start" in the project/data list shell.
 
 ### Form Loading
 
@@ -92,7 +95,9 @@ This same loading panel should be reused for page-level loading, assignment load
 - `TopActionBar`: labeled Back, page title/subtitle, right-side actions.
 - `LoadingPanel`: centered CRDB logo, loading message, animated dots/progress.
 - `ProjectCard`: project name, active forms, drafts, recent submissions.
-- `FormCard`: form name, version, assignment status, draft/submission summary, Start/Continue action.
+- `DataCard`: saved submission or local draft identity, status, updated time, Open action, and CRDB left accent.
+- `RecordTabs`: Saved and Drafts tabs with counts.
+- `PaginationBar`: Previous/Next controls for 10 records per page.
 - `StatusBanner`: success/warning/error/offline states with `aria-live`.
 - `DebugPanel`: collapsible diagnostics gated away from normal user flow.
 - `OdkRuntimeBoundary`: the only host that contains ODK Web Forms; CSS must remain scoped.
@@ -117,14 +122,16 @@ Before improving the UI:
 3. Compare reusable patterns from LIMS `docs/UX_DESIGN_SYSTEM.md` and STEMGEN UI tokens/components before inventing a new component rule.
 4. Create or update shared shell components/tokens first; avoid page-local styling.
 5. Keep ODK Web Forms in `OdkRuntimeBoundary` and verify host CSS does not style ODK controls except for explicitly documented host boundary spacing/footer adjustments.
-6. Build and visually check both mobile and desktop widths before upload.
+6. Keep icon+text action controls for Back, Refresh, Add new, and Open.
+7. Build and visually check both mobile and desktop widths before upload.
 
 ## Acceptance Criteria
 
 - User-facing text says **Monitoring Tool**.
 - Unauthenticated users are sent to Microsoft/Power Pages login.
 - Authenticated users land on a work queue, not a prototype diagnostic page.
-- Form cards show form name and version.
+- Authenticated users first see project cards.
+- Project detail shows Saved and Drafts tabs, 10 cards per page, Open actions, and Add new in the top action bar.
 - Loading uses the CRDB branded `LoadingPanel`.
 - The form runner has a top action bar and a full-width ODK runtime area.
 - Prototype diagnostics are hidden behind a debug panel.

@@ -45,6 +45,22 @@ class DraftStore {
     });
   }
 
+  async list(): Promise<LocalDraft[]> {
+    const db = await this.open();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(this.storeName, 'readonly');
+      const request = tx.objectStore(this.storeName).getAll();
+      request.onsuccess = () => {
+        const drafts = (request.result as LocalDraft[]).sort((left, right) => (
+          right.updatedAt.localeCompare(left.updatedAt)
+        ));
+        resolve(drafts);
+      };
+      request.onerror = () => reject(request.error ?? new Error('Unable to list drafts.'));
+      tx.oncomplete = () => db.close();
+    });
+  }
+
   private async open(): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open(this.databaseName, 1);

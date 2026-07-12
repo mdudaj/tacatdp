@@ -6,6 +6,7 @@ import type {
   FormVersionRow,
   OdkSubmitResult,
   SubmissionRow,
+  SubmissionSummary,
   SubmissionVersionRow,
 } from './types';
 import { devAssignedForms } from '../dev/assignedForms';
@@ -126,6 +127,30 @@ export class PowerPagesApiClient {
     return this.get<FormRow>(
       `/_api/mp_forms(${encodeURIComponent(formId)})?$select=mp_name,mp_xmlformid`,
     );
+  }
+
+  async listSavedSubmissions(): Promise<SubmissionSummary[]> {
+    if (this.shouldUseLocalFixture()) {
+      return [];
+    }
+
+    const signedInEmail = this.getSignedInUserEmail();
+    if (!signedInEmail) {
+      throw new Error('Power Pages session did not provide a signed-in email for submission filtering.');
+    }
+
+    const submissions = await this.get<DataverseCollection<SubmissionRow>>(
+      `/_api/mp_submissions?$select=mp_submissionid,mp_instanceid,mp_submittedat,mp_updatedat,mp_lifecyclestatus,mp_reviewstate&$filter=mp_useremail eq '${this.escapeODataString(signedInEmail)}'&$orderby=mp_updatedat desc&$top=50`,
+    );
+
+    return submissions.value.map((submission) => ({
+      submissionId: submission.mp_submissionid,
+      instanceId: submission.mp_instanceid,
+      submittedAt: submission.mp_submittedat,
+      updatedAt: submission.mp_updatedat,
+      lifecycleStatus: submission.mp_lifecyclestatus,
+      reviewState: submission.mp_reviewstate,
+    }));
   }
 
   async submitOdkSubmission(assignment: FormAssignmentSummary, payload: unknown): Promise<OdkSubmitResult> {
