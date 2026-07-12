@@ -24,6 +24,8 @@ from urllib.parse import quote
 
 DEFAULT_ASSIGNMENT_EMAIL = "john.mduda@mshirikacorp.onmicrosoft.com"
 MAX_XFORMXML_CHARS = 1048576
+XFORM_FILE_MARKER_PREFIX = "dataverse-file:"
+XFORM_FILE_MEDIA_TYPE = "application/xml"
 PROJECT_CODE = "TACATDP"
 PROJECT_NAME = "TACATDP Impact Monitoring"
 XML_FORM_ID = "tacatdp_impact_evaluation"
@@ -267,6 +269,20 @@ class SeedClient:
         if response.status_code >= 400:
             raise RuntimeError(f"PATCH {table} failed: HTTP {response.status_code} {self.deploy.safe_error(response)}")
 
+    def upload_file_column(self, table: str, record_id: str, column: str, path: Path, file_name: str, media_type: str) -> None:
+        url = f"{self.dv.base}/{self.entity_set(table)}({record_id})/{self.column(column)}"
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/octet-stream",
+            "OData-MaxVersion": "4.0",
+            "OData-Version": "4.0",
+            "x-ms-file-name": file_name,
+        }
+        with path.open("rb") as handle:
+            response = self.dv.session.patch(url, data=handle, headers=headers, timeout=180)
+        if response.status_code >= 400:
+            raise RuntimeError(f"PATCH {table}.{column} file failed: HTTP {response.status_code} {self.deploy.safe_error(response)}")
+
     def ensure(self, table: str, filter_expr: str, payload: dict[str, Any], label: str, execute: bool, update_existing: bool = False) -> str | None:
         existing = self.find_one(table, filter_expr)
         primary_id = self.primary_id(table)
@@ -316,6 +332,10 @@ def load_xform_xml(path: str | None, version: str, form_name: str) -> tuple[str,
     return text, f"xlsform-{version}-{digest[:12]}"
 
 
+def load_xform_xml_path(path: str | None) -> Path | None:
+    return Path(path).resolve() if path else None
+
+
 def main() -> int:
     try:
         sys.stdout.reconfigure(line_buffering=True)
@@ -327,7 +347,11 @@ def main() -> int:
     assignment_email = env_assignment_email(deploy, args.env_file, args.assignment_email).lower()
     form_version = args.form_version or (timestamp_version() if args.xform_xml else FORM_VERSION)
     xform_xml, xform_hash = load_xform_xml(args.xform_xml, form_version, args.form_name)
+    xform_xml_path = load_xform_xml_path(args.xform_xml)
     xform_bytes = len(xform_xml.encode("utf-8"))
+    xform_file_name = xform_xml_path.name if xform_xml_path else f"{XML_FORM_ID}-{form_version}.xml"
+    uses_file_storage = xform_bytes > MAX_XFORMXML_CHARS
+    xform_runtime_source = f"{XFORM_FILE_MARKER_PREFIX}{xform_file_name}" if uses_file_storage else xform_xml
 
     print("# TACATDP ODK Rich MVP Seed")
     print(f"Mode: {'execute' if args.execute else 'dry-run'}")
@@ -339,14 +363,9 @@ def main() -> int:
     print(f"Version: {form_version}")
     print(f"XForm XML bytes: {xform_bytes}")
     print(f"XForm hash: {xform_hash}")
-    if xform_bytes > MAX_XFORMXML_CHARS:
-        print(
-            "XForm XML exceeds the current FormVersions.XFormXml multiline text limit "
-            f"({MAX_XFORMXML_CHARS} characters). Store this compiled form through a Dataverse "
-            "file column/FormAttachments path before executing the seed."
-        )
-        if args.execute:
-            raise SystemExit("Refusing Dataverse write: compiled XForm is too large for FormVersions.XFormXml.")
+    print(f"XForm storage: {'FormAttachments.File' if uses_file_storage else 'FormVersions.XFormXml'}")
+    if uses_file_storage and not xform_xml_path:
+        raise SystemExit("Refusing Dataverse write: file-backed XForm storage requires --xform-xml.")
 
     if settings.deploy_target.lower() != "dev":
         raise SystemExit(f"Refusing non-dev deployment target: {settings.deploy_target}")
@@ -392,7 +411,7 @@ def main() -> int:
     version_payload = {
         client.column("Version"): form_version,
         client.column("Hash"): xform_hash,
-        client.column("XFormXml"): xform_xml,
+        client.column("XFormXml"): xform_runtime_source,
         client.column("WebFormsEnabled"): True,
         client.column("LifecycleStatus"): CHOICE["published"],
         client.column("PublishedAt"): now,
@@ -408,6 +427,34 @@ def main() -> int:
         args.execute,
         update_existing=True,
     ) or "DRY-RUN-VERSION-ID"
+
+    if uses_file_storage:
+        attachment_payload = {
+            client.column("FileName"): xform_file_name,
+            client.column("MediaType"): XFORM_FILE_MEDIA_TYPE,
+        }
+        if not args.execute:
+            print(f"would create/update: xform file {xform_file_name}")
+            print(f"would upload: xform file {xform_file_name}")
+        elif xform_xml_path:
+            key, value = client.bind("FormVersions", "FormAttachments", "FormVersion", version_id)
+            attachment_payload[key] = value
+            attachment_filter = (
+                f"{client.column('FileName')} eq '{escape_odata(xform_file_name)}' "
+                f"and _{client.column('FormVersion')}_value eq {version_id}"
+            )
+            attachment_id = client.ensure(
+                "FormAttachments",
+                attachment_filter,
+                attachment_payload,
+                f"xform file {xform_file_name}",
+                args.execute,
+                update_existing=True,
+            )
+            if not attachment_id:
+                raise RuntimeError(f"Unable to resolve XForm attachment row for {xform_file_name}")
+            client.upload_file_column("FormAttachments", attachment_id, "File", xform_xml_path, xform_file_name, XFORM_FILE_MEDIA_TYPE)
+            print(f"uploaded: xform file {xform_file_name}")
 
     assignment_key = ASSIGNMENT_KEY_TEMPLATE.format(email=assignment_email)
     assignment_payload = {

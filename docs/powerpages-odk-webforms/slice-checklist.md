@@ -148,5 +148,10 @@ If clicking ODK Send appears to reload the page or returns to the top with answe
 - [x] Validate generated XForm XML parse, body refs, form id, version, and instance-name expression.
 - [x] Add seed-script support for compiled XML and dry-run Dataverse update.
 - [x] Dry-run Dataverse seed update before live write.
-- [ ] Implement Dataverse file-column/FormAttachments storage for full compiled XForms larger than `FormVersions.XFormXml`.
-- [ ] Update the SPA to load large XForm XML from the Dataverse-managed file source, then render ODK Web Forms.
+- [x] Implement Dataverse file-column/FormAttachments storage for full compiled XForms larger than `FormVersions.XFormXml`.
+- [x] Update the SPA to load large XForm XML from the Dataverse-managed file source, then render ODK Web Forms.
+- [x] Execute Dataverse seed for version `20260712174458448`, storing `FormVersions.XFormXml` as `dataverse-file:tacatdp_impact_evaluation-20260712174458448.xml`.
+- [x] Upload compiled XML to `FormAttachments.File` and repoint John/test assignments to the compiled version.
+- [x] Upload Power Pages build `xform-file-source-20260712-001`.
+- [x] Verify hosted Dataverse state after upload: file-backed XML downloads, parses, and has 428 unique absolute body refs.
+- [ ] Browser-verify the signed-in site loads the full compiled TACATDP Impact Evaluation form from Dataverse file storage.

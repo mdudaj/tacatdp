@@ -51,6 +51,7 @@ ASSOCIATION_TARGET_TABLES = {
     "mp_formversion",
 }
 GLOBAL_SCOPE = 756150000
+XFORM_FILE_MARKER_PREFIX = "dataverse-file:"
 
 
 def load_deploy_module() -> Any:
@@ -246,7 +247,12 @@ class Verifier:
         self.check("form version exists", bool(version), form_version_id)
         self.check("form version web forms enabled", (version or {}).get("mp_webformsenabled") is True)
         xform = (version or {}).get("mp_xformxml") or ""
-        self.check("form version has XForm XML", len(xform) > 1000, f"{len(xform)} bytes")
+        if xform.startswith(XFORM_FILE_MARKER_PREFIX):
+            file_name = xform.removeprefix(XFORM_FILE_MARKER_PREFIX)
+            self.check("form version uses file-backed XForm marker", bool(file_name), file_name)
+            xform = self.download_xform_file(form_version_id, file_name)
+        else:
+            self.check("form version has XForm XML", len(xform) > 1000, f"{len(xform)} bytes")
         if xform:
             self.verify_xform_body_refs(xform)
         form_id = (version or {}).get("_mp_form_value")
@@ -255,6 +261,34 @@ class Verifier:
             form = self.dv.get_json(f"mp_forms({form_id})?$select=mp_name,mp_xmlformid,mp_lifecyclestatus")
             self.check("form exists", bool(form), form_id)
             self.check("form XmlFormId populated", bool((form or {}).get("mp_xmlformid")), (form or {}).get("mp_xmlformid") or "")
+
+    def download_xform_file(self, form_version_id: str, file_name: str) -> str:
+        rows = self.rows(
+            "mp_formattachments?$select=mp_formattachmentid,mp_filename,mp_mediatype,_mp_formversion_value"
+            f"&$filter=_mp_formversion_value eq {form_version_id} and mp_filename eq '{escape_odata(file_name)}'&$top=1"
+        )
+        self.check("form version XForm file attachment exists", bool(rows), file_name)
+        if not rows:
+            return ""
+        attachment = rows[0]
+        self.check("form version XForm file media type", attachment.get("mp_mediatype") == "application/xml", str(attachment.get("mp_mediatype")))
+        attachment_id = attachment["mp_formattachmentid"]
+        response = self.dv.session.get(
+            f"{self.dv.base}/mp_formattachments({attachment_id})/mp_file/$value",
+            headers={"Accept": "application/xml"},
+            timeout=180,
+        )
+        self.check(
+            "form version XForm file downloads",
+            response.status_code < 400,
+            f"HTTP {response.status_code}",
+        )
+        if response.status_code >= 400:
+            print(self.deploy.safe_error(response))
+            return ""
+        text = response.text
+        self.check("form version XForm file has XML", len(text) > 1000 and text.lstrip().startswith("<"), f"{len(text)} bytes")
+        return text
 
     def verify_xform_body_refs(self, xform: str) -> None:
         try:
@@ -272,7 +306,7 @@ class Verifier:
         duplicates: list[str] = []
         for element in body.iter():
             ref = element.attrib.get("ref")
-            if not ref:
+            if not ref or not ref.startswith("/"):
                 continue
             tag = element.tag.rsplit("}", 1)[-1]
             if ref in refs:

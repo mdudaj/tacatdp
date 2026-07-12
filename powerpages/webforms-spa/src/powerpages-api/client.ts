@@ -1,5 +1,6 @@
 import type {
   DataverseCollection,
+  FormAttachmentRow,
   FormAssignmentRow,
   FormAssignmentSummary,
   FormRow,
@@ -20,6 +21,7 @@ interface RequestOptions {
 }
 
 const INSTANCE_FILE_NAME = 'xml_submission_file';
+const XFORM_FILE_MARKER_PREFIX = 'dataverse-file:';
 const SUBMISSION_LIFECYCLE_SUBMITTED = 100000001;
 const SUBMISSION_REVIEW_RECEIVED = 100000000;
 
@@ -166,6 +168,7 @@ export class PowerPagesApiClient {
 
     const formVersion = await this.getFormVersion(submission.formVersionId);
     const form = await this.getForm(formVersion._mp_form_value);
+    const xformXml = await this.resolveFormVersionXForm(submission.formVersionId, formVersion.mp_xformxml);
 
     return {
       assignmentId: `submission:${submission.submissionId}`,
@@ -176,7 +179,7 @@ export class PowerPagesApiClient {
       formName: form.mp_name,
       xmlFormId: form.mp_xmlformid,
       version: formVersion.mp_version,
-      xformXml: formVersion.mp_xformxml,
+      xformXml,
     };
   }
 
@@ -247,6 +250,7 @@ export class PowerPagesApiClient {
   private async toSummary(assignment: FormAssignmentRow): Promise<FormAssignmentSummary> {
     const formVersion = await this.getFormVersion(assignment._mp_formversion_value);
     const form = await this.getForm(formVersion._mp_form_value);
+    const xformXml = await this.resolveFormVersionXForm(assignment._mp_formversion_value, formVersion.mp_xformxml);
 
     return {
       assignmentId: assignment.mp_formassignmentid,
@@ -257,8 +261,38 @@ export class PowerPagesApiClient {
       formName: form.mp_name,
       xmlFormId: form.mp_xmlformid,
       version: formVersion.mp_version,
-      xformXml: formVersion.mp_xformxml,
+      xformXml,
     };
+  }
+
+  private async resolveFormVersionXForm(formVersionId: string, markerOrXml: string): Promise<string> {
+    if (!markerOrXml.startsWith(XFORM_FILE_MARKER_PREFIX)) {
+      return markerOrXml;
+    }
+
+    const fileName = markerOrXml.slice(XFORM_FILE_MARKER_PREFIX.length);
+    if (!fileName) {
+      throw new Error(`Form version ${formVersionId} references an empty XForm file marker.`);
+    }
+
+    const attachments = await this.get<DataverseCollection<FormAttachmentRow>>(
+      `/_api/mp_formattachments?$select=mp_formattachmentid,mp_filename,mp_mediatype,_mp_formversion_value&$filter=_mp_formversion_value eq ${encodeURIComponent(formVersionId)} and mp_filename eq '${this.escapeODataString(fileName)}'&$top=1`,
+    );
+    const attachment = attachments.value[0];
+    if (!attachment) {
+      throw new Error(`Form version ${formVersionId} references missing XForm file ${fileName}.`);
+    }
+
+    const response = await this.send(
+      `/_api/mp_formattachments(${encodeURIComponent(attachment.mp_formattachmentid)})/mp_file/$value`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: attachment.mp_mediatype || 'application/xml',
+        },
+      },
+    );
+    return response.text();
   }
 
   private async get<T>(url: string): Promise<T> {

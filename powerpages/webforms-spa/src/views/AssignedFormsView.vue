@@ -51,7 +51,7 @@ const postSubmitMessage = ref('');
 const postSubmitTone = ref<'success' | 'warning'>('success');
 const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
 const submitting = ref(false);
-const buildMarker = 'site-shell-footer-20260712-001';
+const buildMarker = 'xform-file-source-20260712-001';
 const previousBuildMarker = 'single-header-assignment-filter-20260711-001';
 const crdbLogoUrl = '/CRDB_Bank_PLC.svg';
 const runtimeClickStatus = ref('No ODK runtime button click observed in this page load.');
@@ -66,8 +66,8 @@ const projectWorkspaces = computed<ProjectWorkspace[]>(() => {
 
   return [{
     id: 'tacatdp-impact-monitoring',
-    name: 'TACATDP Impact Monitoring',
-    description: 'Secure Microsoft-hosted monitoring workspace for assigned project data.',
+    name: 'TACATDP Impact Evaluation',
+    description: 'Secure Microsoft-hosted impact evaluation workspace for assigned project data.',
     assignments: assignments.value,
   }];
 });
@@ -455,7 +455,7 @@ onUnmounted(() => {
   <main class="monitoring-shell" aria-labelledby="app-title">
     <section v-if="authRequired" class="auth-panel" aria-labelledby="auth-title">
       <h1 id="auth-title">Sign in required</h1>
-      <p>Use your Microsoft account to continue to Monitoring Tool.</p>
+      <p>Use your Microsoft account to continue to TACATDP Impact Evaluation.</p>
       <a class="primary-action" :href="api.getSignInUrl()">
         <LogIn class="action-icon" aria-hidden="true" />
         Sign in with Microsoft

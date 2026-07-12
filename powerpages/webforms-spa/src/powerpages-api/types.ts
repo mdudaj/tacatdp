@@ -17,6 +17,13 @@ export interface FormVersionRow {
   _mp_form_value: string;
 }
 
+export interface FormAttachmentRow {
+  mp_formattachmentid: string;
+  mp_filename: string;
+  mp_mediatype?: string;
+  _mp_formversion_value?: string;
+}
+
 export interface FormRow {
   mp_formid?: string;
   mp_name: string;

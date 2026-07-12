@@ -24,10 +24,19 @@ The hosted Monitoring Tool proved these facts:
 - Power Pages `/_api` can create `mp_submissions`, `mp_submissionversions`, and `mp_submissionattachments` metadata rows.
 - Direct browser binary upload to the Dataverse file column failed on the hosted origin with `400`, Dataverse code `0x80048d19`.
 - Dataverse verification showed the attachment row existed but `mp_file_name` remained null.
+- Service-principal Dataverse Web API upload to `FormAttachments.File` succeeded for the full compiled XForm after using `Content-Type: application/octet-stream` plus `x-ms-file-name`; `application/xml` returned HTTP `415`.
+- Hosted verification can download the XForm from `mp_formattachments(<id>)/mp_file/$value`, parse it, and verify the ODK body refs.
 
 ## Decision
 
 For the shareable MVP, treat file support as **metadata proven, binary storage pending**.
+
+For full XForm runtime source, use Dataverse file-column storage through the trusted deployment/seed path:
+
+- Keep `FormVersions.XFormXml` as inline XML only when it fits the multiline text limit.
+- For larger forms, store `dataverse-file:<filename>` in `FormVersions.XFormXml`.
+- Store the XML binary in `FormAttachments.File`, with `FormAttachments.MediaType = application/xml`.
+- The browser SPA reads the file through Power Pages `/_api` and table permissions; it must not use raw Dataverse OAuth tokens.
 
 The next binary persistence slice must be one of these Microsoft-managed options:
 

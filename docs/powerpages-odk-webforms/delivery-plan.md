@@ -109,6 +109,26 @@ Implementation instructions:
 6. Seed the generated XML only after dry-run review. If the XML is larger than `FormVersions.XFormXml`, do not execute the multiline seed; implement Dataverse file-column/FormAttachments storage first.
 7. Validate with source validator, SPA build, pyxform conversion, hosted smoke, and browser edit/add-new tests.
 
+## Completed Slice: File-Backed Full XLSForm Runtime Source
+
+Implementation instructions:
+
+1. Inspect Microsoft Dataverse file-column data docs, Power Pages Web API docs, `scripts/dataverse-seed-odk-mvp-form.py`, `scripts/verify-powerpages-api-smoke-hosted.py`, and `powerpages/webforms-spa/src/powerpages-api/client.ts`.
+2. Keep `FormVersions` as the assignment/version metadata table. For XML larger than `FormVersions.XFormXml`, store `dataverse-file:<filename>` in `mp_xformxml` and upload the actual XML to `FormAttachments.File`.
+3. Upload file-column binary content using `Content-Type: application/octet-stream` and `x-ms-file-name`; keep `FormAttachments.MediaType` as `application/xml`.
+4. Update the SPA to resolve only the explicit `dataverse-file:` marker through Power Pages `/_api/mp_formattachments(...)/mp_file/$value`. Inline XML remains supported for small/dev forms.
+5. Update hosted verification so it downloads and parses the file-backed XML and checks absolute body refs.
+6. Validate with `python3 scripts/validate-webforms-spa-foundation.py`, `npm run typecheck`, `npm run build`, seed dry-run, seed execute, `python3 scripts/verify-powerpages-api-smoke-hosted.py --env-file .env`, and an approved Power Pages upload.
+
+Verification result on 2026-07-12:
+
+- Compiled XLSForm artifact: `artifacts/xforms/tacatdp_impact_evaluation-20260712174458448.xml`.
+- Published form version: `20260712174458448`.
+- XML source: `FormAttachments.File` with marker `dataverse-file:tacatdp_impact_evaluation-20260712174458448.xml`.
+- Hosted verifier downloaded `22,363,778` bytes, parsed the XForm, and found `428` unique absolute body refs.
+- John and `test.user@mshirikacorp.onmicrosoft.com` assignments were repointed to the compiled version.
+- Power Pages build/upload marker: `xform-file-source-20260712-001`.
+
 ## Completed Slice: Monitoring Tool UX Foundation
 
 Implementation instructions:
