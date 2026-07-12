@@ -8,6 +8,10 @@
 - Submit shows a CRDB-branded blocking loading state with logo and loading dots while the Dataverse write is in progress.
 - Successful submit refreshes the Saved records list, returns the user to the project data-card list, and displays the submit result as a success or warning banner. Attachment binary warnings remain visible without trapping the user on the form.
 - Failed submit keeps the user on the form runner and shows the error there.
+- Edit submit creates a new `SubmissionVersions` row for the selected `Submissions` row and does not create a new saved data-card record.
+- Edit submit stores XML with the selected record's canonical `instanceID`, even when ODK Web Forms generated a different edit-session id.
+- Saved data-card titles use computed `instance_name` when available and fall back to canonical instance id only when the instance name cannot be computed.
+- Saved data-card search includes both computed instance name and canonical instance id.
 - One attachment is represented as a `SubmissionAttachments` row linked to the submission version.
 - Browser binary upload through the Power Pages route is attempted with the documented Dataverse single-request file-column pattern and must report whether Power Pages accepted or rejected the binary content.
 - No raw Dataverse credentials or client secrets are present in the SPA.
@@ -52,6 +56,14 @@
 - Saved submitted records show owner email, version, updated timestamp, and an Edit action.
 - Edit opens ODK Web Forms using `editInstance` and the latest `SubmissionVersions.XFormSubmissionXml`; submit writes a new submission version for the same ODK instance id.
 - Submit from either Add new or Edit returns to the Saved tab after success and shows the Dataverse result banner.
+- The pagination control appears after the card list, remains visually separate from records, uses icon+text actions, and shows the current page of total pages.
+
+## XLSForm Import Acceptance
+
+- `docs/Revised_TACATDP impact evaluation_20260712.xlsx` is treated as the source workbook for the next full-form MVP slice.
+- Temporary Office/LibreOffice lock files such as `docs/.~lock.*.xlsx#` are not committed.
+- pyxform package review documents version, license, Python support, and conversion command before installation.
+- The compiled XForm preserves `form_id=tacatdp_impact_evaluation`, version `2607121652`, and instance-name intent `Customer_ID:Customer_Name`.
 
 ## Dataverse Submission Mapping Acceptance
 

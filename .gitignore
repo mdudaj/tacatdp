@@ -6,6 +6,7 @@ dist/
 node_modules/
 powerpages/webforms-spa/.powerpages-site/
 powerpages/tacatdp-monitoring-tool-upload/
+.~lock.*#
 
 .env
 .env.*

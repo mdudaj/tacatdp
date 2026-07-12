@@ -35,6 +35,7 @@ interface InstancePayloadSummary {
   payloadType?: string;
   status?: string;
   violationCount: number;
+  instanceName?: string;
   attachmentNames: string[];
   attachmentDetails: AttachmentPayloadSummary[];
   submissionMeta?: unknown;
@@ -144,6 +145,7 @@ export class PowerPagesApiClient {
       return {
         submissionId: submission.mp_submissionid,
         instanceId: submission.mp_instanceid,
+        displayName: metadata.instanceName,
         userEmail: submission.mp_useremail,
         submittedAt: submission.mp_submittedat,
         updatedAt: submission.mp_updatedat,
@@ -187,10 +189,15 @@ export class PowerPagesApiClient {
     return latestVersion.mp_xformsubmissionxml;
   }
 
-  async submitOdkSubmission(assignment: FormAssignmentSummary, payload: unknown): Promise<OdkSubmitResult> {
+  async submitOdkSubmission(
+    assignment: FormAssignmentSummary,
+    payload: unknown,
+    options: { existingSubmission?: SubmissionSummary | null } = {},
+  ): Promise<OdkSubmitResult> {
     if (this.shouldUseLocalFixture()) {
       return {
         instanceId: `local:${crypto.randomUUID()}`,
+        displayName: 'Local development record',
         submissionId: 'local-submission',
         submissionVersionId: 'local-submission-version',
         versionNumber: 1,
@@ -202,9 +209,13 @@ export class PowerPagesApiClient {
 
     const xml = await this.extractSubmittedXml(payload);
     const attachments = this.extractAttachmentPayloads(payload);
-    const instanceId = this.extractInstanceId(xml) ?? `uuid:${crypto.randomUUID()}`;
+    const submittedInstanceId = this.extractInstanceId(xml) ?? `uuid:${crypto.randomUUID()}`;
+    const instanceId = options.existingSubmission?.instanceId ?? submittedInstanceId;
+    const canonicalXml = this.normalizeInstanceId(xml, instanceId);
     const now = new Date().toISOString();
-    const existingSubmission = await this.findSubmissionByInstanceId(instanceId);
+    const existingSubmission = options.existingSubmission
+      ? { mp_submissionid: options.existingSubmission.submissionId, mp_instanceid: options.existingSubmission.instanceId }
+      : await this.findSubmissionByInstanceId(instanceId);
     const submissionId = existingSubmission?.mp_submissionid ?? await this.createSubmission(assignment, instanceId, now);
     const versionNumber = await this.nextSubmissionVersionNumber(instanceId);
     const submissionVersionId = await this.createSubmissionVersion({
@@ -214,7 +225,7 @@ export class PowerPagesApiClient {
       payload,
       submissionId,
       versionNumber,
-      xml,
+      xml: canonicalXml,
     });
     if (existingSubmission) {
       await this.updateSubmission(existingSubmission.mp_submissionid, now);
@@ -223,6 +234,7 @@ export class PowerPagesApiClient {
 
     return {
       instanceId,
+      displayName: this.resolveInstanceName(canonicalXml),
       submissionId,
       submissionVersionId,
       versionNumber,
@@ -279,7 +291,7 @@ export class PowerPagesApiClient {
       mp_versionnumber: input.versionNumber,
       mp_instanceid: input.instanceId,
       mp_xformsubmissionxml: input.xml,
-      mp_submissionjson: JSON.stringify(this.summarizePayload(input.payload, input.assignment)),
+      mp_submissionjson: JSON.stringify(this.summarizePayload(input.payload, input.assignment, input.xml)),
       mp_current: true,
       mp_useragent: window.navigator.userAgent.slice(0, 850),
       mp_deviceid: 'tacatdp-powerpages-poc',
@@ -496,7 +508,7 @@ export class PowerPagesApiClient {
     return attachments;
   }
 
-  private summarizePayload(payload: unknown, assignment: FormAssignmentSummary): InstancePayloadSummary & {
+  private summarizePayload(payload: unknown, assignment: FormAssignmentSummary, xml: string): InstancePayloadSummary & {
     assignmentKey: string;
     formVersionId: string;
     xmlFormId: string;
@@ -523,6 +535,7 @@ export class PowerPagesApiClient {
       payloadType: candidate.payloadType,
       status: candidate.status,
       violationCount: Array.isArray(candidate.violations) ? candidate.violations.length : 0,
+      instanceName: this.resolveInstanceName(xml),
       submissionMeta: candidate.submissionMeta,
       attachmentNames,
       attachmentDetails,
@@ -536,20 +549,56 @@ export class PowerPagesApiClient {
     return value.replaceAll("'", "''");
   }
 
-  private parseSubmissionMetadata(value?: string): { assignmentKey?: string; formVersionId?: string; xmlFormId?: string } {
+  private parseSubmissionMetadata(value?: string): { assignmentKey?: string; formVersionId?: string; xmlFormId?: string; instanceName?: string } {
     if (!value) {
       return {};
     }
 
     try {
-      const parsed = JSON.parse(value) as { assignmentKey?: unknown; formVersionId?: unknown; xmlFormId?: unknown };
+      const parsed = JSON.parse(value) as { assignmentKey?: unknown; formVersionId?: unknown; xmlFormId?: unknown; instanceName?: unknown };
       return {
         assignmentKey: typeof parsed.assignmentKey === 'string' ? parsed.assignmentKey : undefined,
         formVersionId: typeof parsed.formVersionId === 'string' ? parsed.formVersionId : undefined,
         xmlFormId: typeof parsed.xmlFormId === 'string' ? parsed.xmlFormId : undefined,
+        instanceName: typeof parsed.instanceName === 'string' ? parsed.instanceName : undefined,
       };
     } catch {
       return {};
     }
+  }
+
+  private normalizeInstanceId(xml: string, instanceId: string): string {
+    const parsed = new DOMParser().parseFromString(xml, 'text/xml');
+    const instanceIdElement = parsed.getElementsByTagName('instanceID')[0];
+    if (!instanceIdElement) {
+      return xml;
+    }
+
+    instanceIdElement.textContent = instanceId;
+    return new XMLSerializer().serializeToString(parsed);
+  }
+
+  private resolveInstanceName(xml: string): string | undefined {
+    const parsed = new DOMParser().parseFromString(xml, 'text/xml');
+    const explicit = this.firstText(parsed, 'instanceName');
+    if (explicit) {
+      return explicit;
+    }
+
+    const customerId = this.firstText(parsed, 'Customer_ID');
+    const customerName = this.firstText(parsed, 'Customer_Name');
+    if (customerId && customerName) {
+      return `${customerId}:${customerName}`;
+    }
+    if (customerId || customerName) {
+      return customerId || customerName;
+    }
+
+    return undefined;
+  }
+
+  private firstText(document: Document, tagName: string): string | undefined {
+    const value = document.getElementsByTagName(tagName)[0]?.textContent?.trim();
+    return value || undefined;
   }
 }

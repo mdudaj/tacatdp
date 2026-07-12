@@ -51,7 +51,7 @@ const postSubmitMessage = ref('');
 const postSubmitTone = ref<'success' | 'warning'>('success');
 const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
 const submitting = ref(false);
-const buildMarker = 'submit-progress-return-list-20260712-001';
+const buildMarker = 'edit-submit-reuse-display-name-20260712-001';
 const previousBuildMarker = 'single-header-assignment-filter-20260711-001';
 const crdbLogoUrl = '/CRDB_Bank_PLC.svg';
 const runtimeClickStatus = ref('No ODK runtime button click observed in this page load.');
@@ -78,6 +78,7 @@ const draftCount = computed(() => localDrafts.value.length);
 const savedCount = computed(() => submissions.value.length);
 const filteredSavedSubmissions = computed(() => submissions.value.filter((submission) => matchesSearch([
   submission.instanceId,
+  submission.displayName,
   submission.userEmail,
   submission.assignmentKey,
   submission.formVersionId,
@@ -117,7 +118,7 @@ const runnerSubtitle = computed(() => {
     return base;
   }
 
-  return `${base} · Editing ${selectedEditSubmission.value.instanceId}`;
+  return `${base} · Editing ${selectedEditSubmission.value.displayName || selectedEditSubmission.value.instanceId}`;
 });
 const editInstanceOptions = computed(() => {
   const submission = selectedEditSubmission.value;
@@ -323,11 +324,13 @@ async function handleSubmit(payload: unknown, callback?: (result: unknown) => vo
   submitStatus.value = 'Submitting to Dataverse...';
   submitTone.value = 'neutral';
   try {
-    const result = await api.submitOdkSubmission(selectedAssignment.value, payload);
+    const result = await api.submitOdkSubmission(selectedAssignment.value, payload, {
+      existingSubmission: selectedEditSubmission.value,
+    });
     dataverseWriteStatus.value = `${new Date().toLocaleTimeString()} - Dataverse submit write completed.`;
     const attachmentSummary = `${result.attachmentCount} attachment record${result.attachmentCount === 1 ? '' : 's'}, ${result.attachmentBinaryUploadCount} binary upload${result.attachmentBinaryUploadCount === 1 ? '' : 's'}`;
     const warningSummary = result.attachmentWarnings.length > 0 ? ` Attachment warning: ${result.attachmentWarnings.join(' ')}` : '';
-    submitStatus.value = `Submitted to Dataverse. Instance ${result.instanceId}, version ${result.versionNumber}; ${attachmentSummary}.${warningSummary}`;
+    submitStatus.value = `Submitted to Dataverse. ${result.displayName || result.instanceId}, version ${result.versionNumber}; ${attachmentSummary}.${warningSummary}`;
     submitTone.value = result.attachmentWarnings.length > 0 ? 'warning' : 'success';
     submissions.value = await api.listSavedSubmissions();
     callback?.(selectedEditSubmission.value ? {} : { next: POST_SUBMIT__NEW_INSTANCE });
@@ -584,7 +587,7 @@ onUnmounted(() => {
           >
             <div>
               <p class="eyebrow">Saved record</p>
-              <h2>{{ submission.instanceId }}</h2>
+              <h2>{{ submission.displayName || submission.instanceId }}</h2>
               <p class="form-meta">
                 {{ submission.userEmail || 'Unknown owner' }} · Version {{ submission.versionNumber || 1 }} · Updated {{ formatDate(submission.updatedAt || submission.submittedAt) }}
               </p>

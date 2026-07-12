@@ -23,9 +23,16 @@ Package installation changes the local supply-chain state and must use the appro
 | `@getodk/web-forms` | `1.0.0` | Apache-2.0 | ODK-style web renderer | `npm view @getodk/web-forms version license dependencies peerDependencies dist.unpackedSize time.modified`; repository `getodk/central-frontend`; peer `vue ^3.5.29` |
 | `@getodk/xforms-engine` | `1.0.0` | Apache-2.0 | XForms computation/runtime semantics | `npm view @getodk/xforms-engine version license dependencies peerDependencies dist.unpackedSize time.modified`; repository `getodk/central-frontend`; peer `solid-js ^1.9.7` |
 
+## Accepted XLSForm Tool Packages
+
+| Package | Version | License | Purpose | Evidence |
+| --- | --- | --- | --- | --- |
+| `pyxform` | `4.5.0` | BSD-2-Clause | Compile the revised TACATDP XLSForm workbook into ODK XForm XML for `FormVersions.XFormXml` | PyPI shows `pyxform 4.5.0`, released 2026-06-25, Python `>=3.10`; GitHub `XLSForm/pyxform` says pyxform converts XLSForms to ODK XForms and supports `xls2xform path_to_XLSForm [output_path]` |
+
 ## Compatibility Notes
 
 - Local Node validated for this slice: `v24.18.0`; local npm: `11.16.0`.
+- Local Python must be `>=3.10` before installing `pyxform==4.5.0`.
 - Current Vite and Vue engine requirement is satisfied by local Node.
 - ODK packages declare Node `^24.16.0` and npm `11`; Node `v24.18.0` satisfies this requirement.
 - `@getodk/web-forms` depends on Vue peer `^3.5.29`; pinned Vue `3.5.39` satisfies it.

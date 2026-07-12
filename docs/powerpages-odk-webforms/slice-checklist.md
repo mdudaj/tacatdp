@@ -120,8 +120,12 @@ If clicking ODK Send appears to reload the page or returns to the top with answe
 - [x] Submit from edit mode writes a new `SubmissionVersions` row for the same ODK `instanceID` and updates the submission header timestamp.
 - [x] Update validator to block reintroducing signed-in-user filtering on saved submitted records.
 - [x] Add CRDB-branded submit progress overlay and return successful submits to the Saved data-card list with the Dataverse result banner.
+- [x] Fix edit submit source path so the selected Dataverse submission row is the canonical edit target even if ODK Web Forms emits a new edit-session `instanceID`.
+- [x] Add source metadata path for saved card display names from XLSForm `instance_name`, with fallback to canonical instance id.
 - [ ] Browser-verify that John and test user both see the same submitted-record list after Power Pages cache refresh.
 - [ ] Browser-verify that Edit opens a submitted record with previous answers populated and submit creates version `n+1`.
+- [ ] Browser-verify that Edit does not increase the Saved card count.
+- [ ] Browser-verify that revised-form saved cards display `Customer_ID:Customer_Name` after the full XLSForm seed is deployed.
 - [ ] Browser-verify hosted build `submit-progress-return-list-20260712-001`: submit shows the CRDB loading dots, returns to Saved, and preserves attachment warnings in the banner.
 
 ## Next Slice: Editable Local Draft Resume
@@ -134,3 +138,13 @@ If clicking ODK Send appears to reload the page or returns to the top with answe
 ## UX Scope Discipline
 
 - [ ] Before future UX-impacting work, capture behavior and data scope first: who sees which records, what is loaded client-side versus paged from Dataverse, which fields are searchable, what each action mutates, and what happens in empty/error/loading states.
+
+## Next Slice: Full XLSForm Import
+
+- [x] Inspect `docs/Revised_TACATDP impact evaluation_20260712.xlsx` without committing the temporary `.~lock` file.
+- [x] Document pyxform research, package review, requirements, and implementation plan.
+- [ ] Install `pyxform==4.5.0` in a project-local tool environment after approval.
+- [ ] Compile `docs/Revised_TACATDP impact evaluation_20260712.xlsx` to XForm XML.
+- [ ] Validate generated XForm XML parse, body refs, form id, version, and instance-name expression.
+- [ ] Replace embedded rich seed XForm with compiled XML and settings metadata.
+- [ ] Dry-run Dataverse seed update before live write.

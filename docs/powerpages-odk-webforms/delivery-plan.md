@@ -36,6 +36,7 @@ powerpages/
 9. Implement assigned forms, ODK Web Forms runtime load, local draft proof, online submit, attachment upload, and history.
 10. Upload compiled SPA through the enhanced Power Pages metadata package after approval, using the explicit website ID package path.
 11. Promote the prototype shell into the **Monitoring Tool** UX: CRDB-branded app shell, work queue, top action bars, reusable loading panel, project/form cards, history entry point, and hidden debug diagnostics.
+12. Replace the hand-authored rich seed with a pyxform-compiled version of `docs/Revised_TACATDP impact evaluation_20260712.xlsx`, preserving XLSForm settings metadata and assigning the published form version code from `settings.version`.
 
 ## Verification Gates
 
@@ -45,6 +46,8 @@ powerpages/
 - Browser `/_api` read succeeds for one metadata table.
 - Local draft survives refresh.
 - Online submit creates `Submissions` and `SubmissionVersions` in the Power Pages environment.
+- Edit submit creates a new `SubmissionVersions` row on the selected `Submissions` record and does not create a new saved record.
+- Saved record cards show computed XLSForm `instance_name` when available.
 - Attachment upload creates `SubmissionAttachments`.
 - Browser binary file persistence is either verified through the documented Power Pages file-column route or explicitly reported as pending with attachment metadata preserved.
 - Mobile and desktop screenshots show the Monitoring Tool shell, CRDB branding, readable form cards, and isolated ODK runtime spacing.
@@ -92,6 +95,17 @@ Implementation instructions:
 5. Reject non-ready ODK payloads before writes. For ready payloads, extract `meta/instanceID`, create or reuse `mp_submissions`, and create a current `mp_submissionversions` record with the canonical XML and compact JSON metadata.
 6. Keep binary attachments deferred until the attachment slice; this slice stores attachment names only in the JSON metadata summary.
 7. Validate with `python3 scripts/validate-webforms-spa-foundation.py`, `npm run build`, and `python3 scripts/verify-powerpages-api-smoke-hosted.py --env-file .env`; after approved upload, run a browser submit and verify records in Dataverse.
+
+## Current Slice: Edit Semantics and XLSForm Import Planning
+
+Implementation instructions:
+
+1. Inspect `xlsform-import-and-edit-plan.md`, `requirements.md`, `acceptance-criteria.md`, `AssignedFormsView.vue`, `PowerPagesApiClient`, and ODK local dependency source for `editInstance` / `FormInstanceEditMode`.
+2. Treat the selected saved Dataverse submission as the canonical edit target. Do not infer edit identity from the XML `instanceID` emitted by ODK Web Forms.
+3. Store a display name in submission-version metadata. For the revised TACATDP workbook, the MVP expression is `Customer_ID:Customer_Name`.
+4. Review `package-review.md` before installing `pyxform==4.5.0`.
+5. Compile `docs/Revised_TACATDP impact evaluation_20260712.xlsx` with `xls2xform` and seed the generated XML only after dry-run review.
+6. Validate with source validator, SPA build, pyxform conversion, hosted smoke, and browser edit/add-new tests.
 
 ## Completed Slice: Monitoring Tool UX Foundation
 

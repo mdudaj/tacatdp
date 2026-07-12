@@ -17,6 +17,8 @@ Deliver a Microsoft-managed ODK-style proof that runs inside Power Pages, render
 - Load the selected `FormVersions.XFormXml`.
 - Render the form through ODK Web Forms / XForms engine.
 - Editing a saved submitted record must use ODK Web Forms `editInstance` with the latest `SubmissionVersions.XFormSubmissionXml`, then submit a new version for the same ODK `instanceID`.
+- Edit submit must reuse the selected Dataverse `Submissions` row and must not create a new record even if ODK Web Forms emits a new XML `instanceID` during edit initialization. Normalize stored edit XML back to the selected canonical instance id.
+- Saved data cards must display the XLSForm `settings.instance_name` result when available, falling back to the canonical instance id. For the revised TACATDP XLSForm, compute the MVP display name as `Customer_ID:Customer_Name`.
 - Do not create a local draft just because the ODK runtime loaded. Draft cards must represent restorable instance state, not runtime markers.
 - Save and restore editable local draft state in IndexedDB only after the implementation captures ODK instance XML/state and can restore it into the runtime.
 - Submit online to Dataverse through Power Pages `/_api`.
@@ -26,6 +28,7 @@ Deliver a Microsoft-managed ODK-style proof that runs inside Power Pages, render
 - Persist at least one file/photo as a `SubmissionAttachments` metadata row linked to the submitted version.
 - Attempt browser binary upload to the Dataverse file column only through Power Pages `/_api`; do not add raw Dataverse credentials, direct OAuth, or external storage. If the hosted browser route fails, keep metadata persistence and report binary storage as a pending managed-Microsoft slice.
 - Show user's submission history for the selected form.
+- Use pyxform to compile the full revised XLSForm `docs/Revised_TACATDP impact evaluation_20260712.xlsx` into the Dataverse `FormVersions.XFormXml` seed. Preserve `settings.form_id=tacatdp_impact_evaluation`, timestamp-style `settings.version=2607121652`, and `settings.instance_name=concat(${Customer_ID}, ":", ${Customer_Name})`.
 
 ## Non-Functional Requirements
 

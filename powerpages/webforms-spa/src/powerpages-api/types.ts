@@ -54,6 +54,7 @@ export interface SubmissionVersionRow {
 
 export interface OdkSubmitResult {
   instanceId: string;
+  displayName?: string;
   submissionId: string;
   submissionVersionId: string;
   versionNumber: number;
@@ -65,6 +66,7 @@ export interface OdkSubmitResult {
 export interface SubmissionSummary {
   submissionId: string;
   instanceId: string;
+  displayName?: string;
   userEmail?: string;
   submittedAt?: string;
   updatedAt?: string;

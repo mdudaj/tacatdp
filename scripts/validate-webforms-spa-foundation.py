@@ -171,11 +171,17 @@ def validate_powerpages_session_contract() -> None:
         "getSubmissionFormContext",
         "getLatestSubmissionXml",
         "updateSubmission",
+        "normalizeInstanceId",
+        "resolveInstanceName",
+        "Customer_ID",
+        "Customer_Name",
+        "existingSubmission",
+        "displayName",
     ):
         if required not in client:
             fail(f"Global saved-record/edit API path missing required guardrail: {required}")
     for required in (
-        "submit-progress-return-list-20260712-001",
+        "edit-submit-reuse-display-name-20260712-001",
         "type AppView = 'projects' | 'records' | 'runner'",
         "Add new",
         "Saved",
@@ -201,6 +207,8 @@ def validate_powerpages_session_contract() -> None:
         "/CRDB_Bank_PLC.svg",
         "activeView.value = selectedProject.value ? 'records' : 'projects'",
         "activeRecordTab.value = 'saved'",
+        "existingSubmission: selectedEditSubmission.value",
+        "submission.displayName || submission.instanceId",
     ):
         if required not in view:
             fail(f"Monitoring Tool CRUD workspace shell missing required text or state: {required}")
@@ -263,7 +271,7 @@ def main() -> int:
         "preventRuntimeButtonDefault",
         "document.addEventListener('submit'",
         "document.addEventListener('click'",
-        "submit-progress-return-list-20260712-001",
+        "edit-submit-reuse-display-name-20260712-001",
         "Last runtime click",
         "Last ODK submit event",
         "Last Dataverse write",
