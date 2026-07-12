@@ -154,4 +154,7 @@ If clicking ODK Send appears to reload the page or returns to the top with answe
 - [x] Upload compiled XML to `FormAttachments.File` and repoint John/test assignments to the compiled version.
 - [x] Upload Power Pages build `xform-file-source-20260712-001`.
 - [x] Verify hosted Dataverse state after upload: file-backed XML downloads, parses, and has 428 unique absolute body refs.
+- [x] Diagnose browser render regression where the pyxform output loaded but showed only heading/submit because it was serialized with `html:`/`ns1:` prefixes instead of the renderer-compatible `h:html` plus default XForms namespace shape.
+- [x] Normalize compiled XForm namespace serialization in `scripts/xlsform-compile.py`.
+- [x] Compile and seed normalized version `20260712182300000`; hosted verifier downloads `16,673,209` bytes and confirms 428 unique body refs.
 - [ ] Browser-verify the signed-in site loads the full compiled TACATDP Impact Evaluation form from Dataverse file storage.

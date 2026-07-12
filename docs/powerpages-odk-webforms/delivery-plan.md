@@ -129,6 +129,14 @@ Verification result on 2026-07-12:
 - John and `test.user@mshirikacorp.onmicrosoft.com` assignments were repointed to the compiled version.
 - Power Pages build/upload marker: `xform-file-source-20260712-001`.
 
+Follow-up correction on 2026-07-12:
+
+- Symptom: hosted browser loaded the form heading and submit button, but no body fields.
+- Evidence: the uploaded XForm contained 428 body refs, but pyxform had serialized controls with `html:`/`ns1:` prefixes. The earlier rendered hand-authored form used `h:html` with the XForms namespace as the default namespace.
+- Fix: `scripts/xlsform-compile.py` now normalizes generated XML namespaces and fails validation unless the body is serialized in the ODK Web Forms-compatible shape.
+- Corrected published form version: `20260712182300000`.
+- Hosted verifier downloaded `16,673,209` bytes, parsed the XForm, and found `428` unique absolute body refs.
+
 ## Completed Slice: Monitoring Tool UX Foundation
 
 Implementation instructions:

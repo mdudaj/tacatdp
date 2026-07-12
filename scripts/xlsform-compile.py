@@ -25,6 +25,13 @@ XML_NS = {
     "h": "http://www.w3.org/1999/xhtml",
     "xf": "http://www.w3.org/2002/xforms",
 }
+OUTPUT_NAMESPACES = [
+    ("h", "http://www.w3.org/1999/xhtml"),
+    ("", "http://www.w3.org/2002/xforms"),
+    ("jr", "http://openrosa.org/javarosa"),
+    ("odk", "http://www.opendatakit.org/xforms"),
+    ("orx", "http://openrosa.org/xforms"),
+]
 
 
 def parse_args() -> argparse.Namespace:
@@ -112,6 +119,12 @@ def compile_xform(workbook: Path, output_xml: Path, skip_validate: bool) -> None
     subprocess.run(command, cwd=ROOT, check=True)
 
 
+def write_normalized_xform(tree: ET.ElementTree, xml_path: Path) -> None:
+    for prefix, namespace in OUTPUT_NAMESPACES:
+        ET.register_namespace(prefix, namespace)
+    tree.write(xml_path, encoding="utf-8", xml_declaration=True)
+
+
 def override_xform_metadata(xml_path: Path, form_title: str, version: str) -> None:
     tree = ET.parse(xml_path)
     root = tree.getroot()
@@ -122,7 +135,7 @@ def override_xform_metadata(xml_path: Path, form_title: str, version: str) -> No
     if data is None:
         raise SystemExit("Compiled XForm has no primary instance data node.")
     data.attrib["version"] = version
-    tree.write(xml_path, encoding="utf-8", xml_declaration=True)
+    write_normalized_xform(tree, xml_path)
 
 
 def validate_xml(xml_path: Path, expected_form_id: str, expected_version: str) -> dict[str, object]:
@@ -148,11 +161,14 @@ def validate_xml(xml_path: Path, expected_form_id: str, expected_version: str) -
     duplicates = sorted({ref for ref in refs if refs.count(ref) > 1})
     if duplicates:
         raise SystemExit(f"Compiled XForm has duplicate body refs rejected by ODK Web Forms: {', '.join(duplicates)}")
+    if "<h:body><input " not in text and "<h:body><select" not in text and "<h:body><group" not in text:
+        raise SystemExit("Compiled XForm was not serialized in the ODK Web Forms-compatible namespace shape.")
     return {
         "form_id": form_id,
         "version": version,
         "xml_bytes": len(text.encode("utf-8")),
         "body_ref_count": len(refs),
+        "namespace_shape": "h:html with default XForms controls",
     }
 
 
