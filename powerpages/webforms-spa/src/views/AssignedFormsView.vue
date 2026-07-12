@@ -51,7 +51,8 @@ const postSubmitMessage = ref('');
 const postSubmitTone = ref<'success' | 'warning'>('success');
 const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
 const submitting = ref(false);
-const buildMarker = 'runtime-error-focus-20260712-001';
+const formRuntimeLoading = ref(false);
+const buildMarker = 'form-runtime-loading-20260712-001';
 const previousBuildMarker = 'single-header-assignment-filter-20260711-001';
 const crdbLogoUrl = '/CRDB_Bank_PLC.svg';
 const runtimeClickStatus = ref('No ODK runtime button click observed in this page load.');
@@ -264,10 +265,11 @@ async function focusFirstRuntimeErrorAfterRender() {
 
 function resetRuntimeDiagnostics(assignment: FormAssignmentSummary) {
   runtimeStatus.value = selectedEditSubmission.value
-    ? 'Initializing ODK Web Forms edit session...'
-    : 'Initializing ODK Web Forms runtime...';
+    ? 'Preparing form edit session...'
+    : 'Preparing form runtime...';
   submitStatus.value = '';
   submitTone.value = 'neutral';
+  formRuntimeLoading.value = true;
   runtimeClickStatus.value = 'No ODK runtime button click observed for this selected form.';
   odkSubmitEventStatus.value = 'No ODK submit event observed for this selected form.';
   dataverseWriteStatus.value = 'No Dataverse submit write attempted for this selected form.';
@@ -311,6 +313,7 @@ async function openSavedSubmission(submission: SubmissionSummary) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (caught) {
     selectedEditSubmission.value = null;
+    formRuntimeLoading.value = false;
     error.value = caught instanceof Error ? caught.message : 'Unable to open saved record for editing.';
   } finally {
     loading.value = false;
@@ -361,9 +364,10 @@ function handleFormLoaded() {
     return;
   }
 
+  formRuntimeLoading.value = false;
   runtimeStatus.value = selectedEditSubmission.value
-    ? 'ODK Web Forms edit session loaded. Submit saves a new version for this record.'
-    : 'ODK Web Forms runtime loaded. Complete the form and submit online; editable local draft restore is the next slice.';
+    ? 'Form edit session loaded. Submit saves a new version for this record.'
+    : 'Form runtime loaded. Complete the form and submit online; editable local draft restore is the next slice.';
   relabelOdkSubmitButton();
 }
 
@@ -445,7 +449,7 @@ async function loadWorkspace() {
     }
     savedPage.value = 1;
     draftPage.value = 1;
-    runtimeStatus.value = selectedAssignment.value ? 'Initializing ODK Web Forms runtime...' : '';
+    runtimeStatus.value = selectedAssignment.value ? 'Preparing form runtime...' : '';
     submitStatus.value = '';
     submitTone.value = 'neutral';
     runtimeClickStatus.value = selectedAssignment.value
@@ -786,6 +790,12 @@ onUnmounted(() => {
       </section>
 
       <section v-if="selectedAssignment" class="runner-shell" :aria-label="selectedVersionLabel">
+        <section v-if="formRuntimeLoading" class="loading-panel loading-panel--runtime" aria-live="polite" aria-label="Loading form">
+          <img class="loading-logo" :src="crdbLogoUrl" alt="CRDB Bank">
+          <h2>Loading form</h2>
+          <p>Preparing the form runtime</p>
+          <span class="loading-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        </section>
         <section class="odk-runtime-host" aria-label="ODK Web Forms runtime">
           <OdkWebForm
             :key="`${selectedAssignment.formVersionId}:${selectedEditSubmission?.submissionId || 'new'}`"
