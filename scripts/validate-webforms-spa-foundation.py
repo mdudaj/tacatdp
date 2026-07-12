@@ -126,6 +126,10 @@ def validate_powerpages_hosting() -> None:
 
         template = site / "page-templates/Monitoring-Tool-SPA.pagetemplate.yml"
         home = site / "web-pages/home/Home.webpage.copy.html"
+        home_content_candidates = (
+            site / "web-pages/home/content-pages/en-US/Home.webpage.copy.html",
+            site / "web-pages/home/content-pages/Home.en-US.webpage.copy.html",
+        )
         footer = site / "web-templates/footer/Footer.webtemplate.source.html"
         footer_snippet_candidates = (
             site / "content-snippets/footer/en-US/Footer.contentsnippet.value.html",
@@ -137,9 +141,15 @@ def validate_powerpages_hosting() -> None:
             fail(f"missing {home.relative_to(ROOT)}")
         if not footer.exists():
             fail(f"missing {footer.relative_to(ROOT)}")
+        home_content = next((path for path in home_content_candidates if path.exists()), None)
+        if home_content is None:
+            fail(f"missing Home language content page under {site.relative_to(ROOT)}")
 
         template_text = template.read_text()
-        home_text = home.read_text()
+        home_texts = {
+            home.relative_to(ROOT): home.read_text(),
+            home_content.relative_to(ROOT): home_content.read_text(),
+        }
         footer_text = footer.read_text()
         footer_snippet = next((path for path in footer_snippet_candidates if path.exists()), None)
         if footer_snippet is None:
@@ -147,12 +157,13 @@ def validate_powerpages_hosting() -> None:
         footer_snippet_text = footer_snippet.read_text()
         if "usewebsiteheaderandfooter: true" not in template_text and "adx_usewebsiteheaderandfooter: true" not in template_text:
             fail("Monitoring Tool SPA page template must use the Power Pages header/footer runtime so shell.getTokenDeferred is available")
-        for forbidden in ("<!doctype", "<html", "<head", "<body"):
-            if forbidden in home_text.lower():
-                fail("Monitoring Tool Home copy must be a Power Pages page fragment, not a full HTML document")
-        for required in ("__TACATDP_POWERPAGES__", "index-3K1-wZQo.mjs", ".css"):
-            if required not in home_text:
-                fail(f"Monitoring Tool Home copy missing required hosted asset/bootstrap: {required}")
+        for home_path, home_text in home_texts.items():
+            for forbidden in ("<!doctype", "<html", "<head", "<body"):
+                if forbidden in home_text.lower():
+                    fail(f"Monitoring Tool Home copy must be a Power Pages page fragment, not a full HTML document: {home_path}")
+            for required in ("__TACATDP_POWERPAGES__", "index-3K1-wZQo.mjs", "index-D2gciYo5.css", "site-shell-footer-20260712-001"):
+                if required not in home_text:
+                    fail(f"Monitoring Tool Home copy missing required hosted asset/bootstrap {required}: {home_path}")
         for required in (
             "mt-site-footer",
             "mt-site-footer__inner",

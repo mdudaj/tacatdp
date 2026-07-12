@@ -1,22 +1,12 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TACATDP Monitoring Tool</title>
-    <script>
-      window.__TACATDP_POWERPAGES__ = {
-        isAuthenticated: {% if user %}true{% else %}false{% endif %},
-        userEmail: {% if user %}"{{ user.emailaddress1 | escape }}"{% else %}""{% endif %},
-        userName: {% if user %}"{{ user.fullname | escape }}"{% else %}""{% endif %}
-      };
-    </script>
-    <script type="module" crossorigin src="/assets/index-3K1-wZQo.mjs"></script>
-    <link rel="modulepreload" crossorigin href="/assets/runtime-core.esm-bundler-5TRCMxAO.mjs">
-    <link rel="modulepreload" crossorigin href="/assets/index-Cg9qvMI9-B1UfK9zv.mjs">
-    <link rel="stylesheet" crossorigin href="/assets/index-CLlTa1IS.css">
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
-</html>
+<script>
+  window.__TACATDP_POWERPAGES__ = {
+    isAuthenticated: {% if user %}true{% else %}false{% endif %},
+    userEmail: {% if user %}"{{ user.emailaddress1 | escape }}"{% else %}""{% endif %},
+    userName: {% if user %}"{{ user.fullname | escape }}"{% else %}""{% endif %}
+  };
+</script>
+<link rel="modulepreload" crossorigin href="/assets/runtime-core.esm-bundler-5TRCMxAO.mjs">
+<link rel="modulepreload" crossorigin href="/assets/index-Cg9qvMI9-B1UfK9zv.mjs">
+<link rel="stylesheet" crossorigin href="/assets/index-D2gciYo5.css?v=site-shell-footer-20260712-001">
+<div id="app"></div>
+<script type="module" crossorigin src="/assets/index-3K1-wZQo.mjs?v=site-shell-footer-20260712-001"></script>
