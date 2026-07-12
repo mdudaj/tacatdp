@@ -51,9 +51,10 @@ const postSubmitMessage = ref('');
 const postSubmitTone = ref<'success' | 'warning'>('success');
 const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
 const submitting = ref(false);
-const buildMarker = 'pagination-footer-20260712-001';
+const buildMarker = 'always-visible-pagination-app-footer-20260712-001';
 const previousBuildMarker = 'single-header-assignment-filter-20260711-001';
 const crdbLogoUrl = '/CRDB_Bank_PLC.svg';
+const currentYear = new Date().getFullYear();
 const runtimeClickStatus = ref('No ODK runtime button click observed in this page load.');
 const odkSubmitEventStatus = ref('No ODK submit event observed in this page load.');
 const dataverseWriteStatus = ref('No Dataverse submit write attempted in this page load.');
@@ -663,7 +664,7 @@ onUnmounted(() => {
           </section>
         </section>
 
-        <nav v-if="activeRecordCount > 0" class="pagination-bar" aria-label="Record pagination">
+        <nav class="pagination-bar" aria-label="Record pagination">
           <p class="pagination-summary">
             Showing {{ activePageStart }}-{{ activePageEnd }} of {{ activeRecordCount }}
           </p>
@@ -764,5 +765,9 @@ onUnmounted(() => {
         </details>
       </section>
     </template>
+
+    <footer class="app-footer" aria-label="Application footer">
+      CRDB @{{ currentYear }}
+    </footer>
   </main>
 </template>

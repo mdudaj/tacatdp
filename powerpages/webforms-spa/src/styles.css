@@ -61,7 +61,7 @@ body {
 .monitoring-shell {
   width: min(1180px, 100%);
   margin: 0 auto;
-  padding: clamp(14px, 3vw, 28px);
+  padding: clamp(14px, 3vw, 28px) clamp(14px, 3vw, 28px) 72px;
 }
 
 .sr-only {
@@ -742,6 +742,21 @@ body {
 .pagination-button:disabled {
   cursor: not-allowed;
   opacity: 0.45;
+}
+
+.app-footer {
+  position: fixed;
+  right: clamp(14px, 3vw, 28px);
+  bottom: var(--mt-space-3);
+  z-index: 20;
+  padding: var(--mt-space-2) var(--mt-space-3);
+  border: 1px solid var(--mt-color-border);
+  border-radius: var(--mt-radius-md);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--mt-color-text-muted);
+  box-shadow: var(--mt-shadow-soft);
+  font-size: 0.82rem;
+  font-weight: 800;
 }
 
 .empty-state--inline {
