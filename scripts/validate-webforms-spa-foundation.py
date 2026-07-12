@@ -127,6 +127,10 @@ def validate_powerpages_hosting() -> None:
         template = site / "page-templates/Monitoring-Tool-SPA.pagetemplate.yml"
         home = site / "web-pages/home/Home.webpage.copy.html"
         footer = site / "web-templates/footer/Footer.webtemplate.source.html"
+        footer_snippet_candidates = (
+            site / "content-snippets/footer/en-US/Footer.contentsnippet.value.html",
+            site / "content-snippets/footer/Footer.en-US.contentsnippet.value.html",
+        )
         if not template.exists():
             fail(f"missing {template.relative_to(ROOT)}")
         if not home.exists():
@@ -137,6 +141,10 @@ def validate_powerpages_hosting() -> None:
         template_text = template.read_text()
         home_text = home.read_text()
         footer_text = footer.read_text()
+        footer_snippet = next((path for path in footer_snippet_candidates if path.exists()), None)
+        if footer_snippet is None:
+            fail(f"missing footer content snippet under {site.relative_to(ROOT)}")
+        footer_snippet_text = footer_snippet.read_text()
         if "usewebsiteheaderandfooter: true" not in template_text and "adx_usewebsiteheaderandfooter: true" not in template_text:
             fail("Monitoring Tool SPA page template must use the Power Pages header/footer runtime so shell.getTokenDeferred is available")
         for forbidden in ("<!doctype", "<html", "<head", "<body"):
@@ -156,6 +164,9 @@ def validate_powerpages_hosting() -> None:
         ):
             if required not in footer_text:
                 fail(f"Power Pages Footer shell template missing required Monitoring Tool footer contract: {required}")
+        for forbidden in ("Copyright ©", "All rights reserved", "(c) CRDB"):
+            if forbidden in footer_snippet_text:
+                fail(f"Power Pages default footer content snippet must not render duplicate footer text: {footer_snippet.relative_to(ROOT)}")
 
 
 def validate_powerpages_session_contract() -> None:
