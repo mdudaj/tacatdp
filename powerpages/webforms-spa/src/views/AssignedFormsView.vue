@@ -52,7 +52,8 @@ const postSubmitTone = ref<'success' | 'warning'>('success');
 const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
 const submitting = ref(false);
 const formRuntimeLoading = ref(false);
-const buildMarker = 'form-runtime-loading-20260712-001';
+const formRuntimeMountReady = ref(false);
+const buildMarker = 'form-runtime-loading-paint-20260712-001';
 const previousBuildMarker = 'single-header-assignment-filter-20260711-001';
 const crdbLogoUrl = '/CRDB_Bank_PLC.svg';
 const runtimeClickStatus = ref('No ODK runtime button click observed in this page load.');
@@ -270,10 +271,18 @@ function resetRuntimeDiagnostics(assignment: FormAssignmentSummary) {
   submitStatus.value = '';
   submitTone.value = 'neutral';
   formRuntimeLoading.value = true;
+  formRuntimeMountReady.value = false;
   runtimeClickStatus.value = 'No ODK runtime button click observed for this selected form.';
   odkSubmitEventStatus.value = 'No ODK submit event observed for this selected form.';
   dataverseWriteStatus.value = 'No Dataverse submit write attempted for this selected form.';
   selectedAssignment.value = assignment;
+}
+
+async function prepareRuntimeMount() {
+  await nextTick();
+  window.setTimeout(() => {
+    formRuntimeMountReady.value = true;
+  }, 180);
 }
 
 function openProject(project: ProjectWorkspace) {
@@ -299,6 +308,7 @@ function openRunner(assignment = primaryAssignment.value) {
   resetRuntimeDiagnostics(assignment);
   activeView.value = 'runner';
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  void prepareRuntimeMount();
 }
 
 async function openSavedSubmission(submission: SubmissionSummary) {
@@ -311,9 +321,11 @@ async function openSavedSubmission(submission: SubmissionSummary) {
     resetRuntimeDiagnostics(context);
     activeView.value = 'runner';
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    void prepareRuntimeMount();
   } catch (caught) {
     selectedEditSubmission.value = null;
     formRuntimeLoading.value = false;
+    formRuntimeMountReady.value = false;
     error.value = caught instanceof Error ? caught.message : 'Unable to open saved record for editing.';
   } finally {
     loading.value = false;
@@ -768,6 +780,15 @@ onUnmounted(() => {
         </div>
       </section>
 
+      <section v-if="formRuntimeLoading" class="submit-overlay" aria-live="assertive" aria-label="Loading form">
+        <div class="submit-progress-panel" role="status">
+          <img class="loading-logo" :src="crdbLogoUrl" alt="CRDB Bank">
+          <h2>Loading form</h2>
+          <p>Preparing the form runtime</p>
+          <span class="loading-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        </div>
+      </section>
+
       <nav class="top-action-bar" aria-label="Form actions">
         <button class="icon-action icon-action--secondary" type="button" aria-label="Back to project records" @click="backToRecords">
           <ArrowLeft class="action-icon" aria-hidden="true" />
@@ -796,7 +817,7 @@ onUnmounted(() => {
           <p>Preparing the form runtime</p>
           <span class="loading-dots" aria-hidden="true"><i></i><i></i><i></i></span>
         </section>
-        <section class="odk-runtime-host" aria-label="ODK Web Forms runtime">
+        <section v-if="formRuntimeMountReady" class="odk-runtime-host" aria-label="ODK Web Forms runtime">
           <OdkWebForm
             :key="`${selectedAssignment.formVersionId}:${selectedEditSubmission?.submissionId || 'new'}`"
             :form-xml="selectedAssignment.xformXml"
