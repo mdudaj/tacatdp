@@ -1,1 +1,33 @@
-<!-- Monitoring Tool owns app footer/status. Keep the default Power Pages footer blank. -->
+<style>
+  .mt-site-footer,
+  .mt-site-footer *,
+  .mt-site-footer *::before,
+  .mt-site-footer *::after {
+    box-sizing: border-box;
+  }
+
+  .mt-site-footer {
+    width: min(1180px, 100%);
+    margin: 0 auto;
+    padding: 12px clamp(14px, 3vw, 28px) clamp(14px, 3vw, 28px);
+    color: #5c6b60;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  }
+
+  .mt-site-footer__inner {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 32px;
+    border-top: 1px solid #d7e4d1;
+    padding-top: 12px;
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+</style>
+
+<footer class="mt-site-footer" role="contentinfo">
+  <div class="mt-site-footer__inner">
+    (c) CRDB {{ now | date: 'yyyy' }}
+  </div>
+</footer>

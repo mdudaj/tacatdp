@@ -51,10 +51,9 @@ const postSubmitMessage = ref('');
 const postSubmitTone = ref<'success' | 'warning'>('success');
 const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
 const submitting = ref(false);
-const buildMarker = 'designed-pagination-footer-20260712-001';
+const buildMarker = 'site-shell-footer-20260712-001';
 const previousBuildMarker = 'single-header-assignment-filter-20260711-001';
 const crdbLogoUrl = '/CRDB_Bank_PLC.svg';
-const currentYear = new Date().getFullYear();
 const runtimeClickStatus = ref('No ODK runtime button click observed in this page load.');
 const odkSubmitEventStatus = ref('No ODK submit event observed in this page load.');
 const dataverseWriteStatus = ref('No Dataverse submit write attempted in this page load.');
@@ -765,9 +764,5 @@ onUnmounted(() => {
         </details>
       </section>
     </template>
-
-    <footer class="app-footer" aria-label="Application footer">
-      (c) CRDB {{ currentYear }}
-    </footer>
   </main>
 </template>

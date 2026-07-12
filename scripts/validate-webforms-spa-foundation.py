@@ -126,13 +126,17 @@ def validate_powerpages_hosting() -> None:
 
         template = site / "page-templates/Monitoring-Tool-SPA.pagetemplate.yml"
         home = site / "web-pages/home/Home.webpage.copy.html"
+        footer = site / "web-templates/footer/Footer.webtemplate.source.html"
         if not template.exists():
             fail(f"missing {template.relative_to(ROOT)}")
         if not home.exists():
             fail(f"missing {home.relative_to(ROOT)}")
+        if not footer.exists():
+            fail(f"missing {footer.relative_to(ROOT)}")
 
         template_text = template.read_text()
         home_text = home.read_text()
+        footer_text = footer.read_text()
         if "usewebsiteheaderandfooter: true" not in template_text and "adx_usewebsiteheaderandfooter: true" not in template_text:
             fail("Monitoring Tool SPA page template must use the Power Pages header/footer runtime so shell.getTokenDeferred is available")
         for forbidden in ("<!doctype", "<html", "<head", "<body"):
@@ -141,6 +145,17 @@ def validate_powerpages_hosting() -> None:
         for required in ("__TACATDP_POWERPAGES__", "index-3K1-wZQo.mjs", ".css"):
             if required not in home_text:
                 fail(f"Monitoring Tool Home copy missing required hosted asset/bootstrap: {required}")
+        for required in (
+            "mt-site-footer",
+            "mt-site-footer__inner",
+            "role=\"contentinfo\"",
+            "(c) CRDB",
+            "now | date: 'yyyy'",
+            "width: min(1180px, 100%)",
+            "justify-content: flex-end",
+        ):
+            if required not in footer_text:
+                fail(f"Power Pages Footer shell template missing required Monitoring Tool footer contract: {required}")
 
 
 def validate_powerpages_session_contract() -> None:
@@ -149,6 +164,8 @@ def validate_powerpages_session_contract() -> None:
     drafts = (SPA / "src/offline/drafts.ts").read_text()
     if '<header class="app-header">' in view:
         fail("SPA must not render a second CRDB/session header; use the Power Pages Header template for visible chrome")
+    if "app-footer" in view:
+        fail("SPA must not render the copyright footer; use the Power Pages Footer shell template")
     for required in (
         "getSignedInUserEmail",
         "$filter=mp_useremail eq",
@@ -181,7 +198,7 @@ def validate_powerpages_session_contract() -> None:
         if required not in client:
             fail(f"Global saved-record/edit API path missing required guardrail: {required}")
     for required in (
-        "designed-pagination-footer-20260712-001",
+        "site-shell-footer-20260712-001",
         "type AppView = 'projects' | 'records' | 'runner'",
         "Add new",
         "Saved",
@@ -214,9 +231,6 @@ def validate_powerpages_session_contract() -> None:
         "Showing {{ activePageStart }}-{{ activePageEnd }} of {{ activeRecordCount }}",
         "Page {{ activeRecordPage }} of {{ activeTotalPages }}",
         "pagination-button--active",
-        "currentYear",
-        "app-footer",
-        "(c) CRDB {{ currentYear }}",
         "activeView.value = selectedProject.value ? 'records' : 'projects'",
         "activeRecordTab.value = 'saved'",
         "existingSubmission: selectedEditSubmission.value",
@@ -283,7 +297,7 @@ def main() -> int:
         "preventRuntimeButtonDefault",
         "document.addEventListener('submit'",
         "document.addEventListener('click'",
-        "designed-pagination-footer-20260712-001",
+        "site-shell-footer-20260712-001",
         "Last runtime click",
         "Last ODK submit event",
         "Last Dataverse write",
