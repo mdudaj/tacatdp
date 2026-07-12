@@ -146,6 +146,7 @@ def validate_powerpages_hosting() -> None:
 def validate_powerpages_session_contract() -> None:
     view = (SPA / "src/views/AssignedFormsView.vue").read_text()
     client = (SPA / "src/powerpages-api/client.ts").read_text()
+    drafts = (SPA / "src/offline/drafts.ts").read_text()
     if '<header class="app-header">' in view:
         fail("SPA must not render a second CRDB/session header; use the Power Pages Header template for visible chrome")
     for required in (
@@ -157,15 +158,33 @@ def validate_powerpages_session_contract() -> None:
         if required not in client:
             fail(f"Power Pages assignment API must filter by the signed-in email: missing {required}")
     for required in (
-        "crud-workspace-shell-20260712-001",
+        "icon-honest-drafts-20260712-001",
         "type AppView = 'projects' | 'records' | 'runner'",
         "Add new",
         "Saved",
         "Drafts",
         "Open",
+        "@lucide/vue",
+        "ArrowLeft",
+        "FolderOpen",
+        "RefreshCw",
+        "FilePenLine",
+        "Editable local draft save and restore is not enabled yet",
     ):
         if required not in view:
             fail(f"Monitoring Tool CRUD workspace shell missing required text or state: {required}")
+    handle_loaded = re.search(r"function handleFormLoaded\(\)\s*\{(?P<body>.*?)\nasync function handleSubmit", view, flags=re.S)
+    if not handle_loaded:
+        fail("Monitoring Tool runner must keep an explicit handleFormLoaded function")
+    if "draftStore.save" in handle_loaded.group("body"):
+        fail("handleFormLoaded must not create local drafts; drafts require restorable ODK instance state")
+    if "Local runtime marker saved" in view or "Open a form once to create a local draft marker" in view:
+        fail("Monitoring Tool must not present runtime-load markers as local drafts")
+    for glyph in ('aria-hidden="true">></span>', 'aria-hidden="true"><</span>', 'aria-hidden="true">R</span>', 'aria-hidden="true">S</span>', 'aria-hidden="true">D</span>', 'aria-hidden="true">+</span>'):
+        if glyph in view:
+            fail(f"Monitoring Tool actions must use icon components, not text glyphs: {glyph}")
+    if "RuntimeLoaded" not in drafts or "isRestorableDraft" not in drafts:
+        fail("Draft store must filter non-restorable runtime-load markers")
 
 
 def main() -> int:
@@ -186,7 +205,7 @@ def main() -> int:
         if script not in package.get("scripts", {}):
             fail(f"package.json missing script {script}")
     dependencies = package.get("dependencies", {})
-    for dependency in ("@getodk/web-forms", "@getodk/xforms-engine"):
+    for dependency in ("@getodk/web-forms", "@getodk/xforms-engine", "@lucide/vue"):
         if dependency not in dependencies:
             fail(f"package.json missing reviewed ODK dependency {dependency}")
 
@@ -213,7 +232,7 @@ def main() -> int:
         "preventRuntimeButtonDefault",
         "document.addEventListener('submit'",
         "document.addEventListener('click'",
-        "crud-workspace-shell-20260712-001",
+        "icon-honest-drafts-20260712-001",
         "Last runtime click",
         "Last ODK submit event",
         "Last Dataverse write",

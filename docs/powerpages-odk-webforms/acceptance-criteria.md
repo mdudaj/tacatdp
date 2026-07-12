@@ -3,7 +3,7 @@
 - Power Pages site source is downloaded under `powerpages/tacatdp-monitoring-tool/`.
 - ODK Central-inspired schema artifacts exist and have a dry-run Dataverse plan.
 - One assigned XForm-backed form can be read by an authenticated Power Pages user.
-- Draft state can be saved locally and restored.
+- The UI does not create or display a draft unless the stored browser-local state is restorable. Runtime-load markers are not drafts.
 - Online submit creates a submission header and current submission version.
 - One attachment is represented as a `SubmissionAttachments` row linked to the submission version.
 - Browser binary upload through the Power Pages route is attempted with the documented Dataverse single-request file-column pattern and must report whether Power Pages accepted or rejected the binary content.
@@ -34,9 +34,16 @@
 
 - The assigned form view imports `OdkWebForm` from `@getodk/web-forms`.
 - The selected assignment's XForm XML is passed to the ODK runtime from the Power Pages `/_api` client result.
-- The runtime `loaded` event saves a browser-local IndexedDB marker and refreshes the local draft count.
+- The runtime `loaded` event updates only the runtime status. It must not save a browser-local draft marker or refresh a misleading local draft count.
 - The runtime `submit` event validates ODK payload readiness and writes the canonical instance XML through Power Pages `/_api`.
 - `npm run build` succeeds for `powerpages/webforms-spa/`.
+
+## Monitoring Tool UX Acceptance
+
+- Shell actions use the maintained `@lucide/vue` icon package rather than text glyphs.
+- Back actions use `ArrowLeft`; Open actions use `FolderOpen`; pagination uses chevron icons.
+- The project workspace does not show old non-restorable runtime-load markers as local drafts.
+- The empty draft state tells users that editable local draft save/restore is not enabled yet.
 
 ## Dataverse Submission Mapping Acceptance
 

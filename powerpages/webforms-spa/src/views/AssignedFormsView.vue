@@ -1,5 +1,16 @@
 <script setup lang="ts">
 import { OdkWebForm, POST_SUBMIT__NEW_INSTANCE } from '@getodk/web-forms';
+import {
+  ArrowLeft,
+  ChevronLeft,
+  ChevronRight,
+  Database,
+  FilePenLine,
+  FolderOpen,
+  LogIn,
+  Plus,
+  RefreshCw,
+} from '@lucide/vue';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { draftStore, type LocalDraft } from '../offline/drafts';
 import { PowerPagesApiClient } from '../powerpages-api/client';
@@ -33,7 +44,7 @@ const online = ref(typeof navigator === 'undefined' ? true : navigator.onLine);
 const runtimeStatus = ref('');
 const submitStatus = ref('');
 const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
-const buildMarker = 'crud-workspace-shell-20260712-001';
+const buildMarker = 'icon-honest-drafts-20260712-001';
 const previousBuildMarker = 'single-header-assignment-filter-20260711-001';
 const runtimeClickStatus = ref('No ODK runtime button click observed in this page load.');
 const odkSubmitEventStatus = ref('No ODK submit event observed in this page load.');
@@ -62,12 +73,6 @@ const activeRecordPage = computed(() => activeRecordTab.value === 'saved' ? save
 const activeTotalPages = computed(() => Math.max(1, Math.ceil(activeRecordCount.value / pageSize)));
 const pagedSavedSubmissions = computed(() => paginate(submissions.value, savedPage.value));
 const pagedDrafts = computed(() => paginate(localDrafts.value, draftPage.value));
-const selectedDraftId = computed(() => {
-  if (!selectedAssignment.value) {
-    return '';
-  }
-  return `assignment:${selectedAssignment.value.assignmentId}:form-version:${selectedAssignment.value.formVersionId}`;
-});
 const selectedVersionLabel = computed(() => {
   if (!selectedAssignment.value) {
     return '';
@@ -187,24 +192,12 @@ async function refreshLocalDrafts() {
   localDrafts.value = await draftStore.list();
 }
 
-async function handleFormLoaded() {
-  if (!selectedAssignment.value || !selectedDraftId.value) {
+function handleFormLoaded() {
+  if (!selectedAssignment.value) {
     return;
   }
 
-  await draftStore.save({
-    id: selectedDraftId.value,
-    assignmentKey: selectedAssignment.value.assignmentKey,
-    formVersionId: selectedAssignment.value.formVersionId,
-    updatedAt: new Date().toISOString(),
-    payload: {
-      status: 'RuntimeLoaded',
-      xmlFormId: selectedAssignment.value.xmlFormId,
-      version: selectedAssignment.value.version,
-    },
-  });
-  await refreshLocalDrafts();
-  runtimeStatus.value = 'ODK Web Forms runtime loaded. Local runtime marker saved.';
+  runtimeStatus.value = 'ODK Web Forms runtime loaded. Complete the form and submit online; editable local draft restore is the next slice.';
   relabelOdkSubmitButton();
 }
 
@@ -313,7 +306,7 @@ onUnmounted(() => {
       <h1 id="auth-title">Sign in required</h1>
       <p>Use your Microsoft account to continue to Monitoring Tool.</p>
       <a class="primary-action" :href="api.getSignInUrl()">
-        <span class="action-icon" aria-hidden="true">></span>
+        <LogIn class="action-icon" aria-hidden="true" />
         Sign in with Microsoft
       </a>
     </section>
@@ -327,7 +320,7 @@ onUnmounted(() => {
         </div>
         <div class="hero-actions">
           <button class="icon-action icon-action--secondary" type="button" :disabled="loading" aria-label="Refresh projects" @click="loadWorkspace">
-            <span class="action-icon" aria-hidden="true">R</span>
+            <RefreshCw class="action-icon" aria-hidden="true" />
             Refresh
           </button>
         </div>
@@ -380,7 +373,7 @@ onUnmounted(() => {
             </dl>
           </div>
           <button class="icon-action" type="button" :aria-label="`Open ${project.name}`" @click="openProject(project)">
-            <span class="action-icon" aria-hidden="true">></span>
+            <FolderOpen class="action-icon" aria-hidden="true" />
             Open
           </button>
         </article>
@@ -395,7 +388,7 @@ onUnmounted(() => {
     <template v-else-if="activeView === 'records'">
       <nav class="top-action-bar" aria-label="Project actions">
         <button class="icon-action icon-action--secondary" type="button" aria-label="Back to projects" @click="backToProjects">
-          <span class="action-icon" aria-hidden="true"><</span>
+          <ArrowLeft class="action-icon" aria-hidden="true" />
           Back
         </button>
         <div class="top-action-title">
@@ -404,7 +397,7 @@ onUnmounted(() => {
           <p>{{ online ? 'Online' : 'Offline' }} · {{ savedCount }} saved · {{ draftCount }} local draft{{ draftCount === 1 ? '' : 's' }}</p>
         </div>
         <button class="icon-action" type="button" :disabled="!primaryAssignment" aria-label="Add new record" @click="openRunner()">
-          <span class="action-icon" aria-hidden="true">+</span>
+          <Plus class="action-icon" aria-hidden="true" />
           Add new
         </button>
       </nav>
@@ -423,7 +416,7 @@ onUnmounted(() => {
             :aria-selected="activeRecordTab === 'saved'"
             @click="selectTab('saved')"
           >
-            <span class="action-icon" aria-hidden="true">S</span>
+            <Database class="action-icon" aria-hidden="true" />
             Saved
             <span class="tab-count">{{ savedCount }}</span>
           </button>
@@ -435,7 +428,7 @@ onUnmounted(() => {
             :aria-selected="activeRecordTab === 'drafts'"
             @click="selectTab('drafts')"
           >
-            <span class="action-icon" aria-hidden="true">D</span>
+            <FilePenLine class="action-icon" aria-hidden="true" />
             Drafts
             <span class="tab-count">{{ draftCount }}</span>
           </button>
@@ -455,7 +448,7 @@ onUnmounted(() => {
             <div class="data-card__actions">
               <span class="state-chip">Submitted</span>
               <button class="icon-action icon-action--secondary" type="button" @click="openRunner()">
-                <span class="action-icon" aria-hidden="true">></span>
+                <FolderOpen class="action-icon" aria-hidden="true" />
                 Open
               </button>
             </div>
@@ -480,26 +473,26 @@ onUnmounted(() => {
             <div class="data-card__actions">
               <span class="state-chip state-chip--draft">Local</span>
               <button class="icon-action icon-action--secondary" type="button" @click="openRunner()">
-                <span class="action-icon" aria-hidden="true">></span>
+                <FolderOpen class="action-icon" aria-hidden="true" />
                 Open
               </button>
             </div>
           </article>
           <section v-if="draftCount === 0" class="empty-state empty-state--inline" aria-label="No local drafts">
             <h2>No local drafts</h2>
-            <p>Open a form once to create a local draft marker for offline continuity.</p>
+            <p>Editable local draft save and restore is not enabled yet. Use Add new to capture and submit online.</p>
           </section>
         </section>
 
         <nav v-if="activeRecordCount > pageSize" class="pagination-bar" aria-label="Record pagination">
           <button class="icon-action icon-action--secondary" type="button" :disabled="activeRecordPage <= 1" @click="changePage(-1)">
-            <span class="action-icon" aria-hidden="true"><</span>
+            <ChevronLeft class="action-icon" aria-hidden="true" />
             Previous
           </button>
           <span>Page {{ activeRecordPage }} of {{ activeTotalPages }}</span>
           <button class="icon-action icon-action--secondary" type="button" :disabled="activeRecordPage >= activeTotalPages" @click="changePage(1)">
             Next
-            <span class="action-icon" aria-hidden="true">></span>
+            <ChevronRight class="action-icon" aria-hidden="true" />
           </button>
         </nav>
       </section>
@@ -508,7 +501,7 @@ onUnmounted(() => {
     <template v-else>
       <nav class="top-action-bar" aria-label="Form actions">
         <button class="icon-action icon-action--secondary" type="button" aria-label="Back to project records" @click="backToRecords">
-          <span class="action-icon" aria-hidden="true"><</span>
+          <ArrowLeft class="action-icon" aria-hidden="true" />
           Back
         </button>
         <div class="top-action-title">
@@ -517,7 +510,7 @@ onUnmounted(() => {
           <p v-if="selectedAssignment">Version {{ selectedAssignment.version }} · {{ selectedAssignment.xmlFormId }} · {{ online ? 'Online' : 'Offline' }}</p>
         </div>
         <button class="icon-action icon-action--secondary" type="button" :disabled="loading" aria-label="Refresh workspace" @click="loadWorkspace">
-          <span class="action-icon" aria-hidden="true">R</span>
+          <RefreshCw class="action-icon" aria-hidden="true" />
           Refresh
         </button>
       </nav>

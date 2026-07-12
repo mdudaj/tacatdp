@@ -31,7 +31,7 @@
 - [x] Build the SPA locally.
 - [x] Load one XForm XML payload through the API client.
 - [x] Render through ODK Web Forms/XForms engine.
-- [x] Save a browser-local runtime marker in IndexedDB after form load.
+- [x] Removed browser-local runtime marker creation after form load because it produced false, non-restorable drafts.
 - [x] Keep automated hosted-state smoke verifier as a required gate.
 
 ## Current Slice: Dataverse Submission Mapping
@@ -103,4 +103,14 @@ If clicking ODK Send appears to reload the page or returns to the top with answe
 - [x] Use Open for existing saved/draft cards and avoid Start in the shell.
 - [x] Preserve online/offline status in the project workspace and runner top bar.
 - [x] Keep ODK Web Forms isolated inside `OdkRuntimeBoundary`.
+- [x] Replace text glyph action markers (`<`, `>`, `R`, `S`, `D`, `+`) with maintained Lucide Vue icons.
+- [x] Filter non-restorable runtime-load markers out of the Drafts list.
+- [x] Update source validator so form load cannot reintroduce automatic draft marker creation.
 - [ ] Verify the signed-in browser shows only one CRDB header, project cards first, and the project detail data-card tabs.
+
+## Next Slice: Editable Record/Draft Resume
+
+- [ ] Research and prove the ODK Web Forms-supported way to initialize the runtime from saved instance XML/state.
+- [ ] Store local draft instance XML/state, not just metadata.
+- [ ] Open a saved Dataverse submission into an editable or read-only runner state according to lifecycle/review rules.
+- [ ] Add automated checks that Open does not create a new record or draft unless the user explicitly chooses Add new or Save draft.

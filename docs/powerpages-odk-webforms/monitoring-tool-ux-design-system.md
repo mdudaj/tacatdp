@@ -62,6 +62,7 @@ For the current single-project MVP, use the same project-first pattern that will
 - The active card/list pattern should look like normal CRUD, not a survey launcher or diagnostics page.
 - Cards and action areas use a restrained CRDB left accent strip. State text must be visible; do not communicate state by color alone.
 - Use **Open** for existing work and **Add new** for new submissions. Avoid "Start" in the project/data list shell.
+- Draft cards must represent restorable ODK instance state. Do not display runtime-load markers as drafts because opening them creates an empty form and teaches the wrong workflow.
 
 ### Form Loading
 
@@ -123,7 +124,8 @@ Before improving the UI:
 4. Create or update shared shell components/tokens first; avoid page-local styling.
 5. Keep ODK Web Forms in `OdkRuntimeBoundary` and verify host CSS does not style ODK controls except for explicitly documented host boundary spacing/footer adjustments.
 6. Keep icon+text action controls for Back, Refresh, Add new, and Open.
-7. Build and visually check both mobile and desktop widths before upload.
+7. Use the maintained `@lucide/vue` package for shell icons. Back uses `ArrowLeft`; Open uses `FolderOpen`; Add new uses `Plus`; Refresh uses `RefreshCw`; Saved uses `Database`; Drafts uses `FilePenLine`. Do not use text glyphs such as `<`, `>`, `R`, `S`, `D`, or `+` as icons.
+8. Build and visually check both mobile and desktop widths before upload.
 
 ## Acceptance Criteria
 
@@ -132,6 +134,7 @@ Before improving the UI:
 - Authenticated users land on a work queue, not a prototype diagnostic page.
 - Authenticated users first see project cards.
 - Project detail shows Saved and Drafts tabs, 10 cards per page, Open actions, and Add new in the top action bar.
+- Drafts tab does not show stale runtime-load markers as editable drafts.
 - Loading uses the CRDB branded `LoadingPanel`.
 - The form runner has a top action bar and a full-width ODK runtime area.
 - Prototype diagnostics are hidden behind a debug panel.
