@@ -53,8 +53,6 @@ const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
 const submitting = ref(false);
 const formRuntimeLoading = ref(false);
 const formRuntimeMountReady = ref(false);
-const buildMarker = 'form-runtime-loading-paint-20260712-001';
-const previousBuildMarker = 'single-header-assignment-filter-20260711-001';
 const crdbLogoUrl = '/CRDB_Bank_PLC.svg';
 const runtimeClickStatus = ref('No ODK runtime button click observed in this page load.');
 const odkSubmitEventStatus = ref('No ODK submit event observed in this page load.');
@@ -830,17 +828,6 @@ onUnmounted(() => {
           />
         </section>
 
-        <details class="debug-panel">
-          <summary>Technical diagnostics</summary>
-          <div class="debug-grid">
-            <p>Build {{ buildMarker }}</p>
-            <p>Previous renderer marker {{ previousBuildMarker }}</p>
-            <p>{{ selectedAssignment.xformXml.length }} bytes of XForm XML loaded.</p>
-            <p>Last runtime click: {{ runtimeClickStatus }}</p>
-            <p>Last ODK submit event: {{ odkSubmitEventStatus }}</p>
-            <p>Last Dataverse write: {{ dataverseWriteStatus }}</p>
-          </div>
-        </details>
       </section>
     </template>
   </main>

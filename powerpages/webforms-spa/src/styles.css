@@ -773,33 +773,6 @@ body {
   gap: var(--mt-space-5);
 }
 
-.debug-panel {
-  margin-bottom: var(--mt-space-7);
-  border: 1px solid var(--mt-color-border);
-  border-radius: var(--mt-radius-md);
-  background: var(--mt-color-surface);
-  color: var(--mt-color-text-muted);
-  box-shadow: var(--mt-shadow-soft);
-}
-
-.debug-panel summary {
-  min-height: 44px;
-  padding: var(--mt-space-3) var(--mt-space-4);
-  cursor: pointer;
-  font-weight: 800;
-}
-
-.debug-grid {
-  display: grid;
-  gap: var(--mt-space-2);
-  padding: 0 var(--mt-space-4) var(--mt-space-4);
-  font-size: 0.875rem;
-}
-
-.debug-grid p {
-  margin: 0;
-  overflow-wrap: anywhere;
-}
 
 .odk-runtime-host {
   width: min(960px, 100%);

@@ -164,7 +164,7 @@ def validate_powerpages_hosting() -> None:
             for forbidden in ("<!doctype", "<html", "<head", "<body"):
                 if forbidden in home_text.lower():
                     fail(f"Monitoring Tool Home copy must be a Power Pages page fragment, not a full HTML document: {home_path}")
-            for required in ("__TACATDP_POWERPAGES__", "index-3K1-wZQo.mjs", "index-D2gciYo5.css", "form-runtime-loading-paint-20260712-001"):
+            for required in ("__TACATDP_POWERPAGES__", "index-3K1-wZQo.mjs", "index-D2gciYo5.css", "remove-technical-diagnostics-20260712-001"):
                 if required not in home_text:
                     fail(f"Monitoring Tool Home copy missing required hosted asset/bootstrap {required}: {home_path}")
         for required in (
@@ -223,7 +223,6 @@ def validate_powerpages_session_contract() -> None:
         if required not in client:
             fail(f"Global saved-record/edit API path missing required guardrail: {required}")
     for required in (
-        "form-runtime-loading-paint-20260712-001",
         "type AppView = 'projects' | 'records' | 'runner'",
         "Add new",
         "Saved",
@@ -322,7 +321,6 @@ def main() -> int:
         "preventRuntimeButtonDefault",
         "document.addEventListener('submit'",
         "document.addEventListener('click'",
-        "form-runtime-loading-paint-20260712-001",
         "formRuntimeLoading",
         "formRuntimeMountReady",
         "prepareRuntimeMount",
@@ -331,9 +329,6 @@ def main() -> int:
         "aria-label=\"Loading form\"",
         "loading-panel--runtime",
         "Form runtime loaded",
-        "Last runtime click",
-        "Last ODK submit event",
-        "Last Dataverse write",
         "attachmentBinaryUploadCount",
         "attachmentWarnings",
         "relabelOdkSubmitButton",
@@ -355,6 +350,9 @@ def main() -> int:
     ):
         if expected not in all_text:
             fail(f"missing required ODK runtime proof string: {expected}")
+    for forbidden in ("Technical diagnostics", "debug-panel", "Previous renderer marker"):
+        if forbidden in all_text:
+            fail(f"diagnostics UI must not be visible in the Monitoring Tool runtime: {forbidden}")
     validate_seed_xform_body_refs()
     validate_odk_style_isolation()
     validate_powerpages_hosting()
