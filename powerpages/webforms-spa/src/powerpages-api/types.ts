@@ -38,6 +38,7 @@ export interface FormAssignmentSummary {
 export interface SubmissionRow {
   mp_submissionid: string;
   mp_instanceid: string;
+  mp_useremail?: string;
   mp_submittedat?: string;
   mp_updatedat?: string;
   mp_lifecyclestatus?: number;
@@ -47,6 +48,8 @@ export interface SubmissionRow {
 export interface SubmissionVersionRow {
   mp_submissionversionid: string;
   mp_versionnumber: number;
+  mp_xformsubmissionxml?: string;
+  mp_submissionjson?: string;
 }
 
 export interface OdkSubmitResult {
@@ -62,8 +65,13 @@ export interface OdkSubmitResult {
 export interface SubmissionSummary {
   submissionId: string;
   instanceId: string;
+  userEmail?: string;
   submittedAt?: string;
   updatedAt?: string;
   lifecycleStatus?: number;
   reviewState?: number;
+  assignmentKey?: string;
+  formVersionId?: string;
+  xmlFormId?: string;
+  versionNumber?: number;
 }

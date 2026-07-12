@@ -44,6 +44,10 @@
 - Back actions use `ArrowLeft`; Open actions use `FolderOpen`; pagination uses chevron icons.
 - The project workspace does not show old non-restorable runtime-load markers as local drafts.
 - The empty draft state tells users that editable local draft save/restore is not enabled yet.
+- The Saved tab lists all submitted records readable by the authenticated user's Power Pages table permissions; it must not filter submitted records by `mp_useremail`.
+- The Saved/Drafts toolbar includes a search input at the end and filters as the user types.
+- Saved submitted records show owner email, version, updated timestamp, and an Edit action.
+- Edit opens ODK Web Forms using `editInstance` and the latest `SubmissionVersions.XFormSubmissionXml`; submit writes a new submission version for the same ODK instance id.
 
 ## Dataverse Submission Mapping Acceptance
 

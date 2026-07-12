@@ -134,23 +134,57 @@ export class PowerPagesApiClient {
       return [];
     }
 
-    const signedInEmail = this.getSignedInUserEmail();
-    if (!signedInEmail) {
-      throw new Error('Power Pages session did not provide a signed-in email for submission filtering.');
-    }
-
     const submissions = await this.get<DataverseCollection<SubmissionRow>>(
-      `/_api/mp_submissions?$select=mp_submissionid,mp_instanceid,mp_submittedat,mp_updatedat,mp_lifecyclestatus,mp_reviewstate&$filter=mp_useremail eq '${this.escapeODataString(signedInEmail)}'&$orderby=mp_updatedat desc&$top=50`,
+      `/_api/mp_submissions?$select=mp_submissionid,mp_instanceid,mp_useremail,mp_submittedat,mp_updatedat,mp_lifecyclestatus,mp_reviewstate&$filter=mp_lifecyclestatus eq ${SUBMISSION_LIFECYCLE_SUBMITTED}&$orderby=mp_updatedat desc&$top=5000`,
     );
 
-    return submissions.value.map((submission) => ({
-      submissionId: submission.mp_submissionid,
-      instanceId: submission.mp_instanceid,
-      submittedAt: submission.mp_submittedat,
-      updatedAt: submission.mp_updatedat,
-      lifecycleStatus: submission.mp_lifecyclestatus,
-      reviewState: submission.mp_reviewstate,
+    return Promise.all(submissions.value.map(async (submission) => {
+      const latestVersion = await this.getLatestSubmissionVersionByInstanceId(submission.mp_instanceid);
+      const metadata = this.parseSubmissionMetadata(latestVersion?.mp_submissionjson);
+      return {
+        submissionId: submission.mp_submissionid,
+        instanceId: submission.mp_instanceid,
+        userEmail: submission.mp_useremail,
+        submittedAt: submission.mp_submittedat,
+        updatedAt: submission.mp_updatedat,
+        lifecycleStatus: submission.mp_lifecyclestatus,
+        reviewState: submission.mp_reviewstate,
+        assignmentKey: metadata.assignmentKey,
+        formVersionId: metadata.formVersionId,
+        xmlFormId: metadata.xmlFormId,
+        versionNumber: latestVersion?.mp_versionnumber,
+      };
     }));
+  }
+
+  async getSubmissionFormContext(submission: SubmissionSummary): Promise<FormAssignmentSummary> {
+    if (!submission.formVersionId) {
+      throw new Error(`Submission ${submission.instanceId} does not include formVersionId metadata for edit mode.`);
+    }
+
+    const formVersion = await this.getFormVersion(submission.formVersionId);
+    const form = await this.getForm(formVersion._mp_form_value);
+
+    return {
+      assignmentId: `submission:${submission.submissionId}`,
+      assignmentKey: submission.assignmentKey ?? `submission:${submission.instanceId}`,
+      userEmail: submission.userEmail,
+      formVersionId: submission.formVersionId,
+      formId: formVersion._mp_form_value,
+      formName: form.mp_name,
+      xmlFormId: form.mp_xmlformid,
+      version: formVersion.mp_version,
+      xformXml: formVersion.mp_xformxml,
+    };
+  }
+
+  async getLatestSubmissionXml(instanceId: string): Promise<string> {
+    const latestVersion = await this.getLatestSubmissionVersionByInstanceId(instanceId);
+    if (!latestVersion?.mp_xformsubmissionxml) {
+      throw new Error(`No saved XForm submission XML was found for ${instanceId}.`);
+    }
+
+    return latestVersion.mp_xformsubmissionxml;
   }
 
   async submitOdkSubmission(assignment: FormAssignmentSummary, payload: unknown): Promise<OdkSubmitResult> {
@@ -182,6 +216,9 @@ export class PowerPagesApiClient {
       versionNumber,
       xml,
     });
+    if (existingSubmission) {
+      await this.updateSubmission(existingSubmission.mp_submissionid, now);
+    }
     const attachmentResults = await this.createSubmissionAttachments(submissionVersionId, attachments, now);
 
     return {
@@ -296,6 +333,14 @@ export class PowerPagesApiClient {
     return (versions.value[0]?.mp_versionnumber ?? 0) + 1;
   }
 
+  private async getLatestSubmissionVersionByInstanceId(instanceId: string): Promise<SubmissionVersionRow | null> {
+    const versions = await this.get<DataverseCollection<SubmissionVersionRow>>(
+      `/_api/mp_submissionversions?$select=mp_submissionversionid,mp_versionnumber,mp_xformsubmissionxml,mp_submissionjson&$filter=mp_instanceid eq '${this.escapeODataString(instanceId)}'&$orderby=mp_versionnumber desc&$top=1`,
+    );
+
+    return versions.value[0] ?? null;
+  }
+
   private async createRecord(url: string, body: unknown): Promise<string> {
     const response = await this.send(url, { method: 'POST', body });
     const entityId = response.headers.get('entityid') ?? response.headers.get('OData-EntityId');
@@ -304,6 +349,17 @@ export class PowerPagesApiClient {
       throw new Error(`Power Pages Web API create did not return an entity id for ${url}.`);
     }
     return id;
+  }
+
+  private async updateSubmission(submissionId: string, updatedAt: string): Promise<void> {
+    await this.send(`/_api/mp_submissions(${submissionId})`, {
+      method: 'PATCH',
+      body: {
+        mp_updatedat: updatedAt,
+        mp_lifecyclestatus: SUBMISSION_LIFECYCLE_SUBMITTED,
+        mp_reviewstate: SUBMISSION_REVIEW_RECEIVED,
+      },
+    });
   }
 
   private async request<T>(url: string, options: RequestOptions): Promise<T> {
@@ -478,5 +534,22 @@ export class PowerPagesApiClient {
 
   private escapeODataString(value: string): string {
     return value.replaceAll("'", "''");
+  }
+
+  private parseSubmissionMetadata(value?: string): { assignmentKey?: string; formVersionId?: string; xmlFormId?: string } {
+    if (!value) {
+      return {};
+    }
+
+    try {
+      const parsed = JSON.parse(value) as { assignmentKey?: unknown; formVersionId?: unknown; xmlFormId?: unknown };
+      return {
+        assignmentKey: typeof parsed.assignmentKey === 'string' ? parsed.assignmentKey : undefined,
+        formVersionId: typeof parsed.formVersionId === 'string' ? parsed.formVersionId : undefined,
+        xmlFormId: typeof parsed.xmlFormId === 'string' ? parsed.xmlFormId : undefined,
+      };
+    } catch {
+      return {};
+    }
   }
 }

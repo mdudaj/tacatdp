@@ -8,10 +8,12 @@ import {
   FilePenLine,
   FolderOpen,
   LogIn,
+  Pencil,
   Plus,
   RefreshCw,
+  Search,
 } from '@lucide/vue';
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { draftStore, type LocalDraft } from '../offline/drafts';
 import { PowerPagesApiClient } from '../powerpages-api/client';
 import type { FormAssignmentSummary, SubmissionSummary } from '../powerpages-api/types';
@@ -36,15 +38,17 @@ const submissions = ref<SubmissionSummary[]>([]);
 const localDrafts = ref<LocalDraft[]>([]);
 const selectedProjectId = ref('');
 const selectedAssignment = ref<FormAssignmentSummary | null>(null);
+const selectedEditSubmission = ref<SubmissionSummary | null>(null);
 const activeView = ref<AppView>('projects');
 const activeRecordTab = ref<RecordTab>('saved');
+const recordSearch = ref('');
 const savedPage = ref(1);
 const draftPage = ref(1);
 const online = ref(typeof navigator === 'undefined' ? true : navigator.onLine);
 const runtimeStatus = ref('');
 const submitStatus = ref('');
 const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
-const buildMarker = 'icon-honest-drafts-20260712-001';
+const buildMarker = 'global-submission-search-edit-20260712-001';
 const previousBuildMarker = 'single-header-assignment-filter-20260711-001';
 const runtimeClickStatus = ref('No ODK runtime button click observed in this page load.');
 const odkSubmitEventStatus = ref('No ODK submit event observed in this page load.');
@@ -68,16 +72,62 @@ const selectedProjectAssignments = computed(() => selectedProject.value?.assignm
 const primaryAssignment = computed(() => selectedProjectAssignments.value[0] ?? assignments.value[0] ?? null);
 const draftCount = computed(() => localDrafts.value.length);
 const savedCount = computed(() => submissions.value.length);
-const activeRecordCount = computed(() => activeRecordTab.value === 'saved' ? savedCount.value : draftCount.value);
+const filteredSavedSubmissions = computed(() => submissions.value.filter((submission) => matchesSearch([
+  submission.instanceId,
+  submission.userEmail,
+  submission.assignmentKey,
+  submission.formVersionId,
+  submission.xmlFormId,
+  submission.versionNumber?.toString(),
+  formatStatus(submission.lifecycleStatus),
+  formatReviewState(submission.reviewState),
+  formatDate(submission.updatedAt || submission.submittedAt),
+])));
+const filteredDrafts = computed(() => localDrafts.value.filter((draft) => matchesSearch([
+  draft.id,
+  draft.assignmentKey,
+  draft.formVersionId,
+  formatDate(draft.updatedAt),
+])));
+const filteredSavedCount = computed(() => filteredSavedSubmissions.value.length);
+const filteredDraftCount = computed(() => filteredDrafts.value.length);
+const activeRecordCount = computed(() => activeRecordTab.value === 'saved' ? filteredSavedCount.value : filteredDraftCount.value);
 const activeRecordPage = computed(() => activeRecordTab.value === 'saved' ? savedPage.value : draftPage.value);
 const activeTotalPages = computed(() => Math.max(1, Math.ceil(activeRecordCount.value / pageSize)));
-const pagedSavedSubmissions = computed(() => paginate(submissions.value, savedPage.value));
-const pagedDrafts = computed(() => paginate(localDrafts.value, draftPage.value));
+const pagedSavedSubmissions = computed(() => paginate(filteredSavedSubmissions.value, savedPage.value));
+const pagedDrafts = computed(() => paginate(filteredDrafts.value, draftPage.value));
 const selectedVersionLabel = computed(() => {
   if (!selectedAssignment.value) {
     return '';
   }
   return `${selectedAssignment.value.formName} v${selectedAssignment.value.version}`;
+});
+const runnerTitle = computed(() => selectedEditSubmission.value ? 'Edit record' : 'Form');
+const runnerSubtitle = computed(() => {
+  if (!selectedAssignment.value) {
+    return '';
+  }
+
+  const base = `Version ${selectedAssignment.value.version} · ${selectedAssignment.value.xmlFormId} · ${online.value ? 'Online' : 'Offline'}`;
+  if (!selectedEditSubmission.value) {
+    return base;
+  }
+
+  return `${base} · Editing ${selectedEditSubmission.value.instanceId}`;
+});
+const editInstanceOptions = computed(() => {
+  const submission = selectedEditSubmission.value;
+  if (!submission) {
+    return null;
+  }
+
+  return {
+    resolveInstance: () => api.getLatestSubmissionXml(submission.instanceId),
+    attachmentFileNames: [] as string[],
+    resolveAttachment: async (fileName: string) => {
+      throw new Error(`Attachment edit loading is not enabled for ${fileName}.`);
+    },
+  };
 });
 
 function paginate<T>(records: T[], page: number): T[] {
@@ -93,6 +143,32 @@ function formatDate(value?: string): string {
     dateStyle: 'medium',
     timeStyle: 'short',
   }).format(new Date(value));
+}
+
+function formatStatus(value?: number): string {
+  if (value === 100000001) {
+    return 'Submitted';
+  }
+  if (value === 100000000) {
+    return 'Draft';
+  }
+  return value == null ? 'Submitted' : `Status ${value}`;
+}
+
+function formatReviewState(value?: number): string {
+  if (value === 100000000) {
+    return 'Received';
+  }
+  return value == null ? 'Received' : `Review ${value}`;
+}
+
+function matchesSearch(values: Array<string | undefined>): boolean {
+  const query = recordSearch.value.trim().toLowerCase();
+  if (!query) {
+    return true;
+  }
+
+  return values.some((value) => value?.toLowerCase().includes(query));
 }
 
 function isInsideOdkRuntime(target: EventTarget | null): boolean {
@@ -133,7 +209,9 @@ function relabelOdkSubmitButton() {
 }
 
 function resetRuntimeDiagnostics(assignment: FormAssignmentSummary) {
-  runtimeStatus.value = 'Initializing ODK Web Forms runtime...';
+  runtimeStatus.value = selectedEditSubmission.value
+    ? 'Initializing ODK Web Forms edit session...'
+    : 'Initializing ODK Web Forms runtime...';
   submitStatus.value = '';
   submitTone.value = 'neutral';
   runtimeClickStatus.value = 'No ODK runtime button click observed for this selected form.';
@@ -158,9 +236,27 @@ function openRunner(assignment = primaryAssignment.value) {
     error.value = 'No assigned form is available for this project.';
     return;
   }
+  selectedEditSubmission.value = null;
   resetRuntimeDiagnostics(assignment);
   activeView.value = 'runner';
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+async function openSavedSubmission(submission: SubmissionSummary) {
+  loading.value = true;
+  error.value = '';
+  try {
+    selectedEditSubmission.value = submission;
+    const context = await api.getSubmissionFormContext(submission);
+    resetRuntimeDiagnostics(context);
+    activeView.value = 'runner';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (caught) {
+    selectedEditSubmission.value = null;
+    error.value = caught instanceof Error ? caught.message : 'Unable to open saved record for editing.';
+  } finally {
+    loading.value = false;
+  }
 }
 
 function backToRecords() {
@@ -197,7 +293,9 @@ function handleFormLoaded() {
     return;
   }
 
-  runtimeStatus.value = 'ODK Web Forms runtime loaded. Complete the form and submit online; editable local draft restore is the next slice.';
+  runtimeStatus.value = selectedEditSubmission.value
+    ? 'ODK Web Forms edit session loaded. Submit saves a new version for this record.'
+    : 'ODK Web Forms runtime loaded. Complete the form and submit online; editable local draft restore is the next slice.';
   relabelOdkSubmitButton();
 }
 
@@ -222,7 +320,7 @@ async function handleSubmit(payload: unknown, callback?: (result: unknown) => vo
     submitStatus.value = `Submitted to Dataverse. Instance ${result.instanceId}, version ${result.versionNumber}; ${attachmentSummary}.${warningSummary}`;
     submitTone.value = result.attachmentWarnings.length > 0 ? 'warning' : 'success';
     submissions.value = await api.listSavedSubmissions();
-    callback?.({ next: POST_SUBMIT__NEW_INSTANCE });
+    callback?.(selectedEditSubmission.value ? {} : { next: POST_SUBMIT__NEW_INSTANCE });
   } catch (caught) {
     dataverseWriteStatus.value = `${new Date().toLocaleTimeString()} - Dataverse submit write failed.`;
     submitStatus.value = caught instanceof Error ? `Submit failed: ${caught.message}` : 'Submit failed.';
@@ -250,6 +348,7 @@ async function loadWorkspace() {
     assignments.value = nextAssignments;
     submissions.value = nextSubmissions;
     selectedAssignment.value = assignments.value[0] ?? null;
+    selectedEditSubmission.value = null;
     if (!selectedProjectId.value && projectWorkspaces.value[0]) {
       selectedProjectId.value = projectWorkspaces.value[0].id;
     }
@@ -279,6 +378,11 @@ async function loadWorkspace() {
     loading.value = false;
   }
 }
+
+watch(recordSearch, () => {
+  savedPage.value = 1;
+  draftPage.value = 1;
+});
 
 onMounted(() => {
   document.addEventListener('submit', preventPowerPagesFormSubmit, true);
@@ -316,7 +420,7 @@ onUnmounted(() => {
         <div>
           <p class="eyebrow">Monitoring workspace</p>
           <h1 id="app-title">Projects</h1>
-          <p class="hero-copy">Open a project to review saved records, continue local drafts, or add a new submission.</p>
+          <p class="hero-copy">Open a project to review all submitted records, search saved work, or add a new submission.</p>
         </div>
         <div class="hero-actions">
           <button class="icon-action icon-action--secondary" type="button" :disabled="loading" aria-label="Refresh projects" @click="loadWorkspace">
@@ -394,7 +498,7 @@ onUnmounted(() => {
         <div class="top-action-title">
           <span class="eyebrow">Project</span>
           <h1>{{ selectedProject?.name }}</h1>
-          <p>{{ online ? 'Online' : 'Offline' }} · {{ savedCount }} saved · {{ draftCount }} local draft{{ draftCount === 1 ? '' : 's' }}</p>
+          <p>{{ online ? 'Online' : 'Offline' }} · {{ savedCount }} submitted · {{ draftCount }} local draft{{ draftCount === 1 ? '' : 's' }}</p>
         </div>
         <button class="icon-action" type="button" :disabled="!primaryAssignment" aria-label="Add new record" @click="openRunner()">
           <Plus class="action-icon" aria-hidden="true" />
@@ -407,31 +511,44 @@ onUnmounted(() => {
       </section>
 
       <section class="record-workspace" aria-label="Project records">
-        <div class="record-tabs" role="tablist" aria-label="Record views">
-          <button
-            class="record-tab"
-            :class="{ 'record-tab--active': activeRecordTab === 'saved' }"
-            type="button"
-            role="tab"
-            :aria-selected="activeRecordTab === 'saved'"
-            @click="selectTab('saved')"
-          >
-            <Database class="action-icon" aria-hidden="true" />
-            Saved
-            <span class="tab-count">{{ savedCount }}</span>
-          </button>
-          <button
-            class="record-tab"
-            :class="{ 'record-tab--active': activeRecordTab === 'drafts' }"
-            type="button"
-            role="tab"
-            :aria-selected="activeRecordTab === 'drafts'"
-            @click="selectTab('drafts')"
-          >
-            <FilePenLine class="action-icon" aria-hidden="true" />
-            Drafts
-            <span class="tab-count">{{ draftCount }}</span>
-          </button>
+        <div class="record-toolbar">
+          <div class="record-tabs" role="tablist" aria-label="Record views">
+            <button
+              class="record-tab"
+              :class="{ 'record-tab--active': activeRecordTab === 'saved' }"
+              type="button"
+              role="tab"
+              :aria-selected="activeRecordTab === 'saved'"
+              @click="selectTab('saved')"
+            >
+              <Database class="action-icon" aria-hidden="true" />
+              Saved
+              <span class="tab-count">{{ filteredSavedCount }}</span>
+            </button>
+            <button
+              class="record-tab"
+              :class="{ 'record-tab--active': activeRecordTab === 'drafts' }"
+              type="button"
+              role="tab"
+              :aria-selected="activeRecordTab === 'drafts'"
+              @click="selectTab('drafts')"
+            >
+              <FilePenLine class="action-icon" aria-hidden="true" />
+              Drafts
+              <span class="tab-count">{{ filteredDraftCount }}</span>
+            </button>
+          </div>
+          <label class="record-search">
+            <Search class="record-search__icon" aria-hidden="true" />
+            <span class="sr-only">Search records</span>
+            <input
+              v-model="recordSearch"
+              type="search"
+              autocomplete="off"
+              placeholder="Search records"
+              aria-label="Search saved records and drafts"
+            >
+          </label>
         </div>
 
         <section v-if="activeRecordTab === 'saved'" class="record-list" role="tabpanel" aria-label="Saved records">
@@ -443,19 +560,25 @@ onUnmounted(() => {
             <div>
               <p class="eyebrow">Saved record</p>
               <h2>{{ submission.instanceId }}</h2>
-              <p class="form-meta">Updated {{ formatDate(submission.updatedAt || submission.submittedAt) }}</p>
+              <p class="form-meta">
+                {{ submission.userEmail || 'Unknown owner' }} · Version {{ submission.versionNumber || 1 }} · Updated {{ formatDate(submission.updatedAt || submission.submittedAt) }}
+              </p>
             </div>
             <div class="data-card__actions">
-              <span class="state-chip">Submitted</span>
-              <button class="icon-action icon-action--secondary" type="button" @click="openRunner()">
-                <FolderOpen class="action-icon" aria-hidden="true" />
-                Open
+              <span class="state-chip">{{ formatStatus(submission.lifecycleStatus) }}</span>
+              <button class="icon-action icon-action--secondary" type="button" :disabled="loading" @click="openSavedSubmission(submission)">
+                <Pencil class="action-icon" aria-hidden="true" />
+                Edit
               </button>
             </div>
           </article>
           <section v-if="savedCount === 0" class="empty-state empty-state--inline" aria-label="No saved records">
             <h2>No saved records</h2>
             <p>Add a new record, submit it online, then return here to review it.</p>
+          </section>
+          <section v-else-if="filteredSavedCount === 0" class="empty-state empty-state--inline" aria-label="No matching saved records">
+            <h2>No matching saved records</h2>
+            <p>Adjust the search text to find submitted records by instance, owner, form, status, or date.</p>
           </section>
         </section>
 
@@ -482,6 +605,10 @@ onUnmounted(() => {
             <h2>No local drafts</h2>
             <p>Editable local draft save and restore is not enabled yet. Use Add new to capture and submit online.</p>
           </section>
+          <section v-else-if="filteredDraftCount === 0" class="empty-state empty-state--inline" aria-label="No matching local drafts">
+            <h2>No matching local drafts</h2>
+            <p>Adjust the search text to find local drafts.</p>
+          </section>
         </section>
 
         <nav v-if="activeRecordCount > pageSize" class="pagination-bar" aria-label="Record pagination">
@@ -505,9 +632,9 @@ onUnmounted(() => {
           Back
         </button>
         <div class="top-action-title">
-          <span class="eyebrow">Form</span>
+          <span class="eyebrow">{{ runnerTitle }}</span>
           <h1>{{ selectedAssignment?.formName }}</h1>
-          <p v-if="selectedAssignment">Version {{ selectedAssignment.version }} · {{ selectedAssignment.xmlFormId }} · {{ online ? 'Online' : 'Offline' }}</p>
+          <p v-if="selectedAssignment">{{ runnerSubtitle }}</p>
         </div>
         <button class="icon-action icon-action--secondary" type="button" :disabled="loading" aria-label="Refresh workspace" @click="loadWorkspace">
           <RefreshCw class="action-icon" aria-hidden="true" />
@@ -523,8 +650,9 @@ onUnmounted(() => {
       <section v-if="selectedAssignment" class="runner-shell" :aria-label="selectedVersionLabel">
         <section class="odk-runtime-host" aria-label="ODK Web Forms runtime">
           <OdkWebForm
-            :key="selectedAssignment.formVersionId"
+            :key="`${selectedAssignment.formVersionId}:${selectedEditSubmission?.submissionId || 'new'}`"
             :form-xml="selectedAssignment.xformXml"
+            :edit-instance="editInstanceOptions"
             device-id="tacatdp-powerpages-poc"
             missing-resource-behavior="placeholder"
             @loaded="handleFormLoaded"

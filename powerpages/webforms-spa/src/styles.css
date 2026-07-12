@@ -64,6 +64,18 @@ body {
   padding: clamp(14px, 3vw, 28px);
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .app-header,
 .hero-panel,
 .top-action-bar,
@@ -504,8 +516,9 @@ body {
   gap: var(--mt-space-4);
 }
 
-.record-tabs {
-  display: flex;
+.record-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 340px);
   gap: var(--mt-space-2);
   align-items: center;
   padding: var(--mt-space-2);
@@ -513,6 +526,13 @@ body {
   border-radius: var(--mt-radius-md);
   background: var(--mt-color-surface);
   box-shadow: var(--mt-shadow-soft);
+}
+
+.record-tabs {
+  display: flex;
+  gap: var(--mt-space-2);
+  align-items: center;
+  min-width: 0;
 }
 
 .record-tab {
@@ -552,6 +572,38 @@ body {
   background: var(--mt-color-surface);
   color: var(--mt-color-primary-strong);
   font-size: 0.8rem;
+}
+
+.record-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.record-search__icon {
+  position: absolute;
+  left: var(--mt-space-3);
+  width: 18px;
+  height: 18px;
+  color: var(--mt-color-text-muted);
+  pointer-events: none;
+}
+
+.record-search input {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 var(--mt-space-3) 0 38px;
+  border: 1px solid var(--mt-color-border-strong);
+  border-radius: var(--mt-radius-md);
+  background: var(--mt-color-surface);
+  color: var(--mt-color-text);
+  font: inherit;
+}
+
+.record-search input:focus {
+  box-shadow: var(--mt-focus-ring);
+  outline: none;
 }
 
 .record-list {
@@ -729,6 +781,7 @@ body {
 
   .project-card--entry,
   .data-card,
+  .record-toolbar,
   .record-tabs,
   .pagination-bar {
     display: grid;

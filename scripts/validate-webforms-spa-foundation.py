@@ -152,21 +152,44 @@ def validate_powerpages_session_contract() -> None:
     for required in (
         "getSignedInUserEmail",
         "$filter=mp_useremail eq",
-        "Power Pages session did not provide a signed-in email",
         "listSavedSubmissions",
     ):
         if required not in client:
-            fail(f"Power Pages assignment API must filter by the signed-in email: missing {required}")
+            fail(f"Power Pages assignment API must filter new-form assignments by the signed-in email: missing {required}")
+    saved_method = re.search(r"async listSavedSubmissions\(\).*?\n  async getSubmissionFormContext", client, flags=re.S)
+    if not saved_method:
+        fail("Power Pages API client must keep an explicit listSavedSubmissions method")
+    saved_body = saved_method.group(0)
+    if "mp_useremail eq" in saved_body:
+        fail("Saved submitted records must not be filtered to the signed-in user; authenticated users see all submitted records")
     for required in (
-        "icon-honest-drafts-20260712-001",
+        "mp_lifecyclestatus eq",
+        "mp_useremail",
+        "getLatestSubmissionVersionByInstanceId",
+        "mp_xformsubmissionxml",
+        "parseSubmissionMetadata",
+        "getSubmissionFormContext",
+        "getLatestSubmissionXml",
+        "updateSubmission",
+    ):
+        if required not in client:
+            fail(f"Global saved-record/edit API path missing required guardrail: {required}")
+    for required in (
+        "global-submission-search-edit-20260712-001",
         "type AppView = 'projects' | 'records' | 'runner'",
         "Add new",
         "Saved",
         "Drafts",
-        "Open",
+        "Edit",
+        "recordSearch",
+        "Search records",
+        "filteredSavedSubmissions",
+        "openSavedSubmission",
+        ":edit-instance",
         "@lucide/vue",
         "ArrowLeft",
-        "FolderOpen",
+        "Pencil",
+        "Search",
         "RefreshCw",
         "FilePenLine",
         "Editable local draft save and restore is not enabled yet",
@@ -232,7 +255,7 @@ def main() -> int:
         "preventRuntimeButtonDefault",
         "document.addEventListener('submit'",
         "document.addEventListener('click'",
-        "icon-honest-drafts-20260712-001",
+        "global-submission-search-edit-20260712-001",
         "Last runtime click",
         "Last ODK submit event",
         "Last Dataverse write",

@@ -108,9 +108,27 @@ If clicking ODK Send appears to reload the page or returns to the top with answe
 - [x] Update source validator so form load cannot reintroduce automatic draft marker creation.
 - [ ] Verify the signed-in browser shows only one CRDB header, project cards first, and the project detail data-card tabs.
 
-## Next Slice: Editable Record/Draft Resume
+## Current Slice: Shared Submitted Records Search/Edit
 
-- [ ] Research and prove the ODK Web Forms-supported way to initialize the runtime from saved instance XML/state.
+- [x] Change Saved records from current-user-only to all submitted records readable by authenticated Power Pages table permissions.
+- [x] Keep Add new scoped to the signed-in user's `FormAssignments`.
+- [x] Add search-as-you-type at the end of the Saved/Drafts toolbar.
+- [x] Search loaded records by instance id, owner, form metadata, status, version, and timestamp.
+- [x] Show owner email, latest version number, submitted status, and updated timestamp on saved cards.
+- [x] Change saved card action to Edit.
+- [x] Use ODK Web Forms `editInstance` with latest `SubmissionVersions.XFormSubmissionXml`.
+- [x] Submit from edit mode writes a new `SubmissionVersions` row for the same ODK `instanceID` and updates the submission header timestamp.
+- [x] Update validator to block reintroducing signed-in-user filtering on saved submitted records.
+- [ ] Browser-verify that John and test user both see the same submitted-record list after Power Pages cache refresh.
+- [ ] Browser-verify that Edit opens a submitted record with previous answers populated and submit creates version `n+1`.
+
+## Next Slice: Editable Local Draft Resume
+
 - [ ] Store local draft instance XML/state, not just metadata.
-- [ ] Open a saved Dataverse submission into an editable or read-only runner state according to lifecycle/review rules.
-- [ ] Add automated checks that Open does not create a new record or draft unless the user explicitly chooses Add new or Save draft.
+- [ ] Restore local draft instance XML/state into ODK Web Forms without creating a submitted Dataverse version.
+- [ ] Add lifecycle/review locking rules so submitted records become read-only when locked.
+- [ ] Add automated checks that opening records does not create a new record or draft unless the user explicitly chooses Add new or Save draft.
+
+## UX Scope Discipline
+
+- [ ] Before future UX-impacting work, capture behavior and data scope first: who sees which records, what is loaded client-side versus paged from Dataverse, which fields are searchable, what each action mutates, and what happens in empty/error/loading states.
