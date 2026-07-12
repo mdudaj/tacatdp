@@ -119,8 +119,10 @@ If clicking ODK Send appears to reload the page or returns to the top with answe
 - [x] Use ODK Web Forms `editInstance` with latest `SubmissionVersions.XFormSubmissionXml`.
 - [x] Submit from edit mode writes a new `SubmissionVersions` row for the same ODK `instanceID` and updates the submission header timestamp.
 - [x] Update validator to block reintroducing signed-in-user filtering on saved submitted records.
+- [x] Add CRDB-branded submit progress overlay and return successful submits to the Saved data-card list with the Dataverse result banner.
 - [ ] Browser-verify that John and test user both see the same submitted-record list after Power Pages cache refresh.
 - [ ] Browser-verify that Edit opens a submitted record with previous answers populated and submit creates version `n+1`.
+- [ ] Browser-verify hosted build `submit-progress-return-list-20260712-001`: submit shows the CRDB loading dots, returns to Saved, and preserves attachment warnings in the banner.
 
 ## Next Slice: Editable Local Draft Resume
 

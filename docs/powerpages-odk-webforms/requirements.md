@@ -20,6 +20,8 @@ Deliver a Microsoft-managed ODK-style proof that runs inside Power Pages, render
 - Do not create a local draft just because the ODK runtime loaded. Draft cards must represent restorable instance state, not runtime markers.
 - Save and restore editable local draft state in IndexedDB only after the implementation captures ODK instance XML/state and can restore it into the runtime.
 - Submit online to Dataverse through Power Pages `/_api`.
+- When the user submits, block duplicate interaction with a CRDB-branded submit loading state showing the CRDB logo, "Submitting record", "Saving to Dataverse", and animated loading dots.
+- After a successful submit, refresh the saved-record list, return to the project data-card list on the Saved tab, and show a success/warning banner with the Dataverse instance id, version, attachment row count, binary upload count, and any attachment warning. Failed submits must keep the user on the form with the error visible.
 - Create one `Submissions` header and one current `SubmissionVersions` payload.
 - Persist at least one file/photo as a `SubmissionAttachments` metadata row linked to the submitted version.
 - Attempt browser binary upload to the Dataverse file column only through Power Pages `/_api`; do not add raw Dataverse credentials, direct OAuth, or external storage. If the hosted browser route fails, keep metadata persistence and report binary storage as a pending managed-Microsoft slice.

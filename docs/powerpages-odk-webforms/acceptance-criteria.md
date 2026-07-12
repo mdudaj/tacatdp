@@ -5,6 +5,9 @@
 - One assigned XForm-backed form can be read by an authenticated Power Pages user.
 - The UI does not create or display a draft unless the stored browser-local state is restorable. Runtime-load markers are not drafts.
 - Online submit creates a submission header and current submission version.
+- Submit shows a CRDB-branded blocking loading state with logo and loading dots while the Dataverse write is in progress.
+- Successful submit refreshes the Saved records list, returns the user to the project data-card list, and displays the submit result as a success or warning banner. Attachment binary warnings remain visible without trapping the user on the form.
+- Failed submit keeps the user on the form runner and shows the error there.
 - One attachment is represented as a `SubmissionAttachments` row linked to the submission version.
 - Browser binary upload through the Power Pages route is attempted with the documented Dataverse single-request file-column pattern and must report whether Power Pages accepted or rejected the binary content.
 - No raw Dataverse credentials or client secrets are present in the SPA.
@@ -48,6 +51,7 @@
 - The Saved/Drafts toolbar includes a search input at the end and filters as the user types.
 - Saved submitted records show owner email, version, updated timestamp, and an Edit action.
 - Edit opens ODK Web Forms using `editInstance` and the latest `SubmissionVersions.XFormSubmissionXml`; submit writes a new submission version for the same ODK instance id.
+- Submit from either Add new or Edit returns to the Saved tab after success and shows the Dataverse result banner.
 
 ## Dataverse Submission Mapping Acceptance
 

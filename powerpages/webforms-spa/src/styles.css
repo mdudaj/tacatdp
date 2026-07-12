@@ -303,6 +303,48 @@ body {
   height: auto;
 }
 
+.submit-overlay {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--mt-space-5);
+  background: rgba(243, 247, 242, 0.86);
+  backdrop-filter: blur(6px);
+}
+
+.submit-progress-panel {
+  display: grid;
+  justify-items: center;
+  gap: var(--mt-space-3);
+  width: min(420px, 100%);
+  padding: clamp(28px, 7vw, 46px);
+  border: 1px solid var(--mt-color-border-strong);
+  border-left: 7px solid var(--mt-color-brand);
+  border-radius: var(--mt-radius-md);
+  background: var(--mt-color-surface);
+  color: var(--mt-color-text);
+  text-align: center;
+  box-shadow: var(--mt-shadow-surface);
+}
+
+.submit-progress-panel h2,
+.submit-progress-panel p {
+  margin: 0;
+}
+
+.submit-progress-panel h2 {
+  color: var(--mt-color-primary-strong);
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.submit-progress-panel p {
+  color: var(--mt-color-text-muted);
+  line-height: 1.5;
+}
+
 .loading-dots {
   display: inline-flex;
   gap: var(--mt-space-2);

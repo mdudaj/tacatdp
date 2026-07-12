@@ -84,7 +84,8 @@ This same loading panel should be reused for page-level loading, assignment load
 - Top action bar with Back to project, form name, version, save/draft status, and submit state.
 - ODK Web Forms gets the full main form area below the action bar.
 - Host shell must provide spacing before and after the ODK runtime.
-- Submit result should be a concise status region near the top or bottom of the host shell, not mixed into the assignment selector.
+- Submit shows a blocking CRDB-branded progress panel with the CRDB logo, "Submitting record", "Saving to Dataverse", and animated dots. Do not leave users wondering whether a submit click was accepted.
+- Successful submit returns to the project data-card list on the Saved tab and displays the submit result as a status banner. Failed submit stays on the form runner and keeps the error visible there.
 - Attachment binary warnings should be visible but not framed as a total failure when submission and metadata persistence succeeded.
 
 ### History
@@ -141,6 +142,7 @@ Before improving the UI:
 - Saved records include all submitted records readable by the authenticated user, not only records owned by that user's email.
 - Drafts tab does not show stale runtime-load markers as editable drafts.
 - Loading uses the CRDB branded `LoadingPanel`.
+- Submit uses the CRDB branded blocking progress panel and returns to the Saved data-card list after success.
 - The form runner has a top action bar and a full-width ODK runtime area.
 - Prototype diagnostics are hidden behind a debug panel.
 - Mobile view is readable without forcing a tablet layout.

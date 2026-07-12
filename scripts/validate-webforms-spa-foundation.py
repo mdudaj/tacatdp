@@ -175,7 +175,7 @@ def validate_powerpages_session_contract() -> None:
         if required not in client:
             fail(f"Global saved-record/edit API path missing required guardrail: {required}")
     for required in (
-        "global-submission-search-edit-20260712-001",
+        "submit-progress-return-list-20260712-001",
         "type AppView = 'projects' | 'records' | 'runner'",
         "Add new",
         "Saved",
@@ -193,6 +193,14 @@ def validate_powerpages_session_contract() -> None:
         "RefreshCw",
         "FilePenLine",
         "Editable local draft save and restore is not enabled yet",
+        "submitting",
+        "postSubmitMessage",
+        "postSubmitTone",
+        "Submitting record",
+        "Saving to Dataverse",
+        "/CRDB_Bank_PLC.svg",
+        "activeView.value = selectedProject.value ? 'records' : 'projects'",
+        "activeRecordTab.value = 'saved'",
     ):
         if required not in view:
             fail(f"Monitoring Tool CRUD workspace shell missing required text or state: {required}")
@@ -255,7 +263,7 @@ def main() -> int:
         "preventRuntimeButtonDefault",
         "document.addEventListener('submit'",
         "document.addEventListener('click'",
-        "global-submission-search-edit-20260712-001",
+        "submit-progress-return-list-20260712-001",
         "Last runtime click",
         "Last ODK submit event",
         "Last Dataverse write",
@@ -267,6 +275,9 @@ def main() -> int:
         ".odk-runtime-host .powered-by-wrapper",
         ".odk-runtime-host .footer",
         ".odk-runtime-host .form-wrapper",
+        ".submit-overlay",
+        ".submit-progress-panel",
+        ".loading-dots",
     ):
         if expected not in all_text:
             fail(f"missing required ODK runtime proof string: {expected}")

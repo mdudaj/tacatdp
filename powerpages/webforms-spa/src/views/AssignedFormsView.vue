@@ -47,9 +47,13 @@ const draftPage = ref(1);
 const online = ref(typeof navigator === 'undefined' ? true : navigator.onLine);
 const runtimeStatus = ref('');
 const submitStatus = ref('');
+const postSubmitMessage = ref('');
+const postSubmitTone = ref<'success' | 'warning'>('success');
 const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
-const buildMarker = 'global-submission-search-edit-20260712-001';
+const submitting = ref(false);
+const buildMarker = 'submit-progress-return-list-20260712-001';
 const previousBuildMarker = 'single-header-assignment-filter-20260711-001';
+const crdbLogoUrl = '/CRDB_Bank_PLC.svg';
 const runtimeClickStatus = ref('No ODK runtime button click observed in this page load.');
 const odkSubmitEventStatus = ref('No ODK submit event observed in this page load.');
 const dataverseWriteStatus = ref('No Dataverse submit write attempted in this page load.');
@@ -222,11 +226,13 @@ function resetRuntimeDiagnostics(assignment: FormAssignmentSummary) {
 
 function openProject(project: ProjectWorkspace) {
   selectedProjectId.value = project.id;
+  postSubmitMessage.value = '';
   activeView.value = 'records';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function backToProjects() {
+  postSubmitMessage.value = '';
   activeView.value = 'projects';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -237,6 +243,7 @@ function openRunner(assignment = primaryAssignment.value) {
     return;
   }
   selectedEditSubmission.value = null;
+  postSubmitMessage.value = '';
   resetRuntimeDiagnostics(assignment);
   activeView.value = 'runner';
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -245,6 +252,7 @@ function openRunner(assignment = primaryAssignment.value) {
 async function openSavedSubmission(submission: SubmissionSummary) {
   loading.value = true;
   error.value = '';
+  postSubmitMessage.value = '';
   try {
     selectedEditSubmission.value = submission;
     const context = await api.getSubmissionFormContext(submission);
@@ -306,6 +314,8 @@ async function handleSubmit(payload: unknown, callback?: (result: unknown) => vo
     return;
   }
 
+  submitting.value = true;
+  postSubmitMessage.value = '';
   const candidate = payload as { status?: string; violations?: unknown };
   const violationCount = Array.isArray(candidate.violations) ? candidate.violations.length : 'unknown';
   odkSubmitEventStatus.value = `${new Date().toLocaleTimeString()} - ODK submit event received; payload status ${candidate.status ?? 'unknown'}, violations ${violationCount}.`;
@@ -321,10 +331,20 @@ async function handleSubmit(payload: unknown, callback?: (result: unknown) => vo
     submitTone.value = result.attachmentWarnings.length > 0 ? 'warning' : 'success';
     submissions.value = await api.listSavedSubmissions();
     callback?.(selectedEditSubmission.value ? {} : { next: POST_SUBMIT__NEW_INSTANCE });
+    activeRecordTab.value = 'saved';
+    savedPage.value = 1;
+    selectedEditSubmission.value = null;
+    activeView.value = selectedProject.value ? 'records' : 'projects';
+    postSubmitTone.value = result.attachmentWarnings.length > 0 ? 'warning' : 'success';
+    postSubmitMessage.value = submitStatus.value;
+    submitStatus.value = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (caught) {
     dataverseWriteStatus.value = `${new Date().toLocaleTimeString()} - Dataverse submit write failed.`;
     submitStatus.value = caught instanceof Error ? `Submit failed: ${caught.message}` : 'Submit failed.';
     submitTone.value = 'error';
+  } finally {
+    submitting.value = false;
   }
 }
 
@@ -431,6 +451,7 @@ onUnmounted(() => {
       </section>
 
       <section v-if="loading" class="loading-panel" aria-live="polite" aria-label="Loading projects">
+        <img class="loading-logo" :src="crdbLogoUrl" alt="CRDB Bank">
         <h2>Loading projects</h2>
         <p>Preparing the secure workspace</p>
         <span class="loading-dots" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -508,6 +529,10 @@ onUnmounted(() => {
 
       <section v-if="error" class="status-banner status-banner--error" aria-live="polite">
         {{ error }}
+      </section>
+
+      <section v-if="postSubmitMessage" class="status-banner" :class="`status-banner--${postSubmitTone}`" aria-live="polite">
+        {{ postSubmitMessage }}
       </section>
 
       <section class="record-workspace" aria-label="Project records">
@@ -626,6 +651,15 @@ onUnmounted(() => {
     </template>
 
     <template v-else>
+      <section v-if="submitting" class="submit-overlay" aria-live="assertive" aria-label="Submitting record">
+        <div class="submit-progress-panel" role="status">
+          <img class="loading-logo" :src="crdbLogoUrl" alt="CRDB Bank">
+          <h2>Submitting record</h2>
+          <p>Saving to Dataverse</p>
+          <span class="loading-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        </div>
+      </section>
+
       <nav class="top-action-bar" aria-label="Form actions">
         <button class="icon-action icon-action--secondary" type="button" aria-label="Back to project records" @click="backToRecords">
           <ArrowLeft class="action-icon" aria-hidden="true" />
