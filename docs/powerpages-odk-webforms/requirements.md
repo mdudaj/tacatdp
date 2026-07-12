@@ -28,7 +28,8 @@ Deliver a Microsoft-managed ODK-style proof that runs inside Power Pages, render
 - Persist at least one file/photo as a `SubmissionAttachments` metadata row linked to the submitted version.
 - Attempt browser binary upload to the Dataverse file column only through Power Pages `/_api`; do not add raw Dataverse credentials, direct OAuth, or external storage. If the hosted browser route fails, keep metadata persistence and report binary storage as a pending managed-Microsoft slice.
 - Show user's submission history for the selected form.
-- Use pyxform to compile the full revised XLSForm `docs/Revised_TACATDP impact evaluation_20260712.xlsx` into the Dataverse `FormVersions.XFormXml` seed. Preserve `settings.form_id=tacatdp_impact_evaluation`, timestamp-style `settings.version=2607121652`, and `settings.instance_name=concat(${Customer_ID}, ":", ${Customer_Name})`.
+- Use pyxform to compile the full revised XLSForm `docs/Revised_TACATDP impact evaluation_20260712.xlsx` into a Dataverse-managed form-version source. The user-facing tool/form name is **TACATDP Impact Evaluation**. Preserve `settings.form_id=tacatdp_impact_evaluation`, generate published versions as UTC `YYYYMMDDHHMMSSmmm`, and preserve `settings.instance_name=concat(${Customer_ID}, ":", ${Customer_Name})`.
+- When generated XML exceeds the deployed `FormVersions.XFormXml` multiline text limit, store and load the compiled XML through Dataverse file storage rather than truncating or splitting the XML in page-local code.
 
 ## Non-Functional Requirements
 

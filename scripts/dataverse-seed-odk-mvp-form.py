@@ -14,6 +14,7 @@ truth is FormVersions.XFormXml.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.util
 import sys
 from datetime import datetime, timezone
@@ -22,12 +23,13 @@ from typing import Any
 from urllib.parse import quote
 
 DEFAULT_ASSIGNMENT_EMAIL = "john.mduda@mshirikacorp.onmicrosoft.com"
+MAX_XFORMXML_CHARS = 1048576
 PROJECT_CODE = "TACATDP"
 PROJECT_NAME = "TACATDP Impact Monitoring"
 XML_FORM_ID = "tacatdp_impact_evaluation"
-FORM_NAME = "TACATDP Impact Evaluation - Rich MVP"
+FORM_NAME = "TACATDP Impact Evaluation"
 FORM_VERSION = "260709-rich-mvp"
-ASSIGNMENT_KEY_TEMPLATE = f"{XML_FORM_ID}:{FORM_VERSION}:{{email}}"
+ASSIGNMENT_KEY_TEMPLATE = f"{XML_FORM_ID}:{{email}}"
 
 CHOICE = {
     "active": 100000000,
@@ -176,8 +178,16 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Seed a richer ODK/XForm-backed TACATDP MVP form and assignment.")
     parser.add_argument("--env-file", default=".env", help="Environment file containing Power Platform settings.")
     parser.add_argument("--assignment-email", default=None, help="User email to receive the active form assignment.")
+    parser.add_argument("--xform-xml", default=None, help="Compiled XForm XML to store in FormVersions.XFormXml.")
+    parser.add_argument("--form-version", default=None, help="Published form version code. Defaults to generated UTC YYYYMMDDHHMMSSmmm when --xform-xml is used.")
+    parser.add_argument("--form-name", default=FORM_NAME, help="User-facing form/tool name.")
     parser.add_argument("--execute", action="store_true", help="Perform live writes. Without this flag only a dry-run summary is shown.")
     return parser.parse_args()
+
+
+def timestamp_version() -> str:
+    now = datetime.now(timezone.utc)
+    return now.strftime("%Y%m%d%H%M%S") + f"{now.microsecond // 1000:03d}"
 
 
 def escape_odata(value: str) -> str:
@@ -289,6 +299,23 @@ def env_assignment_email(deploy: Any, env_file: str, explicit: str | None) -> st
     return env.get("TACATDP_SEED_USER_EMAIL") or env.get("POWER_PLATFORM_ASSIGNMENT_USER_EMAIL") or DEFAULT_ASSIGNMENT_EMAIL
 
 
+def load_xform_xml(path: str | None, version: str, form_name: str) -> tuple[str, str]:
+    if not path:
+        return RICH_TACATDP_XFORM, "seed-rich-mvp-20260709"
+    xml_path = Path(path).resolve()
+    if not xml_path.exists():
+        raise SystemExit(f"Compiled XForm XML not found: {xml_path}")
+    text = xml_path.read_text(encoding="utf-8")
+    if XML_FORM_ID not in text:
+        raise SystemExit(f"Compiled XForm XML does not contain expected form id {XML_FORM_ID}: {xml_path}")
+    if f'version="{version}"' not in text:
+        raise SystemExit(f"Compiled XForm XML does not contain expected version {version}: {xml_path}")
+    if form_name not in text:
+        raise SystemExit(f"Compiled XForm XML does not contain expected form title {form_name}: {xml_path}")
+    digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
+    return text, f"xlsform-{version}-{digest[:12]}"
+
+
 def main() -> int:
     try:
         sys.stdout.reconfigure(line_buffering=True)
@@ -298,6 +325,9 @@ def main() -> int:
     deploy = load_deploy_module()
     settings = deploy.build_settings(argparse.Namespace(env_file=args.env_file, schema_dir=None, schema_file=None, execute=False, no_publish=False))
     assignment_email = env_assignment_email(deploy, args.env_file, args.assignment_email).lower()
+    form_version = args.form_version or (timestamp_version() if args.xform_xml else FORM_VERSION)
+    xform_xml, xform_hash = load_xform_xml(args.xform_xml, form_version, args.form_name)
+    xform_bytes = len(xform_xml.encode("utf-8"))
 
     print("# TACATDP ODK Rich MVP Seed")
     print(f"Mode: {'execute' if args.execute else 'dry-run'}")
@@ -305,8 +335,18 @@ def main() -> int:
     print(f"Environment: {settings.environment_url}")
     print(f"Assignment email: {assignment_email}")
     print(f"XmlFormId: {XML_FORM_ID}")
-    print(f"Version: {FORM_VERSION}")
-    print("Fields in XForm: 43")
+    print(f"Form name: {args.form_name}")
+    print(f"Version: {form_version}")
+    print(f"XForm XML bytes: {xform_bytes}")
+    print(f"XForm hash: {xform_hash}")
+    if xform_bytes > MAX_XFORMXML_CHARS:
+        print(
+            "XForm XML exceeds the current FormVersions.XFormXml multiline text limit "
+            f"({MAX_XFORMXML_CHARS} characters). Store this compiled form through a Dataverse "
+            "file column/FormAttachments path before executing the seed."
+        )
+        if args.execute:
+            raise SystemExit("Refusing Dataverse write: compiled XForm is too large for FormVersions.XFormXml.")
 
     if settings.deploy_target.lower() != "dev":
         raise SystemExit(f"Refusing non-dev deployment target: {settings.deploy_target}")
@@ -333,8 +373,8 @@ def main() -> int:
 
     form_payload = {
         client.column("XmlFormId"): XML_FORM_ID,
-        client.column("Name"): FORM_NAME,
-        client.column("Description"): "Richer TACATDP MVP form seeded from the XLSForm inventory for ODK Web Forms testing.",
+        client.column("Name"): args.form_name,
+        client.column("Description"): "TACATDP Impact Evaluation form compiled from XLSForm for ODK Web Forms testing.",
         client.column("LifecycleStatus"): CHOICE["open"],
     }
     if args.execute:
@@ -350,9 +390,9 @@ def main() -> int:
     ) or "DRY-RUN-FORM-ID"
 
     version_payload = {
-        client.column("Version"): FORM_VERSION,
-        client.column("Hash"): "seed-rich-mvp-20260709",
-        client.column("XFormXml"): RICH_TACATDP_XFORM,
+        client.column("Version"): form_version,
+        client.column("Hash"): xform_hash,
+        client.column("XFormXml"): xform_xml,
         client.column("WebFormsEnabled"): True,
         client.column("LifecycleStatus"): CHOICE["published"],
         client.column("PublishedAt"): now,
@@ -362,9 +402,9 @@ def main() -> int:
         version_payload[key] = value
     version_id = client.ensure(
         "FormVersions",
-        f"{client.column('Version')} eq '{escape_odata(FORM_VERSION)}'",
+        f"{client.column('Version')} eq '{escape_odata(form_version)}'",
         version_payload,
-        f"form version {FORM_VERSION}",
+        f"form version {form_version}",
         args.execute,
         update_existing=True,
     ) or "DRY-RUN-VERSION-ID"
@@ -384,14 +424,25 @@ def main() -> int:
             assignment_payload[key] = value
         else:
             print(f"warning: system user not found for {assignment_email}; using UserEmail fallback only")
-    client.ensure(
+    existing_assignment = client.find_one(
         "FormAssignments",
-        f"{client.column('AssignmentKey')} eq '{escape_odata(assignment_key)}'",
-        assignment_payload,
-        f"assignment {assignment_key}",
-        args.execute,
-        update_existing=True,
+        f"{client.column('UserEmail')} eq '{escape_odata(assignment_email)}'",
     )
+    if existing_assignment and args.execute:
+        assignment_id = existing_assignment[client.primary_id("FormAssignments")]
+        client.update("FormAssignments", assignment_id, assignment_payload)
+        print(f"updated: assignment for {assignment_email} -> form version {form_version}")
+    elif existing_assignment:
+        print(f"would update: assignment for {assignment_email} -> form version {form_version}")
+    else:
+        client.ensure(
+            "FormAssignments",
+            f"{client.column('AssignmentKey')} eq '{escape_odata(assignment_key)}'",
+            assignment_payload,
+            f"assignment {assignment_key}",
+            args.execute,
+            update_existing=True,
+        )
 
     print("seed complete" if args.execute else "dry-run complete")
     return 0

@@ -36,7 +36,8 @@ powerpages/
 9. Implement assigned forms, ODK Web Forms runtime load, local draft proof, online submit, attachment upload, and history.
 10. Upload compiled SPA through the enhanced Power Pages metadata package after approval, using the explicit website ID package path.
 11. Promote the prototype shell into the **Monitoring Tool** UX: CRDB-branded app shell, work queue, top action bars, reusable loading panel, project/form cards, history entry point, and hidden debug diagnostics.
-12. Replace the hand-authored rich seed with a pyxform-compiled version of `docs/Revised_TACATDP impact evaluation_20260712.xlsx`, preserving XLSForm settings metadata and assigning the published form version code from `settings.version`.
+12. Replace the hand-authored rich seed with a pyxform-compiled version of `docs/Revised_TACATDP impact evaluation_20260712.xlsx`, naming the tool/form **TACATDP Impact Evaluation** and assigning generated published form versions with UTC `YYYYMMDDHHMMSSmmm`.
+13. For full forms that exceed the current `FormVersions.XFormXml` multiline text limit, store the compiled XML through Dataverse-managed file storage and update the SPA to load the XForm from that file source before rendering ODK Web Forms.
 
 ## Verification Gates
 
@@ -104,8 +105,9 @@ Implementation instructions:
 2. Treat the selected saved Dataverse submission as the canonical edit target. Do not infer edit identity from the XML `instanceID` emitted by ODK Web Forms.
 3. Store a display name in submission-version metadata. For the revised TACATDP workbook, the MVP expression is `Customer_ID:Customer_Name`.
 4. Review `package-review.md` before installing `pyxform==4.5.0`.
-5. Compile `docs/Revised_TACATDP impact evaluation_20260712.xlsx` with `xls2xform` and seed the generated XML only after dry-run review.
-6. Validate with source validator, SPA build, pyxform conversion, hosted smoke, and browser edit/add-new tests.
+5. Compile `docs/Revised_TACATDP impact evaluation_20260712.xlsx` with `scripts/xlsform-compile.py`.
+6. Seed the generated XML only after dry-run review. If the XML is larger than `FormVersions.XFormXml`, do not execute the multiline seed; implement Dataverse file-column/FormAttachments storage first.
+7. Validate with source validator, SPA build, pyxform conversion, hosted smoke, and browser edit/add-new tests.
 
 ## Completed Slice: Monitoring Tool UX Foundation
 

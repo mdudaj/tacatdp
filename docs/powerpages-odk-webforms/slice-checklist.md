@@ -143,8 +143,10 @@ If clicking ODK Send appears to reload the page or returns to the top with answe
 
 - [x] Inspect `docs/Revised_TACATDP impact evaluation_20260712.xlsx` without committing the temporary `.~lock` file.
 - [x] Document pyxform research, package review, requirements, and implementation plan.
-- [ ] Install `pyxform==4.5.0` in a project-local tool environment after approval.
-- [ ] Compile `docs/Revised_TACATDP impact evaluation_20260712.xlsx` to XForm XML.
-- [ ] Validate generated XForm XML parse, body refs, form id, version, and instance-name expression.
-- [ ] Replace embedded rich seed XForm with compiled XML and settings metadata.
-- [ ] Dry-run Dataverse seed update before live write.
+- [x] Install `pyxform==4.5.0` in a project-local tool environment after approval.
+- [x] Compile `docs/Revised_TACATDP impact evaluation_20260712.xlsx` to XForm XML.
+- [x] Validate generated XForm XML parse, body refs, form id, version, and instance-name expression.
+- [x] Add seed-script support for compiled XML and dry-run Dataverse update.
+- [x] Dry-run Dataverse seed update before live write.
+- [ ] Implement Dataverse file-column/FormAttachments storage for full compiled XForms larger than `FormVersions.XFormXml`.
+- [ ] Update the SPA to load large XForm XML from the Dataverse-managed file source, then render ODK Web Forms.
