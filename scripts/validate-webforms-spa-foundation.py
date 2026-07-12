@@ -181,7 +181,7 @@ def validate_powerpages_session_contract() -> None:
         if required not in client:
             fail(f"Global saved-record/edit API path missing required guardrail: {required}")
     for required in (
-        "edit-submit-reuse-display-name-20260712-001",
+        "pagination-footer-20260712-001",
         "type AppView = 'projects' | 'records' | 'runner'",
         "Add new",
         "Saved",
@@ -205,6 +205,14 @@ def validate_powerpages_session_contract() -> None:
         "Submitting record",
         "Saving to Dataverse",
         "/CRDB_Bank_PLC.svg",
+        "visiblePageNumbers",
+        "activePageStart",
+        "activePageEnd",
+        "setActivePage",
+        "clampActivePage",
+        "Showing {{ activePageStart }}-{{ activePageEnd }} of {{ activeRecordCount }}",
+        "Page {{ activeRecordPage }} of {{ activeTotalPages }}",
+        "pagination-button--active",
         "activeView.value = selectedProject.value ? 'records' : 'projects'",
         "activeRecordTab.value = 'saved'",
         "existingSubmission: selectedEditSubmission.value",
@@ -271,7 +279,7 @@ def main() -> int:
         "preventRuntimeButtonDefault",
         "document.addEventListener('submit'",
         "document.addEventListener('click'",
-        "edit-submit-reuse-display-name-20260712-001",
+        "pagination-footer-20260712-001",
         "Last runtime click",
         "Last ODK submit event",
         "Last Dataverse write",

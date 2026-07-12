@@ -51,7 +51,7 @@ const postSubmitMessage = ref('');
 const postSubmitTone = ref<'success' | 'warning'>('success');
 const submitTone = ref<'neutral' | 'success' | 'warning' | 'error'>('neutral');
 const submitting = ref(false);
-const buildMarker = 'edit-submit-reuse-display-name-20260712-001';
+const buildMarker = 'pagination-footer-20260712-001';
 const previousBuildMarker = 'single-header-assignment-filter-20260711-001';
 const crdbLogoUrl = '/CRDB_Bank_PLC.svg';
 const runtimeClickStatus = ref('No ODK runtime button click observed in this page load.');
@@ -99,6 +99,16 @@ const filteredDraftCount = computed(() => filteredDrafts.value.length);
 const activeRecordCount = computed(() => activeRecordTab.value === 'saved' ? filteredSavedCount.value : filteredDraftCount.value);
 const activeRecordPage = computed(() => activeRecordTab.value === 'saved' ? savedPage.value : draftPage.value);
 const activeTotalPages = computed(() => Math.max(1, Math.ceil(activeRecordCount.value / pageSize)));
+const activePageStart = computed(() => activeRecordCount.value === 0 ? 0 : ((activeRecordPage.value - 1) * pageSize) + 1);
+const activePageEnd = computed(() => Math.min(activeRecordPage.value * pageSize, activeRecordCount.value));
+const visiblePageNumbers = computed(() => {
+  const total = activeTotalPages.value;
+  const current = activeRecordPage.value;
+  const start = Math.max(1, current - 1);
+  const end = Math.min(total, start + 2);
+  const adjustedStart = Math.max(1, end - 2);
+  return Array.from({ length: end - adjustedStart + 1 }, (_, index) => adjustedStart + index);
+});
 const pagedSavedSubmissions = computed(() => paginate(filteredSavedSubmissions.value, savedPage.value));
 const pagedDrafts = computed(() => paginate(filteredDrafts.value, draftPage.value));
 const selectedVersionLabel = computed(() => {
@@ -275,14 +285,24 @@ function backToRecords() {
 
 function selectTab(tab: RecordTab) {
   activeRecordTab.value = tab;
+  clampActivePage();
 }
 
 function changePage(direction: -1 | 1) {
+  setActivePage(activeRecordPage.value + direction);
+}
+
+function setActivePage(page: number) {
+  const nextPage = Math.min(Math.max(1, page), activeTotalPages.value);
   if (activeRecordTab.value === 'saved') {
-    savedPage.value = Math.min(Math.max(1, savedPage.value + direction), activeTotalPages.value);
+    savedPage.value = nextPage;
     return;
   }
-  draftPage.value = Math.min(Math.max(1, draftPage.value + direction), activeTotalPages.value);
+  draftPage.value = nextPage;
+}
+
+function clampActivePage() {
+  setActivePage(activeRecordPage.value);
 }
 
 function handleOnline() {
@@ -405,6 +425,10 @@ async function loadWorkspace() {
 watch(recordSearch, () => {
   savedPage.value = 1;
   draftPage.value = 1;
+});
+
+watch([filteredSavedCount, filteredDraftCount, activeRecordTab], () => {
+  clampActivePage();
 });
 
 onMounted(() => {
@@ -639,16 +663,45 @@ onUnmounted(() => {
           </section>
         </section>
 
-        <nav v-if="activeRecordCount > pageSize" class="pagination-bar" aria-label="Record pagination">
-          <button class="icon-action icon-action--secondary" type="button" :disabled="activeRecordPage <= 1" @click="changePage(-1)">
-            <ChevronLeft class="action-icon" aria-hidden="true" />
-            Previous
-          </button>
-          <span>Page {{ activeRecordPage }} of {{ activeTotalPages }}</span>
-          <button class="icon-action icon-action--secondary" type="button" :disabled="activeRecordPage >= activeTotalPages" @click="changePage(1)">
-            Next
-            <ChevronRight class="action-icon" aria-hidden="true" />
-          </button>
+        <nav v-if="activeRecordCount > 0" class="pagination-bar" aria-label="Record pagination">
+          <p class="pagination-summary">
+            Showing {{ activePageStart }}-{{ activePageEnd }} of {{ activeRecordCount }}
+          </p>
+          <div class="pagination-controls">
+            <button
+              class="pagination-button pagination-button--icon"
+              type="button"
+              :disabled="activeRecordPage <= 1"
+              aria-label="Previous page"
+              @click="changePage(-1)"
+            >
+              <ChevronLeft class="action-icon" aria-hidden="true" />
+            </button>
+            <button
+              v-for="pageNumber in visiblePageNumbers"
+              :key="pageNumber"
+              class="pagination-button"
+              :class="{ 'pagination-button--active': pageNumber === activeRecordPage }"
+              type="button"
+              :aria-current="pageNumber === activeRecordPage ? 'page' : undefined"
+              :aria-label="`Page ${pageNumber}`"
+              @click="setActivePage(pageNumber)"
+            >
+              {{ pageNumber }}
+            </button>
+            <button
+              class="pagination-button pagination-button--icon"
+              type="button"
+              :disabled="activeRecordPage >= activeTotalPages"
+              aria-label="Next page"
+              @click="changePage(1)"
+            >
+              <ChevronRight class="action-icon" aria-hidden="true" />
+            </button>
+          </div>
+          <p class="pagination-page-count">
+            Page {{ activeRecordPage }} of {{ activeTotalPages }}
+          </p>
         </nav>
       </section>
     </template>
